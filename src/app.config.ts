@@ -16,12 +16,13 @@ export default defineAppConfig({
     color: '#808080',
     selectedColor: '#0FB99F',
     backgroundColor: '#FFFFFF',
+    borderStyle: 'white',
     list: [
       {
         "pagePath": "pages/index/index",
         "text": "走进东沟",
         "iconPath": './icons/hill.png',
-        "selectedIconPath": './icons/hill-fill.png'
+        "selectedIconPath": './icons/hill-fill.png',
       },
       {
         "pagePath": "pages/leyou/index",
