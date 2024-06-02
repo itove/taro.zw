@@ -1,27 +1,53 @@
-.nutui-react-demo {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.block{
+  background: none;
+  padding: 0;
+  img{
+    margin-left: 0 !important;
+    margin-right: 6px;
+    width: 26px;
+    height: 26px;
+  }
+}
+.slide{
+  // height: 500px;
+  .slide-item{
+    width: 44% !important;
+    padding-right: 5px;
+    .img{
+      border-radius: 12px 12px 0 0;
+    }
+    .text{
+      background: #ffffff;
+      font-size: 17px;
+      padding: 14px;
+      border-radius: 0 0 12px 12px;
+      .title{
+        margin-bottom: 5px;
+      }
+      .summary{
+        font-size: 12px;
+        color: #808080;
+      }
+    }
+  }
+}
+.call{
+  display: flex !important;
   align-items: center;
 }
-
-.index {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  margin-bottom: 30px;
+.text{
+  // display: flex !important;
+  // flex-direction: column;
+  // justify-content: space-between;
+  padding-bottom: 5px;
+  .badge{
+    background: #0FB99F;
+    color: #ffffff;
+    padding: 1.2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
 }
-
-.title {
-  display: block;
-  margin: 20px 0;
-  font-weight: 600;
-}
-
-.btn {
-  display: block;
-  width: 200px;
-  margin-bottom: 20px;
+.zhuzai .list{
+  background: #ffffff;
 }

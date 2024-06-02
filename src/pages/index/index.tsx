@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { View, Image } from '@tarojs/components'
-import { Button } from "@nutui/nutui-react-taro"
 import './index.scss'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
 import Hill from '../../icons/hill-river-fill.png'
@@ -142,7 +141,7 @@ function Index() {
 
   tabPaneList.map((i, index) => {
     tabPane1.push(
-      <View key={index} className="tab-item">
+      <View key={index} className="list-item">
         <View className="img">
           <Image className="w-100 rounded" src={i.p} mode="widthFix" />
         </View>
@@ -183,8 +182,6 @@ function Index() {
         <View className="header">
           智慧导览
           <img
-            width="24px"
-            height="24px"
             src={HillRiver}
           />
         </View>
@@ -195,8 +192,6 @@ function Index() {
         <View className="header">
           走进东沟
           <img
-            width="24px"
-            height="24px"
             src={HillRiver}
           />
         </View>
@@ -231,8 +226,6 @@ function Index() {
         <View className="header">
           乐游东沟
           <img
-            width="24px"
-            height="24px"
             src={HillRiver}
           />
         </View>
