@@ -25,3 +25,54 @@
   width: 200px;
   margin-bottom: 20px;
 }
+.block {
+  padding: 16px;
+  background: #ffffff;
+  margin: 16px 0;
+  .header{
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    img{
+      margin-left: 6px;
+    }
+  }
+}
+.zoujin{
+  .wrapper{
+    display: flex;
+    justify-content: space-between;
+    height: 220px;
+    > View{
+      > Image{
+        height: 100%;
+      }
+      width: 49%;
+      position: relative;
+      .text{
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        color: #ffffff;
+        font-size: 16px;
+        p{
+          font-size: 12px;
+        }
+      }
+    }
+    .col2{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      > View {
+        height: 49%;
+        position: relative;
+        > Image {
+          height: 100%;
+        }
+      }
+    }
+  }
+}

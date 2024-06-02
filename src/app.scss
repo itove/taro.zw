@@ -1,3 +1,51 @@
 page{
-  background-color: #FAFAFA;
+  --gray: #FAFAFA;
+  background-color: var(--gray);
+  --nutui-noticebar-background: #ffffff;
+  --nutui-noticebar-color: #000000;
+  --nutui-noticebar-icon-gap: 10px;
+  --nutui-noticebar-right-icon-width: 40px;
+  --nutui-noticebar-border-radius: 500px;
+  --primary: #0FB99F;
+}
+.w-25{
+  width: 25%;
+}
+.p-1{
+  padding: 1em;
+}
+.home{
+  --nutui-grid-item-content-bg-color: var(--gray);
+  --nutui-grid-border-color: var(--gray);
+  --nutui-indicator-dot-color: #ffffff;
+  .nut-indicator-active{
+    background: #ffffff;
+  }
+}
+.w-100{
+  width: 100%;
+}
+.w-50{
+  width: 50%;
+}
+.text-gray{
+  color: #979797;
+}
+.hell{
+  width: 120%;
+  height: 100px;
+  position: absolute;
+  background: var(--primary);
+  top: 0;
+  left: -10%;
+  border-radius: 0 0 50% 50%;
+}
+.rounded{
+  border-radius: 10px;
+}
+.rounded-5{
+  border-radius: 5px;
+}
+.overflow-hidden{
+  overflow: hidden;
 }
