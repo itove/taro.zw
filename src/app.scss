@@ -54,6 +54,7 @@ page{
   background: #ffffff;
   margin: 16px 0;
   .header{
+    position: relative;
     font-size: 22px;
     font-weight: bold;
     display: flex;
@@ -63,6 +64,12 @@ page{
       width: 24px;
       height: 24px;
       margin-left: 6px;
+    }
+    .more{
+      position: absolute;
+      right: 0;
+      color: #979797;
+      font-size: 14px;
     }
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
 import './index.scss'
-import { Swiper } from '@nutui/nutui-react-taro'
+import { Swiper, Grid } from '@nutui/nutui-react-taro'
 import Youzai from '../../icons/youzai.png'
 import Slider1 from '../../images/slider1.png'
 import Image1 from '../../images/image1.png'
@@ -93,6 +93,33 @@ function Index() {
     )
   })
 
+  const grid = []
+  const gridList = [
+    {
+      t: '茅塔百花蜜',
+      p: Image1 
+    },
+    {
+      t: '住在东沟',
+      p: Image1
+    },
+    {
+      t: '吃在东沟',
+      p: Image1
+    },
+    {
+      t: '购在东沟',
+      p: Image1
+    },
+  ]
+  gridList.map((i, index) => {
+    grid.push(
+      <Grid.Item text={i.t} key={index} className="grid-list rounded overflow-hidden">
+        <Image className="w-100" src={i.p} mode="widthFix" />
+      </Grid.Item>
+    )
+})
+
   return (
     <View className="leyou p-1">
       <View className="youzai block">
@@ -115,6 +142,30 @@ function Index() {
         <View class="list p-1 rounded">
         {zhuzai}
         </View>
+      </View>
+
+      <View className="chizai block">
+        <View className="header">
+          <img
+            src={Youzai}
+          />
+          吃在东沟
+          <View class="more"> 更多 > </View>
+        </View>
+        <Grid columns="2" gap="3" className="">
+          {grid}
+        </Grid>
+      </View>
+
+      <View className="gouzai block">
+        <View className="header">
+          <img
+            src={Youzai}
+          />
+          购在东沟
+          <View class="more"> 更多 > </View>
+        </View>
+        {swiper}
       </View>
 
     </View>
