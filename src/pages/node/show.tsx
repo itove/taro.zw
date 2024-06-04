@@ -8,13 +8,18 @@ import Hotline from '../../icons/hotline.png'
 import Location from '../../icons/location.png'
 import Call from '../../icons/call.png'
 import Pic from '../../icons/image.png'
+import Bookmark from '../../icons/bookmark.png'
 
 function Index() {
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
 
-  // 0: 景点, 1: 住宿, 2: 商品
-  const type = 1
+  // 0: 景点
+  // 1: 住宿
+  // 2: 商品
+  // 3: normal node
+  // 4: 走进东沟
+  const type = 4
 
   useEffect(() => {
     Taro.setNavigationBarTitle({
@@ -231,7 +236,53 @@ function Index() {
         <View className="summary">{node.summary}</View>
         }
 
+        { type == 4 &&
+          <View className="info-1">
+            <View className="item">
+              <img
+                src={Location}
+              />
+              <View> asdf </View>
+            </View>
+            <View className="item">
+              <img
+                src={Location}
+              />
+              <View> asdf </View>
+            </View>
+          </View>
+        }
+
         <View className="divider"></View>
+
+        { type == 4 &&
+          <View className="info-2">
+            <View className="item">
+              <img
+                src={Bookmark}
+              />
+              <View> asdf </View>
+            </View>
+            <View className="item">
+              <img
+                src={Bookmark}
+              />
+              <View> asdf </View>
+            </View>
+            <View className="item">
+              <img
+                src={Bookmark}
+              />
+              <View> asdf </View>
+            </View>
+            <View className="item">
+              <img
+                src={Bookmark}
+              />
+              <View> asdf </View>
+            </View>
+          </View>
+        }
 
         { type == 2 &&
         <View className="contact">
@@ -250,6 +301,7 @@ function Index() {
         </View>
         }
 
+        { type < 3 &&
         <View className="address">
           <View className="text">{node.address}</View>
           <View className="right">
@@ -261,16 +313,17 @@ function Index() {
             <View className="">地图导航</View>
           </View>
         </View>
+        }
       </View>
 
-      { type != 1 &&
-      <>
+      { (type == 0 || type == 2) &&
       <View className="p-1 card-1">
         <View className="title acive"> 景点介绍 </View>
       </View>
+      }
 
+      { type != 1 &&
       <View dangerouslySetInnerHTML={{__html: node.body}} className='body p-1'></View>
-      </>
       }
 
       { type == 1 &&
