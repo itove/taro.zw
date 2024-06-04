@@ -16,13 +16,19 @@ page{
 }
 .card-1{
   background: #ffffff;
-  font-size: 20px;
   border-bottom: 0.5px solid #D8D8D8;
   padding-bottom: 0;
   .title{
     display: inline-block;
     padding: 6px;
     padding-bottom: 10px;
+    font-size: 15px;
+    color: #808080;
+    margin-right: 30px;
+  }
+  .title.acive{
+    font-size: 20px;
+    color: #000000;
     border-bottom: 1.5px solid #0FB99F;
   }
 }
@@ -46,11 +52,39 @@ page{
     }
   }
 }
-.summary{
+.card .summary{
   color: #468CF8;
   margin: 16px 0;
-  padding-bottom: 10px;
+}
+.divider{
   border-bottom: 0.5px solid #D8D8D8;
+  margin-bottom: 14px;
+}
+.contact{
+  margin-bottom: 14px;
+  display: flex;
+  .img{
+    width: 91px;
+    height: 60px;
+    margin-right: 12px;
+    Image{
+      border-radius: 6px;
+    }
+  }
+  .name {
+    font-size: 18px;
+  }
+  .phone {
+    font-size: 12px;
+    color: #979797;
+    display: flex;
+    align-items: center;
+    img{
+      width: 17px;
+      height: 17px;
+      margin-right: 6px;
+    }
+  }
 }
 .address{
   color: #808080;
@@ -60,4 +94,85 @@ page{
     width: 78%;
   }
   padding-bottom: 10px;
+}
+.rooms {
+  --nutui-tabs-titles-background-color: #ffffff;
+  --nutui-tabs-titles-item-color: #000000;
+  --nutui-tabs-titles-item-active-color: #ffffff;
+  --nutui-tabs-tab-line-width: 80px;
+  --nutui-tabs-tab-line-color: #0FB99F;
+  --nutui-tabs-line-bottom: 0;
+  .nut-tabs-titles-item-text {
+    color: #808080;
+    font-size: 15px;
+  }
+  .nut-tabs-titles-item-active .nut-tabs-titles-item-text {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 20px;
+  }
+  .list:last-child{
+    border-bottom: none;
+  }
+  .list{
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid #D8D8D8;
+    .img{
+      width: 65px;
+      height: 65px;
+      position: relative;
+      Image{
+        border-radius: 4px;
+        height: 100%;
+      }
+      .count{
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1px 2px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 4px;
+        left: 4px;
+        color: rgba(255, 255, 255, 0.9412);
+        font-size: 7px;
+        img{
+          width: 7px;
+          height: 7px;
+        }
+      }
+    }
+    .info{
+      width: 60%;
+      overflow: hidden;
+    }
+    .title{
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .summary{
+      font-size: 12px;
+      color: #808080;
+      margin-bottom: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+    }
+    .tags{
+      color: #0FB99F;
+      font-size: 9px;
+      display: flex;
+      View{
+        padding: 1px 2px;
+        border: 0.5px solid #0FB99F;
+        border-radius: 2px;
+        margin-right: 6px;
+      }
+    }
+    .btn-primary{
+      background: #0FB99F;
+      color: #ffffff;
+    }
+  }
 }
