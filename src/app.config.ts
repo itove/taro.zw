@@ -1,5 +1,6 @@
 export default defineAppConfig({
   pages: [
+    'pages/node/show',
     'pages/leyou/index',
     'pages/index/index',
     'pages/nav/index',
