@@ -143,10 +143,19 @@ page{
 .mb-1{
   margin-bottom: 16px;
 }
+.ms-1{
+  margin-left: 16px;
+}
 .btn-primary{
   background: #0FB99F;
   color: #ffffff;
 }
 .text-center{
   text-align: center;
+}
+.d-flex{
+  display: flex;
+}
+.align-items-center{
+  align-items: center;
 }

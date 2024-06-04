@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Button, Cell, Avatar, Row, Col } from "@nutui/nutui-react-taro"
-import { Right } from '@nutui/icons-react-taro'
+import { Avatar } from "@nutui/nutui-react-taro"
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
+import Bookmark from '../../icons/bookmark.png'
 
 function goto() {
   const link = '/pages/me/info'
@@ -13,7 +13,7 @@ function goto() {
 
 function Index() {
   // const [list, setList] = useState([])
-  const [user, setUser] = useState({firm: {name: ''}})
+  const [user, setUser] = useState({name: '请点击登录'})
   const [avatarUrl, setAvatarUrl] = useState('')
   let l = []
 
@@ -40,45 +40,55 @@ function Index() {
     })
     .catch(err => {
       console.log(err)
-      Taro.redirectTo({url: '/pages/me/login'})
+      // Taro.redirectTo({url: '/pages/me/login'})
     })
   }, [])
 
   return (
     <View className="">
-      <Row className="p-1 align-item-center">
-        <Col span="">
+      <View className="p-1 align-items-center d-flex">
+        <View>
           <Avatar
             size="50"
             src={avatarUrl}
           />
-        </Col>
-        <Col span="" className="ps-1">
-            <div className="ellipsis w-10 flex-content flex-content-light">{user.name}</div>
-            <div className="ellipsis w-10 flex-content flex-content-light">{user.firm.name}</div>
-        </Col> 
-      </Row>
-      <Cell.Group>
-        <Cell
-        className='nutui-cell--clickable'
-        title='个人信息'
-        align='center'
-        extra={<Right size="12" />}
-        onClick={goto}
-        />
-        <Cell
-        className='nutui-cell--clickable'
-        title='我的收藏'
-        align='center'
-        extra={<Right size="12" />}
-        />
-        <Cell
-        className='nutui-cell--clickable'
-        title='设置'
-        align='center'
-        extra={<Right size="12" />}
-        />
-      </Cell.Group>
+        </View>
+        <View className="ms-1">
+            {user.name}
+        </View> 
+      </View>
+
+      <View className="block">
+        <View className="header">
+          我的收藏
+        </View>
+        <View className="info-2">
+          <View className="item">
+            <img
+              src={Bookmark}
+            />
+            <View> 游在东沟 </View>
+          </View>
+          <View className="item">
+            <img
+              src={Bookmark}
+            />
+            <View> 住在东沟 </View>
+          </View>
+          <View className="item">
+            <img
+              src={Bookmark}
+            />
+            <View> 吃在东沟 </View>
+          </View>
+          <View className="item">
+            <img
+              src={Bookmark}
+            />
+            <View> 购在东沟 </View>
+          </View>
+        </View>
+      </View>
     </View>
   )
 }

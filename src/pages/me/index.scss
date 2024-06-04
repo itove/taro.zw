@@ -1,0 +1,14 @@
+.info-2{
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  .item{
+    text-align: center;
+    color: #3D3D3D;
+    font-size: 12px;
+    img{
+      width: 34px;
+      height: 34px;
+    }
+  }
+}
