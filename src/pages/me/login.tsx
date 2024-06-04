@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { View } from '@tarojs/components'
-import { Divider, ActionSheet, Button } from "@nutui/nutui-react-taro"
+import { View, Button } from '@tarojs/components'
+import { ActionSheet } from "@nutui/nutui-react-taro"
 import Taro from '@tarojs/taro'
 import './index.scss'
 import { Env } from '../../env'
@@ -54,7 +54,7 @@ function Index() {
     <View className="nutui-react-demo">
       <View className="pt-12">
           <View className="text-center mb-1">请点击登录</View>
-          <Button type="success" className="btn m-auto" disabled={disabled} onClick={() => setIsVisible(!isVisible)}>
+          <Button type="success" className="btn-primary m-auto" disabled={disabled} onClick={() => setIsVisible(!isVisible)}>
             微信登录
           </Button>
           <ActionSheet
@@ -64,8 +64,8 @@ function Index() {
             onSelect={() => setIsVisible(false)}
             onCancel={() => setIsVisible(false)}
           >
-          <Button type="success" className="btn m-auto" disabled={disabled} onClick={wxlogin}>
-            登录
+          <Button type="success" className="btn-primary m-auto w-50" disabled={disabled} onClick={wxlogin}>
+            登 录
           </Button>
         </ActionSheet>
       </View>

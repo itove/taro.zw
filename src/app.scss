@@ -133,3 +133,20 @@ page{
   .grid-list{
   }
 }
+.nutui-react-demo {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mb-1{
+  margin-bottom: 16px;
+}
+.btn-primary{
+  background: #0FB99F;
+  color: #ffffff;
+}
+.text-center{
+  text-align: center;
+}
