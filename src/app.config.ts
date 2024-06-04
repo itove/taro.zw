@@ -1,5 +1,6 @@
 export default defineAppConfig({
   pages: [
+    'pages/feedback/index',
     'pages/me/index',
     'pages/me/login',
     'pages/index/index',
