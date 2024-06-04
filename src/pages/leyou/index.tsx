@@ -118,7 +118,7 @@ function Index() {
         <Image className="w-100" src={i.p} mode="widthFix" />
       </Grid.Item>
     )
-})
+  })
 
   return (
     <View className="leyou p-1">
@@ -144,7 +144,7 @@ function Index() {
         </View>
       </View>
 
-      <View className="chizai block">
+      <View className="chizai block node-index">
         <View className="header">
           <img
             src={Youzai}
@@ -152,7 +152,7 @@ function Index() {
           吃在东沟
           <View class="more"> 更多 > </View>
         </View>
-        <Grid columns="2" gap="3" className="">
+        <Grid columns="2" gap="3" center={false} className="">
           {grid}
         </Grid>
       </View>
