@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Image } from '@tarojs/components'
 import './show.scss'
+import Taro from '@tarojs/taro'
 import Image1 from '../../images/image1.png'
 import Hotline from '../../icons/hotline.png'
 import Location from '../../icons/location.png'
 
 function Index() {
+  useEffect(() => {
+    Taro.setNavigationBarTitle({
+      title: '详情'
+    })
+    // console.log(nodeList)
+    // Taro.getStorage({
+    //   key: Env.storageKey
+    // })
+    // .then(res => {
+    //   console.log('logged in')
+    //   setUser(res.data)
+    //   getNodes(res.data.id)
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    //   setNodeList([])
+    //   // Taro.redirectTo({url: '/pages/me/login'})
+    // })
+  }, [])
 
   const node = {
     title: '云上牡丹园',
