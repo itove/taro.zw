@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/leyou/index',
     'pages/nav/index',
     'pages/me/index',
+    'pages/me/login',
   ],
   window: {
     backgroundTextStyle: 'light',
