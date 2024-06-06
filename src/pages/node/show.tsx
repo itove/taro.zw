@@ -10,35 +10,42 @@ import Call from '../../icons/call.png'
 import Pic from '../../icons/image.png'
 import Bookmark from '../../icons/bookmark.png'
 
+function scrollTo() {
+  Taro.pageScrollTo({
+    scrollTop: 0,
+    duration: 300
+  })
+}
+
 function Index() {
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
+
+  const instance = Taro.getCurrentInstance();
+  const id = instance.router.params.id
+  const type = instance.router.params.type
+  console.log(id);
+  console.log(type);
 
   // 0: 景点
   // 1: 住宿
   // 2: 商品
   // 3: normal node
   // 4: 走进东沟
-  const type = 4
+  // const type = 4
 
   useEffect(() => {
     Taro.setNavigationBarTitle({
       title: '详情'
     })
-    // console.log(nodeList)
-    // Taro.getStorage({
-    //   key: Env.storageKey
-    // })
-    // .then(res => {
-    //   console.log('logged in')
-    //   setUser(res.data)
-    //   getNodes(res.data.id)
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    //   setNodeList([])
-    //   // Taro.redirectTo({url: '/pages/me/login'})
-    // })
+
+    Taro.request({
+      url: Env.apiUrl + 'nodes/' + id
+    })
+    .then(res => {
+      console.log(res)
+      setNode(res.data)
+    })
   }, [])
 
   const node = {

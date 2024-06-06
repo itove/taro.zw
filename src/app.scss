@@ -97,11 +97,15 @@ page{
     width: 53%;
     color: #3D3D3D;
     font-size: 17px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     p{
+      margin-top: 4px;
       color: #979797;
       font-size: 12px;
       // height: 40px;
-      // white-space: nowrap;
+      white-space: normal;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
