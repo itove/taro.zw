@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Image, Button } from '@tarojs/components'
 import './show.scss'
 import Taro from '@tarojs/taro'
+import { Env } from '../../env'
 import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
 import Image1 from '../../images/image1.png'
 import Hotline from '../../icons/hotline.png'
@@ -10,29 +11,25 @@ import Call from '../../icons/call.png'
 import Pic from '../../icons/image.png'
 import Bookmark from '../../icons/bookmark.png'
 
-function scrollTo() {
-  Taro.pageScrollTo({
-    scrollTop: 0,
-    duration: 300
-  })
+Taro.options.html.transformElement = (el) => {
+  if (el.nodeName === 'image') {
+    el.setAttribute('mode', 'widthFix')
+    el.setAttribute('src', Env.baseUrl + el.getAttribute('src'))
+  }
+  return el
 }
 
 function Index() {
+  const [node, setNode] = useState({})
+  const [tags, setTags] = useState({})
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
-  const type = instance.router.params.type
-  console.log(id);
-  console.log(type);
+  const type = instance.router.params.type ? instance.router.params.type : 3
 
-  // 0: 景点
-  // 1: 住宿
-  // 2: 商品
-  // 3: normal node
-  // 4: 走进东沟
-  // const type = 4
+  // 0: 景点 // 1: 住宿 // 2: 商品 // 3: normal node // 4: 走进东沟
 
   useEffect(() => {
     Taro.setNavigationBarTitle({
@@ -43,150 +40,50 @@ function Index() {
       url: Env.apiUrl + 'nodes/' + id
     })
     .then(res => {
-      console.log(res)
-      setNode(res.data)
+      const node = res.data
+      setNode(node)
+      console.log(node)
+
+      setTags(node.tags.map((i, index) => <View key={index}>{i}</View> ))
     })
   }, [])
 
-  const node = {
-    title: '云上牡丹园',
-    tags: [
-      '品种齐全',
-      '拍照打卡',
-    ],
-    summary: '目前整个园园区牡丹栽植面积达到80余亩，近区牡丹栽植面积达到80余亩，近年来牡丹园又多次...',
-    address: '湖北省十堰市茅箭区茅塔乡东沟村一组湖北省十堰市茅箭区茅塔乡东沟村一组',
-    name: '桃园人家',
-    phone: '0719-8457770',
-    body: '<b>test</b><p>tes2</p><h3>sadff</h3>',
-    rooms: [
-      {
-        title: '桃园人家大床房',
-        images: [
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-        ],
-        summary: 'very long 1.2M宽宽单人床2张 1-5楼 无早 可住宽单人床2张 1-5楼 无早 可住宽单人床2张 1-5楼 无早 可住宽单人床2张 1-5楼 无早 可住单人床2张 1-5楼 无早 可住2人',
-        tags: ['电视/投影仪', '书桌', '衣架', '有窗户', '独立卫浴'],
-      },
-      {
-        title: '桃园人家大床房',
-        images: [
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-        ],
-        summary: '1.2M宽单人床2张 1-5楼 无早 可住2人',
-        tags: ['电视/投影仪', '书桌', '衣架', '有窗户', '独立卫浴'],
-      },
-      {
-        title: '桃园人家大床房',
-        images: [
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-        ],
-        summary: '1.2M宽单人床2张 1-5楼 无早 可住2人',
-        tags: ['电视/投影仪', '书桌', '衣架', '有窗户', '独立卫浴'],
-      },
-      {
-        title: '桃园人家大床房',
-        images: [
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-        ],
-        summary: '1.2M宽单人床2张 1-5楼 无早 可住2人',
-        tags: ['电视/投影仪', '书桌', '衣架', '有窗户', '独立卫浴'],
-      },
-      {
-        title: '桃园人家大床房',
-        images: [
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-          {
-            src: Image1,
-          },
-        ],
-        summary: '1.2M宽单人床2张 1-5楼 无早 可住2人',
-        tags: ['电视/投影仪', '书桌', '衣架', '有窗户', '独立卫浴'],
-      },
-    ],
-    qr: Image1
-  }
 
-  const tags = []
+  // const rooms = []
 
-  node.tags.map((i, index) => {
-    tags.push(
-      <View key={index}>{i}</View>
-    )
-  })
-
-  const rooms = []
-
-  node.rooms.map((i, index) => {
-    const tags = []
-    i.tags.map((j, ind) => {
-      tags.push(
-        <View key={ind}>{j}</View>
-      )
-    })
-    rooms.push(
-      <View key={index} className="list">
-        <View className="img">
-          <Image className="w-100" mode="scaleToFill" src={i.images[0].src} onClick={() => preview(i.images)} />
-          <View className="count">
-            <img src={Pic} />
-            {i.images.length}
-          </View>
-        </View>
-        <View className="info">
-          <View className="title">
-          {i.title}
-          </View>
-          <View className="summary">
-          {i.summary}
-          </View>
-          <View className="tags">
-          {tags}
-          </View>
-        </View>
-        <View className="reserve">
-        <Button className='btn-primary' size="mini" onClick={() => preview([{src:node.qr}])}>预定</Button>
-        </View>
-      </View>
-    )
-  })
+  // node.rooms.map((i, index) => {
+  //   const tags = []
+  //   i.tags.map((j, ind) => {
+  //     tags.push(
+  //       <View key={ind}>{j}</View>
+  //     )
+  //   })
+  //   rooms.push(
+  //     <View key={index} className="list">
+  //       <View className="img">
+  //         <Image className="w-100" mode="scaleToFill" src={i.images[0].src} onClick={() => preview(i.images)} />
+  //         <View className="count">
+  //           <img src={Pic} />
+  //           {i.images.length}
+  //         </View>
+  //       </View>
+  //       <View className="info">
+  //         <View className="title">
+  //         {i.title}
+  //         </View>
+  //         <View className="summary">
+  //         {i.summary}
+  //         </View>
+  //         <View className="tags">
+  //         {tags}
+  //         </View>
+  //       </View>
+  //       <View className="reserve">
+  //       <Button className='btn-primary' size="mini" onClick={() => preview([{src:node.qr}])}>预定</Button>
+  //       </View>
+  //     </View>
+  //   )
+  // })
 
   const preview = (images) => {
     setPreviewImages(images)

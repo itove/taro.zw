@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Image } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import { Env } from '../../env'
 import './index.scss'
 import { Swiper, Grid } from '@nutui/nutui-react-taro'
 import Youzai from '../../icons/youzai.png'
@@ -7,7 +9,42 @@ import Slider1 from '../../images/slider1.png'
 import Image1 from '../../images/image1.png'
 import Call from '../../icons/call.png'
 
+function scrollTo() {
+  Taro.pageScrollTo({
+    scrollTop: 0,
+    duration: 300
+  })
+}
+
 function Index() {
+  const [youList, setYouList] = useState([])
+  const [zhuList, setZhuList] = useState([])
+  const [chiList, setChiList] = useState([])
+  const [gouList, setGouList] = useState([])
+
+  useEffect(() => {
+    Taro.request({
+      url: Env.apiUrl + 'wx/leyou'
+    })
+    .then(res => {
+      const data = res.data
+      console.log(res)
+
+      setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
+      setYouList(data.youzai.map((node, index) => <TabPane node={node} index={index} />))
+      setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} index={index} />))
+      setChiList(data.chizai.map((node, index) => <TabPane node={node} index={index} />))
+      setGouList(data.gouzai.map((node, index) => <TabPane node={node} index={index} />))
+      setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
+      setDili(data.dili[0])
+      setZoujin(data.zoujin[0])
+      setWenhua(data.wenhua[0])
+      setLishi(data.lishi[0])
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }, [])
 
   const swiperList = [
     {
@@ -31,7 +68,6 @@ function Index() {
   ]
 
   const swiper =  
-     <Swiper defaultValue={0} loop className="slide" height="230">
         {swiperList.map((item, index) => (
           <Swiper.Item key={item} className="slide-item">
             <Image
@@ -47,7 +83,6 @@ function Index() {
             </View>
           </Swiper.Item>
         ))}
-      </Swiper>
 
   const zhuzaiList = [
     {
@@ -129,7 +164,9 @@ function Index() {
           />
           游在东沟
         </View>
-        {swiper}
+        <Swiper defaultValue={0} loop className="slide" height="230">
+          {swiper}
+        </Swiper>
       </View>
 
       <View className="zhuzai block">
@@ -165,7 +202,9 @@ function Index() {
           购在东沟
           <View class="more"> 更多 > </View>
         </View>
-        {swiper}
+        <Swiper defaultValue={0} loop className="slide" height="230">
+          {swiper}
+        </Swiper>
       </View>
 
     </View>

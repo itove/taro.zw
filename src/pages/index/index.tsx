@@ -18,9 +18,8 @@ const noticeList = [
   '3关于十堰市景区型村庄评定名单',
 ]
 
-function gotoNode(id) {
-  console.log(id)
-  Taro.navigateTo({url: '/pages/node/show?type=3&id=' + id})
+function gotoNode(id, type = 3) {
+  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
 
 function gotoUrl(url) {
@@ -79,55 +78,21 @@ function Index() {
   const [zhuList, setZhuList] = useState([])
   const [chiList, setChiList] = useState([])
   const [gouList, setGouList] = useState([])
+  const [dili, setDili] = useState({})
+  const [zoujin, setZoujin] = useState({})
+  const [wenhua, setWenhua] = useState({})
+  const [lishi, setLishi] = useState({})
   const [tab1value, setTab1value] = useState<string | number>('0')
 
-
-  const items = [
-    {
-      t: '游在东沟',
-      p: Hill,
-      url: 'leyou/index',
-      isTab: true,
-    },
-    {
-      t: '住在东沟',
-      p: Hill,
-      url: 'leyou/index',
-      isTab: true,
-    },
-    {
-      t: '吃在东沟',
-      p: Hill,
-      url: 'leyou/index',
-      isTab: true,
-    },
-    {
-      t: '购在东沟',
-      p: Hill,
-      url: 'leyou/index',
-      isTab: true,
-    },
-    {
-      t: '地理位置',
-      p: Hill,
-      isTab: false,
-    },
-    {
-      t: '投诉建议',
-      p: Hill,
-      url: 'feedback/index',
-      isTab: false,
-    },
-    {
-      t: '文旅要闻',
-      p: Hill,
-      isTab: false,
-    },
-    {
-      t: '旅行游记',
-      p: Hill,
-      isTab: false,
-    },
+  const gridItems = [
+    { t: '游在东沟', p: Hill, url: 'leyou/index', isTab: true, },
+    { t: '住在东沟', p: Hill, url: 'leyou/index', isTab: true, },
+    { t: '吃在东沟', p: Hill, url: 'leyou/index', isTab: true, },
+    { t: '购在东沟', p: Hill, url: 'leyou/index', isTab: true, },
+    { t: '地理位置', p: Hill, url: 'node/show?id=' + dili.id, isTab: false, },
+    { t: '投诉建议', p: Hill, url: 'feedback/index', isTab: false, },
+    { t: '文旅要闻', p: Hill, url: 'node/index?type=wenlv', isTab: false, },
+    { t: '旅行游记', p: Hill, url: 'node/index?type=youji', isTab: false, },
   ]
 
   useEffect(() => {
@@ -135,33 +100,19 @@ function Index() {
       url: Env.apiUrl + 'wx/home'
     })
     .then(res => {
-      const home = res.data
+      const data = res.data
       console.log(res)
 
-      setSliderList(
-        home.slider.map((node, index) => <SwiperItem node={node} index={index} />)
-      )
-
-      setYouList(
-        home.youzai.map((node, index) => <TabPane node={node} index={index} />)
-      )
-
-      setZhuList(
-        home.zhuzai.map((node, index) => <TabPane node={node} index={index} />)
-      )
-
-      setChiList(
-        home.chizai.map((node, index) => <TabPane node={node} index={index} />)
-      )
-
-      setGouList(
-        home.gouzai.map((node, index) => <TabPane node={node} index={index} />)
-      )
-
-      setGridList(
-        items.map((node, index) => <GridItem node={node} index={index} />)
-      )
-
+      setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
+      setYouList(data.youzai.map((node, index) => <TabPane node={node} index={index} />))
+      setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} index={index} />))
+      setChiList(data.chizai.map((node, index) => <TabPane node={node} index={index} />))
+      setGouList(data.gouzai.map((node, index) => <TabPane node={node} index={index} />))
+      setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
+      setDili(data.dili[0])
+      setZoujin(data.zoujin[0])
+      setWenhua(data.wenhua[0])
+      setLishi(data.lishi[0])
     })
     .catch(err => {
       console.log(err)
@@ -199,7 +150,7 @@ function Index() {
             src={HillRiver}
           />
         </View>
-        <Image className="w-100 rounded" src={Daolan} mode="widthFix" />
+        <Image className="w-100 rounded" src={Daolan} mode="widthFix" onClick={() => Taro.switchTab({url: '/pages/nav/index'})} />
       </View>
 
       <View className="zoujin block">
@@ -210,7 +161,7 @@ function Index() {
           />
         </View>
         <View className="wrapper">
-          <View className="">
+          <View className="" onClick={() => gotoNode(6, 4)}>
             <Image className="w-100 rounded" src={Daolan} mode="center" />
             <View class="text">
               东沟简介
@@ -218,14 +169,14 @@ function Index() {
             </View>
           </View>
           <View className="col2">
-            <View className="">
+            <View className="" onClick={() => gotoNode(6, 4)}>
               <Image className="w-100 rounded" src={Daolan} mode="center" />
               <View class="text">
                 东沟文化
                 <p>爱国主义教育基地</p>
               </View>
             </View>
-            <View className="">
+            <View className="" onClick={() => gotoNode(6, 4)}>
               <Image className="w-100 rounded" src={Daolan} mode="center" />
               <View class="text">
                 东沟历史
