@@ -1,13 +1,13 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
-    'pages/nav/index',
+    'pages/node/index',
     'pages/leyou/index',
     'pages/me/index',
     'pages/feedback/index',
     'pages/me/login',
     'pages/node/show',
-    'pages/node/index',
+    'pages/nav/index',
   ],
   window: {
     backgroundTextStyle: 'light',

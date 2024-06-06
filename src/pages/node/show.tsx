@@ -103,7 +103,7 @@ function Index() {
         onClose={() => setShowPreview(false)}
       />
 
-      <Image className="w-100" src={Image1} mode="widthFix" />
+      <Image className="w-100 hero" src={Env.imageUrl + node.image} mode="widthFix" />
 
       <View className="p-1 card">
 

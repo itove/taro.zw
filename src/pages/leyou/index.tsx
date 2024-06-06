@@ -16,13 +16,17 @@ function scrollTo() {
   })
 }
 
+function gotoNode(id, type = 3) {
+  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+}
+
 function SwiperItem({node, index}) {
   return (
     <Swiper.Item className="slide-item">
     <Image
     className="w-100 img"
     mode="widthFix"
-    onClick={() => console.log(index)}
+    onClick={() => gotoNode(node.id)}
     src={Env.imageUrl + node.image}
     alt=""
     />
@@ -36,9 +40,9 @@ function SwiperItem({node, index}) {
 
 function ViewItem({node, index}) {
   return (
-    <View key={index} className="list-item">
+    <View key={index} className="list-item" onClick={() => gotoNode(node.id)}>
       <View className="img">
-        <Image className="w-100 rounded" src={node.image} mode="widthFix" />
+        <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="widthFix" />
       </View>
       <View className="text">
       <View>{node.title}<span class="d-inline-block badge ms-1">民宿</span></View>
@@ -52,7 +56,7 @@ function ViewItem({node, index}) {
 function GridItem({node, index}) {
   return (
     <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden">
-      <Image className="w-100" src={node.image} mode="widthFix" />
+      <Image className="w-100" src={Env.imageUrl + node.image} mode="widthFix" />
     </Grid.Item>
   )
 }
@@ -62,6 +66,7 @@ function Index() {
   const [zhuList, setZhuList] = useState([])
   const [chiList, setChiList] = useState([])
   const [gouList, setGouList] = useState([])
+  const [grid, setGrid] = useState([])
 
   useEffect(() => {
     Taro.request({
@@ -73,8 +78,14 @@ function Index() {
 
       setYouList(data.youzai.map((node, index) => <SwiperItem node={node} index={index} />))
       setZhuList(data.zhuzai.map((node, index) => <ViewItem node={node} index={index} />))
-      setChiList(data.chizai.map((node, index) => index < 4 && <GridItem node={node} index={index} />))
+      // setChiList(data.chizai.map((node, index) => <GridItem node={node} index={index} />))
       setGouList(data.gouzai.map((node, index) => <SwiperItem node={node} index={index} />))
+      setChiList(data.chizai.map((node, index) => index < 4 &&
+          <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
+            <Image className="w-100" src={Env.imageUrl + node.image} mode="widthFix" />
+          </Grid.Item>
+        )
+      )
     })
     .catch(err => {
       console.log(err)
