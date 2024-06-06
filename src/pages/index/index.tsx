@@ -42,7 +42,7 @@ function TabPane({node, type, index}) {
     </View>
     <View className="text">
     {node.title}
-    <p>{node.summary}</p>
+    <p className="ellipsis-2">{node.summary}</p>
     </View>
     </View>
   )
