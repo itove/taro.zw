@@ -10,7 +10,7 @@
 }
 .slide{
   // height: 500px;
-  .slide-item{
+  swiper-item{
     width: 44% !important;
     padding-right: 5px;
     .img{
@@ -50,4 +50,12 @@
 }
 .zhuzai .list{
   background: #ffffff;
+  Image{
+    height: 90px;
+  }
+}
+.chizai .nut-grid-item-text{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
