@@ -124,7 +124,7 @@ function Index() {
             src={Youzai}
           />
           吃在东沟
-          <View class="more"> 更多 > </View>
+          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?type=chizai'})}> 更多 > </View>
         </View>
         <Grid columns="2" gap="3" center={false} className="">
           {chiList}
@@ -137,7 +137,7 @@ function Index() {
             src={Youzai}
           />
           购在东沟
-          <View class="more"> 更多 > </View>
+          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?type=gouzai'})}> 更多 > </View>
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
           {gouList}
