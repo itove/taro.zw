@@ -164,3 +164,8 @@ page{
     width: 100%;
   }
 }
+.nut-grid-item-text{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
