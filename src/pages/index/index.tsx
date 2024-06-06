@@ -34,9 +34,9 @@ function gridGoto(node) {
   }
 }
 
-function TabPane({node, index}) {
+function TabPane({node, type, index}) {
   return (
-    <View key={index} className="list-item" onClick={() => gotoNode(node.id)}>
+    <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
     <View className="img">
     <Image className="w-100 rounded" src={node.image} mode="widthFix" />
     </View>
@@ -104,10 +104,10 @@ function Index() {
       console.log(res)
 
       setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
-      setYouList(data.youzai.map((node, index) => <TabPane node={node} index={index} />))
-      setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} index={index} />))
-      setChiList(data.chizai.map((node, index) => <TabPane node={node} index={index} />))
-      setGouList(data.gouzai.map((node, index) => <TabPane node={node} index={index} />))
+      setYouList(data.youzai.map((node, index) => <TabPane node={node} type={0} index={index} />))
+      setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} type={1} index={index} />))
+      setChiList(data.chizai.map((node, index) => <TabPane node={node} type={0} index={index} />))
+      setGouList(data.gouzai.map((node, index) => <TabPane node={node} type={2} index={index} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
       setDili(data.dili[0])
       setZoujin(data.zoujin[0])

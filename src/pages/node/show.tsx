@@ -21,7 +21,7 @@ Taro.options.html.transformElement = (el) => {
 
 function Index() {
   const [node, setNode] = useState({})
-  const [tags, setTags] = useState({})
+  const [tags, setTags] = useState([])
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
 
