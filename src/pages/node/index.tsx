@@ -4,7 +4,6 @@ import { Env } from '../../env'
 import { View, Image } from '@tarojs/components'
 import { Grid } from '@nutui/nutui-react-taro'
 import './index.scss'
-import Image1 from '../../images/image1.png'
 
 function Index() {
   const instance = Taro.getCurrentInstance();

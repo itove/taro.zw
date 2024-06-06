@@ -5,11 +5,9 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
 import Hill from '../../icons/hill-river-fill.png'
-import Slider1 from '../../images/slider1.png'
 import Speaker from '../../icons/speaker.png'
 import HillRiver from '../../icons/hill-river-1.png'
 import Daolan from '../../images/zhihuidaolan.png'
-import Image1 from '../../images/image1.png'
 
 
 const noticeList = [
