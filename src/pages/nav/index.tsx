@@ -1,18 +1,23 @@
 import React from 'react'
 import { View } from '@tarojs/components'
-import { Button } from "@nutui/nutui-react-taro"
 import './index.scss'
+import Search from '../../icons/search.png'
+import Grid from '../../icons/grid.png'
 
 function Index() {
   return (
-    <View className="nutui-react-demo">
-      <View className="index">
-        欢迎使用 NutUI React 开发 Taro 多端项目。
-      </View>
-      <View className="index">
-        <Button type="primary" className="btn">
-          NutUI React Button
-        </Button>
+    <View className="">
+      <View className="top">
+        <View className="icon">
+          <img src={Search} />
+        </View>
+        <View className="item active"> 景点 </View>
+        <View className="item"> 卫生间 </View>
+        <View className="item"> 出入口 </View>
+        <View className="item"> 服务点 </View>
+        <View className="icon">
+          <img src={Grid} />
+        </View>
       </View>
     </View>
   )
