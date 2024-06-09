@@ -5,11 +5,6 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
 import Image1 from '../../images/image1.png'
-import Hotline from '../../icons/hotline.png'
-import Location from '../../icons/location.png'
-import Call from '../../icons/call.png'
-import Pic from '../../icons/image.png'
-import Bookmark from '../../icons/bookmark.png'
 
 Taro.options.html.transformElement = (el) => {
   if (el.nodeName === 'image') {
@@ -63,7 +58,7 @@ function Index() {
   //       <View className="img">
   //         <Image className="w-100" mode="scaleToFill" src={i.images[0].src} onClick={() => preview(i.images)} />
   //         <View className="count">
-  //           <img src={Pic} />
+  //           <img src={Env.iconUrl + 'image.png'} />
   //           {i.images.length}
   //         </View>
   //       </View>
@@ -118,7 +113,7 @@ function Index() {
           <View className="right">
             <View className="icon">
               <img
-                src={Hotline}
+                src={Env.iconUrl + 'hotline.png'}
               />
               </View>
             <View className="">语音讲解</View>
@@ -128,7 +123,7 @@ function Index() {
           <View className="right">
             <View className="icon">
               <img
-                src={Call}
+                src={Env.iconUrl + 'call.png'}
               />
               </View>
             <View className="">电话</View>
@@ -144,13 +139,13 @@ function Index() {
           <View className="info-1">
             <View className="item">
               <img
-                src={Location}
+                src={Env.iconUrl + 'location.png'}
               />
               <View> asdf </View>
             </View>
             <View className="item">
               <img
-                src={Location}
+                src={Env.iconUrl + 'location.png'}
               />
               <View> asdf </View>
             </View>
@@ -163,25 +158,25 @@ function Index() {
           <View className="info-2">
             <View className="item">
               <img
-                src={Bookmark}
+                src={Env.iconUrl + 'bookmark.png' }
               />
               <View> asdf </View>
             </View>
             <View className="item">
               <img
-                src={Bookmark}
+                src={Env.iconUrl + 'honor.png' }
               />
               <View> asdf </View>
             </View>
             <View className="item">
               <img
-                src={Bookmark}
+                src={Env.iconUrl + 'map.png' }
               />
               <View> asdf </View>
             </View>
             <View className="item">
               <img
-                src={Bookmark}
+                src={Env.iconUrl + 'letter.png' }
               />
               <View> asdf </View>
             </View>
@@ -198,7 +193,7 @@ function Index() {
               {node.name}
             </View>
             <View className="phone">
-              <img src={Call} />
+              <img src={Env.iconUrl + 'call.png'} />
               电话：{node.phone}
             </View>
           </View>
@@ -211,7 +206,7 @@ function Index() {
           <View className="right">
             <View className="icon">
               <img
-                src={Location}
+                src={Env.iconUrl + 'location.png'}
               />
             </View>
             <View className="">地图导航</View>

@@ -5,15 +5,20 @@ import { View, Image } from '@tarojs/components'
 import { Grid } from '@nutui/nutui-react-taro'
 import './index.scss'
 
+function gotoNode(id, type = 3) {
+  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+}
+
 function Index() {
   const instance = Taro.getCurrentInstance();
   const region = instance.router.params.region
+  const title = instance.router.params.title
 
   const [list, setList] = useState([])
 
   useEffect(() => {
     Taro.setNavigationBarTitle({
-      title: '吃在东沟'
+      title: '列表'
     })
     Taro.request({
       url: Env.apiUrl + 'nodes/' + region

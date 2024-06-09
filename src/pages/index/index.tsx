@@ -4,9 +4,6 @@ import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
-import Hill from '../../icons/hill-river-fill.png'
-import Speaker from '../../icons/speaker.png'
-import HillRiver from '../../icons/hill-river-1.png'
 import Daolan from '../../images/zhihuidaolan.png'
 
 
@@ -18,6 +15,10 @@ const noticeList = [
 
 function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+}
+
+function gotoNodeIndex(region) {
+  Taro.navigateTo({url: '/pages/node/index?region=' + region})
 }
 
 function gotoUrl(url) {
@@ -77,20 +78,18 @@ function Index() {
   const [chiList, setChiList] = useState([])
   const [gouList, setGouList] = useState([])
   const [dili, setDili] = useState({})
-  const [zoujin, setZoujin] = useState({})
-  const [wenhua, setWenhua] = useState({})
-  const [lishi, setLishi] = useState({})
+  const [jianjie, setJianjie] = useState({})
   const [tab1value, setTab1value] = useState<string | number>('0')
 
   const gridItems = [
-    { t: '游在东沟', p: Hill, url: 'leyou/index', isTab: true, },
-    { t: '住在东沟', p: Hill, url: 'leyou/index', isTab: true, },
-    { t: '吃在东沟', p: Hill, url: 'leyou/index', isTab: true, },
-    { t: '购在东沟', p: Hill, url: 'leyou/index', isTab: true, },
-    { t: '地理位置', p: Hill, url: 'node/show?id=' + dili.id, isTab: false, },
-    { t: '投诉建议', p: Hill, url: 'feedback/index', isTab: false, },
-    { t: '文旅要闻', p: Hill, url: 'node/index?type=wenlv', isTab: false, },
-    { t: '旅行游记', p: Hill, url: 'node/index?type=youji', isTab: false, },
+    { t: '游在东沟', p: Env.iconUrl + 'grid_1.png', url: 'leyou/index', isTab: true, },
+    { t: '住在东沟', p: Env.iconUrl + 'grid_2.png', url: 'leyou/index', isTab: true, },
+    { t: '吃在东沟', p: Env.iconUrl + 'grid_3.png', url: 'leyou/index', isTab: true, },
+    { t: '购在东沟', p: Env.iconUrl + 'grid_4.png', url: 'leyou/index', isTab: true, },
+    { t: '地理位置', p: Env.iconUrl + 'grid_5.png', url: 'node/show?id=' + dili.id, isTab: false, },
+    { t: '投诉建议', p: Env.iconUrl + 'grid_6.png', url: 'feedback/index', isTab: false, },
+    { t: '文旅要闻', p: Env.iconUrl + 'grid_7.png', url: 'node/index?type=wenlv', isTab: false, },
+    { t: '旅行游记', p: Env.iconUrl + 'grid_8.png', url: 'node/index?type=youji', isTab: false, },
   ]
 
   useEffect(() => {
@@ -107,10 +106,8 @@ function Index() {
       setChiList(data.chizai.map((node, index) => <TabPane node={node} type={0} index={index} />))
       setGouList(data.gouzai.map((node, index) => <TabPane node={node} type={2} index={index} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
-      setDili(data.dili[0])
-      setZoujin(data.zoujin[0])
-      setWenhua(data.wenhua[0])
-      setLishi(data.lishi[0])
+      // setDili(data.dili[0])
+      setJianjie(data.jianjie[0])
     })
     .catch(err => {
       console.log(err)
@@ -129,7 +126,7 @@ function Index() {
       </Grid>
 
       <NoticeBar
-      leftIcon={<img alt="notice" width="16px" height="16px" src={Speaker} />}
+      leftIcon={<img alt="notice" width="16px" height="16px" src={Env.iconUrl + 'speaker.png'} />}
       rightIcon={<span className="text-gray">更多 ></span>}
       className="rounded-5 overflow-hidden"
       direction="vertical"
@@ -145,7 +142,7 @@ function Index() {
         <View className="header">
           智慧导览
           <img
-            src={HillRiver}
+            src={Env.iconUrl + 'hill-river-1.png'}
           />
         </View>
         <Image className="w-100 rounded" src={Daolan} mode="widthFix" onClick={() => Taro.switchTab({url: '/pages/nav/index'})} />
@@ -155,11 +152,11 @@ function Index() {
         <View className="header">
           走进东沟
           <img
-            src={HillRiver}
+            src={Env.iconUrl + 'hill-river-1.png'}
           />
         </View>
         <View className="wrapper">
-          <View className="" onClick={() => gotoNode(6, 4)}>
+          <View className="" onClick={() => gotoNode(jianjie.id, 4)}>
             <Image className="w-100 rounded" src={Daolan} mode="center" />
             <View class="text">
               东沟简介
@@ -167,14 +164,14 @@ function Index() {
             </View>
           </View>
           <View className="col2">
-            <View className="" onClick={() => gotoNode(6, 4)}>
+            <View className="" onClick={() => gotoNodeIndex('hongse')}>
               <Image className="w-100 rounded" src={Daolan} mode="center" />
               <View class="text">
                 东沟文化
                 <p>爱国主义教育基地</p>
               </View>
             </View>
-            <View className="" onClick={() => gotoNode(6, 4)}>
+            <View className="" onClick={() => gotoNodeIndex('history')}>
               <Image className="w-100 rounded" src={Daolan} mode="center" />
               <View class="text">
                 东沟历史
@@ -189,7 +186,7 @@ function Index() {
         <View className="header">
           乐游东沟
           <img
-            src={HillRiver}
+            src={Env.iconUrl + 'hill-river-1.png'}
           />
         </View>
 

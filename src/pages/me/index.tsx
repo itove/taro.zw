@@ -4,7 +4,6 @@ import { Avatar } from "@nutui/nutui-react-taro"
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import Bookmark from '../../icons/bookmark.png'
 
 function goto() {
   const link = '/pages/me/info'
@@ -65,25 +64,25 @@ function Index() {
         <View className="info-2">
           <View className="item">
             <img
-              src={Bookmark}
+              src={Env.iconUrl + 'grid_1.png'}
             />
             <View> 游在东沟 </View>
           </View>
           <View className="item">
             <img
-              src={Bookmark}
+              src={Env.iconUrl + 'grid_2.png'}
             />
             <View> 住在东沟 </View>
           </View>
           <View className="item">
             <img
-              src={Bookmark}
+              src={Env.iconUrl + 'grid_3.png'}
             />
             <View> 吃在东沟 </View>
           </View>
           <View className="item">
             <img
-              src={Bookmark}
+              src={Env.iconUrl + 'grid_4.png'}
             />
             <View> 购在东沟 </View>
           </View>
