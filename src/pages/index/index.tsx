@@ -124,7 +124,7 @@ function Index() {
     <View className="p-1 home">
       <View className="hell">
       </View>
-      <Swiper defaultValue={0} autoPlay indicator className="rounded">
+      <Swiper defaultValue={0} autoPlay indicator className="rounded" height="160">
         {sliderList}
       </Swiper>
       <Grid columns="4" className="">
