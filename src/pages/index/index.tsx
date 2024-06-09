@@ -4,7 +4,6 @@ import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
-import Daolan from '../../images/zhihuidaolan.png'
 
 
 const noticeList = [
@@ -79,6 +78,8 @@ function Index() {
   const [gouList, setGouList] = useState([])
   const [dili, setDili] = useState({})
   const [jianjie, setJianjie] = useState({})
+  const [hongsetext, setHongsetext] = useState({})
+  const [historytext, setHistorytext] = useState({})
   const [tab1value, setTab1value] = useState<string | number>('0')
 
   const gridItems = [
@@ -108,6 +109,8 @@ function Index() {
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
       // setDili(data.dili[0])
       setJianjie(data.jianjie[0])
+      setHongsetext(data.hongsetext[0])
+      setHistorytext(data.historytext[0])
     })
     .catch(err => {
       console.log(err)
@@ -145,7 +148,7 @@ function Index() {
             src={Env.iconUrl + 'hill-river-1.png'}
           />
         </View>
-        <Image className="w-100 rounded" src={Daolan} mode="widthFix" onClick={() => Taro.switchTab({url: '/pages/nav/index'})} />
+        <Image className="w-100 rounded" src={Env.imageUrl + 'daolan.png'} mode="widthFix" onClick={() => Taro.switchTab({url: '/pages/nav/index'})} />
       </View>
 
       <View className="zoujin block">
@@ -157,7 +160,7 @@ function Index() {
         </View>
         <View className="wrapper">
           <View className="" onClick={() => gotoNode(jianjie.id, 4)}>
-            <Image className="w-100 rounded" src={Daolan} mode="center" />
+            <Image className="w-100 rounded" src={Env.imageUrl + jianjie.image} mode="center" />
             <View class="text">
               东沟简介
               <p>点击查看></p>
@@ -165,14 +168,14 @@ function Index() {
           </View>
           <View className="col2">
             <View className="" onClick={() => gotoNodeIndex('hongse')}>
-              <Image className="w-100 rounded" src={Daolan} mode="center" />
+              <Image className="w-100 rounded" src={Env.imageUrl + hongsetext.image} mode="center" />
               <View class="text">
                 东沟文化
                 <p>爱国主义教育基地</p>
               </View>
             </View>
             <View className="" onClick={() => gotoNodeIndex('history')}>
-              <Image className="w-100 rounded" src={Daolan} mode="center" />
+              <Image className="w-100 rounded" src={Env.imageUrl + historytext.image} mode="center" />
               <View class="text">
                 东沟历史
                 <p>瞻仰革命圣迹</p>

@@ -4,10 +4,6 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import './index.scss'
 import { Swiper, Grid } from '@nutui/nutui-react-taro'
-import Youzai from '../../icons/youzai.png'
-import Slider1 from '../../images/slider1.png'
-import Image1 from '../../images/image1.png'
-import Call from '../../icons/call.png'
 
 function scrollTo() {
   Taro.pageScrollTo({
@@ -47,7 +43,7 @@ function ViewItem({node, index}) {
       <View className="text">
       <View>{node.title}<span class="d-inline-block badge ms-1">民宿</span></View>
       <p className="ellipsis-2 my-1">{node.summary}</p>
-      <p class="call"><img width="17px" height="17px" src={Call} /> 电话：0719-8888888</p>
+      <p class="call"><img width="17px" height="17px" src={Env.iconUrl + 'call.png'} /> 电话：0719-8888888</p>
       </View>
     </View>
   )
@@ -97,7 +93,7 @@ function Index() {
       <View className="youzai block">
         <View className="header">
           <img
-            src={Youzai}
+            src={Env.iconUrl + 'youzai.png'}
           />
           游在东沟
         </View>
@@ -109,7 +105,7 @@ function Index() {
       <View className="zhuzai block">
         <View className="header">
           <img
-            src={Youzai}
+            src={Env.iconUrl + 'youzai.png'}
           />
           住在东沟
         </View>
@@ -121,7 +117,7 @@ function Index() {
       <View className="chizai block node-index">
         <View className="header">
           <img
-            src={Youzai}
+            src={Env.iconUrl + 'chizai.png'}
           />
           吃在东沟
           <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=chizai'})}> 更多 > </View>
@@ -134,7 +130,7 @@ function Index() {
       <View className="gouzai block">
         <View className="header">
           <img
-            src={Youzai}
+            src={Env.iconUrl + 'gouzai.png'}
           />
           购在东沟
           <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=gouzai'})}> 更多 > </View>
