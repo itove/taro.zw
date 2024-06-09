@@ -1,7 +1,7 @@
 export default defineAppConfig({
   pages: [
-    'pages/me/info',
     'pages/index/index',
+    'pages/me/info',
     'pages/node/index',
     'pages/leyou/index',
     'pages/me/index',

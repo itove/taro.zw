@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View } from '@tarojs/components'
-import { Right } from '@nutui/icons-react-taro'
+import { View, Button } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import {
-  Cell,
   Form,
-  Picker,
-	Uploader,
-  Button,
-  InputNumber,
   Input,
   TextArea
 } from '@nutui/nutui-react-taro'
@@ -47,6 +41,7 @@ function Index() {
         'content-type': 'application/merge-patch+json'
       }
     }).then((res) =>{
+      console.log(res.data);
       if (res.statusCode === 200) {
         Taro.showToast({
           title: '修改成功',
@@ -75,7 +70,7 @@ function Index() {
         onFinish={(values) => formSubmit(values)}
         footer={
           <>
-            <Button formType="submit" block type="primary">
+            <Button formType="submit" className="btn-primary w-100">
               确定
             </Button>
           </>

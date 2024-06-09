@@ -159,7 +159,7 @@ function Index() {
         />
       </Cell.Group>
     <View className="p-1 fixed">
-      <Button className="btn" onClick={logout}>退出登录</Button>
+      <Button className="btn-primary w-100" onClick={logout}>退出登录</Button>
     </View>
     </View>
   )
