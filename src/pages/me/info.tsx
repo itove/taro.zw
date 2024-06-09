@@ -7,11 +7,9 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
 function Index() {
-  const [user, setUser] = useState({firm: {name: ''}})
+  const [user, setUser] = useState({})
   const [phone, setPhone] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
-  const [firms, setFirms] = useState([])
-  const [firm, setFirm] = useState({})
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -35,11 +33,6 @@ function Index() {
         if (user.name === undefined) {
           user.name = '填写姓名'
         }
-        if (user.firm === undefined) {
-          setFirm({name: '选择律所'})
-        } else {
-          setFirm(user.firm)
-        }
         setUser(user)
         if (user.avatar !== undefined) {
           setAvatarUrl(Env.baseUrl + user.avatar)
@@ -47,53 +40,6 @@ function Index() {
       })
     })
   }, [])
-
-  useEffect(() => {
-    Taro.request({
-      url: Env.apiUrl + 'firms'
-    })
-    .then(res => {
-      // console.log(res)
-      let t = res.data
-      for (const i of t) {
-        i.text = i.name
-        i.value = i.id
-      }
-      setFirms(t)
-    })
-  }, [])
-
-  const changePicker = (list: any[], option: any, columnIndex: number) => {
-    // console.log(columnIndex, option)
-  }
-
-  const confirmPicker = (options: PickerOption[], values: (string | number)[]) => {
-    let firm = options[0]
-    setFirm(firm)
-    Taro.request({
-      method: 'PATCH',
-      data: {firm: "/api/firms/" + firm.id},
-      url: Env.apiUrl + 'users/' + user.id,
-      header: {
-        'content-type': 'application/merge-patch+json'
-      }
-    }).then((res) =>{
-      if (res.statusCode === 200) {
-        Taro.showToast({
-          title: '修改成功',
-          icon: 'success',
-          duration: 2000,
-          success: () => {
-            setTimeout(
-              () => {
-                // Taro.reLaunch({url: '/pages/me/index'})
-              }, 500
-            )
-          }
-        })
-      }
-    })
-  }
 
   const onChooseAvatar = (e) => {
     const f = e.detail.avatarUrl
@@ -208,20 +154,6 @@ function Index() {
         align='center'
         extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{phone}</Button><Right className="ms-1" size="12" /></>}
         />
-        <Cell
-        className='nutui-cell--clickable'
-        title='律所'
-        align='center'
-        extra={<><span>{firm.name}</span><Right className="ms-1" size="12" /></>}
-        onClick={() => setVisible(!visible)} 
-        />
-        <Picker
-          visible={visible}
-          options={firms}
-          onConfirm={(list, values) => confirmPicker(list, values)}
-          onClose={() => setVisible(false)}
-          onChange={changePicker}
-         />
       </Cell.Group>
     <View className="p-1 fixed">
       <Button className="btn" block onClick={logout}>退出登录</Button>
