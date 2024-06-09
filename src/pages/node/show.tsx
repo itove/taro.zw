@@ -66,6 +66,19 @@ function Index() {
     })
   }, [])
 
+  const makeCall = () => {
+    Taro.makePhoneCall({phoneNumber: '8888888'})
+  }
+
+  const openLocation = () => {
+    const latitude = 32.499823
+    const longitude = 110.8336
+    Taro.openLocation({
+      latitude,
+      longitude,
+      scale: 18
+    })
+  }
 
   // const rooms = []
 
@@ -160,13 +173,13 @@ function Index() {
 
         { type == 4 &&
           <View className="info-1">
-            <View className="item">
+            <View className="item" onClick={openLocation}>
               <img
                 src={Env.iconUrl + 'location-1.png'}
               />
               <View> asdf </View>
             </View>
-            <View className="item">
+            <View className="item" onClick={makeCall}>
               <img
                 src={Env.iconUrl + 'call-1.png'}
               />
@@ -226,7 +239,7 @@ function Index() {
         { (type != 2 && type != 4) &&
         <View className="address">
           <View className="text">{node.address}</View>
-          <View className="right">
+          <View className="right" onClick={openLocation}>
             <View className="icon">
               <img
                 src={Env.iconUrl + 'location.png'}
