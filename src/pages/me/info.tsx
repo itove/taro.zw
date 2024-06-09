@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Button, Cell, Avatar, Row, Col, Picker } from "@nutui/nutui-react-taro"
-import { Right } from '@nutui/icons-react-taro'
+import { Button, Cell, Avatar } from "@nutui/nutui-react-taro"
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
+
+function Right() {
+  return (
+    <img src={Env.iconUrl + 'arrow-right.png'} className="ms-1 icon" />
+  )
+}
 
 function Index() {
   const [user, setUser] = useState({})
   const [phone, setPhone] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
-  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     Taro.getStorage({
       key: Env.storageKey
     })
     .then(res => {
-
       // fetch data
       Taro.request({
         url: Env.apiUrl + 'users/' + res.data.id
@@ -49,8 +52,7 @@ function Index() {
       filePath: f,
       name: 'upload',
       formData: {
-        'type': 1,
-        'entityId': user.id
+        'uid': user.id
       }
     })
     .then(res => {
@@ -60,10 +62,11 @@ function Index() {
 
   const onGetphonenumber = (e) => {
     const d = e.detail
+    console.log(d);
     if (d.code !== undefined) {
       Taro.request({
         method: 'POST',
-        url: Env.apiUrl + 'wxgetphone',
+        url: Env.apiUrl + 'wx/getphone',
         data: {code: d.code}
       }).then((res) => {
         if (res.statusCode === 200) {
@@ -133,30 +136,30 @@ function Index() {
   }
 
   return (
-    <View className="">
+    <View className="info">
       <Cell.Group>
         <Cell
         className='nutui-cell--clickable'
         title='头像'
         align='center'
-        extra={<><Button className="notbtn" icon={<Avatar size="22" src={avatarUrl}/>} openType="chooseAvatar" onChooseAvatar={onChooseAvatar}></Button><Right className="ms-1" size="12" /></>}
+        extra={<><Button className="notbtn" icon={<Avatar size="22" src={avatarUrl}/>} openType="chooseAvatar" onChooseAvatar={onChooseAvatar}></Button><Right /></>}
         />
         <Cell
         className='nutui-cell--clickable'
         title='姓名'
         align='center'
-        extra={<><span>{user.name}</span><Right className="ms-1" size="12" /></>}
+        extra={<><span>{user.name}</span><Right /></>}
         onClick={editName}
         />
         <Cell
         className='nutui-cell--clickable'
         title='手机'
         align='center'
-        extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{phone}</Button><Right className="ms-1" size="12" /></>}
+        extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{phone}</Button><Right /></>}
         />
       </Cell.Group>
     <View className="p-1 fixed">
-      <Button className="btn" block onClick={logout}>退出登录</Button>
+      <Button className="btn" onClick={logout}>退出登录</Button>
     </View>
     </View>
   )

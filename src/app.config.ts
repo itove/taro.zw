@@ -1,10 +1,10 @@
 export default defineAppConfig({
   pages: [
+    'pages/me/info',
     'pages/index/index',
     'pages/node/index',
     'pages/leyou/index',
     'pages/me/index',
-    'pages/me/info',
     'pages/me/name',
     'pages/me/setting',
     'pages/feedback/index',
@@ -51,5 +51,14 @@ export default defineAppConfig({
         "selectedIconPath": './icons/user-fill.png'
       },
     ]
-  }
+  },
+ requiredPrivateInfos: [
+   "getLocation",
+ ],
+ permission: {
+   'scope.userLocation': {
+     desc: "你的位置信息将用于显示景点距离"
+   }
+ },
+ lazyCodeLoading: 'requiredComponents',
 })
