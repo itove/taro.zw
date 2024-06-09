@@ -22,9 +22,9 @@ function Index() {
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
-  const type = instance.router.params.type ? instance.router.params.type : 3
+  const type = instance.router.params.type ? instance.router.params.type : 2
 
-  // 0: you // 1: zhu // 2: gou // 3: chi & normal node // 4: 走进东沟
+  // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: 走进东沟
 
   useEffect(() => {
     Taro.request({
@@ -183,7 +183,7 @@ function Index() {
           </View>
         }
 
-        { type == 2 &&
+        { type == 3 &&
         <View className="contact">
           <View className="img">
             <Image mode="widthFix" className="w-100" src={Image1} />
@@ -200,7 +200,7 @@ function Index() {
         </View>
         }
 
-        { type < 3 &&
+        { (type != 2 && type != 4) &&
         <View className="address">
           <View className="text">{node.address}</View>
           <View className="right">
@@ -215,9 +215,9 @@ function Index() {
         }
       </View>
 
-      { (type == 0 || type == 2) &&
+      { (type == 0 || type == 2 || type == 3) &&
       <View className="p-1 card-1">
-        <View className="title acive"> 景点介绍 </View>
+        <View className="title acive"> { type == 0 && '景点介绍' || '商品详情' }</View>
       </View>
       }
 
