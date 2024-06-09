@@ -5,6 +5,7 @@ export default defineAppConfig({
     'pages/leyou/index',
     'pages/me/index',
     'pages/me/info',
+    'pages/me/name',
     'pages/feedback/index',
     'pages/me/login',
     'pages/node/show',
