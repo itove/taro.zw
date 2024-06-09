@@ -52,7 +52,7 @@ function SwiperItem({node, index}) {
   return (
     <Swiper.Item key={index} className="rounded">
     <Image
-    className="w-100"
+    className="w-100 rounded"
     mode="widthFix"
     onClick={() => console.log(index)}
     src={Env.imageUrl + node.image}
