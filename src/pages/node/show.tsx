@@ -240,7 +240,7 @@ function Index() {
         { type == 3 &&
         <View className="contact">
           <View className="img">
-            <Image mode="widthFix" className="w-100" src={Env.imageUrl + node.image} />
+            <Image mode="aspectFill" className="w-100" src={Env.imageUrl + node.image} />
           </View>
           <View className="">
             <View className="name">
