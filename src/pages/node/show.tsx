@@ -281,6 +281,24 @@ function Index() {
       </Tabs>
       }
 
+      { type == 3 &&
+      <View className="footer">
+        <View className="">
+          <View className="">
+            <img src={Env.iconUrl + 'house.png'} />
+            主页
+          </View>
+          <View className="">
+            <img src={Env.iconUrl + isFav && 'star.png' || 'star.png'} />
+            { isFav || '已收藏' || '收藏'}
+            <img src={Env.iconUrl + 'star.png'} />
+            收藏
+          </View>
+        </View>
+        <Button className="btn-primary btn-rounded">立即购买</Button>
+      </View>
+      }
+
     </View>
   )
 }
