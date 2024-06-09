@@ -17,9 +17,6 @@ function Index() {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    Taro.setNavigationBarTitle({
-      title: '列表'
-    })
     Taro.request({
       url: Env.apiUrl + 'nodes/' + region
     })
@@ -27,7 +24,11 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setList(data.map((node, index) =>
+      Taro.setNavigationBarTitle({
+        title: data.region
+      })
+
+      setList(data.nodes.map((node, index) =>
           <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
             <Image className="w-100" src={Env.imageUrl + node.image} mode="widthFix" />
           </Grid.Item>

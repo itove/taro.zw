@@ -27,10 +27,6 @@ function Index() {
   // 0: 景点 // 1: 住宿 // 2: 商品 // 3: normal node // 4: 走进东沟
 
   useEffect(() => {
-    Taro.setNavigationBarTitle({
-      title: '详情'
-    })
-
     Taro.request({
       url: Env.apiUrl + 'nodes/' + id
     })
@@ -38,6 +34,10 @@ function Index() {
       const node = res.data
       setNode(node)
       console.log(node)
+
+      Taro.setNavigationBarTitle({
+        title: node.title
+      })
 
       setTags(node.tags.map((i, index) => <View key={index}>{i}</View> ))
     })
@@ -139,13 +139,13 @@ function Index() {
           <View className="info-1">
             <View className="item">
               <img
-                src={Env.iconUrl + 'location.png'}
+                src={Env.iconUrl + 'location-1.png'}
               />
               <View> asdf </View>
             </View>
             <View className="item">
               <img
-                src={Env.iconUrl + 'location.png'}
+                src={Env.iconUrl + 'call-1.png'}
               />
               <View> asdf </View>
             </View>
