@@ -19,8 +19,12 @@ function Index() {
 
   useEffect(() => {
     console.log(uid)
+    let url = Env.apiUrl + 'nodes/' + region
+    if (uid !== undefined ) {
+      url = Env.apiUrl + 'userfav?region=' + region + '&uid=' + uid
+    }
     Taro.request({
-      url: Env.apiUrl + 'nodes/' + region
+      url
     })
     .then(res => {
       const data = res.data
