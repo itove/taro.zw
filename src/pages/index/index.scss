@@ -1,5 +1,9 @@
 page{
   padding-bottom: 10px;
+  .home{
+    position: relative;
+    overflow: hidden;
+  }
 }
 .wrapper{
   Image::before{
