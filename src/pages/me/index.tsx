@@ -6,9 +6,9 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
 function Index() {
-  const [logged, setLogged] = useState(true)
+  const [logged, setLogged] = useState(false)
   const [user, setUser] = useState({})
-  const [uid, setUid] = useState('')
+  const [uid, setUid] = useState(0)
   const [avatarUrl, setAvatarUrl] = useState('')
 
   useEffect(() => {
@@ -16,6 +16,7 @@ function Index() {
       key: Env.storageKey
     })
     .then(res => {
+      setLogged(true)
       // fetch data
       Taro.request({
         url: Env.apiUrl + 'users/' + res.data.id
