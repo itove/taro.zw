@@ -163,7 +163,7 @@ function Index() {
         </View>
         <View className="wrapper">
           <View className="" onClick={() => gotoNode(jianjie.id, 4)}>
-            <Image className="w-100 rounded" src={Env.imageUrl + jianjie.image} mode="center" />
+            <Image className="w-100 rounded" src={Env.imageUrl + jianjie.image} mode="aspectFill" />
             <View class="text">
               东沟简介
               <p>点击查看></p>
@@ -171,14 +171,14 @@ function Index() {
           </View>
           <View className="col2">
             <View className="" onClick={() => gotoNodeIndex('hongse')}>
-              <Image className="w-100 rounded" src={Env.imageUrl + hongsetext.image} mode="center" />
+              <Image className="w-100 rounded" src={Env.imageUrl + hongsetext.image} mode="aspectFill" />
               <View class="text">
                 东沟文化
                 <p>爱国主义教育基地</p>
               </View>
             </View>
             <View className="" onClick={() => gotoNodeIndex('history')}>
-              <Image className="w-100 rounded" src={Env.imageUrl + historytext.image} mode="center" />
+              <Image className="w-100 rounded" src={Env.imageUrl + historytext.image} mode="aspectFill" />
               <View class="text">
                 东沟历史
                 <p>瞻仰革命圣迹</p>
