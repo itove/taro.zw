@@ -25,6 +25,7 @@ function Index() {
         console.log(res)
         let u = res.data
         setUser(u)
+        setUid(u.id)
         if (u.avatar !== undefined) {
           setAvatarUrl(Env.baseUrl + u.avatar)
         }

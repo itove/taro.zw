@@ -13,10 +13,12 @@ function Index() {
   const instance = Taro.getCurrentInstance();
   const region = instance.router.params.region
   const title = instance.router.params.title
+  const uid = instance.router.params.uid
 
   const [list, setList] = useState([])
 
   useEffect(() => {
+    console.log(uid)
     Taro.request({
       url: Env.apiUrl + 'nodes/' + region
     })
