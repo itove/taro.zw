@@ -18,3 +18,9 @@
     height: 16px;
   }
 }
+page{
+  --nutui-actionsheet-item-border-bottom: none;
+  .nut-actionsheet .nut-popup-title{
+    border-bottom: none;
+  }
+}

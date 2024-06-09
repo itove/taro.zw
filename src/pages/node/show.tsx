@@ -216,7 +216,7 @@ function Index() {
 
       { (type == 0 || type == 2 || type == 3) &&
       <View className="p-1 card-1">
-        <View className="title acive"> { type == 0 && '景点介绍' || '商品详情' }</View>
+        <View className="no-overflow title acive"> { type == 0 && '景点介绍' || '商品详情' }</View>
       </View>
       }
 
