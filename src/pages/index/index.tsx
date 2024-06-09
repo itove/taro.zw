@@ -6,12 +6,6 @@ import { Env } from '../../env'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
 
 
-const noticeList = [
-  '关于十堰市景区型村庄评定名单',
-  '2关于十堰市景区型村庄评定名单',
-  '3关于十堰市景区型村庄评定名单',
-]
-
 function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
@@ -27,6 +21,14 @@ function gotoUrl(url) {
 function gridGoto(node) {
   if (node.isTab) {
     Taro.switchTab({url: '/pages/' + node.url})
+    .then(
+      res => {
+        Taro.pageScrollTo({
+          selector: node.target,
+          duration: 300
+        })
+      }
+    )
   } else {
     Taro.navigateTo({url: '/pages/' + node.url})
   }
@@ -70,7 +72,7 @@ function GridItem({node, index}) {
 
 function Index() {
   const [sliderList, setSliderList] = useState([])
-  const [noticeBar, setNoticeBar] = useState([])
+  const [notice, setNotice] = useState([])
   const [gridList, setGridList] = useState([])
   const [youList, setYouList] = useState([])
   const [zhuList, setZhuList] = useState([])
@@ -83,14 +85,14 @@ function Index() {
   const [tab1value, setTab1value] = useState<string | number>('0')
 
   const gridItems = [
-    { t: '游在东沟', p: Env.iconUrl + 'grid_1.png', url: 'leyou/index', isTab: true, },
-    { t: '住在东沟', p: Env.iconUrl + 'grid_2.png', url: 'leyou/index', isTab: true, },
-    { t: '吃在东沟', p: Env.iconUrl + 'grid_3.png', url: 'leyou/index', isTab: true, },
-    { t: '购在东沟', p: Env.iconUrl + 'grid_4.png', url: 'leyou/index', isTab: true, },
-    { t: '地理位置', p: Env.iconUrl + 'grid_5.png', url: 'node/show?id=' + dili.id, isTab: false, },
-    { t: '投诉建议', p: Env.iconUrl + 'grid_6.png', url: 'feedback/index', isTab: false, },
-    { t: '文旅要闻', p: Env.iconUrl + 'grid_7.png', url: 'node/index?region=wenlv', isTab: false, },
-    { t: '旅行游记', p: Env.iconUrl + 'grid_8.png', url: 'node/index?region=youji', isTab: false, },
+    { t: '游在东沟', p: Env.iconUrl + 'grid_1.png', target: '.youzai', url: 'leyou/index', isTab: true, },
+    { t: '住在东沟', p: Env.iconUrl + 'grid_2.png', target: '.zhuzai', url: 'leyou/index', isTab: true, },
+    { t: '吃在东沟', p: Env.iconUrl + 'grid_3.png', target: '.chizai', url: 'leyou/index', isTab: true, },
+    { t: '购在东沟', p: Env.iconUrl + 'grid_4.png', target: '.gouzai', url: 'leyou/index', isTab: true, },
+    { t: '地理位置', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/show?id=' + dili.id, isTab: false, },
+    { t: '投诉建议', p: Env.iconUrl + 'grid_6.png', target: '', url: 'feedback/index', isTab: false, },
+    { t: '文旅要闻', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?region=wenlv', isTab: false, },
+    { t: '旅行游记', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?region=youji', isTab: false, },
   ]
 
   useEffect(() => {
@@ -102,6 +104,7 @@ function Index() {
       console.log(res)
 
       setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
+      setNotice(data.notice.map((node, index) => node.title ))
       setYouList(data.youzai.map((node, index) => <TabPane node={node} type={0} index={index} />))
       setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} type={1} index={index} />))
       setChiList(data.chizai.map((node, index) => <TabPane node={node} type={0} index={index} />))
@@ -133,11 +136,11 @@ function Index() {
       rightIcon={<span className="text-gray">更多 ></span>}
       className="rounded-5 overflow-hidden"
       direction="vertical"
-      list={noticeList}
+      list={notice}
       speed={5}
       duration={1000}
       height={30}
-      onClick={(e) => { }}
+      onClick={(e) => gotoNodeIndex('notice')}
       // closeable
       />
 
