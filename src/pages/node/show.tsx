@@ -131,6 +131,7 @@ function Index() {
         // visible={true}
         images={previewImages}
         visible={showPreview}
+        showMenuByLongpress={true}
         onClose={() => setShowPreview(false)}
       />
 
@@ -282,20 +283,20 @@ function Index() {
       }
 
       { type == 3 &&
-      <View className="footer">
-        <View className="">
+      <View className="footer fixed">
+        <View className="left">
           <View className="">
             <img src={Env.iconUrl + 'house.png'} />
-            主页
+            <View>主页</View>
           </View>
           <View className="">
-            <img src={Env.iconUrl + isFav && 'star.png' || 'star.png'} />
-            { isFav || '已收藏' || '收藏'}
-            <img src={Env.iconUrl + 'star.png'} />
-            收藏
+            <img src={Env.iconUrl + (isFav && 'star.png' || 'star.png')} />
+            <View>{ isFav && '已收藏' || '收藏'}</View>
           </View>
         </View>
-        <Button className="btn-primary btn-rounded">立即购买</Button>
+        <View className="right">
+          <Button className="w-100 btn-primary btn-rounded" onClick={() => preview([{src: Env.imageUrl + node.image}])}>立即购买</Button>
+        </View>
       </View>
       }
 

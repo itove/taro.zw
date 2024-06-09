@@ -7,6 +7,7 @@ page{
   --nutui-noticebar-right-icon-width: 40px;
   --nutui-noticebar-border-radius: 500px;
   --primary: #0FB99F;
+  padding-bottom: 55px;
 }
 .w-25{
   width: 25%;
@@ -177,4 +178,13 @@ page{
 }
 .no-overflow{
   overflow: unset !important;
+}
+.fixed{
+  position: fixed;
+  bottom: .1rem;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  margin: auto;
+  background-color: #fff;
 }

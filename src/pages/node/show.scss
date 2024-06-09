@@ -209,7 +209,26 @@ page{
   }
 }
 .footer{
+  padding: 0px 16px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-top: 0.5px solid #E6E6E6;
+  height: 49px;
+  .left{
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img{
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .right{
+    width: 65%;
+    .btn-rounded{
+      border-radius: 20px;
+    }
+  }
 }
