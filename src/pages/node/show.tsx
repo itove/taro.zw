@@ -20,6 +20,7 @@ function Index() {
   const [isFav, setIsFav] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
+  const [logged, setLogged] = useState(false)
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
@@ -50,12 +51,13 @@ function Index() {
       key: Env.storageKey
     })
     .then(res => {
+      setLogged(true)
       Taro.request({
         url: Env.apiUrl + 'isfav?uid=' + res.data.id + '&nid=' + id
       })
       .then(res => {
         console.log(res.data)
-        setIsFav(res.data)
+        setIsFav(res.data.isFav)
       })
     })
     .catch(err => {
