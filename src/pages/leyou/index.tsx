@@ -12,17 +12,17 @@ function scrollTo() {
   })
 }
 
-function gotoNode(id, type = 3) {
+function gotoNode(id, type = 2) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
 
-function SwiperItem({node, index}) {
+function SwiperItem({node, index, type}) {
   return (
     <Swiper.Item className="slide-item">
     <Image
     className="w-100 img"
     mode="widthFix"
-    onClick={() => gotoNode(node.id)}
+    onClick={() => gotoNode(node.id, type)}
     src={Env.imageUrl + node.image}
     alt=""
     />
@@ -36,7 +36,7 @@ function SwiperItem({node, index}) {
 
 function ViewItem({node, index}) {
   return (
-    <View key={index} className="list-item" onClick={() => gotoNode(node.id)}>
+    <View key={index} className="list-item" onClick={() => gotoNode(node.id, 1)}>
       <View className="img">
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="widthFix" />
       </View>
@@ -72,10 +72,10 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setYouList(data.youzai.map((node, index) => <SwiperItem node={node} index={index} />))
+      setYouList(data.youzai.map((node, index) => <SwiperItem node={node} index={index} type={0} />))
       setZhuList(data.zhuzai.map((node, index) => <ViewItem node={node} index={index} />))
       // setChiList(data.chizai.map((node, index) => <GridItem node={node} index={index} />))
-      setGouList(data.gouzai.map((node, index) => <SwiperItem node={node} index={index} />))
+      setGouList(data.gouzai.map((node, index) => <SwiperItem node={node} index={index} type={3} />))
       setChiList(data.chizai.map((node, index) => index < 4 &&
           <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
             <Image className="w-100" src={Env.imageUrl + node.image} mode="widthFix" />
