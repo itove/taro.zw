@@ -37,7 +37,9 @@ function Index() {
       const node = res.data
       setNode(node)
       console.log(node)
-      setBody(node.body.replace(/&nbsp;/g, ''))
+      if (node.body) {
+        setBody(node.body.replace(/&nbsp;/g, ''))
+      }
 
       Taro.setNavigationBarTitle({
         title: node.title
@@ -195,13 +197,13 @@ function Index() {
               <img
                 src={Env.iconUrl + 'location-1.png'}
               />
-              <View> asdf </View>
+              <View> {node.address}</View>
             </View>
             <View className="item" onClick={makeCall}>
               <img
                 src={Env.iconUrl + 'call-1.png'}
               />
-              <View> asdf </View>
+              <View> {node.phone}</View>
             </View>
           </View>
         }
@@ -214,25 +216,25 @@ function Index() {
               <img
                 src={Env.iconUrl + 'bookmark.png' }
               />
-              <View> asdf </View>
+              <View> 东沟简介 </View>
             </View>
-            <View className="item">
+            <View className="item" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=honor'})}>
               <img
                 src={Env.iconUrl + 'honor.png' }
               />
-              <View> asdf </View>
+              <View> 东沟荣誉 </View>
             </View>
             <View className="item">
               <img
                 src={Env.iconUrl + 'map.png' }
               />
-              <View> asdf </View>
+              <View> 地理交通 </View>
             </View>
-            <View className="item">
+            <View className="item" onClick={() => Taro.navigateTo({url: '/pages/feedback/index'})}>
               <img
                 src={Env.iconUrl + 'letter.png' }
               />
-              <View> asdf </View>
+              <View> 投诉建议 </View>
             </View>
           </View>
         }
