@@ -50,7 +50,7 @@ function TabPane({node, type, index}) {
 
 function SwiperItem({node, index}) {
   return (
-    <Swiper.Item key={index}>
+    <Swiper.Item key={index} className="rounded">
     <Image
     className="w-100"
     mode="widthFix"
