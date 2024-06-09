@@ -15,6 +15,7 @@ Taro.options.html.transformElement = (el) => {
 
 function Index() {
   const [node, setNode] = useState({})
+  const [body, setBody] = useState('')
   const [tags, setTags] = useState([])
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
@@ -33,6 +34,7 @@ function Index() {
       const node = res.data
       setNode(node)
       console.log(node)
+      setBody(node.body.replace(/&nbsp;/g, ''))
 
       Taro.setNavigationBarTitle({
         title: node.title
@@ -221,7 +223,7 @@ function Index() {
       }
 
       { type != 1 &&
-      <View dangerouslySetInnerHTML={{__html: node.body}} className='body p-1'></View>
+      <View dangerouslySetInnerHTML={{__html: body}} className='body p-1'></View>
       }
 
       { type == 1 &&
@@ -239,7 +241,7 @@ function Index() {
           </View>
         </Tabs.TabPane>
         <Tabs.TabPane title="酒店详情">
-          <View dangerouslySetInnerHTML={{__html: node.body}} className='body'></View>
+          <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
         </Tabs.TabPane>
       </Tabs>
       }
