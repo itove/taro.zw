@@ -4,7 +4,6 @@ import './show.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
-import Image1 from '../../images/image1.png'
 
 Taro.options.html.transformElement = (el) => {
   if (el.nodeName === 'image') {
@@ -186,7 +185,7 @@ function Index() {
         { type == 3 &&
         <View className="contact">
           <View className="img">
-            <Image mode="widthFix" className="w-100" src={Image1} />
+            <Image mode="widthFix" className="w-100" src={Env.imageUrl + node.image} />
           </View>
           <View className="">
             <View className="name">
