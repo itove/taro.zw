@@ -36,7 +36,7 @@ function Index() {
 
       setList(data.nodes.map((node, index) =>
           <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
-            <Image className="w-100" src={Env.imageUrl + node.image} mode="widthFix" />
+            <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
           </Grid.Item>
         )
       )
