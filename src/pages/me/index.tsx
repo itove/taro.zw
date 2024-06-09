@@ -5,16 +5,10 @@ import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
-function goto() {
-  const link = '/pages/me/info'
-  Taro.navigateTo({ url: link })
-}
-
 function Index() {
-  // const [list, setList] = useState([])
-  const [user, setUser] = useState({name: '请点击登录'})
+  const [logged, setLogged] = useState(false)
+  const [user, setUser] = useState({})
   const [avatarUrl, setAvatarUrl] = useState('')
-  let l = []
 
   useEffect(() => {
     Taro.getStorage({
@@ -28,9 +22,6 @@ function Index() {
       .then(res => {
         console.log(res)
         let u = res.data
-        if (u.firm === undefined) {
-          u.firm = {name: ''}
-        }
         setUser(u)
         if (u.avatar !== undefined) {
           setAvatarUrl(Env.baseUrl + u.avatar)
@@ -43,6 +34,14 @@ function Index() {
     })
   }, [])
 
+  const goto = () => {
+    if (logged) {
+      Taro.navigateTo({ url: ''})
+    } else {
+      Taro.navigateTo({ url: 'login'})
+    }
+  }
+
   return (
     <View className="">
       <View className="p-1 align-items-center d-flex">
@@ -53,7 +52,11 @@ function Index() {
           />
         </View>
         <View className="ms-1">
-            {user.name}
+            { logged &&
+            <View>{user.name}</View>
+            ||
+            <View onClick={() => Taro.navigateTo({url: 'login'})}>请点击登录</View>
+            }
         </View> 
       </View>
 
@@ -62,25 +65,25 @@ function Index() {
           我的收藏
         </View>
         <View className="info-2">
-          <View className="item">
+          <View className="item" onClick={() => goto('youzai')}>
             <img
               src={Env.iconUrl + 'grid_1.png'}
             />
             <View> 游在东沟 </View>
           </View>
-          <View className="item">
+          <View className="item" onClick={() => goto('zhuzai')} >
             <img
               src={Env.iconUrl + 'grid_2.png'}
             />
             <View> 住在东沟 </View>
           </View>
-          <View className="item">
+          <View className="item" onClick={() => goto('chizai')} >
             <img
               src={Env.iconUrl + 'grid_3.png'}
             />
             <View> 吃在东沟 </View>
           </View>
-          <View className="item">
+          <View className="item" onClick={() => goto('gouzai')} >
             <img
               src={Env.iconUrl + 'grid_4.png'}
             />
