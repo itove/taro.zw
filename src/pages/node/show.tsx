@@ -24,7 +24,7 @@ function Index() {
   const id = instance.router.params.id
   const type = instance.router.params.type ? instance.router.params.type : 3
 
-  // 0: 景点 // 1: 住宿 // 2: 商品 // 3: normal node // 4: 走进东沟
+  // 0: you // 1: zhu // 2: gou // 3: chi & normal node // 4: 走进东沟
 
   useEffect(() => {
     Taro.request({
