@@ -6,8 +6,9 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
 function Index() {
-  const [logged, setLogged] = useState(false)
+  const [logged, setLogged] = useState(true)
   const [user, setUser] = useState({})
+  const [uid, setUid] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
 
   useEffect(() => {
@@ -34,9 +35,9 @@ function Index() {
     })
   }, [])
 
-  const goto = () => {
+  const goto = (region) => {
     if (logged) {
-      Taro.navigateTo({ url: ''})
+      Taro.navigateTo({ url: '/pages/node/index?region=' + region + '&uid=' + uid})
     } else {
       Taro.navigateTo({ url: 'login'})
     }
