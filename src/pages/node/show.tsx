@@ -244,7 +244,7 @@ function Index() {
           </View>
           <View className="">
             <View className="name">
-              {node.name}
+              {node.title}
             </View>
             <View className="phone">
               <img src={Env.iconUrl + 'call.png'} />
