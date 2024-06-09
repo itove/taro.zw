@@ -204,10 +204,10 @@ function Index() {
           activeType="button"
           className="tabs"
           >
-          <Tabs.TabPane title="游在东沟"> {youList} </Tabs.TabPane>
-          <Tabs.TabPane title="住在东沟"> {zhuList} </Tabs.TabPane>
-          <Tabs.TabPane title="吃在东沟"> {chiList} </Tabs.TabPane>
-          <Tabs.TabPane title="购在东沟"> {gouList} </Tabs.TabPane>
+          <Tabs.TabPane className="tabpane" title="游在东沟"> {youList} </Tabs.TabPane>
+          <Tabs.TabPane className="tabpane" title="住在东沟"> {zhuList} </Tabs.TabPane>
+          <Tabs.TabPane className="tabpane" title="吃在东沟"> {chiList} </Tabs.TabPane>
+          <Tabs.TabPane className="tabpane" title="购在东沟"> {gouList} </Tabs.TabPane>
         </Tabs>
       </View>
 

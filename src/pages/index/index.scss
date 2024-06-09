@@ -1,3 +1,6 @@
+page{
+  padding-bottom: 10px;
+}
 .wrapper{
   Image::before{
     content: ' ';
@@ -57,6 +60,8 @@
   --nutui-tabs-titles-item-active-color: #ffffff;
   --nutui-tabs-titles-font-size: 13px;
   --nutui-tabs-tabpane-padding: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
   .nut-tabs-titles-item-text {
     background: #F1F2F2;
     border-radius: 50px;
@@ -71,6 +76,8 @@
     height: 90px;
   }
   .tabs{
-    height: 635px;
+    .tabpane{
+      // height: 635px;
+    }
   }
 }
