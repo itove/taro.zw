@@ -17,6 +17,7 @@ function Index() {
   const [node, setNode] = useState({})
   const [body, setBody] = useState('')
   const [tags, setTags] = useState([])
+  const [isFav, setIsFav] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
 
@@ -41,6 +42,25 @@ function Index() {
       })
 
       setTags(node.tags.map((i, index) => <View key={index}>{i}</View> ))
+    })
+  }, [])
+
+  useEffect(() => {
+    Taro.getStorage({
+      key: Env.storageKey
+    })
+    .then(res => {
+      Taro.request({
+        url: Env.apiUrl + 'isfav?uid=' + res.data.id + '&nid=' + id
+      })
+      .then(res => {
+        console.log(res.data)
+        setIsFav(res.data)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      // Taro.redirectTo({url: '/pages/me/login'})
     })
   }, [])
 

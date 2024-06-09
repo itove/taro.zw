@@ -21,7 +21,7 @@ function Index() {
     console.log(uid)
     let url = Env.apiUrl + 'nodes/' + region
     if (uid !== undefined ) {
-      url = Env.apiUrl + 'userfav?region=' + region + '&uid=' + uid
+      url = Env.apiUrl + 'fav?region=' + region + '&uid=' + uid
     }
     Taro.request({
       url
