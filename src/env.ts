@@ -12,10 +12,10 @@ switch (envVer) {
     // baseUrl = 'https://donggou.dev.itove.com/'
     break
   case 'trial':
-    baseUrl = 'https://donggou.dev.itove.com/'
+    baseUrl = 'https://www.donggou.net.cn/'
     break
   case 'release':
-    baseUrl = 'https://donggou.itove.com/';
+    baseUrl = 'https://www.donggou.net.cn/';
     break
 }
 
