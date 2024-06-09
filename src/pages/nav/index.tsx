@@ -1,10 +1,16 @@
-import React from 'react'
-import { View } from '@tarojs/components'
+import React, { useState, useEffect } from 'react'
+import { View, Map } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
+
 function Index() {
+  useEffect(() => {
+    // const mapCtx = Taro.createMapContext('map')
+    // mapCtx.addCustomLayer('6662cf796168')
+  }, [])
+
   return (
     <View className="">
       <View className="top">
@@ -19,6 +25,12 @@ function Index() {
           <img src={Env.iconUrl + 'gird.png'} />
         </View>
       </View>
+
+      <Map id="map"
+      latitude="32.499823"
+      longitude="110.8336"
+
+      />
     </View>
   )
 }
