@@ -69,7 +69,7 @@ function Index() {
   }, [])
 
   const makeCall = () => {
-    Taro.makePhoneCall({phoneNumber: '8888888'})
+    Taro.makePhoneCall({phoneNumber: node.phone})
   }
 
   const openLocation = () => {
