@@ -15,6 +15,7 @@ Taro.options.html.transformElement = (el) => {
 
 function Index() {
   const [node, setNode] = useState({})
+  const [uid, setUid] = useState(0)
   const [body, setBody] = useState('')
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
@@ -52,6 +53,7 @@ function Index() {
     })
     .then(res => {
       setLogged(true)
+      setUid(res.data.id)
       Taro.request({
         url: Env.apiUrl + 'isfav?uid=' + res.data.id + '&nid=' + id
       })
@@ -77,6 +79,31 @@ function Index() {
       latitude,
       longitude,
       scale: 18
+    })
+  }
+
+  const toggleFav = () => {
+    if (!logged) {
+      Taro.navigateTo({ url: '/pages/me/login' })
+      return
+    }
+    let url = 'fav/add'
+    const data = {
+      uid: uid,
+      nid: id,
+    }
+    if (isFav) {
+      url = 'fav/remove'
+      setIsFav(false)
+    } else {
+      setIsFav(true)
+    }
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + url,
+      data
+    }).then((res) => {
+      setIsFav(res.data.isFav)
     })
   }
 
@@ -125,16 +152,6 @@ function Index() {
 
   return (
     <View className="show">
-
-      <ImagePreview
-        autoPlay
-        // visible={true}
-        images={previewImages}
-        visible={showPreview}
-        showMenuByLongpress={true}
-        onClose={() => setShowPreview(false)}
-      />
-
       <Image className="w-100 hero" src={Env.imageUrl + node.image} mode="widthFix" />
 
       <View className="p-1 card">
@@ -289,7 +306,7 @@ function Index() {
             <img src={Env.iconUrl + 'house.png'} />
             <View>主页</View>
           </View>
-          <View className="">
+          <View className="" onClick={toggleFav}>
             <img src={Env.iconUrl + (isFav && 'star.png' || 'star.png')} />
             <View>{ isFav && '已收藏' || '收藏'}</View>
           </View>
@@ -299,6 +316,15 @@ function Index() {
         </View>
       </View>
       }
+
+      <ImagePreview
+        // autoPlay
+        // visible={true}
+        images={previewImages}
+        visible={showPreview}
+        showMenuByLongpress={true}
+        onClose={() => setShowPreview(false)}
+      />
 
     </View>
   )
