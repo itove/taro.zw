@@ -202,6 +202,7 @@ function Index() {
             setTab1value(value)
           }}
           activeType="button"
+          className="tabs"
           >
           <Tabs.TabPane title="游在东沟"> {youList} </Tabs.TabPane>
           <Tabs.TabPane title="住在东沟"> {zhuList} </Tabs.TabPane>
