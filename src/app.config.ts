@@ -1,6 +1,7 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
+    'pages/nav/index',
     'pages/me/info',
     'pages/node/index',
     'pages/leyou/index',
@@ -10,7 +11,6 @@ export default defineAppConfig({
     'pages/feedback/index',
     'pages/me/login',
     'pages/node/show',
-    'pages/nav/index',
   ],
   window: {
     backgroundTextStyle: 'light',

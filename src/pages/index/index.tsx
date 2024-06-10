@@ -72,7 +72,7 @@ function GridItem({node, index}) {
 
 function Index() {
   const [sliderList, setSliderList] = useState([])
-  const [notice, setNotice] = useState([])
+  const [tongzhi, setTongzhi] = useState([])
   const [gridList, setGridList] = useState([])
   const [youList, setYouList] = useState([])
   const [zhuList, setZhuList] = useState([])
@@ -104,7 +104,7 @@ function Index() {
       console.log(res)
 
       setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
-      setNotice(data.notice.map((node, index) => node.title ))
+      setTongzhi(data.tongzhi.map((node, index) => node.title ))
       setYouList(data.youzai.map((node, index) => <TabPane node={node} type={0} index={index} />))
       setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} type={1} index={index} />))
       setChiList(data.chizai.map((node, index) => <TabPane node={node} type={2} index={index} />))
@@ -136,11 +136,11 @@ function Index() {
       rightIcon={<span className="text-gray">更多 ></span>}
       className="rounded-5 overflow-hidden"
       direction="vertical"
-      list={notice}
+      list={tongzhi}
       speed={5}
       duration={1000}
       height={30}
-      onClick={(e) => gotoNodeIndex('notice')}
+      onClick={(e) => gotoNodeIndex('tongzhi')}
       // closeable
       />
 
