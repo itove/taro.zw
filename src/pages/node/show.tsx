@@ -223,7 +223,7 @@ function Index() {
               />
               <View> 东沟荣誉 </View>
             </View>
-            <View className="item">
+            <View className="item" onClick={() => Taro.navigateTo({url: '/pages/node/show?id=10'})}>
               <img
                 src={Env.iconUrl + 'map.png' }
               />
