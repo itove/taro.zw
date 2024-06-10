@@ -5,7 +5,7 @@ import { View, Image } from '@tarojs/components'
 import { Grid } from '@nutui/nutui-react-taro'
 import './index.scss'
 
-function gotoNode(id, type = 3) {
+function gotoNode(id, type = 2) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
 

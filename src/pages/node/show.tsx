@@ -15,6 +15,7 @@ Taro.options.html.transformElement = (el) => {
 
 function Index() {
   const [node, setNode] = useState({})
+  const [rooms, setRooms] = useState([])
   const [uid, setUid] = useState(0)
   const [body, setBody] = useState('')
   const [tags, setTags] = useState([])
@@ -34,18 +35,20 @@ function Index() {
       url: Env.apiUrl + 'nodes/' + id
     })
     .then(res => {
-      const node = res.data
-      setNode(node)
-      console.log(node)
-      if (node.body) {
-        setBody(node.body.replace(/&nbsp;/g, ''))
+      const n = res.data
+      setNode(n)
+      console.log(n)
+      if (n.body) {
+        setBody(n.body.replace(/&nbsp;/g, ''))
       }
 
       Taro.setNavigationBarTitle({
-        title: node.title
+        title: n.title
       })
 
-      setTags(node.tags.map((i, index) => <View key={index}>{i}</View> ))
+      setTags(n.tags.map((i, index) => <View key={index}>{i}</View> ))
+
+      setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
     })
   }, [])
 
@@ -69,6 +72,38 @@ function Index() {
       // Taro.redirectTo({url: '/pages/me/login'})
     })
   }, [])
+
+  const RoomView = ({room, index, node}) => {
+    const previews = []
+    room.images.map((i) => previews.push({src: Env.imageUrl + i}))
+    return (
+      <View key={index} className="list">
+        <View className="img">
+          <Image className="w-100" mode="scaleToFill" src={Env.imageUrl + room.images[0]} onClick={() => preview(previews)} />
+          <View className="count">
+            <img src={Env.iconUrl + 'image.png'} />
+            {room.images.length}
+          </View>
+        </View>
+        <View className="info">
+          <View className="title">
+          {room.title}
+          </View>
+          <View className="summary">
+          {room.summary}
+          </View>
+          <View className="tags">
+          {
+            room.tags.map((t, ind) => <View key={ind}>{t}</View>)
+          }
+          </View>
+        </View>
+        <View className="reserve">
+        <Button className='btn-primary' size="mini" onClick={() => preview([{src: Env.imageUrl + node.image}])}>预定</Button>
+        </View>
+      </View>
+    )
+  }
 
   const makeCall = () => {
     Taro.makePhoneCall({phoneNumber: node.phone})
@@ -109,42 +144,6 @@ function Index() {
     })
   }
 
-  // const rooms = []
-
-  // node.rooms.map((i, index) => {
-  //   const tags = []
-  //   i.tags.map((j, ind) => {
-  //     tags.push(
-  //       <View key={ind}>{j}</View>
-  //     )
-  //   })
-  //   rooms.push(
-  //     <View key={index} className="list">
-  //       <View className="img">
-  //         <Image className="w-100" mode="scaleToFill" src={i.images[0].src} onClick={() => preview(i.images)} />
-  //         <View className="count">
-  //           <img src={Env.iconUrl + 'image.png'} />
-  //           {i.images.length}
-  //         </View>
-  //       </View>
-  //       <View className="info">
-  //         <View className="title">
-  //         {i.title}
-  //         </View>
-  //         <View className="summary">
-  //         {i.summary}
-  //         </View>
-  //         <View className="tags">
-  //         {tags}
-  //         </View>
-  //       </View>
-  //       <View className="reserve">
-  //       <Button className='btn-primary' size="mini" onClick={() => preview([{src:node.qr}])}>预定</Button>
-  //       </View>
-  //     </View>
-  //   )
-  // })
-
   const preview = (images) => {
     setPreviewImages(images)
     setShowPreview(true)
@@ -176,7 +175,7 @@ function Index() {
           </View>
           }
           { type == 1 &&
-          <View className="right">
+          <View className="right" onClick={makeCall}>
             <View className="icon">
               <img
                 src={Env.iconUrl + 'call.png'}

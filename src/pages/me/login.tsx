@@ -26,6 +26,7 @@ function Index() {
             url: Env.apiUrl + 'wxlogin',
             data
           }).then((res) => {
+            console.log(res)
             if (res.statusCode === 200) {
               Taro.setStorage({
                 key: Env.storageKey,
