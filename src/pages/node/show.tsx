@@ -159,7 +159,7 @@ function Index() {
 
         <View className="header">
           <View className="">
-            <View className="title">{node.title}</View>
+            <View className="title article-title">{node.title}</View>
             { (type == 0 || type == 1) &&
             <View className="tags">{tags}</View>
             }
@@ -270,7 +270,7 @@ function Index() {
         }
       </View>
 
-      { (type == 0 || type == 2 || type == 3) &&
+      { (type == 0 || type == 3) &&
       <View className="p-1 card-1">
         <View className="no-overflow title acive"> { type == 0 && '景点介绍' || '商品详情' }</View>
       </View>
