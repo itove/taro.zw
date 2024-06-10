@@ -61,6 +61,7 @@ function Index() {
         // style={{ padding: '30px 50px' }}
         onClose={() => { setShowPop(false) }}
         position="bottom"
+        overlay={false}
         lockScroll
       >
         <View className="popup">
