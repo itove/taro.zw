@@ -48,10 +48,10 @@ function Index() {
 
   const opacity = 1
   const zIndex = 1
-  const row = 2
-  const col = 1
-  const latPer = (ne[0] - sw[0]) / col
-  const longPer = (ne[1] - sw[1]) / row
+  const row = 4
+  const col = 4
+  const latPer = (ne[0] - sw[0]) / row
+  const longPer = (ne[1] - sw[1]) / col
 
   for (let i = 0; i < col; i++) {
     const neLat = ne[0] - latPer * i
