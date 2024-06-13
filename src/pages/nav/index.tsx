@@ -177,6 +177,7 @@ function Index() {
         latitude={center.lat}
         longitude={center.long}
         onMarkerTap={onMarkerTap}
+        scale={15} // 3-20
         onClick={onTap}
         // markers={markers}
       />
