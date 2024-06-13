@@ -43,15 +43,6 @@ function Index() {
 
   mapContext.addMarkers({
     markers: markers,
-    // success(){
-    //   console.log('ok')
-    // },
-    // fail(err){
-    //   console.log(err)
-    // },
-    // complete(){
-    //   console.log('complete')
-    // }
   }) 
   .then(res => {
     console.log('markers added')
