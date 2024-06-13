@@ -65,7 +65,7 @@ function SwiperItem({node, index}) {
 function GridItem({node, index}) {
   return (
     <Grid.Item text={node.t} key={index} onClick={() => gridGoto(node) }>
-    <Image className="w-25" src={node.p} mode="widthFix" />
+    <Image className="img" src={node.p} mode="widthFix" />
     </Grid.Item>
   )
 }
@@ -127,7 +127,7 @@ function Index() {
       <Swiper defaultValue={0} autoPlay indicator className="rounded" height="160">
         {sliderList}
       </Swiper>
-      <Grid columns="4" className="">
+      <Grid columns="4" className="grid">
         {gridList}
       </Grid>
 

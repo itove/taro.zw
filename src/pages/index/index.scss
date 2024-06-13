@@ -3,6 +3,13 @@ page{
   .home{
     position: relative;
     overflow: hidden;
+    .grid{
+      --nutui-grid-item-text-font-size: 14px;
+      .img{
+        width: 37px;
+        height: 37px;
+      }
+    }
   }
 }
 .wrapper{
