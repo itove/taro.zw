@@ -13,7 +13,7 @@ function ListItem({node, index, type}) {
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
     <View className="img">
-    <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="widthFix" />
+    <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
     </View>
     <View className="text">
     {node.title}
