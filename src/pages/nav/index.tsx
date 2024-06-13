@@ -9,23 +9,23 @@ import { Popup } from '@nutui/nutui-react-taro'
 function Index() {
   const [showPop, setShowPop] = useState(false)
 
-  const center = [32.497362991555164, 110.84169432860472]
+  const center = { lat: 32.497362991555164, long: 110.84169432860472 }
 
-  const ne = [32.502324044478755, 110.85202774943821]
-  const sw = [32.49135119861189, 110.83205731962198]
+  const ne = { lat: 32.502324044478755, long: 110.85202774943821 }
+  const sw = { lat: 32.49135119861189, long: 110.83205731962198 }
 
   const markers = [
     {
       id: 0,
-      latitude: ne[0],
-      longitude: ne[1],
+      latitude: ne.lat,
+      longitude: ne.long,
       width: 16,
       height: 24
     },
     {
       id: 0,
-      latitude: sw[0],
-      longitude: sw[1],
+      latitude: sw.lat,
+      longitude: sw.long,
       width: 16,
       height: 24
     }
@@ -50,12 +50,12 @@ function Index() {
   // whole one
   const src = Env.imageUrl + 'map/map.donggou.1.png'
   const northeast = {
-    latitude: ne[0],
-    longitude: ne[1] 
+    latitude: ne.lat,
+    longitude: ne.long, 
   }
   const southwest = {
-    latitude: sw[0],
-    longitude: sw[1]
+    latitude: sw.lat,
+    longitude: sw.long,
   }
   const bounds = {
     northeast,
@@ -83,17 +83,17 @@ function Index() {
   // small ones
   const row = 4
   const col = 4
-  const latPer = (ne[0] - sw[0]) / row
-  const longPer = (ne[1] - sw[1]) / col
+  const latPer = (ne.lat - sw.lat) / row
+  const longPer = (ne.long - sw.long) / col
 
   for (let i = 0; i < col; i++) {
-    const neLat = ne[0] - latPer * i
-    const swLat = ne[0] - latPer * (i + 1)
+    const neLat = ne.lat - latPer * i
+    const swLat = ne.lat - latPer * (i + 1)
     let neLong
     let swLong
     for (let j = 0; j < row; j++) {
-      neLong = sw[1] + longPer * (j + 1)
-      swLong = sw[1] + longPer * j
+      neLong = sw.long + longPer * (j + 1)
+      swLong = sw.long + longPer * j
       const northeast = {
         latitude: neLat,
         longitude: neLong
@@ -174,8 +174,8 @@ function Index() {
       <Map
         id="map"
         className="map"
-        latitude={center[0]}
-        longitude={center[1]}
+        latitude={center.lat}
+        longitude={center.long}
         onMarkerTap={onMarkerTap}
         onClick={onTap}
         // markers={markers}
