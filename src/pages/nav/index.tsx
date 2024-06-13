@@ -9,7 +9,7 @@ import { Popup } from '@nutui/nutui-react-taro'
 function Index() {
   const [showPop, setShowPop] = useState(false)
 
-  const center = [32.499823, 110.83360]
+  const center = [32.497362991555164, 110.84169432860472]
 
   const ne = [32.502324044478755, 110.85202774943821]
   const sw = [32.49135119861189, 110.83205731962198]
