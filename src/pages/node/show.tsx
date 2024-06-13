@@ -99,7 +99,7 @@ function Index() {
           </View>
         </View>
         <View className="reserve">
-        <Button className='btn-primary' size="mini" onClick={() => preview([{src: Env.imageUrl + room.qr}])}>预定</Button>
+        <Button className='btn-primary' size="mini" onClick={() => preview([{src: Env.imageUrl + node.qr}])}>预定</Button>
         </View>
       </View>
     )
