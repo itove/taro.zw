@@ -41,9 +41,9 @@ function ViewItem({node, index}) {
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="widthFix" />
       </View>
       <View className="text">
-      <View>{node.title}<span class="d-inline-block badge ms-1">民宿</span></View>
+      <View>{node.title}<span class="d-inline-block badge">{node.tags[0]}</span></View>
       <p className="ellipsis-2 my-1">{node.summary}</p>
-      <p class="call"><img width="17px" height="17px" src={Env.iconUrl + 'call.png'} /> 电话：0719-8888888</p>
+      <p class="call"><img width="17px" height="17px" src={Env.iconUrl + 'call.png'} /> 电话：{node.phone}</p>
       </View>
     </View>
   )
