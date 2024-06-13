@@ -94,7 +94,7 @@ function Index() {
           </View>
           <View className="tags">
           {
-            room.tags.map((t, ind) => <View key={ind}>{t}</View>)
+            room.tags.map((t, ind) => (ind < 3 && <View key={ind}>{t}</View>))
           }
           </View>
         </View>
@@ -105,8 +105,8 @@ function Index() {
     )
   }
 
-  const makeCall = () => {
-    Taro.makePhoneCall({phoneNumber: node.phone})
+  const makeCall = (num = node.phone) => {
+    Taro.makePhoneCall({phoneNumber: num})
   }
 
   const openLocation = () => {
@@ -175,7 +175,7 @@ function Index() {
           </View>
           }
           { type == 1 &&
-          <View className="right" onClick={makeCall}>
+          <View className="right" onClick={() => makeCall(node.phone)}>
             <View className="icon">
               <img
                 src={Env.iconUrl + 'call.png'}
