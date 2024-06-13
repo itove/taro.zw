@@ -28,7 +28,6 @@ function Index() {
           <img src={Env.iconUrl + 'gird.png'} />
         </View>
       </View>
-      // <WebView src={url0} />
     </View>
   )
 }
