@@ -26,9 +26,21 @@ function Index() {
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
-  const type = instance.router.params.type ? instance.router.params.type : 2
-
   // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: 走进东沟
+  const type = instance.router.params.type ? instance.router.params.type : 2
+  const innerAudioContext = Taro.createInnerAudioContext()
+  const [audio, setAudio] = useState(innerAudioContext)
+
+  innerAudioContext.onPlay(() => {
+  })
+  innerAudioContext.onStop(() => {
+  })
+  innerAudioContext.onPause(() => {
+  })
+  innerAudioContext.onError((res) => {
+    console.log(res.errMsg)
+    console.log(res.errCode)
+  })
 
   useEffect(() => {
     Taro.request({
@@ -49,8 +61,29 @@ function Index() {
       setTags(n.tags.map((i, index) => <View key={index}>{i}</View> ))
 
       setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
+
+      innerAudioContext.src = Env.imageUrl + n.audio
     })
   }, [])
+
+
+  const playAudio = () => {
+      console.log(audio.src)
+      console.log(innerAudioContext.src)
+      if (audio.paused) {
+        audio.play()
+        console.log('playing...')
+      } else {
+        audio.pause()
+        console.log('paused...')
+      }
+  }
+
+  useEffect(() => {
+    return () => {
+      innerAudioContext.destroy()
+    }
+  }, []);
 
   useEffect(() => {
     Taro.getStorage({
@@ -165,7 +198,7 @@ function Index() {
             }
           </View>
           { type == 0 &&
-          <View className="right">
+          <View className="right" onClick={() => playAudio(innerAudioContext)}>
             <View className="icon">
               <img
                 src={Env.iconUrl + 'hotline.png'}

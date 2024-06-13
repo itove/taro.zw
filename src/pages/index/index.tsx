@@ -10,8 +10,8 @@ function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
 
-function gotoNodeIndex(region) {
-  Taro.navigateTo({url: '/pages/node/index?region=' + region})
+function gotoNodeIndex(region, type = 0) {
+  Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})
 }
 
 function gotoUrl(url) {
@@ -140,7 +140,7 @@ function Index() {
       speed={5}
       duration={1000}
       height={30}
-      onClick={(e) => gotoNodeIndex('tongzhi')}
+      onClick={(e) => gotoNodeIndex('tongzhi', 1)}
       // closeable
       />
 
