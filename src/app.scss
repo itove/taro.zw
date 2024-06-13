@@ -129,8 +129,12 @@ page{
   .nut-grid-item-text{
     padding: 8px;
   }
-  Image{
-    border-radius: 10px 10px 0 0;
+  .grid{
+    Image{
+      border-radius: 10px 10px 0 0;
+    }
+  }
+  .list{
   }
 }
 .nutui-react-demo {
