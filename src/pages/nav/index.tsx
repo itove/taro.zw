@@ -45,6 +45,42 @@ function Index() {
 
   const opacity = 1
   const zIndex = 1
+
+  /*
+  // whole one
+  const src = Env.imageUrl + 'map/map.donggou.1.png'
+  const northeast = {
+    latitude: ne[0],
+    longitude: ne[1] 
+  }
+  const southwest = {
+    latitude: sw[0],
+    longitude: sw[1]
+  }
+  const bounds = {
+    northeast,
+    southwest,
+  }
+  const o = {
+    id: 1,
+    src,
+    opacity,
+    zIndex,
+    bounds,
+  }
+  // console.log(o)
+  // console.log(index)
+
+  mapContext.addGroundOverlay(o)
+  .then(res => {
+    console.log('groundOverlay added')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+  */
+
+  // small ones
   const row = 4
   const col = 4
   const latPer = (ne[0] - sw[0]) / row
