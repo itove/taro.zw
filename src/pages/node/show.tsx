@@ -51,7 +51,7 @@ function Index() {
       setNode(n)
       console.log(n)
       if (n.body) {
-        setBody(n.body.replace(/&nbsp;/g, ''))
+        setBody(n.body.replace(/&nbsp;/g, '<br/>'))
       }
 
       Taro.setNavigationBarTitle({
