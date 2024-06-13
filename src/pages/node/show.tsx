@@ -186,7 +186,7 @@ function Index() {
 
   return (
     <View className="show">
-      <Image className="w-100 hero" src={Env.imageUrl + node.image} mode="widthFix" />
+      <Image className="w-100 hero" src={Env.imageUrl + node.image} mode="aspectFill" />
 
       <View className="p-1 card">
 
