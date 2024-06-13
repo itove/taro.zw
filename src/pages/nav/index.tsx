@@ -54,20 +54,20 @@ function Index() {
   const longPer = (ne[1] - sw[1]) / row
 
   for (let i = 0; i < col; i++) {
-    const lat0 = ne[0] - latPer * i
-    const lat1 = ne[0] - latPer * (i + 1)
-    let long0
-    let long1
+    const neLat = ne[0] - latPer * i
+    const swLat = ne[0] - latPer * (i + 1)
+    let neLong
+    let swLong
     for (let j = 0; j < row; j++) {
-      long0 = sw[1] + longPer * (j + 1)
-      long1 = sw[1] + longPer * j
+      neLong = sw[1] + longPer * (j + 1)
+      swLong = sw[1] + longPer * j
       const northeast = {
-        latitude: lat0,
-        longitude: long0
+        latitude: neLat,
+        longitude: neLong
       }
       const southwest = {
-        latitude: lat1,
-        longitude: long1
+        latitude: swLat,
+        longitude: swLong
       }
       const bounds = {
         northeast,
@@ -79,15 +79,15 @@ function Index() {
       const markers = [
         {
           id: index,
-          latitude: lat0,
-          longitude: long0,
+          latitude: neLat,
+          longitude: neLong,
           width: 16,
           height: 24
         },
         {
           id: index,
-          latitude: lat1,
-          longitude: long1,
+          latitude: swLat,
+          longitude: swLong,
           width: 16,
           height: 24
         },
