@@ -11,11 +11,8 @@ function Index() {
 
   const center = [32.499823, 110.83360]
 
-  const ne = [32.500799, 110.83360]
-  const sw = [32.499123, 110.83230]
-
-  const ne1 = [32.500799, 110.83621]
-  const sw1 = [32.499123, 110.83530]
+  const ne = [32.502324044478755, 110.85202774943821]
+  const sw = [32.49135119861189, 110.83205731962198]
 
   const markers = [
     {
@@ -103,8 +100,7 @@ function Index() {
         console.log(err)
       })
 
-      const src = Env.imageUrl + 'deb/o_' + index + '.jpg'
-      // const src = Env.imageUrl + 'deb/deb.jpg'
+      const src = Env.imageUrl + 'map/' + index + '.png'
       const o = {
         id: index,
         src,
@@ -112,8 +108,8 @@ function Index() {
         zIndex,
         bounds,
       }
-      console.log(o)
-      console.log(index)
+      // console.log(o)
+      // console.log(index)
 
       mapContext.addGroundOverlay(o)
       .then(res => {
