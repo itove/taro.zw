@@ -336,7 +336,7 @@ function Index() {
       { type == 3 &&
       <View className="footer fixed">
         <View className="left">
-          <View className="">
+          <View className="" onClick={() => Taro.switchTab({url: '/pages/index/index'})}>
             <img src={Env.iconUrl + 'house.png'} />
             <View>主页</View>
           </View>
@@ -346,7 +346,7 @@ function Index() {
           </View>
         </View>
         <View className="right">
-          <Button className="w-100 btn-primary btn-rounded" onClick={() => preview([{src: Env.imageUrl + node.image}])}>立即购买</Button>
+          <Button className="w-100 btn-primary btn-rounded" onClick={() => preview([{src: Env.imageUrl + node.qr}])}>立即购买</Button>
         </View>
       </View>
       }
