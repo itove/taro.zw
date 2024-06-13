@@ -9,11 +9,6 @@ import { Popup } from '@nutui/nutui-react-taro'
 function Index() {
   const [showPop, setShowPop] = useState(false)
 
-  // const query = wx.createSelectorQuery()
-  // const mapContext = Taro.createMapContext(query.select('.map'))
-  // const [map, setMap] = useState(mapContext)
-  // console.log(mapContext)
-
   const center = [32.499823, 110.83360]
 
   const ne = [32.500799, 110.83360]
