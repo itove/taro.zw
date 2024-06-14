@@ -10,7 +10,7 @@ function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
 
-function gotoNodeIndex(region, type = 0) {
+function gotoNodeIndex(region, type) {
   Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})
 }
 
@@ -170,14 +170,14 @@ function Index() {
             </View>
           </View>
           <View className="col2">
-            <View className="" onClick={() => gotoNodeIndex('hongse')}>
+            <View className="" onClick={() => gotoNodeIndex('hongse', 5)}>
               <Image className="w-100 rounded" src={Env.imageUrl + hongsetext.image} mode="aspectFill" />
               <View class="text">
                 东沟文化
                 <p>爱国主义教育基地</p>
               </View>
             </View>
-            <View className="" onClick={() => gotoNodeIndex('history')}>
+            <View className="" onClick={() => gotoNodeIndex('history', 5)}>
               <Image className="w-100 rounded" src={Env.imageUrl + historytext.image} mode="aspectFill" />
               <View class="text">
                 东沟历史
