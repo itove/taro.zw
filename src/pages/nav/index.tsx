@@ -8,6 +8,7 @@ import { Env } from '../../env'
 function Index() {
   const [display, setDisplay] = useState('none')
   const [distance, setDistance] = useState(0)
+  const [nodes, setNodes] = useState([])
   const [node, setNode] = useState({title: '', summary: '', audio: ''})
 
   const center = { lat: 32.497362991555164, long: 110.84169432860472 }
@@ -20,36 +21,58 @@ function Index() {
   const col = 4
   const latPer = (ne.lat - sw.lat) / row
   const longPer = (ne.long - sw.long) / col
+  const markerWidth = 16
+  const markerHeight = 24
 
   const markers = [
     {
       id: 0,
       latitude: ne.lat,
       longitude: ne.long,
-      width: 16,
-      height: 24
+      width: markerWidth,
+      height: markerHeight
     },
     {
       id: 0,
       latitude: sw.lat,
       longitude: sw.long,
-      width: 16,
-      height: 24
+      width: markerWidth,
+      height: markerHeight
     }
   ]
 
   const mapContext = Taro.createMapContext('map')
 
   useEffect(() => {
-    mapContext.addMarkers({
-      markers: markers,
-    }) 
+    const markers = []
+    Taro.request({
+      url: Env.apiUrl + 'map/markers'
+    })
     .then(res => {
-      console.log('markers added')
+      const nodes = res.data
+      console.log(nodes)
+      setNodes(nodes)
+      nodes.map((n, index) => {
+        markers.push({
+          id: index,
+          latitude: n.latitude,
+          longitude: n.longitude,
+          width: markerWidth,
+          height: markerHeight,
+        })
+      })
+
+      mapContext.addMarkers({
+        markers: markers,
+      }) 
+      .then(res => {
+        console.log('markers added')
+      })
+      .catch(err => {
+        console.log(err)
+      })
     })
-    .catch(err => {
-      console.log(err)
-    })
+
 
     /*
     // whole one
@@ -110,32 +133,33 @@ function Index() {
 
         const index = col * i + j
 
-        const markers = [
-          {
-            id: index,
-            latitude: neLat,
-            longitude: neLong,
-            width: 16,
-            height: 24
-          },
-          {
-            id: index,
-            latitude: swLat,
-            longitude: swLong,
-            width: 16,
-            height: 24
-          },
-        ]
+        // add markers for every ne & sw
+        // const markers = [
+        //   {
+        //     id: index,
+        //     latitude: neLat,
+        //     longitude: neLong,
+        //     width: markerWidth,
+        //     height: markerHeight
+        //   },
+        //   {
+        //     id: index,
+        //     latitude: swLat,
+        //     longitude: swLong,
+        //     width: markerWidth,
+        //     height: markerHeight
+        //   },
+        // ]
 
-        mapContext.addMarkers({
-          markers: markers,
-        }) 
-        .then(res => {
-          console.log('markers added')
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        // mapContext.addMarkers({
+        //   markers: markers,
+        // }) 
+        // .then(res => {
+        //   console.log('markers added')
+        // })
+        // .catch(err => {
+        //   console.log(err)
+        // })
 
         const src = Env.imageUrl + 'map/' + index + '.png'
         const o = {
@@ -167,8 +191,10 @@ function Index() {
 
   const onMarkerTap = (e) => {
     console.log(e.detail.markerId)
+    const id = e.detail.markerId
     const title = '景点 ' + e.detail.markerId
-    setNode( {title: title , summary: title + '概述', audio: ''})
+    // setNode( {title: title , summary: title + '概述', audio: ''})
+    setNode(nodes[id])
     setDisplay('block')
   }
 

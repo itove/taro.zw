@@ -21,8 +21,8 @@ page{
   }
 }
 .map{
-  width: 100%;
-  height: 100vh;
+  // width: 100%;
+  // height: 100vh;
 }
 .pop{
   background: none;
@@ -48,6 +48,7 @@ page{
       font-size: 12px;
       border-bottom: 0.5px solid #D8D8D8;
       .left{
+        width: 70%;
       }
       .right{
         text-align: center;
