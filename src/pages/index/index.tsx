@@ -140,7 +140,7 @@ function Index() {
       speed={5}
       duration={1000}
       height={30}
-      onClick={(e) => gotoNodeIndex('tongzhi', 1)}
+      onClick={(e) => gotoNodeIndex('tongzhi', 5)}
       // closeable
       />
 
