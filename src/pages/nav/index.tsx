@@ -3,11 +3,12 @@ import { View, Map } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { Popup } from '@nutui/nutui-react-taro'
 
 
 function Index() {
-  const [showPop, setShowPop] = useState(false)
+  const [display, setDisplay] = useState('none')
+  const [distance, setDistance] = useState(0)
+  const [node, setNode] = useState({title: '', summary: '', audio: ''})
 
   const center = { lat: 32.497362991555164, long: 110.84169432860472 }
 
@@ -161,12 +162,14 @@ function Index() {
   const onTap = (e) => {
     console.log(e.detail.latitude)
     console.log(e.detail.longitude)
-    setShowPop(false)
+    setDisplay('none')
   }
 
   const onMarkerTap = (e) => {
     console.log(e.detail.markerId)
-    setShowPop(true)
+    const title = '景点 ' + e.detail.markerId
+    setNode( {title: title , summary: title + '概述', audio: ''})
+    setDisplay('block')
   }
 
   return (
@@ -178,27 +181,23 @@ function Index() {
         longitude={center.long}
         onMarkerTap={onMarkerTap}
         scale={15} // 3-20
-        onClick={onTap}
+        onTap={onTap}
+        // onClick={onTap}
         // markers={markers}
       />
 
-      <Popup
-        className="pop"
-        visible={showPop}
-        overlay={false}
-        duration={100}
-				// position="bottom"
-        onClose={() => {
-          setShowPop(false)
-        }}
+      <View className="pop">
+      <View
+        className="wrapper"
+        style={{display: display}}
       >
         <View className="card rounded p-1">
-          <View className="title pb-8">标题 </View>
+          <View className="title pb-8">{node.title}</View>
 
           <View className="body">
             <View className="left">
-              <View className="pb-8">距离 </View>
-              <View className="ellipsis-2">概述 </View>
+              <View className="pb-8">距您{distance}公里 </View>
+              <View className="ellipsis-2">{node.summary}</View>
             </View>
             <View className="right">
               <img className="icon" src={Env.iconUrl + 'hotline-primary.png'} />
@@ -219,7 +218,8 @@ function Index() {
           </View>
         </View>
 
-      </Popup>
+      </View>
+      </View>
     </View>
   )
 }
