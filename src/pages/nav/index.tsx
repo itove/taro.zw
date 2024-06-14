@@ -23,6 +23,13 @@ function Index() {
   audio.onPause(() => {
     setPlayIcon(Env.iconUrl + 'hotline.png')
   })
+  audio.onEnded(() => {
+    setPlayIcon(Env.iconUrl + 'hotline.png')
+  })
+  audio.onCanplay(() => {
+  })
+  audio.onTimeUpdate(() => {
+  })
   audio.onError((res) => {
     console.log(res.errMsg)
     console.log(res.errCode)
