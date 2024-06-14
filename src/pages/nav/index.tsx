@@ -11,8 +11,8 @@ function Index() {
 
   const center = { lat: 32.497362991555164, long: 110.84169432860472 }
 
-  const ne = { lat: 32.502324044478755, long: 110.85202774943821 }
-  const sw = { lat: 32.49135119861189, long: 110.83205731962198 }
+  const ne = { lat: 32.50916729, long: 110.86286523 }
+  const sw = { lat: 32.48679658, long: 110.82360543 }
 
   const markers = [
     {
