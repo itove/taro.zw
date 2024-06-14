@@ -10,6 +10,23 @@ function Index() {
   const [distance, setDistance] = useState(0)
   const [nodes, setNodes] = useState([])
   const [node, setNode] = useState({title: '', summary: '', audio: ''})
+  const innerAudioContext = Taro.createInnerAudioContext()
+  const [audio, setAudio] = useState(innerAudioContext)
+  const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
+
+  audio.onPlay(() => {
+    setPlayIcon(Env.iconUrl + 'hotline-primary.png')
+  })
+  audio.onStop(() => {
+    setPlayIcon(Env.iconUrl + 'hotline.png')
+  })
+  audio.onPause(() => {
+    setPlayIcon(Env.iconUrl + 'hotline.png')
+  })
+  audio.onError((res) => {
+    console.log(res.errMsg)
+    console.log(res.errCode)
+  })
 
   const center = { lat: 32.497362991555164, long: 110.84169432860472 }
 
@@ -186,6 +203,8 @@ function Index() {
   const onTap = (e) => {
     console.log(e.detail.latitude)
     console.log(e.detail.longitude)
+    audio.destroy()
+    setPlayIcon(Env.iconUrl + 'hotline.png')
     setDisplay('none')
   }
 
@@ -193,9 +212,33 @@ function Index() {
     console.log(e.detail.markerId)
     const id = e.detail.markerId
     const title = '景点 ' + e.detail.markerId
-    // setNode( {title: title , summary: title + '概述', audio: ''})
     setNode(nodes[id])
     setDisplay('block')
+    audio.destroy()
+    setPlayIcon(Env.iconUrl + 'hotline.png')
+    innerAudioContext.src = Env.imageUrl + nodes[id].audio
+    setAudio(innerAudioContext)
+  }
+
+  const openLocation = (latitude, longitude) => {
+    Taro.openLocation({
+      latitude,
+      longitude,
+      scale: 18
+    })
+  }
+
+  const playAudio = (src) => {
+      console.log(innerAudioContext.src)
+      console.log(audio.src)
+      console.log(audio)
+      if (audio.paused) {
+        audio.play()
+        console.log('playing...')
+      } else {
+        audio.pause()
+        console.log('paused...')
+      }
   }
 
   return (
@@ -225,8 +268,8 @@ function Index() {
               <View className="pb-8">距您{distance}公里 </View>
               <View className="ellipsis-2">{node.summary}</View>
             </View>
-            <View className="right">
-              <img className="icon" src={Env.iconUrl + 'hotline-primary.png'} />
+            <View className="right" onClick={() => playAudio(Env.imageUrl + node.audio)}>
+              <img className="icon" src={playIcon} />
               <View className="text">语音讲解 </View>
             </View>
           </View>
@@ -238,7 +281,7 @@ function Index() {
             <View className="">
               <img className="icon" src={Env.iconUrl + 'star.png'} /> 收藏
             </View>
-            <View className="">
+            <View className="" onClick={() => openLocation(node.latitude, node.longitude) }>
               <img className="icon" src={Env.iconUrl + 'nav.png'} /> 前往
             </View>
           </View>
