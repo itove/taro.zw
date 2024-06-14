@@ -108,6 +108,7 @@ function Index() {
             src={Env.iconUrl + 'youzai.png'}
           />
           住在东沟
+          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=zhuzai&type=1'})}> 更多 > </View>
         </View>
         <View class="list p-1 rounded">
         {zhuList}
