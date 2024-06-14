@@ -163,6 +163,7 @@ function Index() {
   const onTap = (e) => {
     console.log(e.detail.latitude)
     console.log(e.detail.longitude)
+    setShowPop(false)
   }
 
   const onMarkerTap = (e) => {
