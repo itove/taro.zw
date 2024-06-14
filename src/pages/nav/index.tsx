@@ -167,6 +167,7 @@ function Index() {
 
   const onMarkerTap = (e) => {
     console.log(e.detail.markerId)
+    setShowPop(true)
   }
 
   return (
@@ -181,6 +182,44 @@ function Index() {
         onClick={onTap}
         // markers={markers}
       />
+
+      <Popup
+        className="pop"
+        visible={showPop}
+        overlay={false}
+				// position="bottom"
+        onClose={() => {
+          setShowPop(false)
+        }}
+      >
+        <View className="card rounded p-1">
+          <View className="title pb-8">标题 </View>
+
+          <View className="body">
+            <View className="left">
+              <View className="pb-8">距离 </View>
+              <View className="ellipsis-2">概述 </View>
+            </View>
+            <View className="right">
+              <img className="icon" src={Env.iconUrl + 'hotline-primary.png'} />
+              <View className="text">语音讲解 </View>
+            </View>
+          </View>
+
+          <View className="footer pt-16">
+            <View className="">
+              <img className="icon" src={Env.iconUrl + 'share.png'} /> 分享
+            </View>
+            <View className="">
+              <img className="icon" src={Env.iconUrl + 'star.png'} /> 收藏
+            </View>
+            <View className="">
+              <img className="icon" src={Env.iconUrl + 'nav.png'} /> 前往
+            </View>
+          </View>
+        </View>
+
+      </Popup>
     </View>
   )
 }
