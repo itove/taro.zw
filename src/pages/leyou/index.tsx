@@ -34,9 +34,9 @@ function SwiperItem({node, index, type}) {
   )
 }
 
-function ViewItem({node, index}) {
+function ViewItem({node, type, index}) {
   return (
-    <View key={index} className="list-item" onClick={() => gotoNode(node.id, 1)}>
+    <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
       <View className="img">
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="widthFix" />
       </View>
@@ -49,6 +49,7 @@ function ViewItem({node, index}) {
   )
 }
 
+/*
 function GridItem({node, index}) {
   return (
     <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden">
@@ -56,6 +57,7 @@ function GridItem({node, index}) {
     </Grid.Item>
   )
 }
+*/
 
 function Index() {
   const [youList, setYouList] = useState([])
@@ -73,11 +75,11 @@ function Index() {
       console.log(res)
 
       setYouList(data.youzai.map((node, index) => <SwiperItem node={node} index={index} type={0} />))
-      setZhuList(data.zhuzai.map((node, index) => <ViewItem node={node} index={index} />))
+      setZhuList(data.zhuzai.map((node, index) => <ViewItem node={node} type={1} index={index} />))
       // setChiList(data.chizai.map((node, index) => <GridItem node={node} index={index} />))
       setGouList(data.gouzai.map((node, index) => <SwiperItem node={node} index={index} type={3} />))
       setChiList(data.chizai.map((node, index) => index < 4 &&
-          <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
+          <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, 2)}>
             <Image className="w-100" src={Env.imageUrl + node.image} mode="widthFix" />
           </Grid.Item>
         )
@@ -121,7 +123,7 @@ function Index() {
             src={Env.iconUrl + 'chizai.png'}
           />
           吃在东沟
-          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=chizai'})}> 更多 > </View>
+          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=chizai&type=2'})}> 更多 > </View>
         </View>
         <Grid columns="2" gap="3" center={false} className="">
           {chiList}
@@ -134,7 +136,7 @@ function Index() {
             src={Env.iconUrl + 'gouzai.png'}
           />
           购在东沟
-          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=gouzai'})}> 更多 > </View>
+          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=gouzai&type=3'})}> 更多 > </View>
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
           {gouList}

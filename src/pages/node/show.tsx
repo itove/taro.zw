@@ -26,7 +26,7 @@ function Index() {
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
-  // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: 走进东沟
+  // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: 走进东沟 // 5: index list & show normal
   const type = instance.router.params.type ? instance.router.params.type : 2
   const innerAudioContext = Taro.createInnerAudioContext()
   const [audio, setAudio] = useState(innerAudioContext)
@@ -288,7 +288,7 @@ function Index() {
         </View>
         }
 
-        { (type != 2 && type != 4) &&
+        { (type != 2 && type != 4 && type != 5) &&
         <View className="address">
           <View className="text">{node.address}</View>
           <View className="right" onClick={openLocation}>

@@ -23,6 +23,7 @@ function ListItem({node, index, type}) {
   )
 }
 
+/*
 function GridItem({node, index, type}) {
   return (
     <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
@@ -30,13 +31,14 @@ function GridItem({node, index, type}) {
     </Grid.Item>
   )
 }
+*/
 
 function Index() {
   const instance = Taro.getCurrentInstance();
   const region = instance.router.params.region
   const title = instance.router.params.title
   const uid = instance.router.params.uid
-  const type = instance.router.params.type ? instance.router.params.type : 0
+  const type = instance.router.params.type ? instance.router.params.type : 2
 
   const [list, setList] = useState([])
 
@@ -59,13 +61,13 @@ function Index() {
 
       setList(data.nodes.map((node, index) =>
 
-          type == 0
+          type == 2
           &&
-    <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
+    <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
     <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
     </Grid.Item>
           ||
-          <ListItem node={node} />
+          <ListItem node={node} type={type}/>
         )
       )
     })
@@ -76,12 +78,12 @@ function Index() {
 
   return (
     <View className="node-index p-1">
-    {type == 0 &&
+    {type == 2 &&
       <Grid columns="2" gap="3" center={false} className="grid">
         {list}
       </Grid>
     }
-    {type == 1 &&
+    {type != 2 &&
       <View className="list">
         {list}
       </View>
