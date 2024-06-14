@@ -61,6 +61,13 @@ function Index() {
   const mapContext = Taro.createMapContext('map')
 
   useEffect(() => {
+    return () => {
+      audio.destroy()
+      innerAudioContext.destroy()
+    }
+  }, []);
+
+  useEffect(() => {
     const markers = []
     Taro.request({
       url: Env.apiUrl + 'map/markers'
@@ -224,7 +231,7 @@ function Index() {
     Taro.openLocation({
       latitude,
       longitude,
-      scale: 18
+      scale: 15
     })
   }
 
