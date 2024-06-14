@@ -34,8 +34,8 @@ function Index() {
   const sw = { lat: 32.48679658, long: 110.82360543 }
   const opacity = 1
   const zIndex = 1
-  const row = 4
-  const col = 4
+  const row = 8
+  const col = 8
   const latPer = (ne.lat - sw.lat) / row
   const longPer = (ne.long - sw.long) / col
   const markerWidth = 16
@@ -100,7 +100,7 @@ function Index() {
 
     /*
     // whole one
-    const src = Env.imageUrl + 'map/map.donggou.1.png'
+    const src = Env.imageUrl + 'map/map.png'
     const northeast = {
       latitude: ne.lat,
       longitude: ne.long, 
@@ -130,10 +130,10 @@ function Index() {
     .catch(err => {
       console.log(err)
     })
+    // whole one end
     */
 
     // small ones
-
     for (let i = 0; i < col; i++) {
       const neLat = ne.lat - latPer * i
       const swLat = ne.lat - latPer * (i + 1)
@@ -205,6 +205,7 @@ function Index() {
         })
       }
     }
+  // small ones end
   }, [])
 
   const onTap = (e) => {
