@@ -276,19 +276,23 @@ function Index() {
               <View className="pb-8">距您{distance}公里 </View>
               <View className="ellipsis-2">{node.summary}</View>
             </View>
+            { node.audio &&
             <View className="right" onClick={() => playAudio(Env.imageUrl + node.audio)}>
               <img className="icon" src={playIcon} />
               <View className="text">语音讲解 </View>
             </View>
+            }
           </View>
 
           <View className="footer pt-16">
             <View className="">
               <img className="icon" src={Env.iconUrl + 'share.png'} /> 分享
             </View>
+            { false &&
             <View className="">
               <img className="icon" src={Env.iconUrl + 'star.png'} /> 收藏
             </View>
+            }
             <View className="" onClick={() => openLocation(node.latitude, node.longitude) }>
               <img className="icon" src={Env.iconUrl + 'nav.png'} /> 前往
             </View>
