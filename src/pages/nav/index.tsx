@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, WebView, Map } from '@tarojs/components'
+import { View, Map } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
