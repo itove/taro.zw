@@ -124,7 +124,9 @@ function Index() {
           width: markerWidth,
           height: markerHeight,
           iconPath: path,
-          // title: 'title',
+          // collision: 'marker',
+          // collisionRelation: 'together', // 'alone' or 'together'
+          // title: n.title,
           // callout: {
           //   content: n.title,
           //   color: '#000000',
@@ -140,7 +142,7 @@ function Index() {
           //   // collision: '',
           // },
           // customCallout: {
-          //   display: 'BYCLICK',
+          //   display: 'BYCLICK', // 'ALWAYS' or 'BYCLICK'
           //   // anchorX: 0,
           //   // anchorY: 0,
           // },
@@ -154,7 +156,7 @@ function Index() {
             // borderWidth: 0,
             borderRadius: 4,
             padding: 4,
-            // textAlign: 'center',
+            textAlign: 'center',
             // collision: '',
           }
         })
