@@ -6,6 +6,29 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { fmtSeconds } from '../../utils/fmtSeconds'
 
+
+function Rad(d) { 
+  //根据经纬度判断距离
+  return d * Math.PI / 180.0;
+}
+
+/**
+ * lat1/lng1 user's
+ * lat2/lng2 target's
+ */
+function getDistance(lat1, lng1, lat2, lng2) {
+  var radLat1 = Rad(lat1);
+  var radLat2 = Rad(lat2);
+  var a = radLat1 - radLat2;
+  var b = Rad(lng1) - Rad(lng2);
+  var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+  s = s * 6378.137;
+  s = Math.round(s * 10000) / 10000;
+  s = s.toFixed(1)
+  return Number(s)
+}
+
+
 function Index() {
   const [display, setDisplay] = useState('none')
   const [progress, setProgress] = useState('语音讲解')
@@ -15,6 +38,7 @@ function Index() {
   const innerAudioContext = Taro.createInnerAudioContext()
   const [audio, setAudio] = useState(innerAudioContext)
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
+  const [userLocation, setUserLocation] = useState({})
 
   audio.onPlay(() => {
     setPlayIcon(Env.iconUrl + 'hotline-primary.png')
@@ -52,23 +76,6 @@ function Index() {
   const markerWidth = 16
   const markerHeight = 24
 
-  const markers = [
-    {
-      id: 0,
-      latitude: ne.lat,
-      longitude: ne.long,
-      width: markerWidth,
-      height: markerHeight
-    },
-    {
-      id: 0,
-      latitude: sw.lat,
-      longitude: sw.long,
-      width: markerWidth,
-      height: markerHeight
-    }
-  ]
-
   const mapContext = Taro.createMapContext('map')
 
   useDidHide(() => {
@@ -77,6 +84,13 @@ function Index() {
   })
 
   useEffect(() => {
+    Taro.getLocation({
+      // type: 'wgs84',
+      type: 'gcj02',
+      }).then((res) => {
+        console.log(res)
+        setUserLocation({lat: res.latitude, long: res.longitude})
+      })
   }, []);
 
   useEffect(() => {
@@ -236,13 +250,13 @@ function Index() {
 
   const onMarkerTap = (e) => {
     console.log(e.detail.markerId)
-    const id = e.detail.markerId
-    const title = '景点 ' + e.detail.markerId
-    setNode(nodes[id])
+    const index = e.detail.markerId
+    setNode(nodes[index])
+    setDistance(getDistance(userLocation.lat, userLocation.long, nodes[index].latitude, nodes[index].longitude))
     setDisplay('block')
     audio.destroy()
     setPlayIcon(Env.iconUrl + 'hotline.png')
-    innerAudioContext.src = Env.imageUrl + nodes[id].audio
+    innerAudioContext.src = Env.imageUrl + nodes[index].audio
     setAudio(innerAudioContext)
     setProgress('语音讲解')
   }
@@ -280,8 +294,6 @@ function Index() {
         max-scale={17}
         min-scale={11}
         onTap={onTap}
-        // onClick={onTap}
-        // markers={markers}
       />
 
       <View className="pop">
