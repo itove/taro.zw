@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Button } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
@@ -11,6 +11,32 @@ import {
 } from '@nutui/nutui-react-taro'
 
 function Index() {
+  const [node, setNode] = useState({})
+
+  useEffect(() => {
+    Taro.request({
+      url: Env.apiUrl + 'wx/feedback'
+    })
+    .then(res => {
+      const n = res.data
+      setNode(n)
+      console.log(n)
+    })
+  }, [])
+
+  const makeCall = (num = node.phone) => {
+    Taro.makePhoneCall({phoneNumber: num})
+  }
+
+  const openLocation = () => {
+    const latitude = 32.499823
+    const longitude = 110.8336
+    Taro.openLocation({
+      latitude,
+      longitude,
+      scale: 18
+    })
+  }
 
   const formSubmit = (data) => {
     console.log(data);
@@ -43,6 +69,29 @@ function Index() {
 
   return (
     <View className="p-1">
+      <View className="title">
+      {node.title}
+      </View>
+
+      <View className="info-1">
+      <View className="item" onClick={openLocation}>
+      <img
+      src={Env.iconUrl + 'location-1.png'}
+      />
+      <View> {node.address}</View>
+      </View>
+      <View className="item" onClick={makeCall}>
+      <img
+      src={Env.iconUrl + 'call-1.png'}
+      />
+      <View> {node.phone}</View>
+      </View>
+      </View>
+
+      <View className="summary">
+      {node.summary}
+      </View>
+
       <Form 
         labelPosition="left"
         onFinish={(values) => formSubmit(values)}
