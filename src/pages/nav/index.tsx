@@ -40,6 +40,9 @@ function Index() {
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
   const [userLocation, setUserLocation] = useState({})
   const envVer = Taro.getAccountInfoSync().miniProgram.envVersion
+
+  // set map width/height depend on environment
+  // cause its fucking slow in devtools if set map width: 100%/height: 100vh
   let mapClass = 'w-h-100'
   if (envVer === 'develop') {
     ratio = ''
