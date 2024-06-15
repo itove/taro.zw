@@ -4,6 +4,7 @@ import './show.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
+import { fmtSeconds } from '../../utils/fmtSeconds'
 
 Taro.options.html.transformElement = (el) => {
   if (el.nodeName === 'image') {
@@ -30,14 +31,28 @@ function Index() {
   const type = instance.router.params.type ? instance.router.params.type : 2
   const innerAudioContext = Taro.createInnerAudioContext()
   const [audio, setAudio] = useState(innerAudioContext)
+  const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
+  const [progress, setProgress] = useState('语音讲解')
 
-  innerAudioContext.onPlay(() => {
+  audio.onPlay(() => {
+    setPlayIcon(Env.iconUrl + 'hotline-primary.png')
   })
-  innerAudioContext.onStop(() => {
+  audio.onStop(() => {
+    setPlayIcon(Env.iconUrl + 'hotline.png')
   })
-  innerAudioContext.onPause(() => {
+  audio.onPause(() => {
+    setPlayIcon(Env.iconUrl + 'hotline.png')
   })
-  innerAudioContext.onError((res) => {
+  audio.onEnded(() => {
+    setPlayIcon(Env.iconUrl + 'hotline.png')
+    setProgress('语音讲解')
+  })
+  audio.onCanplay(() => {
+  })
+  audio.onTimeUpdate(() => {
+    setProgress(fmtSeconds(audio.duration - audio.currentTime))
+  })
+  audio.onError((res) => {
     console.log(res.errMsg)
     console.log(res.errCode)
   })
@@ -69,7 +84,6 @@ function Index() {
 
   const playAudio = () => {
       console.log(audio.src)
-      console.log(innerAudioContext.src)
       if (audio.paused) {
         audio.play()
         console.log('playing...')
@@ -81,7 +95,7 @@ function Index() {
 
   useEffect(() => {
     return () => {
-      innerAudioContext.destroy()
+      audio.destroy()
     }
   }, []);
 
@@ -198,13 +212,11 @@ function Index() {
             }
           </View>
           { type == 0 &&
-          <View className="right" onClick={() => playAudio(innerAudioContext)}>
+          <View className="right" onClick={() => playAudio()}>
             <View className="icon">
-              <img
-                src={Env.iconUrl + 'hotline.png'}
-              />
+              <img src={playIcon} />
               </View>
-            <View className="">语音讲解</View>
+            <View className="">{progress}</View>
           </View>
           }
           { type == 1 &&

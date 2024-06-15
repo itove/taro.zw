@@ -48,7 +48,6 @@ function Index() {
     ratio = ''
   }
 
-
   audio.onPlay(() => {
     setPlayIcon(Env.iconUrl + 'hotline-primary.png')
   })
