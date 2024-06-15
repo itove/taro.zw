@@ -21,8 +21,8 @@ page{
   }
 }
 .map{
-  width: 100%;
-  height: 100vh;
+  // width: 100%;
+  // height: 100vh;
 }
 .pop{
   background: none;
@@ -42,15 +42,18 @@ page{
       font-weight: bold;
     }
     .body{
-      padding-bottom: 16px;
+      // padding-bottom: 16px;
       display: flex;
       justify-content: space-between;
       font-size: 12px;
-      border-bottom: 0.5px solid #D8D8D8;
       .left{
         width: 70%;
       }
       .right{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         text-align: center;
         .icon {
           width: 36px;
@@ -62,19 +65,21 @@ page{
       }
     }
     .footer{
+      border-top: 0.5px solid #D8D8D8;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11px;
-      View{
-        display: flex;
-        align-items: center;
-      }
-      .icon{
-        width: 15px;
-        height: 15px;
-        margin-right: 4px;
-      }
     }
+  }
+}
+
+.small{
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  .icon{
+    width: 15px !important;
+    height: 15px !important;
+    margin-right: 4px;
   }
 }

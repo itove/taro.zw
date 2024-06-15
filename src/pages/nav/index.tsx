@@ -3,10 +3,11 @@ import { View, Map } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-
+import { fmtSeconds } from '../../utils/fmtSeconds'
 
 function Index() {
   const [display, setDisplay] = useState('none')
+  const [progress, setProgress] = useState('语音讲解')
   const [distance, setDistance] = useState(0)
   const [nodes, setNodes] = useState([])
   const [node, setNode] = useState({title: '', summary: '', audio: ''})
@@ -25,10 +26,12 @@ function Index() {
   })
   audio.onEnded(() => {
     setPlayIcon(Env.iconUrl + 'hotline.png')
+    setProgress('语音讲解')
   })
   audio.onCanplay(() => {
   })
   audio.onTimeUpdate(() => {
+    setProgress(fmtSeconds(audio.duration - audio.currentTime))
   })
   audio.onError((res) => {
     console.log(res.errMsg)
@@ -221,6 +224,7 @@ function Index() {
     audio.destroy()
     setPlayIcon(Env.iconUrl + 'hotline.png')
     setDisplay('none')
+    setProgress('语音讲解')
   }
 
   const onMarkerTap = (e) => {
@@ -233,6 +237,7 @@ function Index() {
     setPlayIcon(Env.iconUrl + 'hotline.png')
     innerAudioContext.src = Env.imageUrl + nodes[id].audio
     setAudio(innerAudioContext)
+    setProgress('语音讲解')
   }
 
   const openLocation = (latitude, longitude) => {
@@ -278,34 +283,39 @@ function Index() {
         style={{display: display}}
       >
         <View className="card rounded p-1">
-          <View className="title pb-8">{node.title}</View>
 
           <View className="body">
             <View className="left">
+            <View className="title pb-8">{node.title}</View>
               <View className="pb-8">距您{distance}公里 </View>
               <View className="ellipsis-2">{node.summary}</View>
             </View>
             { node.audio &&
             <View className="right" onClick={() => playAudio(Env.imageUrl + node.audio)}>
-              <img className="icon" src={playIcon} />
-              <View className="text">语音讲解 </View>
+              <View>
+                <img className="icon" src={playIcon} />
+                <View className="text">{ progress }</View>
+              </View>
+              <View className="small" onClick={() => openLocation(node.latitude, node.longitude) }>
+                <img className="icon" src={Env.iconUrl + 'nav.png'} /> 前往
+              </View>
             </View>
             }
           </View>
 
+            { false &&
           <View className="footer pt-16">
-            <View className="">
+            <View className="small">
               <img className="icon" src={Env.iconUrl + 'share.png'} /> 分享
             </View>
-            { false &&
-            <View className="">
+            <View className="small">
               <img className="icon" src={Env.iconUrl + 'star.png'} /> 收藏
             </View>
-            }
-            <View className="" onClick={() => openLocation(node.latitude, node.longitude) }>
+            <View className="small" onClick={() => openLocation(node.latitude, node.longitude) }>
               <img className="icon" src={Env.iconUrl + 'nav.png'} /> 前往
             </View>
           </View>
+            }
         </View>
 
       </View>
