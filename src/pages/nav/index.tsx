@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDidHide } from '@tarojs/taro'
-import { View, Map } from '@tarojs/components'
+import { View, Map, CoverView } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
@@ -117,6 +117,25 @@ function Index() {
           longitude: n.longitude,
           width: markerWidth,
           height: markerHeight,
+          // title: 'title',
+          customCallout: {
+            display: 'BYCLICK'
+            // anchorX: 0,
+            // anchorY: 0,
+          },
+          label: {
+            content: n.title,
+            fontSize: '12',
+            color: '#000000',
+            bgColor: '#ffffff',
+            // anchorX: 0,
+            // anchorY: 0,
+            // borderWidth: 0,
+            borderRadius: 4,
+            padding: 4,
+            textAlign: 'center',
+            // collision: '',
+          }
         })
       })
 
@@ -252,7 +271,7 @@ function Index() {
     console.log(e.detail.longitude)
     audio.destroy()
     setPlayIcon(Env.iconUrl + 'hotline.png')
-    setDisplay('none')
+    // setDisplay('none')
     setProgress('语音讲解')
   }
 
@@ -302,7 +321,11 @@ function Index() {
         max-scale={17}
         min-scale={11}
         onTap={onTap}
-      />
+      >
+        <CoverView className="call-out" slot="callout">
+            fuck
+        </CoverView>
+      </Map>
 
       <View className="pop">
       <View
