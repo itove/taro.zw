@@ -262,7 +262,7 @@ function Index() {
               />
               <View> 地理交通 </View>
             </View>
-            <View className="item" onClick={() => Taro.navigateTo({url: '/pages/feedback/index'})}>
+            <View className="item" onClick={() => Taro.switchTab({url: '/pages/feedback/index'})}>
               <img
                 src={Env.iconUrl + 'letter.png' }
               />

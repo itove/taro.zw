@@ -45,8 +45,8 @@ export default defineAppConfig({
         "selectedIconPath": './icons/pavilion-fill.png'
       },
       {
-        "pagePath": "pages/me/index",
-        "text": "个人中心",
+        "pagePath": "pages/feedback/index",
+        "text": "联系我们",
         "iconPath": './icons/user.png',
         "selectedIconPath": './icons/user-fill.png'
       },
