@@ -1,2 +1,5 @@
 - &nbsp
-- play time
+- marker:
+    - change marker width/iconPath
+    - customCallout
+    - label center
