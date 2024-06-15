@@ -218,7 +218,7 @@ page{
   border-top: 0.5px solid #E6E6E6;
   height: 49px;
   .left{
-    width: 25%;
+    // width: 25%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -232,7 +232,7 @@ page{
     }
   }
   .right{
-    width: 65%;
+    width: 85%;
     .btn-rounded{
       border-radius: 20px;
     }

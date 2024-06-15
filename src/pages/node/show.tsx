@@ -340,7 +340,7 @@ function Index() {
             <img src={Env.iconUrl + 'house.png'} />
             <View>主页</View>
           </View>
-          <View className="fav" onClick={toggleFav}>
+          <View className="fav d-none" onClick={toggleFav}>
             <img src={Env.iconUrl + (isFav && 'star.png' || 'star.png')} />
             <View>{ isFav && '已收藏' || '收藏'}</View>
           </View>
