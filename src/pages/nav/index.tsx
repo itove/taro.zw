@@ -39,6 +39,12 @@ function Index() {
   const [audio, setAudio] = useState(innerAudioContext)
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
   const [userLocation, setUserLocation] = useState({})
+  const envVer = Taro.getAccountInfoSync().miniProgram.envVersion
+  let mapClass = 'w-h-100'
+  if (envVer === 'develop') {
+    ratio = ''
+  }
+
 
   audio.onPlay(() => {
     setPlayIcon(Env.iconUrl + 'hotline-primary.png')
@@ -286,7 +292,7 @@ function Index() {
     <View className="">
       <Map
         id="map"
-        className="map"
+        className={mapClass}
         latitude={center.lat}
         longitude={center.long}
         onMarkerTap={onMarkerTap}

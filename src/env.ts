@@ -21,6 +21,7 @@ switch (envVer) {
 }
 
 export const Env = {
+  ver: envVer, // "0.1.0" WTF
   baseUrl: baseUrl,
   apiUrl: baseUrl + 'api/',
   imageUrl: baseUrl + 'images/',
