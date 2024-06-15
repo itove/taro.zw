@@ -45,7 +45,7 @@ function Index() {
   // cause its fucking slow in devtools if set map width: 100%/height: 100vh
   let mapClass = 'w-h-100'
   if (envVer === 'develop') {
-    ratio = ''
+    mapClass = ''
   }
 
   audio.onPlay(() => {
