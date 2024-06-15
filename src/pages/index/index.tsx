@@ -34,6 +34,17 @@ function gridGoto(node) {
   }
 }
 
+function More({region, type}) {
+  return (
+    <View
+      className="more" 
+      onClick={() => Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})}
+    >
+    更多 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
+    </View>
+  )
+}
+
 function TabPane({node, type, index}) {
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
@@ -133,7 +144,7 @@ function Index() {
 
       <NoticeBar
       leftIcon={<img alt="notice" width="16px" height="16px" src={Env.iconUrl + 'speaker.png'} />}
-      rightIcon={<span className="text-gray">更多 ></span>}
+      rightIcon={<More region={'tongzhi'} type={5} />}
       className="rounded-5 overflow-hidden"
       direction="vertical"
       list={tongzhi}

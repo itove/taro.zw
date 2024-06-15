@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
+// import { More } from '../../components/more'
 import './index.scss'
 import { Swiper, Grid } from '@nutui/nutui-react-taro'
 
@@ -59,6 +60,17 @@ function GridItem({node, index}) {
 }
 */
 
+function More({region, type}) {
+  return (
+    <View
+      className="more" 
+      onClick={() => Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})}
+    >
+    更多 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
+    </View>
+  )
+}
+
 function Index() {
   const [youList, setYouList] = useState([])
   const [zhuList, setZhuList] = useState([])
@@ -98,6 +110,7 @@ function Index() {
             src={Env.iconUrl + 'youzai.png'}
           />
           游在东沟
+          <More region={'youzai'} type={0} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
           {youList}
@@ -110,7 +123,7 @@ function Index() {
             src={Env.iconUrl + 'youzai.png'}
           />
           住在东沟
-          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=zhuzai&type=1'})}> 更多 > </View>
+          <More region={'zhuzai'} type={1} />
         </View>
         <View class="list p-1 rounded">
         {zhuList}
@@ -123,7 +136,7 @@ function Index() {
             src={Env.iconUrl + 'chizai.png'}
           />
           吃在东沟
-          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=chizai&type=2'})}> 更多 > </View>
+          <More region={'chizai'} type={2} />
         </View>
         <Grid columns="2" gap="3" center={false} className="">
           {chiList}
@@ -136,7 +149,7 @@ function Index() {
             src={Env.iconUrl + 'gouzai.png'}
           />
           购在东沟
-          <View class="more" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=gouzai&type=3'})}> 更多 > </View>
+          <More region={'gouzai'} type={3} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
           {gouList}
