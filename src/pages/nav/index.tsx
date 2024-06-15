@@ -81,8 +81,8 @@ function Index() {
   const col = 8
   const latPer = (ne.lat - sw.lat) / row
   const longPer = (ne.long - sw.long) / col
-  const markerWidth = 16
-  const markerHeight = 24
+  const markerWidth = 32
+  const markerHeight = 40
 
   const mapContext = Taro.createMapContext('map')
 
@@ -117,6 +117,7 @@ function Index() {
           longitude: n.longitude,
           width: markerWidth,
           height: markerHeight,
+          iconPath: Env.iconUrl + 'marker-house.png',
           // title: 'title',
           customCallout: {
             display: 'BYCLICK'
@@ -271,7 +272,7 @@ function Index() {
     console.log(e.detail.longitude)
     audio.destroy()
     setPlayIcon(Env.iconUrl + 'hotline.png')
-    // setDisplay('none')
+    setDisplay('none')
     setProgress('语音讲解')
   }
 
@@ -323,7 +324,7 @@ function Index() {
         onTap={onTap}
       >
         <CoverView className="call-out" slot="callout">
-            fuck
+          this is customCallout
         </CoverView>
       </Map>
 
