@@ -119,13 +119,14 @@ function Index() {
         }
         markers.push({
           id: index,
+          zindex: index,
           latitude: n.latitude,
           longitude: n.longitude,
           width: markerWidth,
           height: markerHeight,
           iconPath: path,
-          // collision: 'marker',
-          // collisionRelation: 'together', // 'alone' or 'together'
+          collision: 'poi, marker',
+          collisionRelation: 'together', // 'alone' or 'together'
           // title: n.title,
           // callout: {
           //   content: n.title,
@@ -162,6 +163,7 @@ function Index() {
         })
       })
 
+      console.log(markers)
       setMarkers(markers)
 
       mapContext.addMarkers({
