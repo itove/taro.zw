@@ -265,6 +265,8 @@ function Index() {
         longitude={center.long}
         onMarkerTap={onMarkerTap}
         scale={15} // 3-20
+        max-scale={17}
+        min-scale={11}
         onTap={onTap}
         // onClick={onTap}
         // markers={markers}
