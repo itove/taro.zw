@@ -383,16 +383,31 @@ function Index() {
   }
 
   const playAudio = (src) => {
-      console.log(innerAudioContext.src)
-      console.log(audio.src)
-      console.log(audio)
-      if (audio.paused) {
-        audio.play()
-        console.log('playing...')
-      } else {
-        audio.pause()
-        console.log('paused...')
-      }
+    console.log(innerAudioContext.src)
+    console.log(audio.src)
+    console.log(audio)
+    if (audio.paused) {
+      audio.play()
+      console.log('playing...')
+    } else {
+      audio.pause()
+      console.log('paused...')
+    }
+  }
+
+  const showNode = (node) => {
+    let type
+    switch (node.region) {
+      case 27:
+        type = 0
+        break;
+      case 29:
+        type = 1
+        break;
+      default:
+        type = 1
+    }
+    Taro.navigateTo({ url: '/pages/node/show?id=' + node.id + '&type=' + type})
   }
 
   return (
@@ -423,9 +438,9 @@ function Index() {
 
           <View className="body">
             <View className="left">
-            <View className="title pb-8">{node.title}</View>
+            <View className="title pb-8" onClick={() => showNode(node)}>{node.title}</View>
               <View className="pb-8">距您{distance}公里 </View>
-              <View className="ellipsis-2">{node.summary}</View>
+              <View className="ellipsis-2" onClick={() => showNode(node)}>{node.summary}</View>
             </View>
             { node.audio &&
             <View className="right" onClick={() => playAudio(Env.imageUrl + node.audio)}>
