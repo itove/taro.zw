@@ -39,6 +39,8 @@ function Index() {
   const [audio, setAudio] = useState(innerAudioContext)
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
   const [userLocation, setUserLocation] = useState({})
+  const [markers, setMarkers] = useState([])
+  const [prevMarker, setPrevMarker] = useState(0)
   const envVer = Taro.getAccountInfoSync().miniProgram.envVersion
 
   // set map width/height depend on environment
@@ -81,8 +83,8 @@ function Index() {
   const col = 8
   const latPer = (ne.lat - sw.lat) / row
   const longPer = (ne.long - sw.long) / col
-  const markerWidth = 32
-  const markerHeight = 40
+  const markerWidth = 28
+  const markerHeight = 35
 
   const mapContext = Taro.createMapContext('map')
 
@@ -111,34 +113,54 @@ function Index() {
       console.log(nodes)
       setNodes(nodes)
       nodes.map((n, index) => {
+        let  path = Env.iconUrl + 'marker-pavilion.png'
+        if (n.region === 29) {
+          path = Env.iconUrl + 'marker-house.png'
+        }
         markers.push({
           id: index,
           latitude: n.latitude,
           longitude: n.longitude,
           width: markerWidth,
           height: markerHeight,
-          iconPath: Env.iconUrl + 'marker-house.png',
+          iconPath: path,
           // title: 'title',
-          customCallout: {
-            display: 'BYCLICK'
-            // anchorX: 0,
-            // anchorY: 0,
-          },
+          // callout: {
+          //   content: n.title,
+          //   color: '#000000',
+          //   fontSize: '12',
+          //   bgColor: '#ffffff',
+          //   anchorX: 0,
+          //   anchorY: 0,
+          //   // borderWidth: 0,
+          //   borderRadius: 4,
+          //   padding: 6,
+          //   display: 'BYCLICK',
+          //   textAlign: 'center',
+          //   // collision: '',
+          // },
+          // customCallout: {
+          //   display: 'BYCLICK',
+          //   // anchorX: 0,
+          //   // anchorY: 0,
+          // },
           label: {
             content: n.title,
             fontSize: '12',
             color: '#000000',
             bgColor: '#ffffff',
-            // anchorX: 0,
+            anchorX: 0,
             // anchorY: 0,
             // borderWidth: 0,
             borderRadius: 4,
             padding: 4,
-            textAlign: 'center',
+            // textAlign: 'center',
             // collision: '',
           }
         })
       })
+
+      setMarkers(markers)
 
       mapContext.addMarkers({
         markers: markers,
@@ -267,6 +289,56 @@ function Index() {
     }
   }, [])
 
+  const resetPrevMarker = () => {
+    mapContext.removeMarkers({
+      markerIds: [markers[prevMarker]],
+    }) 
+    .then(res => {
+      console.log('markers removed')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+    const m = markers[prevMarker]
+    m.width = markerWidth
+    m.height = markerHeight
+    mapContext.addMarkers({
+      markers: [m]
+    }) 
+    .then(res => {
+      console.log('markers added')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  const biggerMarker = (id) => {
+    mapContext.removeMarkers({
+      markerIds: [markers[id]],
+    }) 
+    .then(res => {
+      console.log('markers removed')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+    const m = markers[id]
+    m.width = 48
+    m.height = 61
+    mapContext.addMarkers({
+      markers: [m]
+    }) 
+    .then(res => {
+      console.log('markers added')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   const onTap = (e) => {
     console.log(e.detail.latitude)
     console.log(e.detail.longitude)
@@ -274,11 +346,18 @@ function Index() {
     setPlayIcon(Env.iconUrl + 'hotline.png')
     setDisplay('none')
     setProgress('语音讲解')
+    // resetPrevMarker()
   }
 
   const onMarkerTap = (e) => {
     console.log(e.detail.markerId)
     const index = e.detail.markerId
+    console.log(markers[index])
+
+    // resetPrevMarker()
+    // setPrevMarker(index)
+    // biggerMarker(index)
+
     setNode(nodes[index])
     setDistance(getDistance(userLocation.lat, userLocation.long, nodes[index].latitude, nodes[index].longitude))
     setDisplay('block')
@@ -317,6 +396,7 @@ function Index() {
         className={mapClass}
         latitude={center.lat}
         longitude={center.long}
+        // markers={markers}
         onMarkerTap={onMarkerTap}
         scale={15} // 3-20
         max-scale={17}
@@ -324,7 +404,7 @@ function Index() {
         onTap={onTap}
       >
         <CoverView className="call-out" slot="callout">
-          this is customCallout
+          <CoverView marker-id="2"> this is customCallout </CoverView>
         </CoverView>
       </Map>
 
