@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useDidHide } from '@tarojs/taro'
 import { View, Map } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
@@ -70,11 +71,12 @@ function Index() {
 
   const mapContext = Taro.createMapContext('map')
 
+  useDidHide(() => {
+    audio.pause()
+    console.log('leave nav')
+  })
+
   useEffect(() => {
-    return () => {
-      audio.destroy()
-      innerAudioContext.destroy()
-    }
   }, []);
 
   useEffect(() => {
@@ -216,6 +218,11 @@ function Index() {
       }
     }
   // small ones end
+
+    return () => {
+      audio.destroy()
+      // innerAudioContext.destroy()
+    }
   }, [])
 
   const onTap = (e) => {
