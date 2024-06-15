@@ -346,7 +346,7 @@ function Index() {
     setPlayIcon(Env.iconUrl + 'hotline.png')
     setDisplay('none')
     setProgress('语音讲解')
-    // resetPrevMarker()
+    resetPrevMarker()
   }
 
   const onMarkerTap = (e) => {
@@ -354,9 +354,11 @@ function Index() {
     const index = e.detail.markerId
     console.log(markers[index])
 
-    // resetPrevMarker()
-    // setPrevMarker(index)
-    // biggerMarker(index)
+    resetPrevMarker()
+    setPrevMarker(index)
+    biggerMarker(index)
+
+    mapContext.moveToLocation({latitude: markers[index].latitude, longitude: markers[index].longitude})
 
     setNode(nodes[index])
     setDistance(getDistance(userLocation.lat, userLocation.long, nodes[index].latitude, nodes[index].longitude))
