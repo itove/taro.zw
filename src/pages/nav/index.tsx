@@ -6,7 +6,6 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { fmtSeconds } from '../../utils/fmtSeconds'
 
-
 function Rad(d) { 
   //根据经纬度判断距离
   return d * Math.PI / 180.0;
@@ -177,6 +176,7 @@ function Index() {
       })
     })
 
+    // groundLayers
     // small ones
     for (let i = 0; i < col; i++) {
       const neLat = ne.lat - latPer * i
