@@ -39,7 +39,7 @@ function Index() {
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
   const [userLocation, setUserLocation] = useState({})
   const [markers, setMarkers] = useState([])
-  const [prevMarker, setPrevMarker] = useState(0)
+  const [prevMarkerId, setPrevMarkerId] = useState(0)
   const envVer = Taro.getAccountInfoSync().miniProgram.envVersion
 
   // set map width/height depend on environment
@@ -165,15 +165,15 @@ function Index() {
       console.log(markers)
       setMarkers(markers)
 
-      mapContext.addMarkers({
-        markers: markers,
-      }) 
-      .then(res => {
-        console.log('markers added')
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      // mapContext.addMarkers({
+      //   markers: markers,
+      // }) 
+      // .then(res => {
+      //   console.log('markers added')
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
     })
 
     // groundLayers
@@ -230,53 +230,29 @@ function Index() {
   }, [])
 
   const resetPrevMarker = () => {
-    mapContext.removeMarkers({
-      markerIds: [markers[prevMarker]],
-    }) 
-    .then(res => {
-      console.log('markers removed')
+    const newMarkers = markers.map((m, i) => {
+      if (i === prevMarkerId) {
+        m.width = markerWidth
+        m.height = markerHeight
+        return m
+      } else {
+        return m
+      }
     })
-    .catch(err => {
-      console.log(err)
-    })
-
-    const m = markers[prevMarker]
-    m.width = markerWidth
-    m.height = markerHeight
-    mapContext.addMarkers({
-      markers: [m]
-    }) 
-    .then(res => {
-      console.log('markers added')
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    setMarkers(newMarkers)
   }
 
-  const biggerMarker = (id) => {
-    mapContext.removeMarkers({
-      markerIds: [markers[id]],
-    }) 
-    .then(res => {
-      console.log('markers removed')
+  const enlargeMarker = (id) => {
+    const newMarkers = markers.map((m, i) => {
+      if (i === id) {
+        m.width = 48
+        m.height = 61
+        return m
+      } else {
+        return m
+      }
     })
-    .catch(err => {
-      console.log(err)
-    })
-
-    const m = markers[id]
-    m.width = 48
-    m.height = 61
-    mapContext.addMarkers({
-      markers: [m]
-    }) 
-    .then(res => {
-      console.log('markers added')
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    setMarkers(newMarkers)
   }
 
   const onTap = (e) => {
@@ -286,20 +262,17 @@ function Index() {
     setPlayIcon(Env.iconUrl + 'hotline.png')
     setDisplay('none')
     setProgress('语音讲解')
-    // resetPrevMarker()
+    resetPrevMarker()
   }
 
   const onMarkerTap = (e) => {
     console.log(e.detail.markerId)
     const index = e.detail.markerId
     console.log(markers[index])
-
-    setPrevMarker(index)
-    // resetPrevMarker()
-    // biggerMarker(index)
-
+    setPrevMarkerId(index)
+    resetPrevMarker()
+    enlargeMarker(index)
     mapContext.moveToLocation({latitude: markers[index].latitude, longitude: markers[index].longitude})
-
     setNode(nodes[index])
     setDistance(getDistance(userLocation.lat, userLocation.long, nodes[index].latitude, nodes[index].longitude))
     setDisplay('block')
@@ -354,7 +327,7 @@ function Index() {
         latitude={center.lat}
         longitude={center.long}
         showLocation={true}
-        // markers={markers}
+        markers={markers}
         onMarkerTap={onMarkerTap}
         scale={15} // 3-20
         max-scale={17}
