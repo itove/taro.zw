@@ -77,7 +77,6 @@ function Index() {
   const ne = { lat: 32.50916729, long: 110.86286523 }
   const sw = { lat: 32.48679658, long: 110.82360543 }
   const opacity = 1
-  const zIndex = 1
   const row = 8
   const col = 8
   const latPer = (ne.lat - sw.lat) / row
@@ -118,7 +117,7 @@ function Index() {
         }
         markers.push({
           id: index,
-          zindex: index,
+          zIndex: index,
           latitude: n.latitude,
           longitude: n.longitude,
           width: markerWidth,
@@ -151,12 +150,12 @@ function Index() {
             fontSize: '12',
             color: '#000000',
             bgColor: '#ffffff',
-            anchorX: 0,
-            // anchorY: 0,
+            textAlign: 'center',
+            // anchorX: -((n.title.length * 12 + 8) / 2),
+            // anchorY: 2,
             // borderWidth: 0,
             borderRadius: 4,
             padding: 4,
-            textAlign: 'center',
             // collision: '',
           }
         })
@@ -206,7 +205,7 @@ function Index() {
           id: index,
           src,
           opacity,
-          zIndex,
+          // zIndex: 1,
           bounds,
         }
         // console.log(o)
@@ -234,6 +233,7 @@ function Index() {
       if (i === prevMarkerId) {
         m.width = markerWidth
         m.height = markerHeight
+        m.zIndex = prevMarkerId
         return m
       } else {
         return m
@@ -247,6 +247,7 @@ function Index() {
       if (i === id) {
         m.width = 48
         m.height = 61
+        m.zIndex = 999
         return m
       } else {
         return m
