@@ -4,6 +4,7 @@ import { Env } from '../../env'
 import { View, Image } from '@tarojs/components'
 import { Grid } from '@nutui/nutui-react-taro'
 import './index.scss'
+// import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
 
 function gotoNode(id, type = 2) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
@@ -43,7 +44,7 @@ function Index() {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    console.log(uid)
+    // console.log(uid)
     let url = Env.apiUrl + 'nodes/' + region
     if (uid !== undefined ) {
       url = Env.apiUrl + 'fav?region=' + region + '&uid=' + uid

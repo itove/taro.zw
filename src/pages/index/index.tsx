@@ -209,6 +209,7 @@ function Index() {
 
         <Tabs
           value={tab1value}
+          autoHeight={true}
           onChange={(value) => {
             setTab1value(value)
           }}

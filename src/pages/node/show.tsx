@@ -328,6 +328,7 @@ function Index() {
       { type == 1 &&
       <Tabs
         value={tab1value}
+        autoHeight={true}
         onChange={(value) => {
           setTab1value(value)
         }}
