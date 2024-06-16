@@ -47,7 +47,7 @@ function Index() {
   // cause its fucking slow in devtools if set map width: 100%/height: 100vh
   let mapClass = 'w-h-100'
   if (envVer === 'develop') {
-    mapClass = ''
+    // mapClass = ''
   }
 
   audio.onPlay(() => {
@@ -350,7 +350,7 @@ function Index() {
     setPlayIcon(Env.iconUrl + 'hotline.png')
     setDisplay('none')
     setProgress('语音讲解')
-    resetPrevMarker()
+    // resetPrevMarker()
   }
 
   const onMarkerTap = (e) => {
@@ -358,9 +358,9 @@ function Index() {
     const index = e.detail.markerId
     console.log(markers[index])
 
-    resetPrevMarker()
     setPrevMarker(index)
-    biggerMarker(index)
+    // resetPrevMarker()
+    // biggerMarker(index)
 
     mapContext.moveToLocation({latitude: markers[index].latitude, longitude: markers[index].longitude})
 
@@ -417,6 +417,7 @@ function Index() {
         className={mapClass}
         latitude={center.lat}
         longitude={center.long}
+        showLocation={true}
         // markers={markers}
         onMarkerTap={onMarkerTap}
         scale={15} // 3-20
