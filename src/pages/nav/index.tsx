@@ -177,42 +177,6 @@ function Index() {
       })
     })
 
-
-    /*
-    // whole one
-    const src = Env.imageUrl + 'map/map.png'
-    const northeast = {
-      latitude: ne.lat,
-      longitude: ne.long, 
-    }
-    const southwest = {
-      latitude: sw.lat,
-      longitude: sw.long,
-    }
-    const bounds = {
-      northeast,
-      southwest,
-    }
-    const o = {
-      id: 1,
-      src,
-      opacity,
-      zIndex,
-      bounds,
-    }
-    // console.log(o)
-    // console.log(index)
-
-    mapContext.addGroundOverlay(o)
-    .then(res => {
-      console.log('groundOverlay added')
-    })
-    .catch(err => {
-      console.log(err)
-    })
-    // whole one end
-    */
-
     // small ones
     for (let i = 0; i < col; i++) {
       const neLat = ne.lat - latPer * i
