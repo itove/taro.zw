@@ -1,5 +1,3 @@
 - &nbsp
 - marker:
-    - change marker width/iconPath
     - customCallout
-    - label center
