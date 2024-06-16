@@ -201,34 +201,6 @@ function Index() {
 
         const index = col * i + j
 
-        // add markers for every ne & sw
-        // const markers = [
-        //   {
-        //     id: index,
-        //     latitude: neLat,
-        //     longitude: neLong,
-        //     width: markerWidth,
-        //     height: markerHeight
-        //   },
-        //   {
-        //     id: index,
-        //     latitude: swLat,
-        //     longitude: swLong,
-        //     width: markerWidth,
-        //     height: markerHeight
-        //   },
-        // ]
-
-        // mapContext.addMarkers({
-        //   markers: markers,
-        // }) 
-        // .then(res => {
-        //   console.log('markers added')
-        // })
-        // .catch(err => {
-        //   console.log(err)
-        // })
-
         const src = Env.imageUrl + 'map/' + index + '.png'
         const o = {
           id: index,
