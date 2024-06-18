@@ -43,6 +43,9 @@ function Index() {
 
   const [list, setList] = useState([])
 
+  const onShareAppMessage = (res) => {}
+  const onShareTimeline = (res) => {}
+
   useEffect(() => {
     // console.log(uid)
     let url = Env.apiUrl + 'nodes/' + region

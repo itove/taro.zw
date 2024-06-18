@@ -78,6 +78,9 @@ function Index() {
   const [gouList, setGouList] = useState([])
   const [grid, setGrid] = useState([])
 
+  const onShareAppMessage = (res) => {}
+  const onShareTimeline = (res) => {}
+
   useEffect(() => {
     Taro.request({
       url: Env.apiUrl + 'wx/leyou'

@@ -42,6 +42,9 @@ function Index() {
   const [prevMarkerId, setPrevMarkerId] = useState(0)
   const envVer = Taro.getAccountInfoSync().miniProgram.envVersion
 
+  const onShareAppMessage = (res) => {}
+  const onShareTimeline = (res) => {}
+
   // set map width/height depend on environment
   // cause its fucking slow in devtools if set map width: 100%/height: 100vh
   let mapClass = 'w-h-100'

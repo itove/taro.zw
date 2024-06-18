@@ -95,6 +95,9 @@ function Index() {
   const [historytext, setHistorytext] = useState({})
   const [tab1value, setTab1value] = useState<string | number>('0')
 
+  const onShareAppMessage = (res) => {}
+  const onShareTimeline = (res) => {}
+
   const gridItems = [
     { t: '游在东沟', p: Env.iconUrl + 'grid_1.png', target: '.youzai', url: 'leyou/index', isTab: true, },
     { t: '住在东沟', p: Env.iconUrl + 'grid_2.png', target: '.zhuzai', url: 'leyou/index', isTab: true, },

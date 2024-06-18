@@ -34,6 +34,9 @@ function Index() {
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
   const [progress, setProgress] = useState('语音讲解')
 
+  const onShareAppMessage = (res) => {}
+  const onShareTimeline = (res) => {}
+
   audio.onPlay(() => {
     setPlayIcon(Env.iconUrl + 'hotline-primary.png')
   })
