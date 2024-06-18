@@ -123,7 +123,7 @@ function Index() {
       <View className="zhuzai block">
         <View className="header">
           <img
-            src={Env.iconUrl + 'youzai.png'}
+            src={Env.iconUrl + 'zhuzai.png'}
           />
           住在东沟
           <More region={'zhuzai'} type={1} />
