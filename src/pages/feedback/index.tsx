@@ -93,12 +93,14 @@ function Index() {
       </View>
 
       <Form 
+        className="form"
         labelPosition="left"
         onFinish={(values) => formSubmit(values)}
         onFinishFailed={(values) => onFinishFailed(values)}
       >
         <View className='example-body'>
         <Form.Item
+          className="form-item"
           required
           label="姓名"
           name="firstname"
@@ -111,13 +113,7 @@ function Index() {
         </Form.Item>
 
         <Form.Item
-          label="邮箱"
-          name="email"
-        >
-          <Input type='text' placeholder='' focus/>
-        </Form.Item>
-
-        <Form.Item
+          className="form-item"
           required
           label="电话"
           name="phone"
@@ -130,6 +126,7 @@ function Index() {
         </Form.Item>
 
         <Form.Item
+          className="form-item"
           required
           label="标题"
           name="title"
@@ -142,6 +139,15 @@ function Index() {
         </Form.Item>
 
         <Form.Item
+          className="form-item"
+          label="邮箱"
+          name="email"
+        >
+          <Input type='text' placeholder='' focus/>
+        </Form.Item>
+
+        <Form.Item
+          className="body"
           required
           name="body"
           rules={[
@@ -151,15 +157,13 @@ function Index() {
         >
           <TextArea
             placeholder="请输入您的意见或建议"
-            className="text-1"
-            style={{ fontSize: '12px' }}
             onChange={(value) => console.log('change', value)}
             onBlur={() => console.log('blur')}
             onFocus={() => console.log('focus')}
           />
         </Form.Item>
         </View>
-        <Button formType="submit" className="btn-primary">提 交</Button>
+        <Button formType="submit" className="btn-primary mt-1">提 交</Button>
       </Form>
     </View>
   )
