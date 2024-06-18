@@ -157,8 +157,12 @@ function Index() {
   }
 
   const openLocation = () => {
-    const latitude = 32.499823
-    const longitude = 110.8336
+    let latitude = 32.499823
+    let longitude = 110.8336
+    if (node.latitude && node.longitude) {
+      latitude = node.latitude
+      longitude = node.longitude
+    }
     Taro.openLocation({
       latitude,
       longitude,
