@@ -115,7 +115,7 @@ function Index() {
       console.log(res)
 
       setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
-      setTongzhi(data.tongzhi.map((node, index) => node.title ))
+      setTongzhi(data.tongzhi.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
       setYouList(data.youzai.map((node, index) => <TabPane node={node} type={0} index={index} />))
       setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} type={1} index={index} />))
       setChiList(data.chizai.map((node, index) => <TabPane node={node} type={2} index={index} />))
@@ -151,7 +151,6 @@ function Index() {
       speed={5}
       duration={1000}
       height={30}
-      onClick={(e) => gotoNodeIndex('tongzhi', 5)}
       // closeable
       />
 
