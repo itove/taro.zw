@@ -12,6 +12,7 @@ import {
 
 function Index() {
   const [node, setNode] = useState({})
+  const [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
     Taro.request({
@@ -39,6 +40,7 @@ function Index() {
   }
 
   const formSubmit = (data) => {
+    setDisabled(true)
     console.log(data);
     Taro.request({
       method: 'POST',
@@ -51,7 +53,9 @@ function Index() {
           icon: 'success',
           duration: 2000
         }).then(() => {
-          Taro.reLaunch({ url: '/pages/index/index' })
+          setTimeout(() => {
+            Taro.reLaunch({ url: '/pages/index/index' })
+          }, 2000)
         })
       } else {
         Taro.showToast({
@@ -163,7 +167,7 @@ function Index() {
           />
         </Form.Item>
         </View>
-        <Button formType="submit" className="btn-primary mt-1">提 交</Button>
+        <Button disabled={disabled} formType="submit" className="btn-primary mt-1">提 交</Button>
       </Form>
     </View>
   )
