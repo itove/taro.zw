@@ -76,12 +76,12 @@ function Index() {
   })
 
   const center = { lat: 32.497362991555164, long: 110.84169432860472 }
-
   const ne = { lat: 32.50916729, long: 110.86286523 }
   const sw = { lat: 32.48679658, long: 110.82360543 }
+
   const opacity = 1
-  const row = 8
   const col = 8
+  const row = 8
   const latPer = (ne.lat - sw.lat) / row
   const longPer = (ne.long - sw.long) / col
   const markerWidth = 28
@@ -180,12 +180,12 @@ function Index() {
 
     // groundLayers
     // small ones
-    for (let i = 0; i < col; i++) {
+    for (let i = 0; i < row; i++) {
       const neLat = ne.lat - latPer * i
       const swLat = ne.lat - latPer * (i + 1)
       let neLong
       let swLong
-      for (let j = 0; j < row; j++) {
+      for (let j = 0; j < col; j++) {
         neLong = sw.long + longPer * (j + 1)
         swLong = sw.long + longPer * j
         const northeast = {
