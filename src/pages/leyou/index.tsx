@@ -22,7 +22,7 @@ function SwiperItem({node, index, type}) {
     <Swiper.Item className="slide-item">
     <Image
     className="w-100 img"
-    mode="widthFix"
+    mode="aspectFill"
     onClick={() => gotoNode(node.id, type)}
     src={Env.imageUrl + node.image}
     alt=""
