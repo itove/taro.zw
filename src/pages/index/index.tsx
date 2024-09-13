@@ -120,14 +120,14 @@ function Index() {
   const onShareTimeline = (res) => {}
 
   const gridItems = [
-    { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '.youzai', url: 'leyou/index', isTab: true, },
-    { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '.zhuzai', url: 'leyou/index', isTab: true, },
-    { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '.chizai', url: 'leyou/index', isTab: true, },
-    { t: '服务', p: Env.iconUrl + 'grid_4.png', target: '.gouzai', url: 'leyou/index', isTab: true, },
-    { t: '采摘', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/show?id=39&type=4', isTab: false, },
-    { t: '特产', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=5&region=dangjian', isTab: false, },
-    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?type=5&region=wenlv', isTab: false, },
-    { t: '商超', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?type=5&region=youji', isTab: false, },
+    { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '服务', p: Env.iconUrl + 'grid_4.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '采摘', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '特产', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '商超', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
   ]
 
   useEffect(() => {
@@ -158,7 +158,7 @@ function Index() {
 
   return (
     <View className="home">
-      <View className="hero" style="background-image: url(https://192.168.122.1:8000/images/1.png)">
+      <View className="hero" style="background-image: url(https://zw.dev.itove.com/images/1.png)">
          <SearchBar className="search" shape="round" maxLength={5} placeholder="搜索景点、美食和购物" />
       </View>
 

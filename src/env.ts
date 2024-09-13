@@ -11,7 +11,7 @@ switch (envVer) {
     baseUrl = 'https://192.168.122.1:8000/'
     break
   case 'trial':
-    // baseUrl = 'https://zw.dev.itove.com/'
+    baseUrl = 'https://zw.dev.itove.com/'
     break
   case 'release':
     baseUrl = 'https://zw.itove.com/'
