@@ -17,7 +17,7 @@ export default defineAppConfig({
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#0FB99F',
+    navigationBarBackgroundColor: '#ffffff',
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'white',
     backgroundColor: '#ed7373', // 窗口的背景色 WTF? https://taro-docs.jd.com/docs/app-config#window

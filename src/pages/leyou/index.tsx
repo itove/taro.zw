@@ -29,7 +29,24 @@ function SwiperItem({node, index, type}) {
     />
     <View className="text">
     <p className="title">{node.title}</p>
-    <p className="summary ellipsis-2">{node.summary}</p>
+    <p className="summary ellipsis-2">1720人出游</p>
+    </View>
+    </Swiper.Item>
+  )
+}
+
+function SwiperItem1({node, index, type}) {
+  return (
+    <Swiper.Item className="slide-item">
+    <Image
+    className="w-100 img"
+    mode="aspectFill"
+    onClick={() => gotoNode(node.id, type)}
+    src={Env.imageUrl + node.image}
+    alt=""
+    />
+    <View className="text text1">
+    <p className="title">{node.title}</p>
     </View>
     </Swiper.Item>
   )
@@ -66,13 +83,14 @@ function More({region, type}) {
       className="more" 
       onClick={() => Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})}
     >
-    更多 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
+    全部 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
     </View>
   )
 }
 
 function Index() {
   const [youList, setYouList] = useState([])
+  const [youList1, setYouList1] = useState([])
   const [zhuList, setZhuList] = useState([])
   const [chiList, setChiList] = useState([])
   const [gouList, setGouList] = useState([])
@@ -90,6 +108,7 @@ function Index() {
       console.log(res)
 
       setYouList(data.youzai.map((node, index) => <SwiperItem node={node} index={index} type={0} />))
+      setYouList1(data.youzai.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
       setZhuList(data.zhuzai.map((node, index) => <ViewItem node={node} type={1} index={index} />))
       // setChiList(data.chizai.map((node, index) => <GridItem node={node} index={index} />))
       setGouList(data.gouzai.map((node, index) => <SwiperItem node={node} index={index} type={3} />))
@@ -109,10 +128,16 @@ function Index() {
     <View className="leyou p-1">
       <View className="youzai block">
         <View className="header">
-          <img
-            src={Env.iconUrl + 'youzai.png'}
-          />
-          游在东沟
+          去哪玩
+        </View>
+        <Swiper defaultValue={0} loop className="slide" height="90">
+          {youList1}
+        </Swiper>
+      </View>
+
+      <View className="youzai block">
+        <View className="header">
+          猜你喜欢
           <More region={'youzai'} type={0} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
@@ -120,42 +145,13 @@ function Index() {
         </Swiper>
       </View>
 
-      <View className="zhuzai block">
+      <View className="youzai block">
         <View className="header">
-          <img
-            src={Env.iconUrl + 'zhuzai.png'}
-          />
-          住在东沟
-          <More region={'zhuzai'} type={1} />
-        </View>
-        <View class="list p-1 rounded">
-        {zhuList}
-        </View>
-      </View>
-
-      <View className="chizai block node-index">
-        <View className="header">
-          <img
-            src={Env.iconUrl + 'chizai.png'}
-          />
-          吃在东沟
-          <More region={'chizai'} type={2} />
-        </View>
-        <Grid columns="2" gap="3" center={false} className="">
-          {chiList}
-        </Grid>
-      </View>
-
-      <View className="gouzai block">
-        <View className="header">
-          <img
-            src={Env.iconUrl + 'gouzai.png'}
-          />
-          购在东沟
-          <More region={'gouzai'} type={3} />
+          热门景点
+          <More region={'youzai'} type={0} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
-          {gouList}
+          {youList}
         </Swiper>
       </View>
 
