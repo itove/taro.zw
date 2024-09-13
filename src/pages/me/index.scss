@@ -24,3 +24,30 @@ page{
     border-bottom: none;
   }
 }
+.block .header{
+  font-size: 18px;
+  .more {
+    color: #000000;
+  }
+}
+.info{
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  .item{
+    text-align: center;
+  }
+}
+.note{
+  margin-top: 8px;
+  text-align: center;
+  color: #c4c4c4;
+  font-size: 14px;
+}
+.block{
+  border-radius: 20px;
+}
+.user{
+  text-align: center;
+  margin-top: 16px;
+}

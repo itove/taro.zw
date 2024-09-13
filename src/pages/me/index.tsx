@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { View } from '@tarojs/components'
+import { View, Button } from '@tarojs/components'
 import { Avatar } from "@nutui/nutui-react-taro"
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
+
+function More({text}) {
+  return (
+    <View
+      className="more" 
+    >
+    全部{text} <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
+    </View>
+  )
+}
 
 function Index() {
   const [logged, setLogged] = useState(false)
@@ -47,14 +57,14 @@ function Index() {
 
   return (
     <View className="">
-      <View className="p-1 align-items-center d-flex">
+      <View className="user">
         <View onClick={() => Taro.navigateTo({url: 'info'})}>
           <Avatar
-            size="50"
+            size="75"
             src={avatarUrl}
           />
         </View>
-        <View className="ms-1">
+        <View className="">
             { logged &&
             <View onClick={() => Taro.navigateTo({url: 'info'})}>{user.name}</View>
             ||
@@ -64,33 +74,100 @@ function Index() {
       </View>
 
       <View className="block">
+        <View className="info">
+          <View className="item">
+            <View className="">2</View>
+            <View className="">收藏</View>
+          </View>
+          <View className="item">
+            <View className="">0</View>
+            <View className="">回答</View>
+          </View>
+          <View className="item">
+            <View className="">13</View>
+            <View className="">优惠券</View>
+          </View>
+          <View className="item">
+            <View className="">2</View>
+            <View className="">游记</View>
+          </View>
+        </View>
+        <Button className="btn">开始你的游记</Button>
+      </View>
+
+      <View className="block">
         <View className="header">
-          我的收藏
+          我的订单
+          <More text={'订单'} />
         </View>
         <View className="info-2">
           <View className="item" onClick={() => goto('youzai')}>
             <img
               src={Env.iconUrl + 'grid_1.png'}
             />
-            <View> 游在东沟 </View>
+            <View> 待付款 </View>
           </View>
           <View className="item" onClick={() => goto('zhuzai')} >
             <img
               src={Env.iconUrl + 'grid_2.png'}
             />
-            <View> 住在东沟 </View>
+            <View> 待出行 </View>
           </View>
           <View className="item" onClick={() => goto('chizai')} >
             <img
               src={Env.iconUrl + 'grid_3.png'}
             />
-            <View> 吃在东沟 </View>
+            <View> 待点评 </View>
           </View>
           <View className="item" onClick={() => goto('gouzai')} >
             <img
               src={Env.iconUrl + 'grid_4.png'}
             />
-            <View> 购在东沟 </View>
+            <View> 历史 </View>
+          </View>
+        </View>
+      </View>
+
+      <View className="block">
+        <View className="header">
+          我的足迹
+          <More text={'足迹'} />
+        </View>
+        <Button className="btn">分享你的足迹照片</Button>
+        <View className="note">
+          用照片记录旅行的小技巧
+        </View>
+      </View>
+
+      <View className="block">
+        <View className="header">
+          更多服务
+          <More text={'服务'} />
+        </View>
+        <View className="info-2">
+          <View className="item" onClick={() => goto('youzai')}>
+            <img
+              src={Env.iconUrl + 'grid_1.png'}
+            />
+            <View> 积分商城 </View>
+          </View>
+          <View className="item" onClick={() => goto('zhuzai')} >
+            <img
+              src={Env.iconUrl + 'grid_2.png'}
+            />
+            <View> 会员卡 </View>
+          </View>
+          <View className="item" onClick={() => goto('chizai')} >
+            <img
+              src={Env.iconUrl + 'grid_3.png'}
+            />
+            <View> 常用信息 </View>
+          </View>
+          <View className="item" onClick={() => goto('gouzai')} >
+            <img
+              src={Env.iconUrl + 'grid_4.png'}
+            />
+            <View> 反馈 </View>
           </View>
         </View>
       </View>

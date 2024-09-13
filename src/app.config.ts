@@ -48,7 +48,7 @@ export default defineAppConfig({
         "selectedIconPath": './icons/discover-fill.png'
       },
       {
-        "pagePath": "pages/user/index",
+        "pagePath": "pages/me/index",
         "text": "我的",
         "iconPath": './icons/user.png',
         "selectedIconPath": './icons/user-fill.png'
