@@ -224,3 +224,14 @@ page{
   width: 200px;
   border-radius: 22px;
 }
+.tags {
+  color: #ffffff;
+  display: flex;
+  .tag{
+    padding: 4px 8px;
+    border: 0.5px solid #D8D8D8;
+    border-radius: 6px;
+    margin-right: 6px;
+    background: #6f8bff;
+  }
+}

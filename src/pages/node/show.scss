@@ -45,16 +45,6 @@ page{
     font-size: 25px;
     margin-bottom: 10px;
   }
-  .tags {
-    color: #808080;
-    display: flex;
-    View{
-      padding: 4px 8px;
-      border: 0.5px solid #D8D8D8;
-      border-radius: 4px;
-      margin-right: 6px;
-    }
-  }
 }
 .card .summary{
   color: #468CF8;
@@ -134,15 +124,15 @@ page{
   --nutui-tabs-titles-item-color: #000000;
   --nutui-tabs-titles-item-active-color: #ffffff;
   --nutui-tabs-tab-line-width: 80px;
-  --nutui-tabs-tab-line-color: #0FB99F;
+  --nutui-tabs-tab-line-color: #3e64ff;
   --nutui-tabs-line-bottom: 0;
   .nut-tabs-titles-item-text {
     color: #808080;
-    font-size: 15px;
+    font-size: 18px;
   }
   .nut-tabs-titles-item-active .nut-tabs-titles-item-text {
-    color: rgba(0, 0, 0, 0.8);
-    font-size: 20px;
+    color: #3e64ff;
+    font-size: 18px;
   }
   .list:last-child{
     border-bottom: none;

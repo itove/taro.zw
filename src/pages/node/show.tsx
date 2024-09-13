@@ -72,11 +72,13 @@ function Index() {
         setBody(n.body.replace(/&nbsp;/g, '<br/>'))
       }
 
+      n.tags = ['免费入园', '度假区', '3A景区']
+
       Taro.setNavigationBarTitle({
         title: n.title
       })
 
-      setTags(n.tags.map((i, index) => <View key={index}>{i}</View> ))
+      setTags(n.tags.map((i, index) => <View className="tag" key={index}>{i}</View> ))
 
       setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
 
@@ -213,141 +215,32 @@ function Index() {
 
         <View className="header">
           <View className="">
-            <View className="title article-title">{node.title}</View>
             { (type == 0 || type == 1) &&
             <View className="tags">{tags}</View>
             }
-          </View>
-          { type == 0 &&
-          <View className="right" onClick={() => playAudio()}>
-            <View className="icon">
-              <img src={playIcon} />
-              </View>
-            <View className="">{progress}</View>
-          </View>
-          }
-          { type == 1 &&
-          <View className="right" onClick={() => makeCall(node.phone)}>
-            <View className="icon">
-              <img
-                src={Env.iconUrl + 'call.png'}
-              />
-              </View>
-            <View className="">电话</View>
-          </View>
-          }
-        </View>
-
-        { (type == 0 || type == 1) &&
-        <View className="summary">{node.summary}</View>
-        }
-
-        { type == 4 &&
-          <View className="info-1">
-            <View className="item" onClick={openLocation}>
-              <img
-                src={Env.iconUrl + 'location-1.png'}
-              />
-              <View> {node.address}</View>
-            </View>
-            <View className="item" onClick={makeCall}>
-              <img
-                src={Env.iconUrl + 'call-1.png'}
-              />
-              <View> {node.phone}</View>
-            </View>
-          </View>
-        }
-
-        <View className="divider"></View>
-
-        { type == 4 &&
-          <View className="info-2">
-            <View className="item">
-              <img
-                src={Env.iconUrl + 'bookmark.png' }
-              />
-              <View> 东沟简介 </View>
-            </View>
-            <View className="item" onClick={() => Taro.navigateTo({url: '/pages/node/index?region=honor'})}>
-              <img
-                src={Env.iconUrl + 'honor.png' }
-              />
-              <View> 东沟荣誉 </View>
-            </View>
-            <View className="item" onClick={() => Taro.navigateTo({url: '/pages/node/show?id=10'})}>
-              <img
-                src={Env.iconUrl + 'map.png' }
-              />
-              <View> 地理交通 </View>
-            </View>
-            <View className="item" onClick={() => Taro.switchTab({url: '/pages/feedback/index'})}>
-              <img
-                src={Env.iconUrl + 'letter.png' }
-              />
-              <View> 投诉建议 </View>
-            </View>
-          </View>
-        }
-
-        { type == 3 &&
-        <View className="contact">
-          <View className="img">
-            <Image mode="aspectFill" className="w-100" src={Env.imageUrl + node.image} />
-          </View>
-          <View className="">
-            <View className="name">
-              {node.title}
-            </View>
-            <View className="phone">
-              <img src={Env.iconUrl + 'call.png'} />
-              电话：{node.phone}
-            </View>
+            <View className="title article-title mt-1">{node.title}</View>
           </View>
         </View>
-        }
-
-        { (type != 2 && type != 4 && type != 5) &&
-        <View className="address">
-          <View className="text">{node.address}</View>
-          <View className="right" onClick={openLocation}>
-            <View className="icon">
-              <img
-                src={Env.iconUrl + 'location.png'}
-              />
-            </View>
-            <View className="">地图导航</View>
-          </View>
-        </View>
-        }
       </View>
 
-      { (type == 0 || type == 3) &&
-      <View className="p-1 card-1">
-        <View className="no-overflow title acive"> { type == 0 && '景点介绍' || '商品详情' }</View>
-      </View>
-      }
-
-      { type != 1 &&
-      <View dangerouslySetInnerHTML={{__html: body}} className='body p-1'></View>
-      }
-
-      { type == 1 &&
+      { type == 0 &&
       <Tabs
         value={tab1value}
         autoHeight={true}
         onChange={(value) => {
           setTab1value(value)
         }}
-        align="left"
         className="rooms"
       >
-        <Tabs.TabPane title="房间预定">
+        <Tabs.TabPane title="景区简介">
           <View>
-            {rooms}
+            <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
           </View>
         </Tabs.TabPane>
-        <Tabs.TabPane title="酒店详情">
+        <Tabs.TabPane title="游客点评">
+          <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
+        </Tabs.TabPane>
+        <Tabs.TabPane title="门票预定">
           <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
         </Tabs.TabPane>
       </Tabs>
