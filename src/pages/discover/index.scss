@@ -1,27 +1,7 @@
-.nutui-react-demo {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.index {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  margin-bottom: 30px;
-}
-
-.title {
-  display: block;
-  margin: 20px 0;
-  font-weight: 600;
-}
-
-.btn {
-  display: block;
-  width: 200px;
-  margin-bottom: 20px;
+.grid-list{
+  height: 300px;
+  margin-bottom: 6px;
+  .nut-grid-item-text{
+    padding-bottom: 14px;
+  }
 }
