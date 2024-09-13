@@ -130,7 +130,7 @@ function Index() {
         <View className="header">
           去哪玩
         </View>
-        <Swiper defaultValue={0} loop className="slide" height="90">
+        <Swiper defaultValue={0} loop className="slide slide1" height="90">
           {youList1}
         </Swiper>
       </View>
