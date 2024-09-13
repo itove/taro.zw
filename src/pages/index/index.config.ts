@@ -1,3 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: '乐游东沟'
+  navigationBarTitleText: '首页',
+  navigationStyle: 'custom'
 })

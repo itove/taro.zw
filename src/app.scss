@@ -56,7 +56,7 @@ page{
   .header{
     position: relative;
     font-size: 22px;
-    font-weight: bold;
+    // font-weight: bold;
     display: flex;
     align-items: center;
     margin-bottom: 16px;
@@ -68,7 +68,7 @@ page{
     .more{
       position: absolute;
       right: 0;
-      color: #979797;
+      color: #646bd9;
       font-size: 14px;
     }
   }

@@ -1,8 +1,8 @@
 {
-  "name": "taro.donggou",
+  "name": "taro.zw",
   "version": "1.0.0",
   "private": true,
-  "description": "donggou",
+  "description": "zw",
   "templateInfo": {
     "name": "react-NutUI",
     "typescript": true,

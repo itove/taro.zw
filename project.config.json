@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "taro.donggou",
-  "description": "donggou",
+  "projectname": "taro.zw",
+  "description": "zw",
   "appid": "touristappid",
   "setting": {
     "urlCheck": false,

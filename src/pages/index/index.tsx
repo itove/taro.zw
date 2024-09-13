@@ -3,8 +3,7 @@ import { View, Image } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
-
+import { Grid, NoticeBar, Swiper, Tabs, SearchBar } from '@nutui/nutui-react-taro'
 
 function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
@@ -40,7 +39,7 @@ function More({region, type}) {
       className="more" 
       onClick={() => Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})}
     >
-    更多 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
+    全部 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
     </View>
   )
 }
@@ -49,7 +48,7 @@ function TabPane({node, type, index}) {
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
     <View className="img">
-    <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="widthFix" />
+    <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
     </View>
     <View className="text">
     {node.title}
@@ -73,6 +72,27 @@ function SwiperItem({node, index}) {
   )
 }
 
+function SwiperItem1({node, index, type}) {
+  return (
+    <Swiper.Item className="slide-item">
+    <Image
+    className="w-100 img"
+    mode="aspectFill"
+    onClick={() => gotoNode(node.id, type)}
+    src={Env.imageUrl + node.image}
+    alt=""
+    />
+    <View className="text">
+    <p className="title">{node.title}</p>
+    <View className="tags">
+      <View className="tag">免费入园</View>
+      <View className="tag">免费入园</View>
+    </View>
+    </View>
+    </Swiper.Item>
+  )
+}
+
 function GridItem({node, index}) {
   return (
     <Grid.Item text={node.t} key={index} onClick={() => gridGoto(node) }>
@@ -86,6 +106,7 @@ function Index() {
   const [tongzhi, setTongzhi] = useState([])
   const [gridList, setGridList] = useState([])
   const [youList, setYouList] = useState([])
+  const [jingList, setJingList] = useState([])
   const [zhuList, setZhuList] = useState([])
   const [chiList, setChiList] = useState([])
   const [gouList, setGouList] = useState([])
@@ -99,14 +120,14 @@ function Index() {
   const onShareTimeline = (res) => {}
 
   const gridItems = [
-    { t: '游在东沟', p: Env.iconUrl + 'grid_1.png', target: '.youzai', url: 'leyou/index', isTab: true, },
-    { t: '住在东沟', p: Env.iconUrl + 'grid_2.png', target: '.zhuzai', url: 'leyou/index', isTab: true, },
-    { t: '吃在东沟', p: Env.iconUrl + 'grid_3.png', target: '.chizai', url: 'leyou/index', isTab: true, },
-    { t: '购在东沟', p: Env.iconUrl + 'grid_4.png', target: '.gouzai', url: 'leyou/index', isTab: true, },
-    { t: '东沟简介', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/show?id=39&type=4', isTab: false, },
-    { t: '党建文明', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=5&region=dangjian', isTab: false, },
-    { t: '文旅要闻', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?type=5&region=wenlv', isTab: false, },
-    { t: '旅行游记', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?type=5&region=youji', isTab: false, },
+    { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '.youzai', url: 'leyou/index', isTab: true, },
+    { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '.zhuzai', url: 'leyou/index', isTab: true, },
+    { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '.chizai', url: 'leyou/index', isTab: true, },
+    { t: '服务', p: Env.iconUrl + 'grid_4.png', target: '.gouzai', url: 'leyou/index', isTab: true, },
+    { t: '采摘', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/show?id=39&type=4', isTab: false, },
+    { t: '特产', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=5&region=dangjian', isTab: false, },
+    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?type=5&region=wenlv', isTab: false, },
+    { t: '商超', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?type=5&region=youji', isTab: false, },
   ]
 
   useEffect(() => {
@@ -120,6 +141,7 @@ function Index() {
       setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
       setTongzhi(data.tongzhi.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
       setYouList(data.youzai.map((node, index) => <TabPane node={node} type={0} index={index} />))
+      setJingList(data.youzai.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
       setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} type={1} index={index} />))
       setChiList(data.chizai.map((node, index) => <TabPane node={node} type={2} index={index} />))
       setGouList(data.gouzai.map((node, index) => <TabPane node={node} type={3} index={index} />))
@@ -135,78 +157,29 @@ function Index() {
   }, [])
 
   return (
-    <View className="p-1 home">
-      <View className="hell">
+    <View className="home">
+      <View className="hero" style="background-image: url(https://192.168.122.1:8000/images/1.png)">
+         <SearchBar className="search" shape="round" maxLength={5} placeholder="搜索景点、美食和购物" />
       </View>
-      <Swiper defaultValue={0} autoPlay indicator className="rounded" height="160">
-        {sliderList}
-      </Swiper>
+
       <Grid columns="4" className="grid">
         {gridList}
       </Grid>
 
-      <NoticeBar
-      leftIcon={<img alt="notice" width="16px" height="16px" src={Env.iconUrl + 'speaker.png'} />}
-      rightIcon={<More region={'tongzhi'} type={5} />}
-      className="rounded-5 overflow-hidden"
-      direction="vertical"
-      list={tongzhi}
-      speed={5}
-      duration={1000}
-      height={30}
-      // closeable
-      />
-
       <View className="daolan block">
         <View className="header">
-          智慧导览
-          <img
-            src={Env.iconUrl + 'hill-river-1.png'}
-          />
+          热门景点
+          <More region={'youzai'} type={0} />
         </View>
-        <Image className="w-100 rounded" src={Env.imageUrl + 'daolan.png'} mode="widthFix" onClick={() => Taro.switchTab({url: '/pages/nav/index'})} />
-      </View>
-
-      <View className="zoujin block">
-        <View className="header">
-          走进东沟
-          <img
-            src={Env.iconUrl + 'hill-river-1.png'}
-          />
-        </View>
-        <View className="wrapper">
-          <View className="" onClick={() => gotoNode(jianjie.id, 4)}>
-            <Image className="w-100 rounded" src={Env.imageUrl + jianjie.image} mode="aspectFill" />
-            <View class="text">
-              东沟简介
-              <p>点击查看></p>
-            </View>
-          </View>
-          <View className="col2">
-            <View className="" onClick={() => gotoNodeIndex('hongse', 5)}>
-              <Image className="w-100 rounded" src={Env.imageUrl + hongsetext.image} mode="aspectFill" />
-              <View class="text">
-                东沟文化
-                <p>爱国主义教育基地</p>
-              </View>
-            </View>
-            <View className="" onClick={() => gotoNodeIndex('history', 5)}>
-              <Image className="w-100 rounded" src={Env.imageUrl + historytext.image} mode="aspectFill" />
-              <View class="text">
-                东沟历史
-                <p>瞻仰革命圣迹</p>
-              </View>
-            </View>
-          </View>
-        </View>
+        <Swiper defaultValue={0} loop className="slide" height="230">
+          {jingList}
+        </Swiper>
       </View>
 
       <View className="leyou block">
         <View className="header">
-          乐游东沟
-          <img
-            src={Env.iconUrl + 'hill-river-1.png'}
-          />
+          玩法推荐
+          <More region={'youzai'} type={0} />
         </View>
 
         <Tabs
@@ -218,10 +191,7 @@ function Index() {
           activeType="button"
           className="tabs"
           >
-          <Tabs.TabPane className="tabpane" title="游在东沟"> {youList} </Tabs.TabPane>
-          <Tabs.TabPane className="tabpane" title="住在东沟"> {zhuList} </Tabs.TabPane>
-          <Tabs.TabPane className="tabpane" title="吃在东沟"> {chiList} </Tabs.TabPane>
-          <Tabs.TabPane className="tabpane" title="购在东沟"> {gouList} </Tabs.TabPane>
+          <Tabs.TabPane className="tabpane" title=""> {youList} </Tabs.TabPane>
         </Tabs>
       </View>
 

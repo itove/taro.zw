@@ -1,4 +1,15 @@
 page{
+  .hero{
+    height: 130px;
+    // background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 130px 16px 16px;
+  }
+  .search{
+    // margin-top: 200px;
+    border-radius: 10px;
+  }
   padding-bottom: 10px;
   .home{
     position: relative;
@@ -90,5 +101,48 @@ page{
     .tabpane{
       // height: 635px;
     }
+  }
+}
+.slide{
+  // height: 500px;
+  swiper-item{
+    width: 44% !important;
+    padding-right: 5px;
+    .img{
+      border-radius: 12px 12px 0 0;
+      height: 120px;
+    }
+    .text{
+      box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 6%);
+      background: #ffffff;
+      font-size: 17px;
+      padding: 14px;
+      border-radius: 0 0 12px 12px;
+      .title{
+        margin-bottom: 5px;
+      }
+      .summary{
+        font-size: 12px;
+        color: #808080;
+      }
+    }
+  }
+}
+.list-item{
+  .img{
+    height: 80px;
+  }
+}
+.tags{
+  // padding: 14px;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 10px;
+  color: #ffffff;
+  .tag{
+    background: #8fadff;
+    border-radius: 3px;
+    margin-right: 4px;
+    padding: 3px;
   }
 }

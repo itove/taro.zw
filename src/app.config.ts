@@ -1,6 +1,9 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
+    'pages/loc/index',
+    'pages/discover/index',
+    'pages/user/index',
     'pages/nav/index',
     'pages/me/info',
     'pages/node/index',
@@ -21,32 +24,32 @@ export default defineAppConfig({
   },
   tabBar: {
     // custom: true,
-    color: '#808080',
-    selectedColor: '#0FB99F',
+    color: '#c9cad6',
+    selectedColor: '#2b7afb',
     backgroundColor: '#FFFFFF',
     borderStyle: 'white',
     list: [
       {
         "pagePath": "pages/index/index",
-        "text": "走进东沟",
-        "iconPath": './icons/hill.png',
-        "selectedIconPath": './icons/hill-fill.png',
+        "text": "首页",
+        "iconPath": './icons/home.png',
+        "selectedIconPath": './icons/home-fill.png',
       },
       {
         "pagePath": "pages/leyou/index",
-        "text": "乐游东沟",
-        "iconPath": './icons/hill-river.png',
-        "selectedIconPath": './icons/hill-river-fill.png'
+        "text": "定位",
+        "iconPath": './icons/loc.png',
+        "selectedIconPath": './icons/loc-fill.png'
       },
       {
-        "pagePath": "pages/nav/index",
-        "text": "智慧导览",
-        "iconPath": './icons/pavilion.png',
-        "selectedIconPath": './icons/pavilion-fill.png'
+        "pagePath": "pages/discover/index",
+        "text": "发现",
+        "iconPath": './icons/discover.png',
+        "selectedIconPath": './icons/discover-fill.png'
       },
       {
-        "pagePath": "pages/feedback/index",
-        "text": "联系我们",
+        "pagePath": "pages/user/index",
+        "text": "我的",
         "iconPath": './icons/user.png',
         "selectedIconPath": './icons/user-fill.png'
       },
