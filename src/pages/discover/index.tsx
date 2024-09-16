@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { View, Image } from '@tarojs/components'
-import { Grid } from '@nutui/nutui-react-taro'
+import { Grid, Avatar } from '@nutui/nutui-react-taro'
 import './index.scss'
 // import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
 
@@ -40,6 +40,7 @@ function Index() {
   const title = instance.router.params.title
   const uid = instance.router.params.uid
   const type = instance.router.params.type ? instance.router.params.type : 2
+  const [avatarUrl, setAvatarUrl] = useState('')
 
   const [list, setList] = useState([])
 
@@ -67,8 +68,24 @@ function Index() {
 
           type == 2
           &&
-    <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
+    <Grid.Item key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
     <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
+    <View className="text">
+      <View>{node.title}</View>
+      <View className="more">
+        <View className="user">
+          <Avatar
+            size="32"
+            src={avatarUrl}
+            className="me-5"
+          />
+          <View>林丹丹</View>
+        </View>
+        <View className="like">
+        <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'suit-heart-gray.svg'} />
+        3.1K</View>
+      </View>
+    </View>
     </Grid.Item>
           ||
           <ListItem node={node} type={type}/>
