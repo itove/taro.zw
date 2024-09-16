@@ -41,6 +41,13 @@ page{
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  .reviews{
+    display: flex;
+    .counts{
+      display: inline;
+      color: #979797;
+    }
+  }
   .title{
     font-size: 25px;
     margin-bottom: 10px;

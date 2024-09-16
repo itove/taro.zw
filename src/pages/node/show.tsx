@@ -219,6 +219,17 @@ function Index() {
             <View className="tags">{tags}</View>
             }
             <View className="title article-title mt-1">{node.title}</View>
+
+          <View className="reviews">
+            <View className="stars">
+              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+            </View>
+            <View className="">4.5/5 <span className="counts">(2399 条评价)</span> </View>
+            </View>
           </View>
         </View>
       </View>
