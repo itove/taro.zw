@@ -1,6 +1,9 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
+    'pages/wenti/index',
+    'pages/jingdian/index',
+    'pages/meishi/index',
     'pages/loc/index',
     'pages/discover/index',
     'pages/user/index',
