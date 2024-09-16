@@ -108,6 +108,8 @@ page{
     overflow: hidden;
     text-overflow: ellipsis;
     .info{
+      display: flex;
+      justify-content: space-between;
       font-size: 12px;
       padding: 0;
     }
