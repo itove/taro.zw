@@ -101,7 +101,8 @@ function SwiperItem1({node, index, type}) {
     <p className="title">{node.title}</p>
     <View className="tags">
       <View className="tag">免费入园</View>
-      <View className="tag">免费入园</View>
+      <View className="tag">度假区</View>
+      <View className="tag">3A景区</View>
     </View>
     </View>
     </Swiper.Item>
