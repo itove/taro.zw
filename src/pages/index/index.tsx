@@ -128,13 +128,13 @@ function Index() {
   const onShareTimeline = (res) => {}
 
   const gridItems = [
-    { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'jingdian/index', isTab: false, },
     { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
     { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
     { t: '服务', p: Env.iconUrl + 'grid_4.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
     { t: '采摘', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
     { t: '特产', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
+    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'wenti/index', isTab: false, },
     { t: '商超', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
   ]
 
