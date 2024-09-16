@@ -75,6 +75,11 @@ function SwiperItem({node, index}) {
 function SwiperItem1({node, index, type}) {
   return (
     <Swiper.Item className="slide-item">
+    <View className="widget">
+      <View className="badge">4.5 <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill.svg'} /></View>
+      <img width="22px" height="22px" src={Env.iconUrl + 'suit-heart.svg'} />
+    </View>
+
     <Image
     className="w-100 img"
     mode="aspectFill"
@@ -83,6 +88,9 @@ function SwiperItem1({node, index, type}) {
     alt=""
     />
     <View className="text">
+    <View className="plus">
+      <img width="36px" height="36px" src={Env.iconUrl + 'plus-circle-fill.svg'} />
+    </View>
     <p className="title">{node.title}</p>
     <View className="tags">
       <View className="tag">免费入园</View>
@@ -95,7 +103,7 @@ function SwiperItem1({node, index, type}) {
 
 function GridItem({node, index}) {
   return (
-    <Grid.Item text={node.t} key={index} onClick={() => gridGoto(node) }>
+    <Grid.Item className="background-none" text={node.t} key={index} onClick={() => gridGoto(node) }>
     <Image className="img" src={node.p} mode="widthFix" />
     </Grid.Item>
   )
@@ -159,6 +167,10 @@ function Index() {
   return (
     <View className="home">
       <View className="hero" style="background-image: url(https://zw.dev.itove.com/images/1.png)">
+        <View className="text">
+          <View className="title">灵秀张湾</View>
+          <View className="desc">十堰市・张湾区</View>
+        </View>
          <SearchBar className="search" shape="round" maxLength={5} placeholder="搜索景点、美食和购物" />
       </View>
 
@@ -171,7 +183,7 @@ function Index() {
           热门景点
           <More region={'youzai'} type={0} />
         </View>
-        <Swiper defaultValue={0} loop className="slide" height="230">
+        <Swiper defaultValue={0} loop className="slide" height="260">
           {jingList}
         </Swiper>
       </View>

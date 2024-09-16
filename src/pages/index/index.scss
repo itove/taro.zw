@@ -1,10 +1,23 @@
 page{
   .hero{
-    height: 130px;
+    height: 105px;
     // background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     padding: 130px 16px 16px;
+    .text{
+      position: absolute;
+      top: 38px;
+      .title{
+        color: #ffffff;
+        font-size: 42px;
+        font-weight: bold;
+      }
+      .desc{
+        color: #6979f8;
+        font-size: 16px;
+      }
+    }
   }
   .search{
     // margin-top: 200px;
@@ -14,11 +27,29 @@ page{
   .home{
     position: relative;
     overflow: hidden;
+    .nut-grid-border{
+      border: none;
+    }
     .grid{
+      position: relative;
+      top: -50px;
+      margin-bottom: -50px;
       --nutui-grid-item-text-font-size: 14px;
+      .nut-grid-item-content{
+        padding: 8px;
+      }
+      .nut-grid-item-content-center{
+        background: none;
+      }
+      .nut-grid-item-content-border{
+        border: none;
+      }
       .img{
         width: 37px;
         height: 37px;
+        padding: 16px 16px 10px;
+        background: #ffffff;
+        border-radius: 15px;
       }
     }
   }
@@ -106,11 +137,11 @@ page{
 .slide{
   // height: 500px;
   swiper-item{
-    width: 44% !important;
+    width: 80% !important;
     padding-right: 5px;
     .img{
       border-radius: 12px 12px 0 0;
-      height: 120px;
+      height: 150px;
     }
     .text{
       box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 6%);
@@ -144,5 +175,23 @@ page{
     border-radius: 3px;
     margin-right: 4px;
     padding: 3px;
+  }
+}
+.widget{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+.slide{
+  .text{
+    position: relative;
+  }
+  .plus{
+    position: absolute;
+    top: -20px;
+    right: 16px;
   }
 }
