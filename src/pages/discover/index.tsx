@@ -40,7 +40,7 @@ function Index() {
   const title = instance.router.params.title
   const uid = instance.router.params.uid
   const type = instance.router.params.type ? instance.router.params.type : 2
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState(Env.imageUrl + 'avatar.png')
 
   const [list, setList] = useState([])
 

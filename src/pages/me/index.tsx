@@ -19,7 +19,7 @@ function Index() {
   const [logged, setLogged] = useState(false)
   const [user, setUser] = useState({})
   const [uid, setUid] = useState(0)
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState(Env.imageUrl + 'avatar.png')
 
   useEffect(() => {
     Taro.getStorage({
@@ -56,7 +56,7 @@ function Index() {
   }
 
   return (
-    <View className="">
+    <View className="me">
       <View className="user">
         <View onClick={() => Taro.navigateTo({url: 'info'})}>
           <Avatar

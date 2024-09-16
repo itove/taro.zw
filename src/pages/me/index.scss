@@ -1,53 +1,53 @@
-.info-2{
-  display: flex;
-  justify-content: space-between;
-  padding: 8px;
-  .item{
-    text-align: center;
-    color: #3D3D3D;
-    font-size: 12px;
-    img{
-      width: 34px;
-      height: 34px;
-    }
-  }
-}
-.info{
-  .icon{
-    width: 16px;
-    height: 16px;
-  }
-}
-page{
+page .me{
   --nutui-actionsheet-item-border-bottom: none;
   .nut-actionsheet .nut-popup-title{
     border-bottom: none;
   }
-}
-.block .header{
-  font-size: 18px;
-  .more {
-    color: #000000;
+  .block .header{
+    font-size: 18px;
+    .more {
+      color: #000000;
+    }
   }
-}
-.info{
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  .item{
+  .info{
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    .item{
+      text-align: center;
+    }
+  }
+  .note{
+    margin-top: 8px;
     text-align: center;
+    color: #c4c4c4;
+    font-size: 14px;
   }
-}
-.note{
-  margin-top: 8px;
-  text-align: center;
-  color: #c4c4c4;
-  font-size: 14px;
-}
-.block{
-  border-radius: 20px;
-}
-.user{
-  text-align: center;
-  margin-top: 16px;
+  .block{
+    border-radius: 20px;
+  }
+  .user{
+    text-align: center;
+    margin-top: 16px;
+  }
+  .info-2{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    .item{
+      text-align: center;
+      color: #3D3D3D;
+      font-size: 12px;
+      img{
+        width: 34px;
+        height: 34px;
+      }
+    }
+  }
+  .info{
+    .icon{
+      width: 16px;
+      height: 16px;
+    }
+  }
 }
