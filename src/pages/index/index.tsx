@@ -51,8 +51,15 @@ function TabPane({node, type, index}) {
     <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
     </View>
     <View className="text">
-    {node.title}
-    <p className="ellipsis-2">{node.summary}</p>
+      <View>
+      {node.title}
+      <p className="ellipsis-2">{node.summary}</p>
+      </View>
+
+      <View className="info">
+        <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
+        <p className="">3.1km</p>
+      </View>
     </View>
     </View>
   )

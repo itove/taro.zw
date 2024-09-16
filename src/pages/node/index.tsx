@@ -91,6 +91,21 @@ function Index() {
   return (
     <View className="node-index p-1">
 
+    <View className="sort">
+      <View>
+        排序
+        <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
+      </View>
+      <View>
+        类别
+        <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
+      </View>
+      <View>
+        地区
+        <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
+      </View>
+    </View>
+
     {type == 2 &&
       <Grid columns="2" gap="3" center={false} className="grid">
         {list}
