@@ -2,6 +2,9 @@ page{
   .nut-tabs-titles{
     display: none;
   }
+  .block{
+    padding: 0;
+  }
   .hero{
     height: 105px;
     // background-position: center;
@@ -89,7 +92,6 @@ page{
         position: absolute;
         top: 16px;
         left: 16px;
-        color: #ffffff;
         font-size: 16px;
         p{
           font-size: 12px;
@@ -148,7 +150,6 @@ swiper-item, .card{
   }
   .text{
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 6%);
-    background: #ffffff;
     font-size: 17px;
     padding: 14px;
     border-radius: 0 0 12px 12px;
@@ -210,6 +211,35 @@ swiper-item, .card{
   .text{
     position: absolute;
     bottom: 0;
-    background: none;
+    display: flex;
+    color: #ffffff;
+    justify-content: space-between;
+    width: 90%;
+  }
+}
+.list{
+  .left{
+    font-size: 12px;
+    padding: 16px 0 32px 0;
+    width: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .right{
+    width: 90%;
+  }
+}
+.zhusu{
+  .tags{
+    padding: 10px 48px;
+    .tag{
+      padding: 6px 12px;
+      color: #3e7cf3;
+      background: #f0f6ff;
+      border-radius: 15px;
+      border: 0;
+      font-size: 16px;
+    }
   }
 }

@@ -46,18 +46,37 @@ function More({region, type}) {
 
 function ListItem({node, type, index}) {
   return (
-    <View className="card">
-      <Image
-      className="w-100 img"
-      mode="aspectFill"
-      onClick={() => gotoNode(node.id, type)}
-      src={Env.imageUrl + node.image}
-      alt=""
-      />
-    <View className="text">
-      <View className="title">{node.title}</View>
-      <View className="price">¥ 898/晚</View>
-    </View>
+    <View className="d-flex">
+      <View className="left align-center">
+        <View className="">
+          <View>
+          <img className="" width="20px" height="20px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+          </View>
+          <View> 4.6 </View>
+        </View>
+        <View className="">
+          <View>
+          <img className="" width="20px" height="20px" src={Env.iconUrl + 'chat-dots-fill.svg'} />
+          </View>
+          <View> 126 </View>
+        </View>
+        <View>
+          <img className="" width="20px" height="20px" src={Env.iconUrl + 'suit-heart-gray.svg'} />
+        </View>
+      </View>
+      <View className="card right">
+        <Image
+        className="w-100 img"
+        mode="aspectFill"
+        onClick={() => gotoNode(node.id, type)}
+        src={Env.imageUrl + node.image}
+        alt=""
+        />
+      <View className="text">
+        <View className="title">{node.title}</View>
+        <View className="price">¥ 898/晚</View>
+      </View>
+      </View>
     </View>
   )
 }
@@ -166,7 +185,11 @@ function Index() {
   }, [])
 
   return (
-    <View className="home">
+    <View className="zhusu">
+      <View className="d-flex tags">
+        <View className="tag">住 28 - 离 30</View>
+        <View className="tag">2 位客人</View>
+      </View>
       <View className="leyou block">
         <View className="list">
           {youList} 
