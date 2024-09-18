@@ -5,6 +5,7 @@ export default defineAppConfig({
     'pages/jingdian/index',
     'pages/meishi/index',
     'pages/zhusu/index',
+    'pages/caizhai/index',
     'pages/loc/index',
     'pages/discover/index',
     'pages/user/index',
