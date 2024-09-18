@@ -150,34 +150,15 @@ function Index() {
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
 
-  const gridItems = [
-    { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '服务', p: Env.iconUrl + 'grid_4.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '采摘', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '特产', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '商超', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-  ]
-
   useEffect(() => {
     Taro.request({
-      url: Env.apiUrl + 'wx/home'
+      url: Env.apiUrl + 'nodes/zhuzai'
     })
     .then(res => {
       const data = res.data
       console.log(res)
 
-      setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
-      setTongzhi(data.tongzhi.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
-      setYouList(data.youzai.map((node, index) => <ListItem node={node} type={0} index={index} />))
-      setJingList(data.youzai.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
-      setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
-      // setDili(data.dili[0])
-      setJianjie(data.jianjie[0])
-      setHongsetext(data.hongsetext[0])
-      setHistorytext(data.historytext[0])
+      setYouList(data.nodes.map((node, index) => <ListItem node={node} type={0} index={index} />))
     })
     .catch(err => {
       console.log(err)
