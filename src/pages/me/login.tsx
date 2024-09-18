@@ -55,7 +55,7 @@ function Index() {
     <View className="nutui-react-demo">
       <View className="pt-12">
           <View className="text-center mb-1">请点击登录</View>
-          <Button type="success" className="btn-primary m-auto" disabled={disabled} onClick={() => setIsVisible(!isVisible)}>
+          <Button type="success" className="btn m-auto" disabled={disabled} onClick={() => setIsVisible(!isVisible)}>
             微信登录
           </Button>
           <ActionSheet
@@ -65,7 +65,7 @@ function Index() {
             onSelect={() => setIsVisible(false)}
             onCancel={() => setIsVisible(false)}
           >
-          <Button type="success" className="btn-primary m-auto w-50" disabled={disabled} onClick={wxlogin}>
+          <Button type="success" className="btn m-auto w-50" disabled={disabled} onClick={wxlogin}>
             登 录
           </Button>
         </ActionSheet>
