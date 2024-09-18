@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/meishi/index',
     'pages/zhusu/index',
     'pages/caizhai/index',
+    'pages/service/index',
     'pages/loc/index',
     'pages/discover/index',
     'pages/user/index',
