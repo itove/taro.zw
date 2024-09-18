@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '乐游东沟'
+  navigationBarTitleText: '景点'
 })
