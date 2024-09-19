@@ -7,6 +7,8 @@ export default defineAppConfig({
     'pages/zhusu/index',
     'pages/caizhai/index',
     'pages/service/index',
+    'pages/techan/index',
+    'pages/shangchao/index',
     'pages/loc/index',
     'pages/discover/index',
     'pages/user/index',
