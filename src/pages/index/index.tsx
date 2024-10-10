@@ -139,11 +139,11 @@ function Index() {
     { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'jingdian/index', isTab: false, },
     { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '', url: 'zhusu/index', isTab: false, },
     { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=0&region=chizai', isTab: false, },
-    { t: '服务', p: Env.iconUrl + 'grid_4.png', target: '', url: 'service/index', isTab: false, },
-    { t: '采摘', p: Env.iconUrl + 'grid_5.png', target: '', url: 'caizhai/index', isTab: false, },
-    { t: '特产', p: Env.iconUrl + 'grid_6.png', target: '', url: 'techan/index', isTab: false, },
-    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'wenti/index', isTab: false, },
-    { t: '商超', p: Env.iconUrl + 'grid_8.png', target: '', url: 'shangchao/index', isTab: false, },
+    { t: '活动', p: Env.iconUrl + 'grid_4.png', target: '', url: 'service/index', isTab: false, },
+    { t: '文创', p: Env.iconUrl + 'grid_5.png', target: '', url: 'caizhai/index', isTab: false, },
+    { t: '艺动', p: Env.iconUrl + 'grid_6.png', target: '', url: 'techan/index', isTab: false, },
+    { t: '购物', p: Env.iconUrl + 'grid_7.png', target: '', url: 'wenti/index', isTab: false, },
+    { t: '玩法', p: Env.iconUrl + 'grid_8.png', target: '', url: 'shangchao/index', isTab: false, },
   ]
 
   useEffect(() => {
@@ -176,17 +176,18 @@ function Index() {
     <View className="home">
       <View className="hero" style="background-image: url(https://zw.dev.itove.com/images/1.png)">
         <View className="text">
-          <View className="title">灵秀张湾</View>
-          <View className="desc">十堰市・张湾区</View>
+          <View className="desc"><img src={Env.iconUrl + 'dingwei.png'} />张湾区</View>
+          <View className="title">遇见张湾</View>
+          <View className="placeholder"></View>
         </View>
-         <SearchBar className="search" shape="round" maxLength={5} placeholder="搜索景点、美食和购物" />
+         <SearchBar className="search" shape="round" maxLength={5} placeholder="请输入关键字搜索景点，美食，购物…" />
       </View>
 
       <Grid columns="4" className="grid">
         {gridList}
       </Grid>
 
-      <View className="daolan block">
+      <View className="jingdian block" style={{backgroundImage: `url(${Env.imageUrl + 'jingdian_bg.png'})`}}>
         <View className="header">
           热门景点
           <More region={'youzai'} type={0} />
