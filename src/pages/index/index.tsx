@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { Grid, NoticeBar, Swiper, Tabs, SearchBar } from '@nutui/nutui-react-taro'
+import { Grid, NoticeBar, Tabs, SearchBar } from '@nutui/nutui-react-taro'
 
 function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
@@ -39,35 +39,45 @@ function More({region, type}) {
       className="more" 
       onClick={() => Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})}
     >
-    全部 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
+    更多 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
     </View>
   )
 }
 
-function TabPane({node, type, index}) {
+function List({node, type, index}) {
+  const style = {
+    fontSize: "22px",
+    "&:before": {
+      color: "#ffffff",
+      backgroundImage: `url(${Env.imageUrl + node.image})`
+    }
+  }
   return (
-    <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
+    <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}
+     // style={{"::before": {backgroundImage: `url(${Env.imageUrl + node.image})`}}}
+     style={{background: `linear-gradient(90deg, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.8)), url(${Env.imageUrl + node.image}) no-repeat center / cover`}}
+     // style={style}
+    >
     <View className="img">
     <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
     </View>
     <View className="text">
       <View>
+      <View className="badge title-badge">一日游</View>
       {node.title}
-      <p className="ellipsis-2">{node.summary}</p>
       </View>
-
       <View className="info">
-        <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
-        <p className="">3.1km</p>
+        <View className="badge">3A景区</View>
+        <View className="badge">门票 ¥54</View>
       </View>
     </View>
     </View>
   )
 }
 
-function SwiperItem({node, index}) {
+function SwiperItem2({node, index}) {
   return (
-    <Swiper.Item key={index} className="rounded">
+    <SwiperItem key={index} className="rounded">
     <Image
     className="w-100 rounded"
     mode="widthFix"
@@ -75,16 +85,15 @@ function SwiperItem({node, index}) {
     src={Env.imageUrl + node.image}
     alt=""
     />
-    </Swiper.Item>
+    </SwiperItem>
   )
 }
 
 function SwiperItem1({node, index, type}) {
   return (
-    <Swiper.Item className="slide-item">
+    <SwiperItem className="slide-item">
     <View className="widget">
-      <View className="badge">4.5 <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill.svg'} /></View>
-      <img width="22px" height="22px" src={Env.iconUrl + 'suit-heart.svg'} />
+      <View className="badge"><img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill.svg'} /> 4.5 </View>
     </View>
 
     <Image
@@ -94,18 +103,8 @@ function SwiperItem1({node, index, type}) {
     src={Env.imageUrl + node.image}
     alt=""
     />
-    <View className="text">
-    <View className="plus">
-      <img width="36px" height="36px" src={Env.iconUrl + 'plus-circle-fill.svg'} />
-    </View>
-    <p className="title">{node.title}</p>
-    <View className="tags">
-      <View className="tag">免费入园</View>
-      <View className="tag">度假区</View>
-      <View className="tag">3A景区</View>
-    </View>
-    </View>
-    </Swiper.Item>
+    <View className="text"> {node.title} </View>
+    </SwiperItem>
   )
 }
 
@@ -118,19 +117,10 @@ function GridItem({node, index}) {
 }
 
 function Index() {
-  const [sliderList, setSliderList] = useState([])
   const [tongzhi, setTongzhi] = useState([])
   const [gridList, setGridList] = useState([])
   const [youList, setYouList] = useState([])
   const [jingList, setJingList] = useState([])
-  const [zhuList, setZhuList] = useState([])
-  const [chiList, setChiList] = useState([])
-  const [gouList, setGouList] = useState([])
-  const [dili, setDili] = useState({})
-  const [jianjie, setJianjie] = useState({})
-  const [hongsetext, setHongsetext] = useState({})
-  const [historytext, setHistorytext] = useState({})
-  const [tab1value, setTab1value] = useState<string | number>('0')
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
@@ -154,18 +144,10 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
       setTongzhi(data.tongzhi.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
-      setYouList(data.youzai.map((node, index) => <TabPane node={node} type={0} index={index} />))
+      setYouList(data.youzai.map((node, index) => <List node={node} type={0} index={index} />))
       setJingList(data.youzai.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
-      setZhuList(data.zhuzai.map((node, index) => <TabPane node={node} type={1} index={index} />))
-      setChiList(data.chizai.map((node, index) => <TabPane node={node} type={2} index={index} />))
-      setGouList(data.gouzai.map((node, index) => <TabPane node={node} type={3} index={index} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
-      // setDili(data.dili[0])
-      setJianjie(data.jianjie[0])
-      setHongsetext(data.hongsetext[0])
-      setHistorytext(data.historytext[0])
     })
     .catch(err => {
       console.log(err)
@@ -189,31 +171,36 @@ function Index() {
 
       <View className="jingdian block" style={{backgroundImage: `url(${Env.imageUrl + 'jingdian_bg.png'})`}}>
         <View className="header">
-          热门景点
-          <More region={'youzai'} type={0} />
+          <View className="left">
+            <img width="18px" height="18px" className="me-5" src={Env.iconUrl + 'fire.png'} />
+            热门景点
+          </View>
+          <View
+            className="more" 
+            onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+          >
+          更多 <img width="14px" height="14px" src={Env.iconUrl + 'arrow_1.png'} />
+          </View>
         </View>
-        <Swiper defaultValue={0} loop className="slide" height="260">
+        <Swiper defaultValue={0} circular className="slide">
           {jingList}
         </Swiper>
       </View>
 
-      <View className="leyou block">
+      <View className="you block" style={{backgroundImage: `url(${Env.imageUrl + 'you_bg.png'})`}}>
         <View className="header">
-          玩法推荐
-          <More region={'youzai'} type={0} />
+          <View className="left">
+            #游玩推荐#
+          </View>
+          <View
+              className="more" 
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+            >
+            更多 <img width="14px" height="14px" src={Env.iconUrl + 'arrow-right.png'} />
+          </View>
         </View>
 
-        <Tabs
-          value={tab1value}
-          autoHeight={true}
-          onChange={(value) => {
-            setTab1value(value)
-          }}
-          activeType="button"
-          className="tabs"
-          >
-          <Tabs.TabPane className="tabpane" title=""> {youList} </Tabs.TabPane>
-        </Tabs>
+        <View className="list"> {youList} </View>
       </View>
 
     </View>
