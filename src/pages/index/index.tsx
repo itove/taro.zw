@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
+import { View, Image, Swiper, SwiperItem, Text } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
@@ -75,17 +75,28 @@ function List({node, type, index}) {
   )
 }
 
-function SwiperItem2({node, index}) {
+function List2({node, type, index}) {
   return (
-    <SwiperItem key={index} className="rounded">
-    <Image
-    className="w-100 rounded"
-    mode="widthFix"
-    onClick={() => console.log(index)}
-    src={Env.imageUrl + node.image}
-    alt=""
-    />
-    </SwiperItem>
+    <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
+    <View className="img">
+    <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
+    </View>
+    <View className="text">
+      <View className="ellipsis"> {node.title} </View>
+      <View className="info">
+        {type === 0 &&
+        <View className="">09/22</View>
+        }
+        {type === 1 &&
+        <View>
+          <img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+          <Text className="hightlight me-5">4.5 </Text>
+          人均 ¥ 56
+        </View>
+        }
+      </View>
+    </View>
+    </View>
   )
 }
 
@@ -118,8 +129,10 @@ function GridItem({node, index}) {
 
 function Index() {
   const [gridList, setGridList] = useState([])
-  const [youList, setYouList] = useState([])
+  const [wanList, setWanList] = useState([])
   const [jingList, setJingList] = useState([])
+  const [dongList, setDongList] = useState([])
+  const [shiList, setShiList] = useState([])
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
@@ -143,9 +156,11 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setYouList(data.jing.map((node, index) => <List node={node} type={0} index={index} />))
-      setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
+      setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
+      setDongList(data.jing.map((node, index) => index < 3 && <List2 node={node} index={index} type={0} />))
+      setShiList(data.jing.map((node, index) => index < 3 && <List2 node={node} index={index} type={1} />))
+      setWanList(data.jing.map((node, index) => <List node={node} type={0} index={index} />))
     })
     .catch(err => {
       console.log(err)
@@ -186,7 +201,7 @@ function Index() {
       </View>
 
       <View className="featured block">
-        <View className="huodong bg-img" style={{backgroundImage: `url(${Env.imageUrl + 'huodong_bg.png'})`}}>
+        <View className="dong item bg-img" style={{backgroundImage: `url(${Env.imageUrl + 'huodong_bg.png'})`}}>
           <View className="header">
             <View className="left">
               <img width="16px" height="16px" className="me-5" src={Env.imageUrl+ 'flag.png'} />
@@ -199,20 +214,26 @@ function Index() {
             <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
             </View>
           </View>
-          <View className="list">
-            <View className="list-item">
-              <View className="img">
-                <Image className="w-100 rounded" src={Env.imageUrl + 'huodong_bg.png'} mode="aspectFill" />
-              </View>
-              <View className="text">
-                <View> 踏青出游 </View>
-                <View className="info">
-                  <View className="">09/22</View>
-                </View>
-              </View>
+          <View className="list">{dongList} </View>
+        </View>
+
+        <View className="shi item bg-img" style={{backgroundImage: `url(${Env.imageUrl + 'meishi_bg.png'})`}}>
+          <View className="header">
+            <View className="left">
+              <img width="16px" height="16px" className="me-5" src={Env.iconUrl+ 'meishi.png'} />
+              推荐美食
+            </View>
+            <View
+              className="more" 
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+            >
+            <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
             </View>
           </View>
+          <View className="list">{shiList} </View>
         </View>
+
+
       </View>
 
       <View className="you block" style={{backgroundImage: `url(${Env.imageUrl + 'you_bg.png'})`}}>
@@ -228,7 +249,7 @@ function Index() {
           </View>
         </View>
 
-        <View className="list"> {youList} </View>
+        <View className="list"> {wanList} </View>
       </View>
 
     </View>

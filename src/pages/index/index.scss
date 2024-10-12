@@ -161,7 +161,7 @@ page{
     background-image: linear-gradient(180deg, #FFFFFF 56%, #ffffff17 85%);
   }
   background-size: 96%;
-  background-position: top -2px left 14px;
+  background-position: top -7px left 16px;
   background-repeat: no-repeat;
   --nutui-tabs-titles-background-color: #ffffff;
   --nutui-tabs-titles-item-color: #000000;
@@ -261,5 +261,43 @@ page{
     position: absolute;
     top: -20px;
     right: 16px;
+  }
+}
+.featured{
+  .header{
+    margin-bottom: 11px;
+  }
+  display: flex;
+  justify-content: space-between;
+  .item{
+    border-radius: 7px;
+    padding: 6px;
+    width: 45%;
+    .header{
+      font-size: 14px;
+    }
+    .list{
+      .list-item{
+        padding: 2px;
+        background: #ffffff;
+        border-radius: 7px;
+        .img{
+          height: 38px;
+          width: 38px;
+          Image{
+            height: 38px;
+          }
+        }
+        .text{
+          width: 70%;
+          .info{
+            color: #999999;
+            .hightlight{
+              color: #FF8214;
+            }
+          }
+        }
+      }
+    }
   }
 }
