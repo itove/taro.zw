@@ -117,7 +117,6 @@ function GridItem({node, index}) {
 }
 
 function Index() {
-  const [tongzhi, setTongzhi] = useState([])
   const [gridList, setGridList] = useState([])
   const [youList, setYouList] = useState([])
   const [jingList, setJingList] = useState([])
@@ -144,9 +143,8 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setTongzhi(data.tongzhi.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
-      setYouList(data.youzai.map((node, index) => <List node={node} type={0} index={index} />))
-      setJingList(data.youzai.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
+      setYouList(data.jing.map((node, index) => <List node={node} type={0} index={index} />))
+      setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
     })
     .catch(err => {
@@ -185,6 +183,36 @@ function Index() {
         <Swiper defaultValue={0} circular className="slide">
           {jingList}
         </Swiper>
+      </View>
+
+      <View className="featured block">
+        <View className="huodong bg-img" style={{backgroundImage: `url(${Env.imageUrl + 'huodong_bg.png'})`}}>
+          <View className="header">
+            <View className="left">
+              <img width="16px" height="16px" className="me-5" src={Env.imageUrl+ 'flag.png'} />
+              热门活动
+            </View>
+            <View
+              className="more" 
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+            >
+            <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
+            </View>
+          </View>
+          <View className="list">
+            <View className="list-item">
+              <View className="img">
+                <Image className="w-100 rounded" src={Env.imageUrl + 'huodong_bg.png'} mode="aspectFill" />
+              </View>
+              <View className="text">
+                <View> 踏青出游 </View>
+                <View className="info">
+                  <View className="">09/22</View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
       </View>
 
       <View className="you block" style={{backgroundImage: `url(${Env.imageUrl + 'you_bg.png'})`}}>
