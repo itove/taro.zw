@@ -1,9 +1,6 @@
 page{
   padding-bottom: 55px;
   font-size: 12px;
-  .hero{
-    height: 281px !important;
-  }
 }
 .card{
   background: #ffffff;
@@ -239,5 +236,66 @@ page{
   white-space: normal !important;
 }
 .body{
-  font-size: 16px;
+  font-size: 14px;
+  color: #666666;
+}
+page .show{
+  .hero{
+    .widget{
+      top: unset;
+      left: unset;
+      .badge{
+        background: #6195FA;
+        border-radius: 10px 0 10px 0;
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+    }
+  }
+  .text{
+    border-bottom: #e7e7e799 1px solid;
+    font-size: 12px;
+    padding: 0 16px 16px;
+    color: #666666;
+    .title{
+      display: flex;
+      font-size: 18px;
+      font-weight: 500;
+      justify-content: space-between;
+      color: #333333;
+      .right{
+        font-size: 14px;
+      }
+      .left{
+        display: flex;
+        align-items: center;
+        .badge{
+          color: #FF8214;
+          background: #ff82141a;
+          font-size: 10px;
+          padding: 4px;
+          border-radius: 4px;
+        }
+      }
+      .right{
+        display: flex;
+        align-items: center;
+      }
+    }
+    .info{
+      >View{
+        margin-top: 6px;
+      }
+      .location{
+        display: flex;
+        justify-content: space-between;
+        .icon{
+          color: #6195FA;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
 }

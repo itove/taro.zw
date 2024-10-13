@@ -22,19 +22,19 @@ function ListItem({node, type, index}) {
       src={Env.imageUrl + node.image}
       alt=""
       />
-    <View className="text">
-      <View className="title">
-        <View className="left d-flex">
-          {node.title}
-          <View className="badge ms-5">进行中</View>
+      <View className="text">
+        <View className="title">
+          <View className="left d-flex">
+            {node.title}
+            <View className="badge ms-5">进行中</View>
+          </View>
+          <View className="right">12.4km</View>
         </View>
-        <View className="right">12.4km</View>
+        <View className="info">
+          <View className="">主办方：十堰市某单位</View>
+          <View className="">活动地点：活动地点</View>
+        </View>
       </View>
-      <View className="info">
-        <View className="">主办方：十堰市某单位</View>
-        <View className="">活动地点：活动地点</View>
-      </View>
-    </View>
     </View>
   )
 }
@@ -53,7 +53,7 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setList(data.jing.map((node, index) => <ListItem node={node} type={0} index={index} />))
+      setList(data.jing.map((node, index) => <ListItem node={node} type={4} index={index} />))
     })
     .catch(err => {
       console.log(err)

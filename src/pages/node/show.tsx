@@ -27,7 +27,7 @@ function Index() {
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
-  // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: 走进东沟 // 5: index list & show normal
+  // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: huodong // 5: index list & show normal
   const type = instance.router.params.type ? instance.router.params.type : 2
   const innerAudioContext = Taro.createInnerAudioContext()
   const [audio, setAudio] = useState(innerAudioContext)
@@ -209,30 +209,67 @@ function Index() {
 
   return (
     <View className="show">
-      <Image className="w-100 hero" src={Env.imageUrl + node.image} mode="aspectFill" />
+      <View className="hero p-1">
+        <View className="widget">
+          <View className="badge">活动日期：2024/09/30 - 2024/10/30</View>
+        </View>
+        <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
+      </View>
 
+      { type != 4 &&
       <View className="p-1 card">
-
         <View className="header">
           <View className="">
             { (type == 0 || type == 1) &&
             <View className="tags">{tags}</View>
             }
+
             <View className="title article-title mt-1">{node.title}</View>
 
-          <View className="reviews">
-            <View className="stars">
-              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-            </View>
-            <View className="">4.5/5 <span className="counts">(2399 条评价)</span> </View>
+            <View className="reviews">
+              <View className="stars">
+                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+              </View>
+              <View className="">4.5/5 <span className="counts">(2399 条评价)</span> </View>
             </View>
           </View>
         </View>
       </View>
+      }
+      
+      { type == 4 &&
+      <>
+      <View className="text">
+        <View className="title">
+          <View className="left d-flex">
+            {node.title}
+            <View className="badge ms-5">进行中</View>
+          </View>
+          <View className="right">
+            <View className="">
+              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} /> 54
+              <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'heart.png'} /> 87
+            </View>
+          </View>
+        </View>
+        <View className="info">
+          <View className="">主办方：十堰市某单位</View>
+          <View className="location">
+            <View>活动地点：活动地点</View>
+            <View class="icon">
+              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'nav-blue.png'} /> 导航
+            </View>
+          </View>
+        </View>
+      </View>
+
+      <View dangerouslySetInnerHTML={{__html: body}} className='body p-1'></View>
+      </>
+      }
 
       { type == 0 &&
       <Tabs
