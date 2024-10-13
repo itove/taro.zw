@@ -14,38 +14,40 @@ function ListItem({node, index, type}) {
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
       <Image className="img rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
-    <View className="text">
-      <View className="title">
-        {node.title}
+      <View className="text">
+        <View className="title">
+          {node.title}
+          { type == 6 &&
+          <View className="tag tag-y ms-5">开放中</View>
+          }
+        </View>
         { type != 6 &&
-        <p className="ellipsis-2">{node.summary}</p>
+          <p className="ellipsis-2">{node.summary}</p>
         }
-        { type == 6 &&
+
+        { type != 3 &&
         <>
-        <View className="tag tag-y ms-5">开放中</View>
+        <View className="d-flex">
+          <View className="tag tag-b-r">周一至周日：09:00-18:00</View>
+        </View>
+        <View className="d-flex">
+          <View className="tag tag-b-r me-8">预约入馆</View>
+          <View className="tag tag-b-r">免费开放</View>
+        </View>
+        <View className="info">
+          <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
+          某某区某街道民主路34号
+        </View>
         </>
         }
-      </View>
-
-      <View className="d-flex">
-        <View className="tag tag-b-r">周一至周日：09:00-18:00</View>
-      </View>
-      <View className="d-flex">
-        <View className="tag tag-b-r me-8">预约入馆</View>
-        <View className="tag tag-b-r">免费开放</View>
-      </View>
-      <View className="info">
-        <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
-        某某区某街道民主路34号
-      </View>
 
 
-      { type != 6 &&
-      <View className="info">
-        <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
-        <p className="">3.1km</p>
-      </View>
-      }
+        { type == 3 &&
+        <View className="info justify-between">
+          <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
+          <p className="">3.1km</p>
+        </View>
+        }
     </View>
 
     </View>
