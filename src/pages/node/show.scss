@@ -127,16 +127,20 @@ page{
   --nutui-tabs-titles-background-color: #ffffff;
   --nutui-tabs-titles-item-color: #000000;
   --nutui-tabs-titles-item-active-color: #ffffff;
-  --nutui-tabs-tab-line-width: 80px;
-  --nutui-tabs-tab-line-color: #3e64ff;
+  --nutui-tabs-tab-line-width: 28px;
+  --nutui-tabs-tab-line-height: 8px;
+  --nutui-tabs-line-border-radius: 4px;
+  // --nutui-tabs-tab-line-color: #3e64ff;
+  --nutui-tabs-tab-line-color: linear-gradient(90deg, #6195fa80 0%, #6195fa1a 100%);
   --nutui-tabs-line-bottom: 0;
   .nut-tabs-titles-item-text {
-    color: #808080;
-    font-size: 18px;
+    color: #666666;
+    font-size: 16px;
   }
   .nut-tabs-titles-item-active .nut-tabs-titles-item-text {
-    color: #3e64ff;
-    font-size: 18px;
+    color: #333333;
+    font-weight: 400;
+    font-size: 16px;
   }
   .list:last-child{
     border-bottom: none;
@@ -261,7 +265,7 @@ page .show{
       display: flex;
       font-size: 18px;
       font-weight: 500;
-      justify-content: space-between;
+      align-items: center;
       color: #333333;
       .right{
         font-size: 14px;

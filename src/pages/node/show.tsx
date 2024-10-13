@@ -211,13 +211,37 @@ function Index() {
   return (
     <View className="show">
       <View className="hero p-1">
+        { type == 4 &&
         <View className="widget">
           <View className="badge">活动日期：2024/09/30 - 2024/10/30</View>
         </View>
+        }
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
       </View>
 
-      { type != 4 &&
+      { type == 6 &&
+      <>
+      <View className="text">
+        <View className="title mb-10">
+          {node.title}
+          <View className="tag tag-y ms-5">进行中</View>
+        </View>
+
+        <View className="d-flex mb-10">
+          <View className="tag tag-b-r">周一至周日：09:00-18:00</View>
+          <View className="tag tag-b-r">预约入馆</View>
+          <View className="tag tag-b-r">免费开放</View>
+        </View>
+
+        <View className="info">
+          <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
+          某某区某街道民主路34号
+        </View>
+      </View>
+      </>
+      }
+
+      { (type != 4 && type !=6) &&
       <View className="p-1 card">
         <View className="header">
           <View className="">
@@ -290,6 +314,27 @@ function Index() {
           <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
         </Tabs.TabPane>
         <Tabs.TabPane title="门票预定">
+          <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
+        </Tabs.TabPane>
+      </Tabs>
+      }
+
+      { type == 6 &&
+      <Tabs
+        value={tab1value}
+        autoHeight={true}
+        onChange={(value) => {
+          setTab1value(value)
+        }}
+        align="left"
+        className="rooms"
+      >
+        <Tabs.TabPane title="简介">
+          <View>
+            <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
+          </View>
+        </Tabs.TabPane>
+        <Tabs.TabPane title="入馆须知">
           <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
         </Tabs.TabPane>
       </Tabs>
