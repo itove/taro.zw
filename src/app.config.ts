@@ -2,9 +2,10 @@ export default defineAppConfig({
   pages: [
     'pages/index/index',
     'pages/wenti/index',
-    'pages/jingdian/index',
+    'pages/jing/index',
     'pages/meishi/index',
-    'pages/zhusu/index',
+    'pages/zhu/index',
+    'pages/wan/index',
     'pages/caizhai/index',
     'pages/service/index',
     'pages/techan/index',
