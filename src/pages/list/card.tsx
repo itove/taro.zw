@@ -96,7 +96,7 @@ function Index() {
         title: data.region
       })
 
-      setList(data.jing.map((node, index) => <ListItem node={node} type={type} index={index} />))
+      setList(data.nodes.map((node, index) => <ListItem node={node} type={type} index={index} />))
     })
     .catch(err => {
       console.log(err)
