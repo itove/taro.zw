@@ -18,19 +18,6 @@
     }
   }
 }
-.tags{
-  // padding: 14px;
-  display: flex;
-  justify-content: flex-start;
-  font-size: 10px;
-  color: #ffffff;
-  .tag{
-    background: #8fadff;
-    border-radius: 3px;
-    margin-right: 4px;
-    padding: 3px;
-  }
-}
 .widget{
   position: absolute;
   top: 12px;
@@ -76,7 +63,7 @@
     }
     .text{
       font-size: 12px;
-      padding: 10px;
+      padding: 10px 10px 16px;
       color: #666666;
       .title{
         display: flex;
@@ -86,6 +73,12 @@
         color: #333333;
         .right{
           font-size: 14px;
+        }
+        .right.nav{
+          font-size: 12px;
+          color: #6195FA;
+          display: flex;
+          align-items: center;
         }
         .left{
           display: flex;

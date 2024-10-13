@@ -31,7 +31,7 @@ function ListItem({node, index, type}) {
         <View className="tag tag-b-r">周一至周日：09:00-18:00</View>
       </View>
       <View className="d-flex">
-        <View className="tag tag-b-r">预约入馆</View>
+        <View className="tag tag-b-r me-8">预约入馆</View>
         <View className="tag tag-b-r">免费开放</View>
       </View>
       <View className="info">
