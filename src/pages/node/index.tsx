@@ -51,6 +51,7 @@ function ListItem({node, index, type}) {
     </View>
   )
 }
+
 function GridItem({node, index, type}) {
   return (
     <View>
@@ -123,9 +124,9 @@ function Index() {
         // <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
         // <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
         // </Grid.Item>
-            <GridItem node={node} type={type} index={index}/>
+            <GridItem node={node} type={type} key={index}/>
           ||
-            <ListItem node={node} type={type} index={index}/>
+            <ListItem node={node} type={type} key={index}/>
         ))
     })
     .catch(err => {

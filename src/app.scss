@@ -67,6 +67,7 @@ page{
     }
     .more{
       font-size: 12px;
+      font-weight: normal;
     }
     img{
       width: 24px;
@@ -173,6 +174,12 @@ page{
 }
 .ms-5{
   margin-left: 5px !important;
+}
+.mb-4{
+  margin-bottom: 4px !important;
+}
+.mb-8{
+  margin-bottom: 8px !important;
 }
 .mb-10{
   margin-bottom: 10px !important;
@@ -297,4 +304,27 @@ page{
 .tag-b-r{
   border-radius: 11px;
   padding: 3px 8px;
+}
+.grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  >View{
+    margin-bottom: 10px;
+    flex: 0 0 auto;
+    width: 49%;
+    .img{
+      height: 152px;
+      border-radius: 10px 10px 0 0;
+    }
+    .text{
+      padding: 10px;
+      background: #ffffff;
+      border-radius: 0 0 10px 10px;
+      .price{
+        color: #FF8214;
+        font-size: 14px;
+      }
+    }
+  }
 }

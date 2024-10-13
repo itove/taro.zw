@@ -1,27 +1,133 @@
-.nutui-react-demo {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.block{
+  background: none;
+  padding: 0;
+  img{
+    margin-left: 0 !important;
+    margin-right: 6px;
+    width: 26px;
+    height: 26px;
+  }
+}
+.slide{
+  margin-bottom: 22px;
+  // height: 500px;
+  swiper-item{
+    width: 44% !important;
+    padding-right: 5px;
+    .img{
+      border-radius: 6px 6px 0 0;
+      height: 100px;
+    }
+    .text{
+      font-size: 17px;
+      padding: 10px 0;
+      border-radius: 0 0 12px 12px;
+      .title{
+        margin-bottom: 5px;
+        font-size: 12px;
+        color: #333333;
+      }
+      .summary{
+        font-size: 12px;
+        color: #808080;
+      }
+    }
+  }
+}
+.call{
+  display: flex !important;
   align-items: center;
 }
-
-.index {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  margin-bottom: 30px;
+.text{
+  // display: flex !important;
+  // flex-direction: column;
+  // justify-content: space-between;
+  padding-bottom: 5px;
+  .badge{
+    background: #0FB99F;
+    color: #ffffff;
+    padding: 1.2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-left: 8px;
+  }
 }
-
-.title {
-  display: block;
-  margin: 20px 0;
-  font-weight: 600;
+.zhuzai .list{
+  background: #ffffff;
+  Image{
+    height: 90px;
+  }
 }
-
-.btn {
-  display: block;
-  width: 200px;
-  margin-bottom: 20px;
+page{
+  background-image: radial-gradient(circle at 50% 0%, #acc8ff 0%, #e2edff00 100%);
+  .wan{
+    background: linear-gradient(180deg, #ffffffd6 4%, #f7f8faf5 85%);
+    border-radius: 20px 20px 0 0;
+    .list .list-item{
+      border-radius: 10px;
+      padding: 10px;
+      background: #ffffff;
+      Image{
+        height: 100%;
+      }
+      .text{
+        width: 66%;
+        .title{
+          color: #333333;
+          font-size: 14px;
+          font-weight: 500;
+        }
+        .d-flex{
+          justify-content: space-between;
+        }
+        .left{
+          font-size: 12px;
+          color: #666666;
+          display: flex;
+          align-items: center;
+        }
+        .right{
+          font-size: 14px;
+          color: #FF8214;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    .grid .grid-item{
+      width: 42.5%;
+      border-radius: 10px;
+      padding: 10px;
+      background: #ffffff;
+      .img{
+        border-radius: 8px;
+        height: 100px;
+      }
+      .text{
+        padding: 0;
+        .title{
+          color: #333333;
+          justify-content: space-between;
+          font-size: 14px;
+          .price{
+            color: #FF8214;
+          }
+        }
+        .summary{
+          color: #999999;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+  .widget{
+    height: 20px;
+    top: 0;
+    left: 0;
+    .badge{
+      border-radius: 6px 0 6px 0;
+      font-size: 10px;
+      line-height: 10px;
+    }
+  }
 }
