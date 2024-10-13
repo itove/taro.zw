@@ -269,7 +269,7 @@ function Index() {
       { type == 4 &&
       <>
       <View className="text">
-        <View className="title">
+        <View className="title justify-between">
           <View className="left d-flex">
             {node.title}
             <View className="badge ms-5">进行中</View>

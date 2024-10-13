@@ -59,7 +59,7 @@ function GridItem({node, index, type}) {
     <View>
       <Image className="w-100 img" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
-        <View className="title d-flex mb-10">
+        <View className="title d-flex justify-between mb-10">
           {node.title}
           { type == 7 &&
           <View className="tag tag-y ms-5">营业中</View>
