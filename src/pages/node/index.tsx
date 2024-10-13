@@ -114,7 +114,7 @@ function Index() {
       console.log(res)
 
       Taro.setNavigationBarTitle({
-        title: data.region
+        title: data.region ? data.region : '列表'
       })
 
       setList(data.nodes.map((node, index) => 

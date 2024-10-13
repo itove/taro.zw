@@ -77,6 +77,8 @@ function ListItem({node, type, index}) {
 function Index() {
   const [list, setList] = useState([])
   const instance = Taro.getCurrentInstance();
+  const region = instance.router.params.region
+  const title = instance.router.params.title
   const type = instance.router.params.type ? instance.router.params.type : 2
 
   const onShareAppMessage = (res) => {}
@@ -84,11 +86,15 @@ function Index() {
 
   useEffect(() => {
     Taro.request({
-      url: Env.apiUrl + 'wx/home'
+      url: Env.apiUrl + 'nodes/' + region
     })
     .then(res => {
       const data = res.data
       console.log(res)
+
+      Taro.setNavigationBarTitle({
+        title: data.region
+      })
 
       setList(data.jing.map((node, index) => <ListItem node={node} type={type} index={index} />))
     })

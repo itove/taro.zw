@@ -161,15 +161,11 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setSliderList(data.slider.map((node, index) => <SwiperItem node={node} index={index} />))
-      setTongzhi(data.tongzhi.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
-      setYouList(data.youzai.map((node, index) => <ListItem node={node} type={0} index={index} />))
-      setJingList(data.youzai.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
+      setSliderList(data.jing.map((node, index) => <SwiperItem node={node} index={index} />))
+      setTongzhi(data.jing.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
+      setYouList(data.jing.map((node, index) => <ListItem node={node} type={0} index={index} />))
+      setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
-      // setDili(data.dili[0])
-      setJianjie(data.jianjie[0])
-      setHongsetext(data.hongsetext[0])
-      setHistorytext(data.historytext[0])
     })
     .catch(err => {
       console.log(err)

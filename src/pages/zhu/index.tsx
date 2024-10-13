@@ -54,7 +54,7 @@ function Index() {
 
   useEffect(() => {
     Taro.request({
-      url: Env.apiUrl + 'nodes/zhuzai'
+      url: Env.apiUrl + 'nodes/zhu'
     })
     .then(res => {
       const data = res.data
