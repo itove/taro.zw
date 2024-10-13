@@ -102,7 +102,6 @@ function Index() {
 
   useEffect(() => {
     // console.log(uid)
-    const region = 'jing'
     let url = Env.apiUrl + 'nodes/' + region
     if (uid !== undefined ) {
       url = Env.apiUrl + 'fav?region=' + region + '&uid=' + uid
