@@ -119,7 +119,7 @@ function Index() {
       <View className="youzai block">
         <View className="header">
           推荐路线
-          <More region={'youzai'} type={0} />
+          <More region={'jing'} type={0} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="184">
           {youList}
@@ -129,7 +129,7 @@ function Index() {
       <View className="chizai block node-index">
         <View className="header">
           去哪玩
-          <More region={'chizai'} type={2} />
+          <More region={'jing'} type={2} />
         </View>
         <View columns="2" gap="3" center={false} className="grid">
           {chiList}
@@ -139,7 +139,7 @@ function Index() {
       <View className="you block">
         <View className="header">
           用户游记
-          <More region={'zhuzai'} type={1} />
+          <More region={'jing'} type={1} />
         </View>
         <View class="list">
         {zhuList}
