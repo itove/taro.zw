@@ -141,7 +141,7 @@ function Index() {
     { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'jingdian/index', isTab: false, },
     { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '', url: 'zhusu/index', isTab: false, },
     { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=0&region=chizai', isTab: false, },
-    { t: '活动', p: Env.iconUrl + 'grid_4.png', target: '', url: 'service/index', isTab: false, },
+    { t: '活动', p: Env.iconUrl + 'grid_4.png', target: '', url: 'list/card', isTab: false, },
     { t: '文创', p: Env.iconUrl + 'grid_5.png', target: '', url: 'caizhai/index', isTab: false, },
     { t: '艺动', p: Env.iconUrl + 'grid_6.png', target: '', url: 'techan/index', isTab: false, },
     { t: '购物', p: Env.iconUrl + 'grid_7.png', target: '', url: 'wenti/index', isTab: false, },

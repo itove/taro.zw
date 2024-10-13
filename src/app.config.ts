@@ -22,6 +22,9 @@ export default defineAppConfig({
     'pages/feedback/index',
     'pages/me/login',
     'pages/node/show',
+    'pages/list/index',
+    'pages/list/card',
+    'pages/list/grid',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -32,8 +35,8 @@ export default defineAppConfig({
   },
   tabBar: {
     // custom: true,
-    color: '#c9cad6',
-    selectedColor: '#2b7afb',
+    color: '#999999',
+    selectedColor: '#7E9CF4',
     backgroundColor: '#FFFFFF',
     borderStyle: 'white',
     list: [
@@ -45,7 +48,7 @@ export default defineAppConfig({
       },
       {
         "pagePath": "pages/leyou/index",
-        "text": "定位",
+        "text": "探索",
         "iconPath": './icons/loc.png',
         "selectedIconPath": './icons/loc-fill.png'
       },
