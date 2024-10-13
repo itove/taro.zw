@@ -45,6 +45,31 @@ page{
     }
   }
 }
+.node-index{
+  .grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    >View{
+      margin-bottom: 10px;
+      flex: 0 0 auto;
+      width: 49%;
+      .img{
+        height: 152px;
+        border-radius: 10px 10px 0 0;
+      }
+      .text{
+        padding: 10px;
+        background: #ffffff;
+        border-radius: 0 0 10px 10px;
+        .price{
+          color: #FF8214;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
 .grid-list{
   height: 213px;
   margin-bottom: 6px;

@@ -51,6 +51,31 @@ function ListItem({node, index, type}) {
     </View>
   )
 }
+function GridItem({node, index, type}) {
+  return (
+    <View>
+      <Image className="w-100 img" src={Env.imageUrl + node.image} mode="aspectFill" />
+      <View className="text">
+        <View className="title d-flex mb-10">
+          {node.title}
+          { type == 7 &&
+          <View className="tag tag-y ms-5">营业中</View>
+          }
+          { type == 5 &&
+          <View className="price">¥39</View>
+          }
+        </View>
+        { type == 7 &&
+        <View className="d-flex mb-10">
+          <View className="tag tag-b-r me-8">可堂食</View>
+          <View className="tag tag-b-r me-8">2楼</View>
+          <View className="tag tag-b-r me-8">超市</View>
+        </View>
+        }
+      </View>
+    </View>
+  )
+}
 
 /*
 function GridItem({node, index, type}) {
@@ -93,13 +118,14 @@ function Index() {
       })
 
       setList(data.nodes.map((node, index) => 
-        type == 2
+        (type == 2 || type == 5 || type == 7)
         &&
-        <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
-        <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
-        </Grid.Item>
+        // <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
+        // <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
+        // </Grid.Item>
+            <GridItem node={node} type={type} index={index}/>
           ||
-            <ListItem node={node} type={type}/>
+            <ListItem node={node} type={type} index={index}/>
         ))
     })
     .catch(err => {
@@ -110,7 +136,7 @@ function Index() {
   return (
     <View className="node-index p-1">
 
-    {type != 6 &&
+    {type == 3 &&
     <View className="sort">
       <View>
         排序
@@ -127,12 +153,12 @@ function Index() {
     </View>
     }
 
-    {type == 2 &&
-      <Grid columns="2" gap="3" center={false} className="grid">
+    { (type == 2 || type == 5 || type == 7) &&
+      <View columns="2" gap="5" center={false} className="grid">
         {list}
-      </Grid>
+      </View>
     }
-    {type != 2 &&
+    { (type != 2 && type != 5 && type != 7) &&
       <View className="list">
         {list}
       </View>
