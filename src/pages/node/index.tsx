@@ -13,19 +13,39 @@ function gotoNode(id, type = 2) {
 function ListItem({node, index, type}) {
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
-    <View className="img">
-    <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
-    </View>
+      <Image className="img rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
     <View className="text">
-      <View>
-      {node.title}
-      <p className="ellipsis-2">{node.summary}</p>
+      <View className="title">
+        {node.title}
+        { type != 6 &&
+        <p className="ellipsis-2">{node.summary}</p>
+        }
+        { type == 6 &&
+        <>
+        <View className="tag tag-y ms-5">开放中</View>
+        </>
+        }
       </View>
 
+      <View className="d-flex">
+        <View className="tag tag-b-r">周一至周日：09:00-18:00</View>
+      </View>
+      <View className="d-flex">
+        <View className="tag tag-b-r">预约入馆</View>
+        <View className="tag tag-b-r">免费开放</View>
+      </View>
+      <View className="info">
+        <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
+        某某区某街道民主路34号
+      </View>
+
+
+      { type != 6 &&
       <View className="info">
         <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
         <p className="">3.1km</p>
       </View>
+      }
     </View>
 
     </View>
@@ -56,6 +76,7 @@ function Index() {
 
   useEffect(() => {
     // console.log(uid)
+    const region = 'jing'
     let url = Env.apiUrl + 'nodes/' + region
     if (uid !== undefined ) {
       url = Env.apiUrl + 'fav?region=' + region + '&uid=' + uid
@@ -71,17 +92,15 @@ function Index() {
         title: data.region
       })
 
-      setList(data.nodes.map((node, index) =>
-
-          type == 2
-          &&
-    <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
-    <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
-    </Grid.Item>
+      setList(data.nodes.map((node, index) => 
+        type == 2
+        &&
+        <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
+        <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
+        </Grid.Item>
           ||
-          <ListItem node={node} type={type}/>
-        )
-      )
+            <ListItem node={node} type={type}/>
+        ))
     })
     .catch(err => {
       console.log(err)
@@ -91,6 +110,7 @@ function Index() {
   return (
     <View className="node-index p-1">
 
+    {type != 6 &&
     <View className="sort">
       <View>
         排序
@@ -105,6 +125,7 @@ function Index() {
         <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
       </View>
     </View>
+    }
 
     {type == 2 &&
       <Grid columns="2" gap="3" center={false} className="grid">

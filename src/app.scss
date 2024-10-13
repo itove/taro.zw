@@ -279,3 +279,21 @@ page{
   background-size: cover;
   background-position: center;
 }
+.tag{
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.tag-y{
+  color: #FF8214;
+  background: #ff82141a;
+}
+.tag-b,
+.tag-b-r{
+  color: #6195FA;
+  background: #6195fa1a;
+}
+.tag-b-r{
+  border-radius: 11px;
+  padding: 3px 8px;
+}

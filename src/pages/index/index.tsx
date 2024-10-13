@@ -140,10 +140,10 @@ function Index() {
   const gridItems = [
     { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'jingdian/index', isTab: false, },
     { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '', url: 'zhusu/index', isTab: false, },
-    { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=0&region=chizai', isTab: false, },
-    { t: '活动', p: Env.iconUrl + 'grid_4.png', target: '', url: 'list/card', isTab: false, },
+    { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=3&region=shi', isTab: false, },
+    { t: '活动', p: Env.iconUrl + 'grid_4.png', target: '', url: 'list/card?type=4&region=dong', isTab: false, },
     { t: '文创', p: Env.iconUrl + 'grid_5.png', target: '', url: 'caizhai/index', isTab: false, },
-    { t: '艺动', p: Env.iconUrl + 'grid_6.png', target: '', url: 'techan/index', isTab: false, },
+    { t: '艺动', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=6&region=yi', isTab: false, },
     { t: '购物', p: Env.iconUrl + 'grid_7.png', target: '', url: 'wenti/index', isTab: false, },
     { t: '玩法', p: Env.iconUrl + 'grid_8.png', target: '', url: 'shangchao/index', isTab: false, },
   ]
@@ -190,7 +190,7 @@ function Index() {
           </View>
           <View
             className="more" 
-            onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+            onClick={() => Taro.navigateTo({url: '/pages/node/index?region=jing&type=0'})}
           >
           更多 <img width="14px" height="14px" src={Env.iconUrl + 'arrow_1.png'} />
           </View>
@@ -209,7 +209,7 @@ function Index() {
             </View>
             <View
               className="more" 
-              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=jing&type=0'})}
             >
             <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
             </View>
@@ -225,7 +225,7 @@ function Index() {
             </View>
             <View
               className="more" 
-              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=shi&type=0'})}
             >
             <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
             </View>
@@ -243,7 +243,7 @@ function Index() {
           </View>
           <View
               className="more" 
-              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=you&type=0'})}
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=wan&type=0'})}
             >
             更多 <img width="14px" height="14px" src={Env.iconUrl + 'arrow-right.png'} />
           </View>

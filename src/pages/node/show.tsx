@@ -27,7 +27,8 @@ function Index() {
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
-  // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: huodong // 5: index list & show normal
+  // 0: all // 1: jing // 2: zhu // 3: shi // 4: dong // 5: wen // 6: yi // 7: gou // 8: wan
+  // index list & show normal
   const type = instance.router.params.type ? instance.router.params.type : 2
   const innerAudioContext = Taro.createInnerAudioContext()
   const [audio, setAudio] = useState(innerAudioContext)
