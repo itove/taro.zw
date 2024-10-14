@@ -101,18 +101,18 @@ function Index() {
 
   useEffect(() => {
     Taro.request({
-      url: Env.apiUrl + 'wx/leyou'
+      url: Env.apiUrl + 'wx/explore'
     })
     .then(res => {
       const data = res.data
       console.log(res)
 
-      setYouList(data.youzai.map((node, index) => <SwiperItem node={node} index={index} type={0} />))
-      setYouList1(data.youzai.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
-      setZhuList(data.zhuzai.map((node, index) => <ViewItem node={node} type={1} index={index} />))
+      setYouList(data.jing.map((node, index) => <SwiperItem node={node} index={index} type={0} />))
+      setYouList1(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
+      setZhuList(data.zhu.map((node, index) => <ViewItem node={node} type={1} index={index} />))
       // setChiList(data.chizai.map((node, index) => <GridItem node={node} index={index} />))
-      setGouList(data.gouzai.map((node, index) => <SwiperItem node={node} index={index} type={3} />))
-      setChiList(data.chizai.map((node, index) => index < 4 &&
+      setGouList(data.gou.map((node, index) => <SwiperItem node={node} index={index} type={3} />))
+      setChiList(data.shi.map((node, index) => index < 4 &&
           <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, 2)}>
             <Image className="w-100" src={Env.imageUrl + node.image} mode="widthFix" />
           </Grid.Item>
@@ -126,7 +126,7 @@ function Index() {
 
   return (
     <View className="leyou p-1">
-      <View className="youzai block">
+      <View className="youzai block mb-16">
         <View className="header">
           去哪玩
         </View>
@@ -135,10 +135,10 @@ function Index() {
         </Swiper>
       </View>
 
-      <View className="youzai block">
+      <View className="youzai block mb-16">
         <View className="header">
           猜你喜欢
-          <More region={'youzai'} type={0} />
+          <More region={'jing'} type={0} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
           {youList}
@@ -148,7 +148,7 @@ function Index() {
       <View className="youzai block">
         <View className="header">
           热门景点
-          <More region={'youzai'} type={0} />
+          <More region={'jing'} type={0} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="230">
           {youList}

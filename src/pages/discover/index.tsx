@@ -36,7 +36,7 @@ function GridItem({node, index, type}) {
 
 function Index() {
   const instance = Taro.getCurrentInstance();
-  const region = instance.router.params.region ? instance.router.params.region: 'youzai'
+  const region = instance.router.params.region ? instance.router.params.region: 'jing'
   const title = instance.router.params.title
   const uid = instance.router.params.uid
   const type = instance.router.params.type ? instance.router.params.type : 2

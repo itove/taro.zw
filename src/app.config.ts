@@ -16,7 +16,7 @@ export default defineAppConfig({
     'pages/nav/index',
     'pages/me/info',
     'pages/node/index',
-    'pages/leyou/index',
+    'pages/explore/index',
     'pages/me/index',
     'pages/me/name',
     'pages/me/setting',
@@ -48,7 +48,7 @@ export default defineAppConfig({
         "selectedIconPath": './icons/home-fill.png',
       },
       {
-        "pagePath": "pages/leyou/index",
+        "pagePath": "pages/explore/index",
         "text": "探索",
         "iconPath": './icons/loc.png',
         "selectedIconPath": './icons/loc-fill.png'
