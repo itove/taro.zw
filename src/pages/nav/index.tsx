@@ -114,7 +114,7 @@ function Index() {
       console.log(nodes)
       setNodes(nodes)
       nodes.map((n, index) => {
-        let  path = Env.iconUrl + 'location-1.png'
+        let  path = Env.iconUrl + 'marker.png'
         if (n.region === 29) {
           path = Env.iconUrl + 'marker-house.png'
         }
