@@ -84,8 +84,8 @@ function Index() {
   const row = 8
   const latPer = (ne.lat - sw.lat) / row
   const longPer = (ne.long - sw.long) / col
-  const markerWidth = 28
-  const markerHeight = 35
+  const markerWidth = 34
+  const markerHeight = 34
 
   const mapContext = Taro.createMapContext('map')
 
@@ -114,7 +114,7 @@ function Index() {
       console.log(nodes)
       setNodes(nodes)
       nodes.map((n, index) => {
-        let  path = Env.iconUrl + 'marker-pavilion.png'
+        let  path = Env.iconUrl + 'location-1.png'
         if (n.region === 29) {
           path = Env.iconUrl + 'marker-house.png'
         }
@@ -249,7 +249,7 @@ function Index() {
     const newMarkers = markers.map((m, i) => {
       if (i === id) {
         m.width = 48
-        m.height = 61
+        m.height = 48
         m.zIndex = 999
         return m
       } else {
