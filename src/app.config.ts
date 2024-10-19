@@ -48,7 +48,7 @@ export default defineAppConfig({
         "selectedIconPath": './icons/home-fill.png',
       },
       {
-        "pagePath": "pages/explore/index",
+        "pagePath": "pages/nav/index",
         "text": "探索",
         "iconPath": './icons/loc.png',
         "selectedIconPath": './icons/loc-fill.png'

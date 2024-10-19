@@ -75,9 +75,9 @@ function Index() {
     console.log(res.errCode)
   })
 
-  const center = { lat: 32.497362991555164, long: 110.84169432860472 }
-  const ne = { lat: 32.50916729, long: 110.86286523 }
-  const sw = { lat: 32.48679658, long: 110.82360543 }
+  const center = { lat: 32.600626, long: 110.643997 }
+  const ne = { lat: 32.780055, long: 110.867839 }
+  const sw = { lat: 32.470901, long: 110.439749 }
 
   const opacity = 1
   const col = 8
