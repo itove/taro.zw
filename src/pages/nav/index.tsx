@@ -75,7 +75,7 @@ function Index() {
     console.log(res.errCode)
   })
 
-  const center = { lat: 32.600626, long: 110.643997 }
+  const center = { lat: 32.625478, long: 110.6537895 }
   const ne = { lat: 32.780055, long: 110.867839 }
   const sw = { lat: 32.470901, long: 110.439749 }
 
@@ -333,9 +333,9 @@ function Index() {
         showLocation={true}
         markers={markers}
         onMarkerTap={onMarkerTap}
-        scale={15} // 3-20
+        scale={10} // 3-20
         max-scale={17}
-        min-scale={11}
+        min-scale={9}
         onTap={onTap}
       >
         <CoverView className="call-out" slot="callout">
