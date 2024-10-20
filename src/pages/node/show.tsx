@@ -14,6 +14,14 @@ Taro.options.html.transformElement = (el) => {
   return el
 }
 
+function openLocation(latitude, longitude) {
+  Taro.openLocation({
+    latitude,
+    longitude,
+    scale: 15
+  })
+}
+
 function Index() {
   const [node, setNode] = useState({})
   const [rooms, setRooms] = useState([])
@@ -285,7 +293,7 @@ function Index() {
           <View className="">主办方：十堰市某单位</View>
           <View className="location">
             <View>活动地点：活动地点</View>
-            <View class="icon">
+            <View class="icon" onClick={() => openLocation(node.latitude, node.longitude)}>
               <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'nav-blue.png'} /> 导航
             </View>
           </View>

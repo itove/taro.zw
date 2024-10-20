@@ -19,6 +19,7 @@ function goto(node, type) {
     gotoNode(node.id, type)
   }
 }
+
 function openLocation(latitude, longitude) {
   Taro.openLocation({
     latitude,
@@ -74,7 +75,7 @@ function ListItem({node, type, index}) {
           <View className="right">{node.distance}km</View>
           }
           { (node.latitude && node.longitude && (type == 5 || type == 7)) &&
-          <View className="right nav"  onClick={() => openLocation(node.latitude, node.longitude)}>
+          <View className="right nav" onClick={() => openLocation(node.latitude, node.longitude)}>
               <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'nav-blue.png'} /> 导航
           </View>
           }
