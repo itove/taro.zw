@@ -173,13 +173,13 @@ function Index() {
   }, [])
 
   return (
-    <View className="home">
+    <View className="jing">
       <View className="pagetitle">景点</View>
       <View className="daolan block">
         <View className="header">
           热门景点
         </View>
-        <Swiper defaultValue={0} loop className="slide" height="260">
+        <Swiper indicator defaultValue={0} loop className="slide" height="280">
           {jingList}
         </Swiper>
       </View>

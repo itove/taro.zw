@@ -27,7 +27,14 @@ page{
     border-radius: 10px;
   }
   padding-bottom: 10px;
-  .home{
+  .jing{
+    --nutui-indicator-dot-color: #d6d6d6;
+    .nut-indicator-active{
+      background: #3e64ff;
+      width: 6px;
+      height: 6px;
+      border-radius: 6px;
+    }
     position: relative;
     overflow: hidden;
     .nut-grid-border{
