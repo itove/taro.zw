@@ -10,7 +10,29 @@ function gotoNode(id, type = 2) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
 
+function Rad(d) { 
+  //根据经纬度判断距离
+  return d * Math.PI / 180.0;
+}
+
+/**
+ * lat1/lng1 user's
+ * lat2/lng2 target's
+ */
+function getDistance(lat1, lng1, lat2, lng2) {
+  var radLat1 = Rad(lat1);
+  var radLat2 = Rad(lat2);
+  var a = radLat1 - radLat2;
+  var b = Rad(lng1) - Rad(lng2);
+  var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+  s = s * 6378.137;
+  s = Math.round(s * 10000) / 10000;
+  s = s.toFixed(1)
+  return Number(s)
+}
+
 function ListItem({node, index, type}) {
+  console.log(node);
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
       <Image className="img rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
@@ -45,7 +67,7 @@ function ListItem({node, index, type}) {
         { type == 3 &&
         <View className="info justify-between">
           <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
-          <p className="">3.1km</p>
+          <p className="">{node.distance}km</p>
         </View>
         }
     </View>
@@ -96,11 +118,22 @@ function Index() {
   const title = instance.router.params.title
   const uid = instance.router.params.uid
   const type = instance.router.params.type ? instance.router.params.type : 2
+  const [userLocation, setUserLocation] = useState({})
 
   const [list, setList] = useState([])
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
+
+  // useEffect(() => {
+  //   Taro.getLocation({
+  //     // type: 'wgs84',
+  //     type: 'gcj02',
+  //     }).then((res) => {
+  //       console.log(res)
+  //       setUserLocation({lat: res.latitude, long: res.longitude})
+  //     })
+  // }, []);
 
   useEffect(() => {
     // console.log(uid)
@@ -119,16 +152,37 @@ function Index() {
         title: data.region ? data.region : '列表'
       })
 
-      setList(data.nodes.map((node, index) => 
-        (type == 2 || type == 5 || type == 7)
+      setList(data.nodes.map((node, index) => {
+        return (type == 2 || type == 5 || type == 7)
         &&
         // <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
         // <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
         // </Grid.Item>
             <GridItem node={node} type={type} key={index}/>
           ||
-            <ListItem node={node} type={type} key={index}/>
+            <ListItem node={node} type={type} key={index} distance={1} />
+        }
         ))
+
+      Taro.getLocation({
+        // type: 'wgs84',
+        type: 'gcj02',
+      }).then((res) => {
+        console.log(res)
+        setUserLocation({lat: res.latitude, long: res.longitude})
+
+        setList(data.nodes.map((node, index) => {
+          node.distance = getDistance(res.latitude, res.longitude, node.latitude, node.longitude)
+          return (type == 2 || type == 5 || type == 7)
+          &&
+              <GridItem node={node} type={type} key={index} />
+            ||
+              <ListItem node={node} type={type} key={index} />
+          }
+          ))
+
+      })
+
     })
     .catch(err => {
       console.log(err)
@@ -136,7 +190,7 @@ function Index() {
   }, [])
 
   return (
-    <View className="node-index p-1">
+    <View className={"node-index p-1 " + region}>
 
     {type == 3 &&
     <View className="sort">
