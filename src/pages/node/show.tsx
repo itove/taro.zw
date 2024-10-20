@@ -77,7 +77,7 @@ function Index() {
     .then(res => {
       const n = res.data
       setNode(n)
-      setFavs(n.favs)
+      setFavs(n.favs.length)
       console.log(n)
       if (n.body) {
         setBody(n.body.replace(/&nbsp;/g, '<br/>'))
