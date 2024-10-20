@@ -162,6 +162,9 @@ page{
 .mt-1{
   margin-top: 16px;
 }
+.mt-16{
+  margin-top: 16px;
+}
 .mb-1{
   margin-bottom: 16px !important;
 }
@@ -182,6 +185,9 @@ page{
 }
 .mb-16{
   margin-bottom: 16px !important;
+}
+.me-4{
+  margin-right: 4px !important;
 }
 .me-5{
   margin-right: 5px !important;
@@ -292,6 +298,10 @@ page{
   color: #FF8214;
   background: #ff82141a;
 }
+.tag-grey{
+  color: #999999;
+  background: #F5F5F5;
+}
 .tag-b,
 .tag-b-r{
   color: #6195FA;
@@ -326,4 +336,11 @@ page{
 }
 .justify-between{
   justify-content: space-between !important;
+}
+.align-items-center{
+  align-items: center !important;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
 }
