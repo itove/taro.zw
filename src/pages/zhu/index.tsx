@@ -26,7 +26,7 @@ function ListItem({node, type, index}) {
           <View> 126 </View>
         </View>
         <View>
-          <img className="" width="20px" height="20px" src={Env.iconUrl + 'suit-heart-gray.svg'} />
+          <img className="" width="20px" height="20px" src={Env.iconUrl + 'heart-red-fill.svg'} />
         </View>
       </View>
       <View className="card right">
