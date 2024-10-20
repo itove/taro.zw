@@ -29,6 +29,7 @@ function Index() {
   const [body, setBody] = useState('')
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
+  const [favs, setFavs] = useState(0)
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
   const [logged, setLogged] = useState(false)
@@ -76,6 +77,7 @@ function Index() {
     .then(res => {
       const n = res.data
       setNode(n)
+      setFavs(n.favs)
       console.log(n)
       if (n.body) {
         setBody(n.body.replace(/&nbsp;/g, '<br/>'))
@@ -196,9 +198,9 @@ function Index() {
     }
     if (isFav) {
       url = 'fav/remove'
-      setIsFav(false)
+      // setIsFav(false)
     } else {
-      setIsFav(true)
+      // setIsFav(true)
     }
     Taro.request({
       method: 'POST',
@@ -206,6 +208,11 @@ function Index() {
       data
     }).then((res) => {
       setIsFav(res.data.isFav)
+      if (res.data.isFav) {
+        setFavs(favs + 1)
+      } else {
+        setFavs(favs - 1)
+      }
     })
   }
 
@@ -285,7 +292,7 @@ function Index() {
           <View className="right">
             <View className="">
               <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} /> 54
-              <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'heart.png'} /> 87
+              <img width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart.png' || 'heart.png')} />{favs}
             </View>
           </View>
         </View>
