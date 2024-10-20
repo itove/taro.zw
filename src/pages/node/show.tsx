@@ -355,24 +355,6 @@ function Index() {
       </Tabs>
       }
 
-      { type == 3 &&
-      <View className="footer fixed">
-        <View className="left">
-          <View className="" onClick={() => Taro.switchTab({url: '/pages/index/index'})}>
-            <img src={Env.iconUrl + 'house.png'} />
-            <View>主页</View>
-          </View>
-          <View className="fav d-none" onClick={toggleFav}>
-            <img src={Env.iconUrl + (isFav && 'star.png' || 'star.png')} />
-            <View>{ isFav && '已收藏' || '收藏'}</View>
-          </View>
-        </View>
-        <View className="right">
-          <Button className="w-100 btn-primary btn-rounded" onClick={() => preview([{src: Env.imageUrl + node.qr}])}>立即购买</Button>
-        </View>
-      </View>
-      }
-
       <ImagePreview
         // autoPlay
         // visible={true}
