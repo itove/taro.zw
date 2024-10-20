@@ -44,12 +44,46 @@ function More({region, type}) {
   )
 }
 
+function toggleFav(node) {
+  console.log('togglefav')
+  Taro.getStorage({
+    key: Env.storageKey
+  })
+  .then(res => {
+    const uid = res.data.id
+
+    let url = 'fav/add'
+    const data = {
+      uid: uid,
+      nid: node.id,
+    }
+    if (node.isFav) {
+      url = 'fav/remove'
+      // setIsFav(false)
+    } else {
+      // setIsFav(true)
+    }
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + url,
+      data
+    }).then((res) => {
+      node.isFav = res.data.isFav
+    })
+
+  })
+  .catch(err => {
+    console.log(err)
+    Taro.navigateTo({ url: '/pages/me/login' })
+  })
+}
+
 function ListItem({node, type, index}) {
   return (
     <View className="card">
       <View className="widget">
         <View className="badge">4.5 <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill.svg'} /></View>
-        <img width="22px" height="22px" src={Env.iconUrl + 'suit-heart.svg'} />
+        <img width="22px" height="22px" onClick={() => toggleFav(node)} src={Env.iconUrl + (node.isFav && 'heart-red-fill.svg' || 'heart-white.svg')} />
       </View>
 
       <Image
@@ -73,26 +107,12 @@ function ListItem({node, type, index}) {
   )
 }
 
-function SwiperItem({node, index}) {
-  return (
-    <Swiper.Item key={index} className="rounded">
-    <Image
-    className="w-100 rounded"
-    mode="widthFix"
-    onClick={() => console.log(index)}
-    src={Env.imageUrl + node.image}
-    alt=""
-    />
-    </Swiper.Item>
-  )
-}
-
 function SwiperItem1({node, index, type}) {
   return (
     <Swiper.Item className="slide-item card">
     <View className="widget">
       <View className="badge">4.5 <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill.svg'} /></View>
-      <img width="22px" height="22px" src={Env.iconUrl + 'suit-heart.svg'} />
+      <img width="22px" height="22px" onClick={() => toggleFav(node)} src={Env.iconUrl + (node.isFav && 'heart-red-fill.svg' || 'heart-white.svg')} />
     </View>
 
     <Image
@@ -116,18 +136,7 @@ function SwiperItem1({node, index, type}) {
   )
 }
 
-function GridItem({node, index}) {
-  return (
-    <Grid.Item className="background-none" text={node.t} key={index} onClick={() => gridGoto(node) }>
-    <Image className="img" src={node.p} mode="widthFix" />
-    </Grid.Item>
-  )
-}
-
 function Index() {
-  const [sliderList, setSliderList] = useState([])
-  const [tongzhi, setTongzhi] = useState([])
-  const [gridList, setGridList] = useState([])
   const [youList, setYouList] = useState([])
   const [jingList, setJingList] = useState([])
   const [zhuList, setZhuList] = useState([])
@@ -138,20 +147,26 @@ function Index() {
   const [hongsetext, setHongsetext] = useState({})
   const [historytext, setHistorytext] = useState({})
   const [tab1value, setTab1value] = useState<string | number>('0')
+  const [logged, setLogged] = useState(false)
+  const [uid, setUid] = useState(0)
+  const [isFav, setIsFav] = useState(false)
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
 
-  const gridItems = [
-    { t: '景点', p: Env.iconUrl + 'grid_1.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '住宿', p: Env.iconUrl + 'grid_2.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '服务', p: Env.iconUrl + 'grid_4.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '采摘', p: Env.iconUrl + 'grid_5.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '特产', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '文体', p: Env.iconUrl + 'grid_7.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-    { t: '商超', p: Env.iconUrl + 'grid_8.png', target: '', url: 'node/index?type=0&region=youzai', isTab: false, },
-  ]
+  useEffect(() => {
+    Taro.getStorage({
+      key: Env.storageKey
+    })
+    .then(res => {
+      setLogged(true)
+      setUid(res.data.id)
+    })
+    .catch(err => {
+      console.log(err)
+      // Taro.redirectTo({url: '/pages/me/login'})
+    })
+  }, [])
 
   useEffect(() => {
     Taro.request({
@@ -161,11 +176,15 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setSliderList(data.jing.map((node, index) => <SwiperItem node={node} index={index} />))
-      setTongzhi(data.jing.map((node, index) => <div onClick={() => gotoNode(node.id, 5)}>{node.title}</div> ))
-      setYouList(data.jing.map((node, index) => <ListItem node={node} type={0} index={index} />))
       setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
-      setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
+      setYouList(data.jing.map((node, index) =>{
+        if (node.favs.includes(uid)) {
+          node.isFav = true
+        } else {
+          node.isFav = false
+        }
+        return <ListItem node={node} type={0} index={index} />
+      }))
     })
     .catch(err => {
       console.log(err)
