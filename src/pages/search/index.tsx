@@ -17,6 +17,8 @@ function Index() {
 
 
   useEffect(() => {
+    setTags2(makeTags2(hot))
+
     Taro.getStorage({
       key: key
     })
@@ -25,7 +27,6 @@ function Index() {
       // setHist(res.data)
       hist = res.data
       setTags(makeTags(res.data))
-      setTags2(makeTags2(hot))
     })
     .catch(err => {
       console.log(err)
