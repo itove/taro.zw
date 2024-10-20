@@ -20,6 +20,8 @@ export default defineAppConfig({
     'pages/me/index',
     'pages/me/name',
     'pages/me/setting',
+    'pages/search/index',
+    'pages/search/result',
     'pages/feedback/index',
     'pages/me/login',
     'pages/node/show',
