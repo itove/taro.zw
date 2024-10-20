@@ -82,7 +82,7 @@ function ListItem({node, index, type}) {
 
 function GridItem({node, index, type}) {
   return (
-    <View>
+    <View onClick={() => gotoNode(node.id, 7)}>
       <Image className="w-100 img" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
         <View className="title d-flex justify-between mb-10">
