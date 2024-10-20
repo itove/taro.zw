@@ -3,6 +3,7 @@ import { View, Button } from '@tarojs/components'
 import { Avatar } from "@nutui/nutui-react-taro"
 import './index.scss'
 import Taro from '@tarojs/taro'
+import { useDidShow } from '@tarojs/taro'
 import { Env } from '../../env'
 
 function More({text}) {
@@ -20,8 +21,17 @@ function Index() {
   const [user, setUser] = useState({})
   const [uid, setUid] = useState(0)
   const [avatarUrl, setAvatarUrl] = useState(Env.imageUrl + 'avatar.jpg')
+  const [favCount, setFavCount] = useState(0)
+  const [answerCount, setAnswerCount] = useState(0)
+  const [couponCount, setCouponCount] = useState(0)
+  const [logCount, setLogCount] = useState(0)
 
   useEffect(() => {
+    console.log('page me useEffect')
+  }, [])
+
+  useDidShow(() => {
+    console.log('page me show')
     Taro.getStorage({
       key: Env.storageKey
     })
@@ -36,6 +46,7 @@ function Index() {
         let u = res.data
         setUser(u)
         setUid(u.id)
+        setFavCount(u.favCount)
         if (u.avatar !== undefined && u.avatar !== null) {
           setAvatarUrl(Env.baseUrl + u.avatar)
         }
@@ -45,7 +56,7 @@ function Index() {
       console.log(err)
       // Taro.redirectTo({url: '/pages/me/login'})
     })
-  }, [])
+  })
 
   const goto = (region) => {
     if (logged) {
@@ -84,19 +95,19 @@ function Index() {
       <View className="block">
         <View className="info">
           <View className="item">
-            <View className="">2</View>
+            <View className="">{favCount}</View>
             <View className="">收藏</View>
           </View>
           <View className="item">
-            <View className="">0</View>
+            <View className="">{answerCount}</View>
             <View className="">回答</View>
           </View>
           <View className="item">
-            <View className="">13</View>
+            <View className="">{couponCount}</View>
             <View className="">优惠券</View>
           </View>
           <View className="item">
-            <View className="">2</View>
+            <View className="">{logCount}</View>
             <View className="">游记</View>
           </View>
         </View>
