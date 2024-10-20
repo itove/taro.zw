@@ -37,7 +37,8 @@ function ListItem({node, index, type}) {
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
       <Image className="img rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
-        <View className="title">
+        <View>
+        <View className="title mb-10">
           {node.title}
           { type == 6 &&
           <View className="tag tag-y ms-5">开放中</View>
@@ -46,6 +47,7 @@ function ListItem({node, index, type}) {
         { type != 6 &&
           <p className="ellipsis-2">{node.summary}</p>
         }
+        </View>
 
         { type != 3 &&
         <>
