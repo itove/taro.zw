@@ -117,6 +117,7 @@ function Index() {
           <View className="searchbtn" onClick={() => search(keyword)}>搜索</View>
         }
         value={keyword}
+        autoFocus={true}
         onChange={(e) => setKeyword(e) }
         // value={keyword}
         onSearch={(e) => search(e) }
