@@ -175,7 +175,11 @@ function Index() {
           <View className="title">遇见张湾</View>
           <View className="placeholder"></View>
         </View>
+        <View
+         onClick={() => Taro.navigateTo({url: '/pages/search/index'})}
+        >
          <SearchBar className="search" shape="round" maxLength={5} placeholder="请输入关键字搜索景点，美食，购物…" />
+        </View>
       </View>
 
       <Grid columns="4" className="grid">
