@@ -1,0 +1,29 @@
+page .search-index{
+  .searchbtn{
+    width: 90%;
+    font-size: 14px;
+  }
+  .nut-searchbar{
+    // height: 36px;
+  }
+  .nut-searchbar-round{
+    padding: 0 0 0 12px;
+    border-radius: 18px 0 0 18px;
+    height: 36px;
+    border: #7E9CF4 1px solid;
+  }
+  .nut-searchbar-rightin,
+  .nut-searchbar-right{
+    width: 68px;
+    height: 38px;
+    line-height: 36px;
+    text-align: center;
+    background: #7E9CF4;
+    border-radius: 0 50px 50px 0;
+    color: #ffffff;
+    margin-left: 0;
+  }
+  .nut-searchbar-clear{
+    margin-right: 8px;
+  }
+}
