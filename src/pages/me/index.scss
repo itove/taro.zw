@@ -1,4 +1,5 @@
 page .me{
+  padding-top: 64px;
   --nutui-actionsheet-item-border-bottom: none;
   .nut-actionsheet .nut-popup-title{
     border-bottom: none;
@@ -28,7 +29,7 @@ page .me{
   }
   .user{
     text-align: center;
-    margin-top: 16px;
+    margin-bottom: 32px;
   }
   .info-2{
     display: flex;

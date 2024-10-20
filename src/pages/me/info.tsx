@@ -7,14 +7,14 @@ import { Env } from '../../env'
 
 function Right() {
   return (
-    <img src={Env.iconUrl + 'arrow-right.png'} className="ms-1 icon" />
+    <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} className="ms-1 icon" />
   )
 }
 
 function Index() {
   const [user, setUser] = useState({})
   const [phone, setPhone] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState(Env.imageUrl + 'avatar.jpg')
 
   useEffect(() => {
     Taro.getStorage({
@@ -37,7 +37,7 @@ function Index() {
           user.name = '填写姓名'
         }
         setUser(user)
-        if (user.avatar !== undefined) {
+        if (user.avatar !== undefined && user.avatar !== null) {
           setAvatarUrl(Env.baseUrl + user.avatar)
         }
       })
