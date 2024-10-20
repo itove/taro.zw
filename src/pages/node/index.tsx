@@ -164,7 +164,7 @@ function Index() {
         // </Grid.Item>
             <GridItem node={node} type={type} key={index}/>
           ||
-            <ListItem node={node} type={type} key={index} distance={1} />
+            <ListItem node={node} type={type} key={index} />
         }
         ))
 

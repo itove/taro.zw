@@ -344,3 +344,13 @@ page{
   display: flex;
   flex-wrap: wrap;
 }
+.widget{
+  height: 20px;
+  top: 0;
+  left: 0;
+  .badge{
+    border-radius: 6px 0 6px 0;
+    font-size: 10px;
+    line-height: 10px;
+  }
+}

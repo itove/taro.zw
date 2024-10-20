@@ -97,6 +97,41 @@ page{
     --nutui-tabs-tab-line-width: 22px;
     --nutui-tabs-titles-item-active-font-size: 16px;
     --nutui-tabs-titles-font-size: 14px;
+    .list-item{
+      margin: 20px 0;
+      padding: 0;
+      .widget{
+        top: 0;
+        left: 0;
+        .badge{
+          font-size: 10px;
+        }
+      }
+      .text{
+        padding: 0;
+        width: 73%;
+        .title {
+          color: #333333;
+          font-size: 14px;
+        }
+        .tag{
+          padding: 3px 6px;
+          font-size: 10px;
+        }
+        .info{
+          font-size: 12px;
+          color: #666666;
+          align-items: center;
+        }
+      }
+      .img{
+        width: 84px;
+        height: 84px;
+      }
+    }
+    .nut-tabpane{
+      padding: 0;
+    }
     .nut-empty-image{
       margin-bottom: 20px;
     }
@@ -110,6 +145,7 @@ page{
     .nut-tabs{
       //background: #ffffff;
       .nut-tabs-titles{
+        margin-bottom: 8px;
         //background: #ffffff;
         .nut-tabs-titles-item{
           font-size: 14px;
