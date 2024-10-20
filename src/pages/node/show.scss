@@ -244,6 +244,14 @@ page{
   color: #666666;
 }
 page .show{
+  .tag{
+    margin-right: 6px;
+  }
+  .tag-blue{
+    background: #6f8bff;
+    color: #ffffff;
+    padding: 4px 6px;
+  }
   .hero{
     .widget{
       top: unset;

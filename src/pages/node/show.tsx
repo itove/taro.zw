@@ -89,7 +89,7 @@ function Index() {
         title: n.title
       })
 
-      setTags(n.tags.map((i, index) => <View className="tag" key={index}>{i}</View> ))
+      setTags(n.tags.map((i, index) => <View className="tag tag-blue" key={index}>{i}</View> ))
 
       setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
 
