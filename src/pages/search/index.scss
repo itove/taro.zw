@@ -1,89 +1,136 @@
-page .search-index{
-  .searchbtn{
-    width: 90%;
-    font-size: 14px;
-  }
-  .nut-searchbar{
-    padding: 0;
-  }
-  .nut-searchbar-round{
-    padding: 0 0 0 12px;
-    border-radius: 18px 0 0 18px;
-    height: 36px;
-    border: #7E9CF4 1px solid;
-  }
-  .nut-searchbar-rightin,
-  .nut-searchbar-right{
-    width: 68px;
-    height: 38px;
-    line-height: 36px;
-    text-align: center;
-    background: #7E9CF4;
-    border-radius: 0 50px 50px 0;
-    color: #ffffff;
-    margin-left: 0;
-  }
-  .nut-searchbar-clear{
-    margin-right: 8px;
-  }
-  .hist,
-  .hot {
-    margin-top: 10px;
-    padding: 16px 0;
-    .title{
-      margin-bottom: 16px;
-      .left{
-        color: #999999;
-        font-size: 12px;
-        font-weight: 400;
-      }
-      .right{
-        font-size: 14px;
-        font-weight: 600;
-        color: #333333;
-        .bar{
-          width: 3px;
-          height: 14px;
-          border-radius: 4px 2px 2px 4px;
-          background: #7E9CF4;
-          margin-right: 11px;
+page{
+  .search-index,
+  .search-result{
+    background: #ffffff;
+    .searchbtn{
+      width: 90%;
+      font-size: 14px;
+    }
+    .nut-searchbar{
+      padding: 0;
+    }
+    .nut-searchbar-round{
+      padding: 0 0 0 12px;
+      border-radius: 18px 0 0 18px;
+      height: 36px;
+      border: #7E9CF4 1px solid;
+    }
+    .nut-searchbar-rightin,
+    .nut-searchbar-right{
+      width: 68px;
+      height: 38px;
+      line-height: 36px;
+      text-align: center;
+      background: #7E9CF4;
+      border-radius: 0 50px 50px 0;
+      color: #ffffff;
+      margin-left: 0;
+    }
+    .nut-searchbar-clear{
+      margin-right: 8px;
+    }
+    .hist,
+    .hot {
+      margin-top: 10px;
+      padding: 16px 0;
+      .title{
+        margin-bottom: 16px;
+        .left{
+          color: #999999;
+          font-size: 12px;
+          font-weight: 400;
+        }
+        .right{
+          font-size: 14px;
+          font-weight: 600;
+          color: #333333;
+          .bar{
+            width: 3px;
+            height: 14px;
+            border-radius: 4px 2px 2px 4px;
+            background: #7E9CF4;
+            margin-right: 11px;
+          }
         }
       }
     }
-  }
-  .hist{
-    .tag{
-      margin-right: 10px;
-      margin-bottom: 10px;
-      width: auto;
-      flex: 0 0 auto;
-      border-radius: 14px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      padding: 0;
-      .text{
+    .hist{
+      .tag{
+        margin-right: 10px;
+        margin-bottom: 10px;
+        width: auto;
+        flex: 0 0 auto;
+        border-radius: 14px;
+        font-size: 12px;
         display: flex;
         align-items: center;
-        padding: 5px 0 5px 15px;
+        padding: 0;
+        .text{
+          display: flex;
+          align-items: center;
+          padding: 5px 0 5px 15px;
+        }
+        .img{
+          margin-left: 8px;
+          padding-right: 15px;
+        }
       }
-      .img{
-        margin-left: 8px;
-        padding-right: 15px;
+    }
+    .hot{
+      margin-top: 0;
+      .tag{
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #7E9CF4;
+        background: #7e9cf41a;
+        padding: 5px 15px;
+        border-radius: 14px;
       }
     }
   }
-  .hot{
-    margin-top: 0;
-    .tag{
-      margin-right: 10px;
-      margin-bottom: 10px;
-      font-size: 12px;
-      font-weight: 400;
-      color: #7E9CF4;
-      background: #7e9cf41a;
-      padding: 5px 15px;
-      border-radius: 14px;
+  .search-result{
+    --nutui-tabs-titles-background-color: #ffffff;
+    --nutui-tabs-titles-item-color: #666666;
+    --nutui-tabs-titles-item-active-color: #333333;
+    --nutui-tabs-tab-line-width: 22px;
+    --nutui-tabs-titles-item-active-font-size: 16px;
+    --nutui-tabs-titles-font-size: 14px;
+    .nut-empty-image{
+      margin-bottom: 20px;
+    }
+    .nut-empty-description{
+      color: #999999;
+      font-size: 14px;
+    }
+    .nut-searchbar-round{
+      border-radius: 18px;
+    }
+    .nut-tabs{
+      //background: #ffffff;
+      .nut-tabs-titles{
+        //background: #ffffff;
+        .nut-tabs-titles-item{
+          font-size: 14px;
+          padding: 0 13px;
+        }
+        .nut-tabs-titles-item-smile{
+          background-image: url("https://zw.dev.itove.com/images/icons/curve.png") !important;
+          background-repeat: no-repeat;
+          background-position: center;
+          //width: 62px;
+          // height: 8px;
+          .nut-icon{
+            color: #7E9CF4;
+            display: none;
+          }
+        }
+        .nut-tabs-titles-item-active{
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
     }
   }
 }
