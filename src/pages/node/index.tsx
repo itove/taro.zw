@@ -69,7 +69,9 @@ function ListItem({node, index, type}) {
         { type == 3 &&
         <View className="info justify-between">
           <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
+          { node.distance && 
           <p className="">{node.distance}km</p>
+          }
         </View>
         }
     </View>
