@@ -52,22 +52,17 @@ function toggleFav(node) {
   .then(res => {
     const uid = res.data.id
 
-    let url = 'fav/add'
     const data = {
       uid: uid,
       nid: node.id,
     }
-    if (node.isFav) {
-      url = 'fav/remove'
-      // setIsFav(false)
-    } else {
-      // setIsFav(true)
-    }
+
     Taro.request({
       method: 'POST',
-      url: Env.apiUrl + url,
+      url: Env.apiUrl + 'fav/toggle',
       data
     }).then((res) => {
+      console.log(res.data.isFav)
       node.isFav = res.data.isFav
     })
 
@@ -149,7 +144,7 @@ function Index() {
   const [tab1value, setTab1value] = useState<string | number>('0')
   const [logged, setLogged] = useState(false)
   const [uid, setUid] = useState(0)
-  const [isFav, setIsFav] = useState(false)
+  // const [isFav, setIsFav] = useState(false)
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
@@ -176,8 +171,16 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
-      setYouList(data.jing.map((node, index) =>{
+      setJingList(data.jing.map((node, index) => {
+        if (node.favs.includes(uid)) {
+          node.isFav = true
+        } else {
+          node.isFav = false
+        }
+        return <SwiperItem1 node={node} index={index} type={0} />
+      }))
+
+      setYouList(data.jing.map((node, index) => {
         if (node.favs.includes(uid)) {
           node.isFav = true
         } else {

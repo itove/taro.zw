@@ -191,20 +191,14 @@ function Index() {
       Taro.navigateTo({ url: '/pages/me/login' })
       return
     }
-    let url = 'fav/add'
     const data = {
       uid: uid,
       nid: id,
     }
-    if (isFav) {
-      url = 'fav/remove'
-      // setIsFav(false)
-    } else {
-      // setIsFav(true)
-    }
+
     Taro.request({
       method: 'POST',
-      url: Env.apiUrl + url,
+      url: Env.apiUrl + 'fav/toggle',
       data
     }).then((res) => {
       setIsFav(res.data.isFav)
