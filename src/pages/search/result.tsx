@@ -61,6 +61,8 @@ function Index() {
     <View className="search-result p-16">
       <SearchBar className="" shape="round"
         value={keyword}
+        disabled={true}
+        clearable={false}
         onChange={(e) => setKeyword(e) }
         value={keyword}
         onSearch={(e) => search(e) }
