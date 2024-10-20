@@ -6,18 +6,15 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
 const key = 'hist'
-
-function rmHist() {
-  const keyword = 'fuck'
-  console.log('remove hist: ', keyword)
-}
+let hist = []
 
 function Index() {
   const [keyword, setKeyword] = useState('')
-  const [hist, setHist] = useState([])
+  // const [hist, setHist] = useState([])
   const [hot, setHot] = useState(['亲子', '民宿推荐', '赏花', '购物', '文创'])
   const [tags, setTags] = useState([])
   const [tags2, setTags2] = useState([])
+
 
   useEffect(() => {
     Taro.getStorage({
@@ -25,7 +22,8 @@ function Index() {
     })
     .then(res => {
       console.log(res.data)
-      setHist(res.data)
+      // setHist(res.data)
+      hist = res.data
       setTags(makeTags(res.data))
       setTags2(makeTags2(hot))
     })
@@ -49,8 +47,9 @@ function Index() {
 
     setKeyword(kw)
 
-    setHist(newUniqHist)
-
+    // setHist(newUniqHist)
+    hist = newUniqHist
+    
     setTags(makeTags(newUniqHist))
 
     Taro.setStorage({
@@ -65,7 +64,7 @@ function Index() {
     return items.map((k, i) => 
     <View className="tag tag-grey" index={i}>
       <View className="text" onClick={() => search(k)}>{k}</View>
-      <img onClick={rmHist} className="img" width="12px" height="12px" src={Env.iconUrl + 'close.png'} />
+      <img onClick={() => rmHist(i)} className="img" width="12px" height="12px" src={Env.iconUrl + 'close.png'} />
     </View>
           )
   }
@@ -80,7 +79,8 @@ function Index() {
 
   const clearHist = () => {
     console.log('clear hist...')
-    setHist([])
+    // setHist([])
+    hist = []
     setTags([])
     Taro.removeStorage({
       key: key,
@@ -93,6 +93,23 @@ function Index() {
     })
   }
 
+  const rmHist = (index) => {
+    console.log('remove hist: ', index)
+    console.log(hist)
+    const newhist = hist
+    console.log(newhist)
+    newhist.splice(index, 1)
+    console.log(newhist)
+    // setHist(newhist)
+    hist = newhist
+    setTags(makeTags(newhist))
+    Taro.setStorage({
+      key: key,
+      data: newhist
+    })
+  }
+
+
   return (
     <View className="search-index p-16">
       <SearchBar className="" shape="round"
@@ -100,7 +117,7 @@ function Index() {
           <View className="searchbtn" onClick={() => search(keyword)}>搜索</View>
         }
         value={keyword}
-        onBlur={(e) => setKeyword(e) }
+        onChange={(e) => setKeyword(e) }
         // value={keyword}
         onSearch={(e) => search(e) }
       />

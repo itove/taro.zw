@@ -54,6 +54,7 @@ page .search-index{
   .hist{
     .tag{
       margin-right: 10px;
+      margin-bottom: 10px;
       width: auto;
       flex: 0 0 auto;
       border-radius: 14px;
@@ -73,13 +74,16 @@ page .search-index{
     }
   }
   .hot{
+    margin-top: 0;
     .tag{
       margin-right: 10px;
+      margin-bottom: 10px;
       font-size: 12px;
       font-weight: 400;
       color: #7E9CF4;
       background: #7e9cf41a;
       padding: 5px 15px;
+      border-radius: 14px;
     }
   }
 }
