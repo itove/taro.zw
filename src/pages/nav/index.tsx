@@ -115,9 +115,9 @@ function Index() {
       setNodes(nodes)
       nodes.map((n, index) => {
         let  path = Env.iconUrl + 'marker.png'
-        if (n.region === 29) {
-          path = Env.iconUrl + 'marker-house.png'
-        }
+        // if (n.region === 29) {
+        //   path = Env.iconUrl + 'marker-house.png'
+        // }
         markers.push({
           id: index,
           zIndex: index,
