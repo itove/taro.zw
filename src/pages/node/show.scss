@@ -214,7 +214,17 @@ page{
   justify-content: space-between;
   align-items: center;
   border-top: 0.5px solid #E6E6E6;
-  height: 49px;
+  height: 75px;
+  .input{
+    width: 68%;
+    background: #f4f4f7;
+    border-radius: 6px;
+    padding: 10px;
+    color: #787b86;
+  }
+  .btns{
+    width: 23%;
+  }
   .left{
     // width: 25%;
     display: flex;
@@ -308,6 +318,62 @@ page .show{
           align-items: center;
         }
       }
+    }
+  }
+}
+.show.talk-show{
+  .info{
+    border-bottom: #f4f4f7 1px solid;
+    .like{
+      font-size: 18px;
+      font-weight: 600;
+      color: #fd6b21;
+    }
+    .date{
+      color: #b9bcc3;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+}
+.comments{
+  font-size: 16px;
+  padding: 20px 0;
+  color: #333333;
+  .title{
+    color: #787b86;
+  }
+  .item{
+    margin: 16px 0;
+    .top{
+      display: flex;
+      justify-content: space-between;
+      .user{
+        display: flex;
+        align-items: center;
+        .img{
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+      }
+      .like{
+        display: flex;
+        align-items: center;
+        .img{
+          margin-right: 10px;
+        }
+      }
+    }
+    .content{
+      padding-left: 55px;
+    }
+    .body{
+      color: #333333;
+      margin-bottom: 6px;
+    }
+    .time{
+      color: #b9bcc3;
+      font-size: 10px;
     }
   }
 }

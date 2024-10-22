@@ -6,8 +6,8 @@ import { Avatar } from '@nutui/nutui-react-taro'
 import './index.scss'
 // import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
 
-function gotoNode(id, type = 2) {
-  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+function gotoNode(id, region = 'talk') {
+  Taro.navigateTo({url: '/pages/node/show?region=' + region + '&id=' + id})
 }
 
 // style={{height: getRandomArbitrary(300, 400) + 'px'}} 
@@ -41,7 +41,7 @@ function GridItem({node, index, type}) {
 
 function Index() {
   const instance = Taro.getCurrentInstance();
-  const region = instance.router.params.region ? instance.router.params.region: 'jing'
+  const region = instance.router.params.region ? instance.router.params.region: 'all'
   const title = instance.router.params.title
   const uid = instance.router.params.uid
   const type = instance.router.params.type ? instance.router.params.type : 2
@@ -70,7 +70,7 @@ function Index() {
 
           type == 2
           &&
-    <View key={index} className="grid-item rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
+    <View key={index} className="grid-item rounded overflow-hidden" onClick={() => gotoNode(node.id, 'talk')}>
       <Image className="w-100 img" style={{height: 300 + 'px'}} src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
         <View>{node.title}</View>

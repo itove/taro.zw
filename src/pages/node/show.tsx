@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image, Button } from '@tarojs/components'
+import { View, Image, Input, Button } from '@tarojs/components'
 import './show.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
 import { fmtSeconds } from '../../utils/fmtSeconds'
+import { fmtDate } from '../../utils/fmtDate'
 
 Taro.options.html.transformElement = (el) => {
   if (el.nodeName === 'image') {
@@ -22,23 +23,49 @@ function openLocation(latitude, longitude) {
   })
 }
 
+function makeCommentsList(comments) {
+  return comments.map((c, i) =>
+        <View className="item">
+          <View className="top">
+            <View className="user">
+              <img width="48px" height="48px" className="img" src={Env.imageUrl + c.author.avatar} />
+              <View>{c.author.name}</View>
+            </View>
+            <View className="like">
+              <img width="16px" height="16px" className="img" src={Env.iconUrl + 'hand-thumbs-up.svg'} />
+              {c.up}
+            </View>
+          </View>
+          <View className="content">
+            <View className="body">{c.body}</View>
+            <View className="time">{fmtDate(new Date(c.createdAt))} </View>
+          </View>
+        </View>
+                     )
+}
+
 function Index() {
   const [node, setNode] = useState({})
   const [rooms, setRooms] = useState([])
   const [uid, setUid] = useState(0)
   const [body, setBody] = useState('')
+  const [comment, setComment] = useState('')
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
   const [favs, setFavs] = useState(0)
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
   const [logged, setLogged] = useState(false)
+  const [commentList, setCommentList] = useState([])
+  const [commentCount, setCommentCount] = useState(0)
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
+  const nid = instance.router.params.id
   // 0: all // 1: jing // 2: zhu // 3: shi // 4: dong // 5: wen // 6: yi // 7: gou // 8: wan
   // index list & show normal
   const type = instance.router.params.type ? instance.router.params.type : 2
+  const region = instance.router.params.region ? instance.router.params.region : 'all'
   const innerAudioContext = Taro.createInnerAudioContext()
   const [audio, setAudio] = useState(innerAudioContext)
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
@@ -89,14 +116,59 @@ function Index() {
         title: n.title
       })
 
+      setCommentCount(n.comments.length)
+      setCommentList(makeCommentsList(n.comments))
       setTags(n.tags.map((i, index) => <View className="tag tag-blue" key={index}>{i}</View> ))
-
       setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
 
       innerAudioContext.src = Env.imageUrl + n.audio
     })
   }, [])
 
+  const sendComment = (body) => {
+    if (!logged) {
+      Taro.navigateTo({ url: '/pages/me/login' })
+      return
+    }
+    setComment('')
+    console.log('send comment: ', body)
+    if(body == '') {
+      console.log('comment body blank')
+      return
+    }
+
+    const data = {
+      body,
+      uid, 
+      nid,
+    }
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + 'comments',
+      data
+    }).then((res) => {
+      if (res.statusCode === 200) {
+        Taro.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        }).then(() => {
+          setCommentList(makeCommentsList(res.data.comments))
+          setCommentCount(res.data.comments.length)
+          setTimeout(() => {
+            // Taro.reLaunch({ url: '/pages/index/index' })
+          }, 2000)
+        })
+      } else {
+        Taro.showToast({
+          title: '系统错误',
+          icon: 'error',
+          duration: 2000
+        })
+        console.log('server error！' + res.errMsg)
+      }
+    })
+  }
 
   const playAudio = () => {
       console.log(audio.src)
@@ -215,11 +287,16 @@ function Index() {
     setShowPreview(true)
   }
 
+  const updateInput = (e) => {
+    const v = e.detail.value
+    setComment(v)
+  }
+
   const [tab1value, setTab1value] = useState<string | number>('0')
 
   return (
-    <View className="show">
-      <View className="hero p-1">
+    <View className={"show p-1 " + region+"-show"}>
+      <View className="hero">
         { type == 4 &&
         <View className="widget">
           <View className="badge">活动日期：2024/09/30 - 2024/10/30</View>
@@ -250,8 +327,8 @@ function Index() {
       </>
       }
 
-      { (type != 4 && type !=6) &&
-      <View className="p-1 card">
+      { (type != 4 && type !=6 && region != 'talk') &&
+      <View className="card">
         <View className="header">
           <View className="">
             { (type == 0 || type == 1) &&
@@ -301,7 +378,21 @@ function Index() {
         </View>
       </View>
 
-      <View dangerouslySetInnerHTML={{__html: body}} className='body p-1'></View>
+      <View dangerouslySetInnerHTML={{__html: body}} className='body py-6'></View>
+      </>
+      }
+
+      { region == 'talk' &&
+      <>
+        <View dangerouslySetInnerHTML={{__html: body}} className='body py-6'></View>
+
+        <View className="info d-flex justify-between align-items-center py-16">
+          <View className="like d-flex align-items-center">
+            <img height="20px" width="20px" src={Env.iconUrl+ 'heart-pink-fill.svg'} />
+            <View className="ms-5">{node.likes}</View>
+          </View>
+          <View className="date">{fmtDate(new Date(node.createdAt))}</View>
+        </View>
       </>
       }
 
@@ -348,6 +439,23 @@ function Index() {
         </Tabs.TabPane>
       </Tabs>
       }
+
+      <View className="comments">
+        <View className="title">评论 ({commentCount})</View>
+        <View className="comments-list">
+        {commentList}
+        </View>
+      </View>
+
+      <View className="footer fixed d-flex p-1">
+        <Input width="" placeholder='我想说...' className="input" value={comment} onInput={(e) => updateInput(e)}>
+          <img widht="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
+        </Input>
+        <View className="d-flex btns">
+          <img widht="28" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
+          <img widht="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
+        </View>
+      </View>
 
       <ImagePreview
         // autoPlay
