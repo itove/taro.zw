@@ -11,13 +11,12 @@ function gotoNode(id, type = 2) {
 }
 
 function ListItem({node, index, keyword, type}) {
-  console.log(node);
   const title = node.title.replace(keyword, `<Text class="hightlight">${keyword}</Text>`)
   const address = node.address ? node.address.replace(keyword, `<Text class="hightlight">${keyword}</Text>`) : ''
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
       <View className="widget">
-        <View className="badge">景点</View>
+        <View className={'badge badge-' + node.region.label}>{node.region.name}</View>
       </View>
       <Image className="img rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
@@ -48,6 +47,14 @@ function Index() {
   const [tab1value, setTab1value] = useState<string | number>('0')
   const [nodes, setNodes] = useState([])
   const [list, setList] = useState([])
+  const [list1, setList1] = useState([])
+  const [list2, setList2] = useState([])
+  const [list3, setList3] = useState([])
+  const [list4, setList4] = useState([])
+  const [list5, setList5] = useState([])
+  const [list6, setList6] = useState([])
+  const [list7, setList7] = useState([])
+  const [list8, setList8] = useState([])
 
   useEffect(() => {
     Taro.request({
@@ -55,7 +62,48 @@ function Index() {
     })
     .then(res => {
       const nodes = res.data.nodes
+      console.log(nodes)
       setList(nodes.map((node, index) => <ListItem node={node} type={1} keyword={keyword} key={index} />))
+      setList1(nodes.map((node, index) => {
+        if (node.region.label === 'jing') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
+      setList2(nodes.map((node, index) => {
+        if (node.region.label === 'zhu') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
+      setList3(nodes.map((node, index) => {
+        if (node.region.label === 'shi') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
+      setList4(nodes.map((node, index) => {
+        if (node.region.label === 'wen') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
+      setList5(nodes.map((node, index) => {
+        if (node.region.label === 'gou') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
+      setList6(nodes.map((node, index) => {
+        if (node.region.label === 'dong') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
+      setList7(nodes.map((node, index) => {
+        if (node.region.label === 'wan') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
+      setList8(nodes.map((node, index) => {
+        if (node.region.label === 'yi') {
+          return <ListItem node={node} type={1} keyword={keyword} key={index} />
+        }
+      }))
     })
   }, [])
 
@@ -81,66 +129,130 @@ function Index() {
         className=""
       >
         <Tabs.TabPane title="全部">
-          <View>{list}</View>
+          { list.length > 0 &&
+          <View>
+          {list}
+          </View>
+          ||
+          <View>
+            <Empty status="empty" description="抱歉，未找到相关内容哦~"
+            image={<img src={Env.imageUrl+ 'empty.png'} />}
+            imageSize={120}
+            />
+          </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="景点">
-          <View>{list}</View>
+          { list1.length > 0 &&
+          <View>
+          {list1}
+          </View>
+          ||
+          <View>
+            <Empty status="empty" description="抱歉，未找到相关内容哦~"
+            image={<img src={Env.imageUrl+ 'empty.png'} />}
+            imageSize={120}
+            />
+          </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="住宿">
+          { list2.length > 0 &&
+          <View>
+          {list2}
+          </View>
+          ||
           <View>
             <Empty status="empty" description="抱歉，未找到相关内容哦~"
             image={<img src={Env.imageUrl+ 'empty.png'} />}
             imageSize={120}
             />
           </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="美食">
+          { list3.length > 0 &&
+          <View>
+          {list3}
+          </View>
+          ||
           <View>
             <Empty status="empty" description="抱歉，未找到相关内容哦~"
             image={<img src={Env.imageUrl+ 'empty.png'} />}
             imageSize={120}
             />
           </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="文创">
+          { list4.length > 0 &&
+          <View>
+          {list4}
+          </View>
+          ||
           <View>
             <Empty status="empty" description="抱歉，未找到相关内容哦~"
             image={<img src={Env.imageUrl+ 'empty.png'} />}
             imageSize={120}
             />
           </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="购物">
+          { list5.length > 0 &&
+          <View>
+          {list5}
+          </View>
+          ||
           <View>
             <Empty status="empty" description="抱歉，未找到相关内容哦~"
             image={<img src={Env.imageUrl+ 'empty.png'} />}
             imageSize={120}
             />
           </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="活动">
+          { list6.length > 0 &&
+          <View>
+          {list6}
+          </View>
+          ||
           <View>
             <Empty status="empty" description="抱歉，未找到相关内容哦~"
             image={<img src={Env.imageUrl+ 'empty.png'} />}
             imageSize={120}
             />
           </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="玩法">
+          { list7.length > 0 &&
+          <View>
+          {list7}
+          </View>
+          ||
           <View>
             <Empty status="empty" description="抱歉，未找到相关内容哦~"
             image={<img src={Env.imageUrl+ 'empty.png'} />}
             imageSize={120}
             />
           </View>
+          }
         </Tabs.TabPane>
         <Tabs.TabPane title="艺动">
+          { list8.length > 0 &&
+          <View>
+          {list8}
+          </View>
+          ||
           <View>
             <Empty status="empty" description="抱歉，未找到相关内容哦~"
             image={<img src={Env.imageUrl+ 'empty.png'} />}
             imageSize={120}
             />
           </View>
+          }
         </Tabs.TabPane>
       </Tabs>
 
