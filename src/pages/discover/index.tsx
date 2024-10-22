@@ -85,7 +85,7 @@ function Index() {
           </View>
           <View className="like">
           <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
-          {node.likes}</View>
+          {node.likes.length}</View>
         </View>
       </View>
     </View>
