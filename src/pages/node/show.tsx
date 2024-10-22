@@ -151,7 +151,7 @@ function Index() {
   const upit = (cid) => {
     console.log('logged? ,', logged);
     if (!logged) {
-      Taro.navigateTo({ url: '/pages/me/login' })
+      // Taro.navigateTo({ url: '/pages/me/login' })
       return
     }
     console.log('up comment: ' + cid)
@@ -282,6 +282,27 @@ function Index() {
             </View>
           </View>
       ))
+  }
+
+  const commentItem = ({c}) => {
+    return (
+      <View className="item">
+        <View className="top">
+          <View className="user">
+            <img width="48px" height="48px" className="img" src={Env.imageUrl + c.author.avatar} />
+            <View>{c.author.name}</View>
+          </View>
+          <View className="like">
+            <img width="16px" height="16px" className="img" onClick={() => upit(c.id)} src={Env.iconUrl + (c.ups.includes(uid) ? 'hand-thumbs-up-fill.svg' : 'hand-thumbs-up.svg')} />
+            {c.ups.length}
+          </View>
+        </View>
+        <View className="content">
+          <View className="body">{c.body}</View>
+          <View className="time">{fmtDate(new Date(c.createdAt))} </View>
+        </View>
+      </View>
+    )
   }
 
   const RoomView = ({room, index, node}) => {
