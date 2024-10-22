@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { SearchBar } from '@nutui/nutui-react-taro'
 import './index.scss'
 import Taro from '@tarojs/taro'
@@ -10,8 +10,10 @@ function gotoNode(id, type = 2) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
 }
 
-function ListItem({node, index, type}) {
+function ListItem({node, index, keyword, type}) {
   console.log(node);
+  const title = node.title.replace(keyword, `<Text class="hightlight">${keyword}</Text>`)
+  const address = node.address ? node.address.replace(keyword, `<Text class="hightlight">${keyword}</Text>`) : ''
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
       <View className="widget">
@@ -21,7 +23,7 @@ function ListItem({node, index, type}) {
       <View className="text">
         <View>
           <View className="title mb-10">
-            {node.title}
+            <View dangerouslySetInnerHTML={{__html: title}}></View>
           </View>
 
           <View className="d-flex">
@@ -32,7 +34,7 @@ function ListItem({node, index, type}) {
 
         <View className="info">
           <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
-          某某区某街道民主路34号
+            <View dangerouslySetInnerHTML={{__html: address}}></View>
         </View>
     </View>
 
@@ -53,7 +55,7 @@ function Index() {
     })
     .then(res => {
       const nodes = res.data.nodes
-      setList(nodes.map((node, index) => <ListItem node={node} type={1} key={index} />))
+      setList(nodes.map((node, index) => <ListItem node={node} type={1} keyword={keyword} key={index} />))
     })
   }, [])
 

@@ -98,6 +98,9 @@ page{
     --nutui-tabs-titles-item-active-font-size: 16px;
     --nutui-tabs-titles-font-size: 14px;
     .list-item{
+      .hightlight{
+        color: #7E9CF4;
+      }
       margin: 20px 0;
       padding: 0;
       .widget{
