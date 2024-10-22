@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { View, Image } from '@tarojs/components'
-import { Grid, Avatar } from '@nutui/nutui-react-taro'
+import { Avatar } from '@nutui/nutui-react-taro'
 import './index.scss'
 // import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
 
 function gotoNode(id, type = 2) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+}
+
+// style={{height: getRandomArbitrary(300, 400) + 'px'}} 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 function ListItem({node, index, type}) {
@@ -49,10 +54,7 @@ function Index() {
 
   useEffect(() => {
     // console.log(uid)
-    let url = Env.apiUrl + 'nodes/' + region
-    if (uid !== undefined ) {
-      url = Env.apiUrl + 'fav?region=' + region + '&uid=' + uid
-    }
+    let url = Env.apiUrl + 'nodes/talk'
     Taro.request({
       url
     })
@@ -68,25 +70,25 @@ function Index() {
 
           type == 2
           &&
-    <Grid.Item key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
-    <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
-    <View className="text">
-      <View>{node.title}</View>
-      <View className="more">
-        <View className="user">
-          <Avatar
-            size="32"
-            src={avatarUrl}
-            className="me-5"
-          />
-          <View>林丹丹</View>
+    <View key={index} className="grid-item rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
+      <Image className="w-100 img" style={{height: 300 + 'px'}} src={Env.imageUrl + node.image} mode="aspectFill" />
+      <View className="text">
+        <View>{node.title}</View>
+        <View className="more">
+          <View className="user">
+            <Avatar
+              size="24"
+              src={Env.imageUrl + node.author.avatar}
+              className="me-5"
+            />
+            <View>{node.author.name}</View>
+          </View>
+          <View className="like">
+          <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
+          {node.likes}</View>
         </View>
-        <View className="like">
-        <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'suit-heart-gray.svg'} />
-        3.1K</View>
       </View>
     </View>
-    </Grid.Item>
           ||
           <ListItem node={node} type={type}/>
         )
@@ -98,11 +100,11 @@ function Index() {
   }, [])
 
   return (
-    <View className="node-index p-1">
+    <View className="discover-index p-1">
     {type == 2 &&
-      <Grid columns="2" gap="3" center={false} className="grid">
+      <View className="grid">
         {list}
-      </Grid>
+      </View>
     }
     {type != 2 &&
       <View className="list">

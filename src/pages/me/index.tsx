@@ -48,7 +48,7 @@ function Index() {
         setUid(u.id)
         setFavCount(u.favCount)
         if (u.avatar !== undefined && u.avatar !== null) {
-          setAvatarUrl(Env.baseUrl + u.avatar)
+          setAvatarUrl(Env.imageUrl + u.avatar)
         }
       })
     })

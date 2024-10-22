@@ -38,7 +38,7 @@ function Index() {
         }
         setUser(user)
         if (user.avatar !== undefined && user.avatar !== null) {
-          setAvatarUrl(Env.baseUrl + user.avatar)
+          setAvatarUrl(Env.imageUrl + user.avatar)
         }
       })
     })
