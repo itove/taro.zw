@@ -33,7 +33,7 @@ function makeCommentsList(comments) {
             </View>
             <View className="like">
               <img width="16px" height="16px" className="img" src={Env.iconUrl + 'hand-thumbs-up.svg'} />
-              {c.up}
+              {c.ups.length}
             </View>
           </View>
           <View className="content">
@@ -58,6 +58,8 @@ function Index() {
   const [logged, setLogged] = useState(false)
   const [commentList, setCommentList] = useState([])
   const [commentCount, setCommentCount] = useState(0)
+  const [liked, setLiked] = useState(false)
+  const [likeCount, setLikeCount] = useState(0)
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
@@ -117,13 +119,57 @@ function Index() {
       })
 
       setCommentCount(n.comments.length)
+      setLikeCount(n.likes.length)
       setCommentList(makeCommentsList(n.comments))
       setTags(n.tags.map((i, index) => <View className="tag tag-blue" key={index}>{i}</View> ))
       setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
 
       innerAudioContext.src = Env.imageUrl + n.audio
+
+      Taro.getStorage({
+        key: Env.storageKey
+      })
+      .then(res => {
+        if (n.likes.includes(res.data.id)) {
+          setLiked(true)
+        }
+      })
+
     })
   }, [])
+
+  const likeit = () => {
+    if (!logged) {
+      Taro.navigateTo({ url: '/pages/me/login' })
+      return
+    }
+    console.log('like it: ')
+
+    const data = {
+      uid, 
+      nid,
+    }
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + 'like',
+      data
+    }).then((res) => {
+      if (res.statusCode === 200) {
+        console.log(res.data)
+        setLikeCount(res.data.count)
+        setLiked(true)
+        // setCommentList(makeCommentsList(res.data.comments))
+        // setCommentCount(res.data.comments.length)
+      } else {
+        Taro.showToast({
+          title: '系统错误',
+          icon: 'error',
+          duration: 2000
+        })
+        console.log('server error！' + res.errMsg)
+      }
+    })
+  }
 
   const sendComment = (body) => {
     if (!logged) {
@@ -148,13 +194,13 @@ function Index() {
       data
     }).then((res) => {
       if (res.statusCode === 200) {
+        setCommentList(makeCommentsList(res.data.comments))
+        setCommentCount(res.data.comments.length)
         Taro.showToast({
           title: '提交成功',
           icon: 'success',
           duration: 2000
         }).then(() => {
-          setCommentList(makeCommentsList(res.data.comments))
-          setCommentCount(res.data.comments.length)
           setTimeout(() => {
             // Taro.reLaunch({ url: '/pages/index/index' })
           }, 2000)
@@ -388,8 +434,8 @@ function Index() {
 
         <View className="info d-flex justify-between align-items-center py-16">
           <View className="like d-flex align-items-center">
-            <img height="20px" width="20px" src={Env.iconUrl+ 'heart-pink-fill.svg'} />
-            <View className="ms-5">{node.likes}</View>
+            <img height="20px" width="20px" onClick={likeit} src={Env.iconUrl + (liked ? 'heart-pink-fill.svg' : 'heart-pink.svg') } />
+            <View className="ms-5">{likeCount}</View>
           </View>
           <View className="date">{fmtDate(new Date(node.createdAt))}</View>
         </View>
