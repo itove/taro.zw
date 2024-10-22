@@ -1,3 +1,8 @@
+- 已知问题：
+    - 内容详情页首次打开评论`支持`按钮无效的问题
+- TODO  
+    - 评论表情
+
 - &nbsp
 - marker:
     - customCallout
