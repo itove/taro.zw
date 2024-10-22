@@ -61,7 +61,11 @@
 page{
   background-image: radial-gradient(circle at 50% 0%, #acc8ff 0%, #e2edff00 100%);
   .wan{
-    background: linear-gradient(180deg, #ffffffd6 4%, #f7f8faf5 85%);
+    // background: linear-gradient(180deg, #ffffffd6 4%, #f7f8faf5 85%);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: 185px;
+    background-color: #ffffff;
     border-radius: 20px 20px 0 0;
     .list .list-item{
       border-radius: 10px;

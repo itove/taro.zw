@@ -115,7 +115,7 @@ function Index() {
   }, [])
 
   return (
-    <View className="wan p-1">
+    <View className="wan p-1" style={{backgroundImage: `url(${Env.imageUrl}grid-bg.png)`}}>
       <View className="youzai block">
         <View className="header">
           推荐路线
