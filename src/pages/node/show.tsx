@@ -23,27 +23,6 @@ function openLocation(latitude, longitude) {
   })
 }
 
-function makeCommentsList(comments) {
-  return comments.map((c, i) =>
-        <View className="item">
-          <View className="top">
-            <View className="user">
-              <img width="48px" height="48px" className="img" src={Env.imageUrl + c.author.avatar} />
-              <View>{c.author.name}</View>
-            </View>
-            <View className="like">
-              <img width="16px" height="16px" className="img" src={Env.iconUrl + 'hand-thumbs-up.svg'} />
-              {c.ups.length}
-            </View>
-          </View>
-          <View className="content">
-            <View className="body">{c.body}</View>
-            <View className="time">{fmtDate(new Date(c.createdAt))} </View>
-          </View>
-        </View>
-                     )
-}
-
 function Index() {
   const [node, setNode] = useState({})
   const [rooms, setRooms] = useState([])
@@ -158,8 +137,37 @@ function Index() {
         console.log(res.data)
         setLikeCount(res.data.count)
         setLiked(true)
-        // setCommentList(makeCommentsList(res.data.comments))
-        // setCommentCount(res.data.comments.length)
+      } else {
+        Taro.showToast({
+          title: '系统错误',
+          icon: 'error',
+          duration: 2000
+        })
+        console.log('server error！' + res.errMsg)
+      }
+    })
+  }
+
+  const upit = (cid) => {
+    console.log('logged? ,', logged);
+    if (!logged) {
+      Taro.navigateTo({ url: '/pages/me/login' })
+      return
+    }
+    console.log('up comment: ' + cid)
+
+    const data = {
+      uid, 
+      cid,
+    }
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + 'up',
+      data
+    }).then((res) => {
+      if (res.statusCode === 200) {
+        console.log(res.data)
+        setCommentList(makeCommentsList(res.data.comments))
       } else {
         Taro.showToast({
           title: '系统错误',
@@ -253,6 +261,28 @@ function Index() {
       // Taro.redirectTo({url: '/pages/me/login'})
     })
   }, [])
+
+  const makeCommentsList = (comments) => {
+    console.log(comments);
+    return comments.map((c, i) => (
+          <View className="item">
+            <View className="top">
+              <View className="user">
+                <img width="48px" height="48px" className="img" src={Env.imageUrl + c.author.avatar} />
+                <View>{c.author.name}</View>
+              </View>
+              <View className="like">
+                <img width="16px" height="16px" className="img" onClick={() => upit(c.id)} src={Env.iconUrl + (c.ups.includes(uid) ? 'hand-thumbs-up-fill.svg' : 'hand-thumbs-up.svg')} />
+                {c.ups.length}
+              </View>
+            </View>
+            <View className="content">
+              <View className="body">{c.body}</View>
+              <View className="time">{fmtDate(new Date(c.createdAt))} </View>
+            </View>
+          </View>
+      ))
+  }
 
   const RoomView = ({room, index, node}) => {
     const previews = []
