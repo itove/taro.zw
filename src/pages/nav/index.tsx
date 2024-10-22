@@ -115,9 +115,11 @@ function Index() {
       setNodes(nodes)
       nodes.map((n, index) => {
         let  path = Env.iconUrl + 'marker.png'
-        // if (n.region === 29) {
-        //   path = Env.iconUrl + 'marker-house.png'
-        // }
+        if (n.marker) {
+          path = Env.imageUrl + n.marker
+        } else if (n.region.marker){
+          path = Env.imageUrl + n.region.marker
+        }
         markers.push({
           id: index,
           zIndex: index,
@@ -356,17 +358,13 @@ function Index() {
               <View className="pb-8">距您{distance}公里 </View>
               <View className="ellipsis-2" onClick={() => showNode(node)}>{node.summary}</View>
             </View>
-            { node.audio &&
             <View className="right" onClick={() => playAudio(Env.imageUrl + node.audio)}>
               <View>
-                <img className="icon" src={playIcon} />
-                <View className="text">{ progress }</View>
               </View>
               <View className="small" onClick={() => openLocation(node.latitude, node.longitude) }>
-                <img className="icon" src={Env.iconUrl + 'nav.png'} /> 前往
+                <img className="icon" src={Env.iconUrl + 'nav.png'} /> 导航
               </View>
             </View>
-            }
           </View>
 
             { false &&
