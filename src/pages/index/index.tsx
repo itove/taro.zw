@@ -182,7 +182,7 @@ function Index() {
         </View>
       </View>
 
-      <Grid columns="4" className="grid">
+      <Grid columns="4" className="grid" style={{backgroundImage: `url(${Env.imageUrl}grid-bg.png)`}}>
         {gridList}
       </Grid>
 

@@ -64,7 +64,9 @@ page{
     }
     .grid{
       padding-bottom: 16px;
-      background: #ffffff;
+      // background: #ffffff;
+      background-size: cover;
+      background-repeat: no-repeat;
       // background-image: linear-gradient(180deg, #ffffffdb 15%, #f7f8faf5 64%);
       border-radius: 20px;
       margin-top: -30px;
@@ -86,7 +88,7 @@ page{
         width: 37px;
         height: 37px;
         padding: 16px 16px 0px;
-        background: #ffffff;
+        // background: #ffffff;
         border-radius: 15px;
       }
     }
