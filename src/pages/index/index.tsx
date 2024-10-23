@@ -92,7 +92,7 @@ function List2({node, type, index}) {
         <View>
           <img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill-gold.svg'} />
           <Text className="hightlight me-5">{node.rates.rate} </Text>
-          人均 ¥ {node.price}
+          人均 ¥ {node.price / 100}
         </View>
         }
       </View>
