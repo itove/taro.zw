@@ -5,7 +5,11 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
 function gotoNode(id, type = 3) {
-  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+  if (type === 1 || type === 2) {
+    Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
+  } else {
+    Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+  }
 }
 
 function gotoNodeIndex(region, type) {

@@ -39,8 +39,9 @@ page{
   justify-content: space-between;
   align-items: baseline;
   .reviews{
-    display: flex;
+    font-size: 16px;
     .counts{
+      font-size: 14px;
       display: inline;
       color: #979797;
     }
@@ -254,6 +255,12 @@ page{
   color: #666666;
 }
 page .show{
+  .card-jing{
+    margin-bottom: 0;
+    padding: 32px 16px;
+    margin-top: -16px;
+    border-radius: 16px;
+  }
   .tag{
     margin-right: 6px;
   }

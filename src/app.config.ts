@@ -25,6 +25,7 @@ export default defineAppConfig({
     'pages/feedback/index',
     'pages/me/login',
     'pages/node/show',
+    'pages/node/show0',
     'pages/list/index',
     'pages/list/card',
     'pages/list/grid',

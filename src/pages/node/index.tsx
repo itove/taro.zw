@@ -7,7 +7,11 @@ import './index.scss'
 // import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
 
 function gotoNode(id, type = 2) {
-  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+  if (type === 1 || type === 2) {
+    Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
+  } else {
+    Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+  }
 }
 
 function Rad(d) { 

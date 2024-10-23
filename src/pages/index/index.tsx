@@ -7,7 +7,11 @@ import { Grid, NoticeBar, Tabs, SearchBar } from '@nutui/nutui-react-taro'
 import { fmtDate } from '../../utils/fmtDate'
 
 function gotoNode(id, type = 3) {
-  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+  if (type === 1 || type === 2) {
+    Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
+  } else {
+    Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+  }
 }
 
 function gotoNodeIndex(region, type) {
@@ -160,7 +164,7 @@ function Index() {
       console.log(res)
 
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
-      setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
+      setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={1} />))
       setDongList(data.dong.map((node, index) => index < 3 && <List2 node={node} index={index} type={0} />))
       setShiList(data.shi.map((node, index) => index < 3 && <List2 node={node} index={index} type={1} />))
       setWanList(data.wan.map((node, index) => <List node={node} type={0} index={index} />))

@@ -7,6 +7,8 @@ page{
   --nutui-noticebar-right-icon-width: 40px;
   --nutui-noticebar-border-radius: 500px;
   --primary: #0FB99F;
+  --nutui-rate-icon-color: #ffb137;
+  --nutui-rate-item-margin: 6px;
 }
 .w-25{
   width: 25%;
@@ -188,6 +190,9 @@ page{
 }
 .mb-16{
   margin-bottom: 16px !important;
+}
+.mb-36{
+  margin-bottom: 36px !important;
 }
 .me-4{
   margin-right: 4px !important;
