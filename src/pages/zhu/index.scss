@@ -230,7 +230,13 @@ swiper-item, .card{
     width: 90%;
   }
 }
-.zhusu{
+.index-zhu{
+  --nutui-calendar-active-background-color: #3e7cf3;
+	--nutui-calendar-choose-background-color: #f0f6ff;
+	--nutui-calendar-choose-color: #3e7cf3;
+  .calendar-confirm-btn{
+    background: #3e7cf3;
+  }
   .tags{
     padding: 10px 48px;
     .tag{

@@ -22,7 +22,7 @@ function ListItem({node, index, type}) {
     <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
     </View>
     <View className="text">
-    {node.title}
+      <View className="ellipsis">{node.title}</View>
     <p className="ellipsis-2">{node.summary}</p>
     </View>
     </View>
@@ -73,7 +73,7 @@ function Index() {
     <View key={index} className="grid-item rounded overflow-hidden" onClick={() => gotoNode(node.id, 'talk')}>
       <Image className="w-100 img" style={{height: 300 + 'px'}} src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
-        <View>{node.title}</View>
+        <View className="ellipsis">{node.title}</View>
         <View className="more">
           <View className="user">
             <Avatar
@@ -81,7 +81,7 @@ function Index() {
               src={Env.imageUrl + node.author.avatar}
               className="me-5"
             />
-            <View>{node.author.name}</View>
+            <View className="ellipsis">{node.author.name}</View>
           </View>
           <View className="like">
           <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
