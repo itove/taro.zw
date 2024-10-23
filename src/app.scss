@@ -73,7 +73,7 @@ page{
   }
 }
 .ellipsis-2{
-  white-space: normal;
+  white-space: normal !important;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
