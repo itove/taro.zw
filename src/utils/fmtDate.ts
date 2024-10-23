@@ -1,4 +1,4 @@
-export function fmtDate (date) {
+export function fmtDate (date, style = 0) {
   const year = date.getFullYear().toString().padStart(4, "0");
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const day = date.getDate().toString().padStart(2, "0");
@@ -6,7 +6,10 @@ export function fmtDate (date) {
   const minute = date.getMinutes().toString().padStart(2, "0");
   const second = date.getSeconds().toString().padStart(2, "0");
   // const result = `${year}-${month}-${day} ${hour}:${minute}:${second}`
-  const result = `${year}年${month}月${day} ${hour}:${minute}`
+  let result = `${year}年${month}月${day} ${hour}:${minute}`
+  if (style === 1) {
+    result = `${month}/${day}`
+  }
 
   return result
 }

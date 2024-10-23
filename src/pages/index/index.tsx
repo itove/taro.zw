@@ -4,6 +4,7 @@ import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Grid, NoticeBar, Tabs, SearchBar } from '@nutui/nutui-react-taro'
+import { fmtDate } from '../../utils/fmtDate'
 
 function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
@@ -85,7 +86,7 @@ function List2({node, type, index}) {
       <View className="ellipsis"> {node.title} </View>
       <View className="info">
         {type === 0 &&
-        <View className="">09/22</View>
+        <View className="">{fmtDate(new Date(node.startAt), 1)}</View>
         }
         {type === 1 &&
         <View>
@@ -104,7 +105,7 @@ function SwiperItem1({node, index, type}) {
   return (
     <SwiperItem className="slide-item">
     <View className="widget">
-      <View className="badge"><img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill.svg'} /> 4.5 </View>
+      <View className="badge"><img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill.svg'} /> {node.rates.rate} </View>
     </View>
 
     <Image
@@ -114,7 +115,7 @@ function SwiperItem1({node, index, type}) {
     src={Env.imageUrl + node.image}
     alt=""
     />
-    <View className="text"> {node.title} </View>
+    <View className="text title"> {node.title} </View>
     </SwiperItem>
   )
 }
@@ -158,9 +159,9 @@ function Index() {
 
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
       setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={0} />))
-      setDongList(data.jing.map((node, index) => index < 3 && <List2 node={node} index={index} type={0} />))
-      setShiList(data.jing.map((node, index) => index < 3 && <List2 node={node} index={index} type={1} />))
-      setWanList(data.jing.map((node, index) => <List node={node} type={0} index={index} />))
+      setDongList(data.dong.map((node, index) => index < 3 && <List2 node={node} index={index} type={0} />))
+      setShiList(data.shi.map((node, index) => index < 3 && <List2 node={node} index={index} type={1} />))
+      setWanList(data.wan.map((node, index) => <List node={node} type={0} index={index} />))
     })
     .catch(err => {
       console.log(err)
