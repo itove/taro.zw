@@ -69,7 +69,7 @@ function ListItem({node, type, index}) {
         <View className="title mb-10">
           <View className="left d-flex" onClick={() => goto(node, type)}>
             {node.title}
-            <View className="badge ms-5">进行中</View>
+            <View className="badge ms-5">{node.tags[0]}</View>
           </View>
           { (node.distance && type == 4) &&
           <View className="right">{node.distance}km</View>
@@ -82,8 +82,8 @@ function ListItem({node, type, index}) {
         </View>
         { type == 4 &&
         <View className="info mb-10">
-          <View className="">主办方：十堰市某单位</View>
-          <View className="">活动地点：活动地点</View>
+          <View className="">主办方：{node.note}</View>
+          <View className="">活动地点：{node.address}</View>
         </View>
         }
         { (type == 5 || type == 7) &&
@@ -95,7 +95,7 @@ function ListItem({node, type, index}) {
         </View>
         <View className="info">
           <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
-          某某区某街道民主路34号
+          {node.address}
         </View>
         </>
         }

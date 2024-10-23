@@ -459,15 +459,15 @@ function Index() {
           </View>
           <View className="right">
             <View className="">
-              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} /> 54
-              <img width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart.png' || 'heart.png')} />{favs}
+              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} /> {commentCount}
+              <img className="ms-20" width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart.png' || 'heart.png')} />{favs}
             </View>
           </View>
         </View>
         <View className="info">
-          <View className="">主办方：十堰市某单位</View>
+          <View className="">主办方：{node.note}</View>
           <View className="location">
-            <View>活动地点：活动地点</View>
+            <View>活动地点：{node.address}</View>
             <View class="icon" onClick={() => openLocation(node.latitude, node.longitude)}>
               <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'nav-blue.png'} /> 导航
             </View>
@@ -475,7 +475,7 @@ function Index() {
         </View>
       </View>
 
-      <View dangerouslySetInnerHTML={{__html: body}} className='body py-6'></View>
+      <View dangerouslySetInnerHTML={{__html: body}} className='body py-16'></View>
       </>
       }
 

@@ -209,7 +209,7 @@ page{
   }
 }
 .footer{
-  padding: 0px 16px;
+  padding: 0 16px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -270,14 +270,14 @@ page .show{
         background: #6195FA;
         border-radius: 10px 0 10px 0;
         font-size: 12px;
-        padding: 6px 8px;
+        padding: 12px 16px;
       }
     }
   }
   .text{
     border-bottom: #e7e7e799 1px solid;
     font-size: 12px;
-    padding: 0 16px 16px;
+    padding: 16px 0;
     color: #666666;
     .title{
       display: flex;
