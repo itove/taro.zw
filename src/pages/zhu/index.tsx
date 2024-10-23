@@ -27,7 +27,7 @@ function ListItem({node, type, index}) {
           <View>{node.comments.length}</View>
         </View>
         <View>
-          <img className="" width="20px" height="20px" src={Env.iconUrl + 'heart-red-fill.svg'} />
+          <img className="" width="20px" height="20px" src={Env.iconUrl + 'heart-grey.svg'} />
         </View>
       </View>
       <View className="card right">
