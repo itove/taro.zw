@@ -255,6 +255,13 @@ page{
   color: #666666;
 }
 page .show{
+  .hero-jing{
+    .img{
+      position: absolute;
+      top: 50px;
+      left: 16px;
+    }
+  }
   .card-jing{
     margin-bottom: 0;
     padding: 32px 16px;

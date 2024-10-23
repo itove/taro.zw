@@ -391,12 +391,13 @@ function Index() {
 
   return (
     <View className={"show " + region+"-show"}>
-      <View className="hero">
+      <View className="hero hero-jing">
         { type == 4 &&
         <View className="widget">
           <View className="badge">{node.tags[0]}</View>
         </View>
         }
+        <img className="img" onClick={() => Taro.navigateBack()} width="28px" height="28px" src={Env.iconUrl + 'chevron-left-white.svg'} />
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
       </View>
 
