@@ -63,13 +63,13 @@ function List({node, type, index}) {
     <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
     </View>
     <View className="text">
-      <View>
-      <View className="badge title-badge">一日游</View>
-      {node.title}
+      <View className="d-flex">
+        <View className="badge title-badge">{node.tags[0]}</View>
+        <View className="ellipsis">{node.title}</View>
       </View>
       <View className="info">
-        <View className="badge">3A景区</View>
-        <View className="badge">门票 ¥54</View>
+        <View className="badge">{node.tags[1]}</View>
+        <View className="badge">{node.tags[2]}</View>
       </View>
     </View>
     </View>
@@ -91,8 +91,8 @@ function List2({node, type, index}) {
         {type === 1 &&
         <View>
           <img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-          <Text className="hightlight me-5">4.5 </Text>
-          人均 ¥ 56
+          <Text className="hightlight me-5">{node.rates.rate} </Text>
+          人均 ¥ {node.price}
         </View>
         }
       </View>
