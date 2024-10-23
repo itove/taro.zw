@@ -24,7 +24,7 @@ function openLocation(latitude, longitude) {
 }
 
 function Index() {
-  const [node, setNode] = useState({})
+  const [node, setNode] = useState({rates: {rate: 0}, tags: []})
   const [rooms, setRooms] = useState([])
   const [uid, setUid] = useState(0)
   const [body, setBody] = useState('')
@@ -91,8 +91,6 @@ function Index() {
         setBody(n.body.replace(/&nbsp;/g, '<br/>'))
       }
 
-      n.tags = ['免费入园', '度假区', '3A景区']
-
       Taro.setNavigationBarTitle({
         title: n.title
       })
@@ -101,7 +99,7 @@ function Index() {
       setLikeCount(n.likes.length)
       setCommentList(makeCommentsList(n.comments))
       setTags(n.tags.map((i, index) => <View className="tag tag-blue" key={index}>{i}</View> ))
-      setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
+      // setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
 
       innerAudioContext.src = Env.imageUrl + n.audio
 
@@ -263,7 +261,6 @@ function Index() {
   }, [])
 
   const makeCommentsList = (comments) => {
-    console.log(comments);
     return comments.map((c, i) => (
           <View className="item">
             <View className="top">
@@ -396,7 +393,7 @@ function Index() {
       <View className="hero">
         { type == 4 &&
         <View className="widget">
-          <View className="badge">活动日期：2024/09/30 - 2024/10/30</View>
+          <View className="badge">{node.tags[0]}</View>
         </View>
         }
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
@@ -407,18 +404,18 @@ function Index() {
       <View className="text">
         <View className="title mb-10">
           {node.title}
-          <View className="tag tag-y ms-5">进行中</View>
+          <View className="tag tag-y ms-5">{node.tags[0]}</View>
         </View>
 
         <View className="d-flex mb-10">
-          <View className="tag tag-b-r me-8">周一至周日：09:00-18:00</View>
-          <View className="tag tag-b-r me-8">预约入馆</View>
-          <View className="tag tag-b-r me-8">免费开放</View>
+          <View className="tag tag-b-r me-8">{node.tags[1]}</View>
+          <View className="tag tag-b-r me-8">{node.tags[2]}</View>
+          <View className="tag tag-b-r me-8">{node.tags[3]}</View>
         </View>
 
         <View className="info">
           <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
-          某某区某街道民主路34号
+          {node.address}
         </View>
       </View>
       </>
@@ -442,7 +439,7 @@ function Index() {
                 <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
                 <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
               </View>
-              <View className="">4.5/5 <span className="counts">(2399 条评价)</span> </View>
+              <View className="">{node.rates.rate} <span className="counts">({commentCount} 条评价)</span> </View>
             </View>
           </View>
         </View>
@@ -455,7 +452,7 @@ function Index() {
         <View className="title justify-between">
           <View className="left d-flex">
             {node.title}
-            <View className="badge ms-5">进行中</View>
+            <View className="badge ms-5">{node.tags[0]}</View>
           </View>
           <View className="right">
             <View className="">

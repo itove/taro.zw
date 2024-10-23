@@ -32,16 +32,15 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 
 function ListItem({node, index, type}) {
-  console.log(node);
   return (
     <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
       <Image className="img rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
         <View>
-        <View className="title mb-10">
-          {node.title}
+        <View className="title mb-4">
+          <View className="ellipsis" style="max-width: 65%">{node.title}</View>
           { type == 6 &&
-          <View className="tag tag-y ms-5">开放中</View>
+          <View className="tag tag-y ms-5">{node.tags[0]}</View>
           }
         </View>
         { type != 6 &&
@@ -52,15 +51,15 @@ function ListItem({node, index, type}) {
         { type != 3 &&
         <>
         <View className="d-flex">
-          <View className="tag tag-b-r">周一至周日：09:00-18:00</View>
+          <View className="tag tag-b-r">{node.tags[0]}</View>
         </View>
         <View className="d-flex">
-          <View className="tag tag-b-r me-8">预约入馆</View>
-          <View className="tag tag-b-r">免费开放</View>
+          <View className="tag tag-b-r me-8">{node.tags[1]}</View>
+          <View className="tag tag-b-r">{node.tags[2]}</View>
         </View>
         <View className="info">
           <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
-          某某区某街道民主路34号
+          {node.address}
         </View>
         </>
         }
@@ -68,7 +67,7 @@ function ListItem({node, index, type}) {
 
         { type == 3 &&
         <View className="info justify-between">
-          <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> 4.5 ¥ 111/人</View>
+          <View className=""><img className="" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} /> {node.rates.rate} ¥ {node.price / 100}/人</View>
           { node.distance && 
           <p className="">{node.distance}km</p>
           }
@@ -88,17 +87,16 @@ function GridItem({node, index, type}) {
         <View className="title d-flex justify-between mb-10">
           {node.title}
           { type == 7 &&
-          <View className="tag tag-y ms-5">营业中</View>
+          <View className="tag tag-y ms-5">{node.tags[0]}</View>
           }
           { type == 5 &&
-          <View className="price">¥39</View>
+          <View className="price">¥{node.price / 100}</View>
           }
         </View>
         { type == 7 &&
         <View className="d-flex mb-10">
-          <View className="tag tag-b-r me-8">可堂食</View>
-          <View className="tag tag-b-r me-8">2楼</View>
-          <View className="tag tag-b-r me-8">超市</View>
+          <View className="tag tag-b-r me-8">{node.tags[0]}</View>
+          <View className="tag tag-b-r me-8">{node.tags[1]}</View>
         </View>
         }
       </View>

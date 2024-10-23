@@ -54,7 +54,7 @@ function ListItem({node, type, index}) {
     <View className="card">
       { type == 4 &&
       <View className="widget">
-        <View className="badge">活动日期：2024/09/30 - 2024/10/30</View>
+        <View className="badge">{node.tags[0]}</View>
       </View>
       }
 
@@ -89,9 +89,9 @@ function ListItem({node, type, index}) {
         { (type == 5 || type == 7) &&
         <>
         <View className="d-flex mb-10 tags">
-          <View className="tag tag-b-r me-8">驻场商家125</View>
-          <View className="tag tag-b-r me-8">共6层</View>
-          <View className="tag tag-b-r me-8">营业时间：10:00-19:00</View>
+          <View className="tag tag-b-r me-8">{node.tags[0]}</View>
+          <View className="tag tag-b-r me-8">{node.tags[1]}</View>
+          <View className="tag tag-b-r me-8">{node.tags[2]}</View>
         </View>
         <View className="info">
           <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
