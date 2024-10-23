@@ -89,10 +89,12 @@ function List2({node, type, index}) {
         <View className="">{fmtDate(new Date(node.startAt), 1)}</View>
         }
         {type === 1 &&
-        <View>
-          <img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-          <Text className="hightlight me-5">{node.rates.rate} </Text>
-          人均 ¥ {node.price / 100}
+        <View className="d-flex justify-between" style="width: 80%">
+          <View>
+            <img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+            <Text className="hightlight me-5">{node.rates.rate} </Text>
+          </View>
+          <View> 人均 ¥ {node.price / 100} </View>
         </View>
         }
       </View>
