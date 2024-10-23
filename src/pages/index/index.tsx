@@ -178,7 +178,7 @@ function Index() {
         <View
          onClick={() => Taro.navigateTo({url: '/pages/search/index'})}
         >
-         <SearchBar className="search" shape="round" maxLength={5} placeholder="请输入关键字搜索景点，美食，购物…" />
+         <SearchBar className="search" disabled={true} shape="round" maxLength={5} placeholder="请输入关键字搜索景点，美食，购物…" />
         </View>
       </View>
 

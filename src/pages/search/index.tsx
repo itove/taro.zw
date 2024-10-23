@@ -11,7 +11,7 @@ let hist = []
 function Index() {
   const [keyword, setKeyword] = useState('')
   // const [hist, setHist] = useState([])
-  const [hot, setHot] = useState(['亲子', '民宿推荐', '赏花', '购物', '文创'])
+  const [hot, setHot] = useState(['花', '亲子', '民宿推荐', '赏花', '购物', '文创'])
   const [tags, setTags] = useState([])
   const [tags2, setTags2] = useState([])
 
