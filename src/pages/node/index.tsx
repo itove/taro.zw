@@ -63,7 +63,7 @@ function ListItem({node, index, type}) {
         </View>
         <View className="info">
           <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
-          {node.address}
+          <View className="ellipsis">{node.address}</View>
         </View>
         </>
         }
