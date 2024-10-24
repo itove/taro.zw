@@ -391,3 +391,49 @@ page .show{
     }
   }
 }
+page .show-2{
+  background: #ffffff;
+  .title{
+    font-size: 22px;
+  }
+  .card{
+    padding: 16px;
+  }
+  .info{
+    .address{
+      align-items: flex-start;
+      font-size: 14px;
+      width: 80%;
+      .img{
+        padding-top: 4px;
+      }
+    }
+    .nav{
+      align-items: flex-start;
+    }
+  }
+  .tag{
+    width: 45%;
+    text-align: center;
+    padding: 10px 32px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    img{
+      margin-right: 8px;
+    }
+  }
+  .section{
+    .title{
+      color: #979797;
+      font-size: 18px;
+    }
+  }
+  .icons{
+    .icon{
+      margin: 10px 16px;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}

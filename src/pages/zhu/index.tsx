@@ -7,7 +7,7 @@ import { Grid, NoticeBar, Swiper, Tabs, SearchBar, Calendar } from '@nutui/nutui
 import { fmtDate } from '../../utils/fmtDate'
 
 function gotoNode(id, type = 3) {
-  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
+  Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
 }
 
 function ListItem({node, type, index}) {
@@ -40,7 +40,7 @@ function ListItem({node, type, index}) {
         />
       <View className="text">
         <View className="title">{node.title}</View>
-        <View className="price">¥ {node.price}/晚</View>
+        <View className="price">¥ {node.price / 100}/晚</View>
       </View>
       </View>
     </View>
@@ -97,7 +97,7 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setYouList(data.nodes.map((node, index) => <ListItem node={node} type={0} index={index} />))
+      setYouList(data.nodes.map((node, index) => <ListItem node={node} type={2} index={index} />))
     })
     .catch(err => {
       console.log(err)

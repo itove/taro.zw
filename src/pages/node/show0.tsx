@@ -390,38 +390,12 @@ function Index() {
   const [tab1value, setTab1value] = useState<string | number>('0')
 
   return (
-    <View className={"show " + region+"-show"}>
+    <View className={"show " + region+"-show" + " show-" + type}>
       <View className="hero hero-jing">
-        { type == 4 &&
-        <View className="widget">
-          <View className="badge">{node.tags[0]}</View>
-        </View>
-        }
         <img className="img" onClick={() => Taro.navigateBack()} width="28px" height="28px" src={Env.iconUrl + 'chevron-left-white.svg'} />
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
       </View>
 
-      { type == 6 &&
-      <>
-      <View className="text">
-        <View className="title mb-10">
-          {node.title}
-          <View className="tag tag-y ms-5">{node.tags[0]}</View>
-        </View>
-
-        <View className="d-flex mb-10">
-          <View className="tag tag-b-r me-8">{node.tags[1]}</View>
-          <View className="tag tag-b-r me-8">{node.tags[2]}</View>
-          <View className="tag tag-b-r me-8">{node.tags[3]}</View>
-        </View>
-
-        <View className="info">
-          <img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'location-grey.png'} />
-          {node.address}
-        </View>
-      </View>
-      </>
-      }
 
       { (type != 4 && type !=6 && region != 'talk') &&
       <View className="card card-jing">
@@ -433,59 +407,71 @@ function Index() {
 
             <View className="title article-title mt-1">{node.title}</View>
 
+            { type == 1 &&
             <View className="reviews d-flex align-items-center">
               <Rate className="stars me-8" allowHalf readOnly touchable defaultValue={0} value={node.rates.rate} />
               <View className="">{node.rates.rate} <span className="counts">({node.rates.users.length} 条评价)</span> </View>
             </View>
+            }
+
+            { type == 2 &&
+
+            <View className="info d-flex justify-between">
+              <View className="address d-flex">
+                <img className="me-5 img" width="22px" height="16px" src={Env.iconUrl + 'location-grey.png'} />
+                <View>{node.address}</View>
+              </View>
+              <View className="nav d-flex" onClick={openLocation}>
+                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'nav-blue.png'} /> 导航
+              </View>
+            </View>
+            }
+
           </View>
         </View>
       </View>
       }
+
+      { type == 2 &&
+        <>
+        <View className="d-flex justify-between p-1">
+          <View className="tag tag-b">
+            <img width="20px" height="20px" src={Env.iconUrl + 'chat-dots-fill.svg'} />
+            <View> {commentCount} 评论 </View>
+          </View>
+          <View className="tag tag-y">
+            <img width="20px" height="20px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+            <View> {node.rates.rate} 评分 </View>
+          </View>
+        </View>
+        <View dangerouslySetInnerHTML={{__html: body}} className='body p-1'></View>
+
+        <View className="services p-1 section">
+          <View className="title">服务</View>
+          <View className="icons d-flex">
+            <View className="icon">
+              <img width="40px" height="40px" src={Env.iconUrl + 'wifi.svg'} />
+              <View>Wifi</View>
+            </View>
+            <View className="icon">
+              <img width="40px" height="40px" src={Env.iconUrl + 'cup-hot.svg'} />
+              <View>咖啡</View>
+            </View>
+            <View className="icon">
+              <img width="40px" height="40px" src={Env.iconUrl + 'tv.svg'} />
+              <View>电视</View>
+            </View>
+          </View>
+        </View>
+
+        <View className="near p-1 section">
+          <View className="title">附近地标</View>
+        </View>
+
+        </>
+      }
+
       
-      { type == 4 &&
-      <>
-      <View className="text">
-        <View className="title justify-between">
-          <View className="left d-flex">
-            {node.title}
-            <View className="badge ms-5">{node.tags[0]}</View>
-          </View>
-          <View className="right">
-            <View className="">
-              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} /> {commentCount}
-              <img className="ms-20" width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart.png' || 'heart.png')} />{favs}
-            </View>
-          </View>
-        </View>
-        <View className="info">
-          <View className="">主办方：{node.note}</View>
-          <View className="location">
-            <View>活动地点：{node.address}</View>
-            <View class="icon" onClick={() => openLocation(node.latitude, node.longitude)}>
-              <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'nav-blue.png'} /> 导航
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View dangerouslySetInnerHTML={{__html: body}} className='body py-16'></View>
-      </>
-      }
-
-      { region == 'talk' &&
-      <>
-        <View dangerouslySetInnerHTML={{__html: body}} className='body py-6'></View>
-
-        <View className="info d-flex justify-between align-items-center py-16">
-          <View className="like d-flex align-items-center">
-            <img height="20px" width="20px" onClick={likeit} src={Env.iconUrl + (liked ? 'heart-pink-fill.svg' : 'heart-pink.svg') } />
-            <View className="ms-5">{likeCount}</View>
-          </View>
-          <View className="date">{fmtDate(new Date(node.createdAt))}</View>
-        </View>
-      </>
-      }
-
       { (type == 0 || type == 1) &&
       <Tabs
         value={tab1value}
@@ -516,45 +502,17 @@ function Index() {
       </Tabs>
       }
 
-      { type == 6 &&
-      <Tabs
-        value={tab1value}
-        autoHeight={true}
-        onChange={(value) => {
-          setTab1value(value)
-        }}
-        align="left"
-        className="rooms"
-      >
-        <Tabs.TabPane title="简介">
-          <View>
-            <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
-          </View>
-        </Tabs.TabPane>
-        <Tabs.TabPane title="入馆须知">
-          <View dangerouslySetInnerHTML={{__html: body}} className='body'></View>
-        </Tabs.TabPane>
-      </Tabs>
-      }
-
-      { type != 1 &&
-      <View className="comments">
-        <View className="title">评论 ({commentCount})</View>
-        <View className="comments-list">
-        {commentList}
-        </View>
-      </View>
-      }
-
+      { type == 1 &&
       <View className="footer fixed d-flex p-1">
         <Input width="" placeholder='我想说...' className="input" value={comment} onInput={(e) => updateInput(e)}>
-          <img widht="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
+          <img width="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
         </Input>
         <View className="d-flex btns">
-          <img widht="28" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
-          <img widht="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
+          <img width="28" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
+          <img width="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
         </View>
       </View>
+      }
 
       <ImagePreview
         // autoPlay
