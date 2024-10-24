@@ -5,43 +5,8 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { Grid, NoticeBar, Swiper, Tabs, SearchBar } from '@nutui/nutui-react-taro'
 
-function gotoNode(id, type = 3) {
-  Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
-}
-
-function gotoNodeIndex(region, type) {
-  Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})
-}
-
-function gotoUrl(url) {
-  Taro.navigateTo({url: '/pages/' + url})
-}
-
-function gridGoto(node) {
-  if (node.isTab) {
-    Taro.switchTab({url: '/pages/' + node.url})
-    .then(
-      res => {
-        Taro.pageScrollTo({
-          selector: node.target,
-          duration: 300
-        })
-      }
-    )
-  } else {
-    Taro.navigateTo({url: '/pages/' + node.url})
-  }
-}
-
-function More({region, type}) {
-  return (
-    <View
-      className="more" 
-      onClick={() => Taro.navigateTo({url: '/pages/node/index?region=' + region + '&type=' + type})}
-    >
-    全部 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
-    </View>
-  )
+function gotoNode(id, type = 1) {
+  Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
 }
 
 function toggleFav(node) {
@@ -177,7 +142,7 @@ function Index() {
         } else {
           node.isFav = false
         }
-        return <SwiperItem1 node={node} index={index} type={0} />
+        return <SwiperItem1 node={node} index={index} type={1} />
       }))
 
       setYouList(data.jing.map((node, index) => {
