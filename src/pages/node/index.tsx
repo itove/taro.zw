@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Picker } from '@tarojs/components'
 import { Grid } from '@nutui/nutui-react-taro'
 import './index.scss'
 // import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
@@ -127,6 +127,9 @@ function Index() {
   const [userLocation, setUserLocation] = useState({})
 
   const [list, setList] = useState([])
+  const [sortList, setSortList] = useState(['地区', '类别'])
+  const [cateList, setCateList] = useState(['农家乐', '星级', '烧烤', '海鲜', '特色', '夜市'])
+  const [locList, setLocList] = useState(['红卫街道', '花果街道', '黄龙镇', '西沟乡', '方滩乡'])
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
@@ -195,21 +198,38 @@ function Index() {
     })
   }, [])
 
+  const sortChange = (e) => {
+    console.log('sort change')
+    console.log(e.detail.value)
+  }
+
   return (
     <View className={"node-index p-1 " + region}>
 
     {type == 3 &&
     <View className="sort">
       <View>
-        排序
+        <Picker mode='selector' range={sortList} onChange={sortChange}>
+          <View className='picker'>
+          排序
+          </View>
+        </Picker>
         <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
       </View>
       <View>
-        类别
+        <Picker mode='selector' range={cateList} onChange={sortChange}>
+          <View className='picker'>
+          类别
+          </View>
+        </Picker>
         <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
       </View>
       <View>
-        地区
+        <Picker mode='selector' range={locList} onChange={sortChange}>
+          <View className='picker'>
+          地区
+          </View>
+        </Picker>
         <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
       </View>
     </View>
