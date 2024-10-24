@@ -201,7 +201,7 @@ function Index() {
           </View>
           <View
             className="more" 
-            onClick={() => Taro.navigateTo({url: '/pages/node/index?region=jing&type=0'})}
+            onClick={() => Taro.navigateTo({url: '/pages/node/index?region=jing&type=1'})}
           >
           更多 <img width="14px" height="14px" src={Env.iconUrl + 'arrow_1.png'} />
           </View>

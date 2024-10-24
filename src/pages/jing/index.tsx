@@ -186,7 +186,7 @@ function Index() {
         } else {
           node.isFav = false
         }
-        return <ListItem node={node} type={0} index={index} />
+        return <ListItem node={node} type={1} index={index} />
       }))
     })
     .catch(err => {
