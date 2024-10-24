@@ -3,7 +3,7 @@ import { View, Image, Input, Button } from '@tarojs/components'
 import './show.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
+import { Tabs, Rate, ImagePreview } from '@nutui/nutui-react-taro'
 import { fmtSeconds } from '../../utils/fmtSeconds'
 import { fmtDate } from '../../utils/fmtDate'
 
@@ -431,14 +431,8 @@ function Index() {
 
             <View className="title article-title mt-1">{node.title}</View>
 
-            <View className="reviews">
-              <View className="stars">
-                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-                <img className="me-5" width="16px" height="16px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-              </View>
+            <View className="reviews d-flex align-items-center">
+              <Rate className="stars me-8" allowHalf readOnly touchable defaultValue={0} value={node.rates.rate} />
               <View className="">{node.rates.rate} <span className="counts">({commentCount} 条评价)</span> </View>
             </View>
           </View>
