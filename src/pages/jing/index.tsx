@@ -49,6 +49,42 @@ function Index() {
     })
   }, [])
 
+  function addToPlan(node) {
+    if (!logged) {
+      Taro.navigateTo({ url: '/pages/me/login' })
+      return
+    }
+
+    const data = {
+      uid: uid,
+      nid: node.id,
+      title: node.title,
+    }
+
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + 'plans',
+      data
+    }).then((res) => {
+      console.log(res.data)
+      if (res.statusCode === 200) {
+        Taro.showToast({
+          title: '已加入行程',
+          icon: 'success',
+          duration: 2000
+        }).then(() => {
+        })
+      } else {
+        Taro.showToast({
+          title: '系统错误',
+          icon: 'error',
+          duration: 2000
+        })
+        console.log('server error！' + res.errMsg)
+      }
+    })
+  }
+
   function toggleFav(id) {
     if (!logged) {
       Taro.navigateTo({ url: '/pages/me/login' })
@@ -147,7 +183,7 @@ function Index() {
         alt=""
         />
       <View className="text">
-        <View className="plus">
+        <View className="plus" onClick={() => addToPlan(node)}>
           <img width="36px" height="36px" src={Env.iconUrl + 'plus-circle-fill.svg'} />
         </View>
         <p className="title">{node.title}</p>
@@ -182,7 +218,7 @@ function Index() {
       alt=""
       />
       <View className="text">
-      <View className="plus">
+      <View className="plus" onClick={() => addToPlan(node)}>
         <img width="36px" height="36px" src={Env.iconUrl + 'plus-circle-fill.svg'} />
       </View>
       <p className="title">{node.title}</p>
