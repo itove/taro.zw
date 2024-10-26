@@ -29,14 +29,18 @@ page .discover-index{
       border-radius: 0 !important;
     }
   }
-  .like{
+  .fav{
     width: 40%;
     justify-content: flex-end;
   }
-  .user, .like{
+  .user, .fav{
     display: flex;
     align-items: center;
     margin-top: 8px;
+    .count{
+      font-size: 14px;
+      // line-height: 14px;
+    }
   }
   .text{
     padding: 10px 4px;

@@ -83,9 +83,10 @@ function Index() {
             />
             <View className="ellipsis">{node.author.name}</View>
           </View>
-          <View className="like">
-          <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
-          {node.likes.length}</View>
+          <View className="fav">
+            <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
+            <View className="count">{node.favs.length}</View>
+          </View>
         </View>
       </View>
     </View>
