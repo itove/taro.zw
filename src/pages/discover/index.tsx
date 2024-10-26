@@ -15,20 +15,6 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function ListItem({node, index, type}) {
-  return (
-    <View key={index} className="list-item" onClick={() => gotoNode(node.id, type)}>
-    <View className="img">
-    <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
-    </View>
-    <View className="text">
-      <View className="ellipsis">{node.title}</View>
-    <p className="ellipsis-2">{node.summary}</p>
-    </View>
-    </View>
-  )
-}
-
 /*
 function GridItem({node, index, type}) {
   return (
@@ -43,14 +29,58 @@ function Index() {
   const instance = Taro.getCurrentInstance();
   const region = instance.router.params.region ? instance.router.params.region: 'all'
   const title = instance.router.params.title
-  const uid = instance.router.params.uid
+  // const uid = instance.router.params.uid
   const type = instance.router.params.type ? instance.router.params.type : 2
-  const [avatarUrl, setAvatarUrl] = useState(Env.imageUrl + 'avatar.png')
 
   const [list, setList] = useState([])
+  const [nodes, setNodes] = useState([])
+  const [logged, setLogged] = useState(false)
+  const [uid, setUid] = useState(0)
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
+
+  function onToggleFav(id) {
+    const newList = nodes.map((item) => {
+      if (item.id === id) {
+        const updatedItem = {
+          ...item,
+          favs: [...item.favs, uid],
+        }
+
+        return updatedItem;
+      }
+
+      return item;
+    })
+
+    setNodes(newList);
+  }
+
+  function GridItem({node, index, type}) {
+    return (
+      <View key={index} className="grid-item rounded overflow-hidden">
+        <Image className="w-100 img" style={{height: 300 + 'px'}} src={Env.imageUrl + node.image} mode="aspectFill" onClick={() => gotoNode(node.id, 'talk')} />
+        <View className="text">
+          <View className="ellipsis">{node.title}</View>
+          <View className="more">
+            <View className="user">
+              <Avatar
+                size="24"
+                src={Env.imageUrl + node.author.avatar}
+                className="me-5"
+              />
+              <View className="ellipsis">{node.author.name}</View>
+            </View>
+            <View className="fav" onClick={() => onToggleFav(node.id)}>
+              <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
+              <View className="count">{node.favs.length}</View>
+            </View>
+          </View>
+        </View>
+      </View>
+    )
+  }
 
   useEffect(() => {
     // console.log(uid)
@@ -66,52 +96,28 @@ function Index() {
       //   title: data.region
       // })
 
-      setList(data.nodes.map((node, index) =>
+      setNodes(data.nodes)
 
-          type == 2
-          &&
-    <View key={index} className="grid-item rounded overflow-hidden" onClick={() => gotoNode(node.id, 'talk')}>
-      <Image className="w-100 img" style={{height: 300 + 'px'}} src={Env.imageUrl + node.image} mode="aspectFill" />
-      <View className="text">
-        <View className="ellipsis">{node.title}</View>
-        <View className="more">
-          <View className="user">
-            <Avatar
-              size="24"
-              src={Env.imageUrl + node.author.avatar}
-              className="me-5"
-            />
-            <View className="ellipsis">{node.author.name}</View>
-          </View>
-          <View className="fav">
-            <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
-            <View className="count">{node.favs.length}</View>
-          </View>
-        </View>
-      </View>
-    </View>
-          ||
-          <ListItem node={node} type={type}/>
-        )
-      )
+      Taro.getStorage({
+        key: Env.storageKey
+      })
+      .then(res => {
+        setLogged(true)
+        setUid(res.data.id)
+      })
     })
     .catch(err => {
       console.log(err)
     })
+
+
   }, [])
 
   return (
     <View className="discover-index p-1">
-    {type == 2 &&
       <View className="grid">
-        {list}
+        {nodes.map((node, index) => <GridItem node={node} key={index} />)}
       </View>
-    }
-    {type != 2 &&
-      <View className="list">
-        {list}
-      </View>
-    }
     </View>
   )
 }
