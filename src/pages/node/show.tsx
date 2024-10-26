@@ -31,6 +31,7 @@ function Index() {
   const [comment, setComment] = useState('')
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
+  const [favs, setFavs] = useState(0)
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
   const [logged, setLogged] = useState(false)
@@ -430,9 +431,11 @@ function Index() {
             <View className="badge ms-5">{node.tags[0]}</View>
           </View>
           <View className="right">
-            <View className="">
-              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} /> {commentCount}
-              <img className="ms-20" width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart.png' || 'heart.png')} />{favCount}
+            <View className="d-flex">
+              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} />
+              <View className="count ms-5">{commentCount}</View>
+              <img className="ms-20" width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart-pink-fill.svg' || 'heart-pink.svg')} />
+              <View className="count ms-5">{favCount}</View>
             </View>
           </View>
         </View>

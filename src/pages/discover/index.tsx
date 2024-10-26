@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 import { View, Image } from '@tarojs/components'
-import { Avatar } from '@nutui/nutui-react-taro'
 import './index.scss'
 // import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
 
@@ -41,23 +40,54 @@ function Index() {
   const onShareTimeline = (res) => {}
 
   function onToggleFav(id) {
-    const newList = nodes.map((item) => {
-      if (item.id === id) {
-        const updatedItem = {
-          ...item,
-          favs: [...item.favs, uid],
+    if (!logged) {
+      Taro.navigateTo({ url: '/pages/me/login' })
+      return
+    }
+
+    const newNodes = nodes.map((node) => {
+      if (node.id === id) {
+
+        const data = { uid: uid, nid: node.id }
+
+        Taro.request({
+          method: 'POST',
+          url: Env.apiUrl + 'fav/toggle',
+          data
+        }).then((res) => {
+          console.log(res.data)
+          // return res.data.node
+        })
+
+        let favs = node.favs
+        if (node.favs.includes(uid)) {
+          favs = node.favs.filter((i) => {return i !== uid})
+        } else {
+          favs = [...node.favs, uid]
         }
 
-        return updatedItem;
+        const updatedNode = {
+          ...node,
+          favs: favs,
+        }
+
+        return updatedNode
       }
 
-      return item;
+      // console.log(node)
+      return node
     })
 
-    setNodes(newList);
+    setNodes(newNodes);
   }
 
   function GridItem({node, index, type}) {
+    node.isFav = false
+    if (node.favs.includes(uid)) {
+      node.isFav = true
+    }
+    node.favCount = node.favs.length
+
     return (
       <View key={index} className="grid-item rounded overflow-hidden">
         <Image className="w-100 img" style={{height: 300 + 'px'}} src={Env.imageUrl + node.image} mode="aspectFill" onClick={() => gotoNode(node.id, 'talk')} />
@@ -65,16 +95,12 @@ function Index() {
           <View className="ellipsis">{node.title}</View>
           <View className="more">
             <View className="user">
-              <Avatar
-                size="24"
-                src={Env.imageUrl + node.author.avatar}
-                className="me-5"
-              />
+              <img width="24px" height="24px" src={Env.imageUrl + node.author.avatar} className="me-5 avatar img" />
               <View className="ellipsis">{node.author.name}</View>
             </View>
             <View className="fav" onClick={() => onToggleFav(node.id)}>
-              <img className="icon me-5" width="16px" height="16px" src={Env.iconUrl + 'heart-grey.svg'} />
-              <View className="count">{node.favs.length}</View>
+              <img className="icon me-5" height="16px" width="16px" src={Env.iconUrl + (node.isFav ? 'heart-pink-fill.svg' : 'heart-grey.svg') } />
+              <View className="count">{node.favCount}</View>
             </View>
           </View>
         </View>
