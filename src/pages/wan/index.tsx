@@ -84,7 +84,7 @@ function More({region, type}) {
 function Index() {
   const [youList, setYouList] = useState([])
   const [wanList, setWanList] = useState([])
-  const [xingList, setXingList] = useState([])
+  const [luList, setLuList] = useState([])
   const [grid, setGrid] = useState([])
 
   const onShareAppMessage = (res) => {}
@@ -98,7 +98,7 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setXingList(data.xing.map((node, index) => <SwiperItem node={node} key={index} type={0} />))
+      setLuList(data.lu.map((node, index) => <SwiperItem node={node} key={index} type={0} />))
       setWanList(data.wan.map((node, index) => index < 4 && <GridItem node={node} type={0} key={index} />))
       setYouList(data.you.map((node, index) => <ViewItem node={node} type={1} key={index} />))
     })
@@ -112,10 +112,10 @@ function Index() {
       <View className="youzai block">
         <View className="header">
           推荐路线
-          <More region={'xing'} type={0} />
+          <More region={'lu'} type={0} />
         </View>
         <Swiper defaultValue={0} loop className="slide" height="184">
-          {xingList}
+          {luList}
         </Swiper>
       </View>
 
