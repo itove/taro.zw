@@ -41,6 +41,9 @@ function Index() {
   const [likeCount, setLikeCount] = useState(0)
   const [favCount, setFavCount] = useState(0)
 
+  const onShareAppMessage = (res) => {}
+  const onShareTimeline = (res) => {}
+
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
   const nid = instance.router.params.id
@@ -48,36 +51,34 @@ function Index() {
   // index list & show normal
   const type = instance.router.params.type ? instance.router.params.type : 2
   const region = instance.router.params.region ? instance.router.params.region : 'all'
-  const innerAudioContext = Taro.createInnerAudioContext()
-  const [audio, setAudio] = useState(innerAudioContext)
-  const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
-  const [progress, setProgress] = useState('语音讲解')
 
-  const onShareAppMessage = (res) => {}
-  const onShareTimeline = (res) => {}
+  // const innerAudioContext = Taro.createInnerAudioContext()
+  // const [audio, setAudio] = useState(innerAudioContext)
+  // const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
+  // const [progress, setProgress] = useState('语音讲解')
 
-  audio.onPlay(() => {
-    setPlayIcon(Env.iconUrl + 'hotline-primary.png')
-  })
-  audio.onStop(() => {
-    setPlayIcon(Env.iconUrl + 'hotline.png')
-  })
-  audio.onPause(() => {
-    setPlayIcon(Env.iconUrl + 'hotline.png')
-  })
-  audio.onEnded(() => {
-    setPlayIcon(Env.iconUrl + 'hotline.png')
-    setProgress('语音讲解')
-  })
-  audio.onCanplay(() => {
-  })
-  audio.onTimeUpdate(() => {
-    setProgress(fmtSeconds(audio.duration - audio.currentTime))
-  })
-  audio.onError((res) => {
-    console.log(res.errMsg)
-    console.log(res.errCode)
-  })
+  // audio.onPlay(() => {
+  //   setPlayIcon(Env.iconUrl + 'hotline-primary.png')
+  // })
+  // audio.onStop(() => {
+  //   setPlayIcon(Env.iconUrl + 'hotline.png')
+  // })
+  // audio.onPause(() => {
+  //   setPlayIcon(Env.iconUrl + 'hotline.png')
+  // })
+  // audio.onEnded(() => {
+  //   setPlayIcon(Env.iconUrl + 'hotline.png')
+  //   setProgress('语音讲解')
+  // })
+  // audio.onCanplay(() => {
+  // })
+  // audio.onTimeUpdate(() => {
+  //   setProgress(fmtSeconds(audio.duration - audio.currentTime))
+  // })
+  // audio.onError((res) => {
+  //   console.log(res.errMsg)
+  //   console.log(res.errCode)
+  // })
 
   useEffect(() => {
     Taro.request({
@@ -102,7 +103,7 @@ function Index() {
       setTags(n.tags.map((i, index) => <View className="tag tag-blue" key={index}>{i}</View> ))
       // setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
 
-      innerAudioContext.src = Env.imageUrl + n.audio
+      // innerAudioContext.src = Env.imageUrl + n.audio
 
       Taro.getStorage({
         key: Env.storageKey
@@ -225,22 +226,22 @@ function Index() {
     })
   }
 
-  const playAudio = () => {
-      console.log(audio.src)
-      if (audio.paused) {
-        audio.play()
-        console.log('playing...')
-      } else {
-        audio.pause()
-        console.log('paused...')
-      }
-  }
+  // const playAudio = () => {
+  //     console.log(audio.src)
+  //     if (audio.paused) {
+  //       audio.play()
+  //       console.log('playing...')
+  //     } else {
+  //       audio.pause()
+  //       console.log('paused...')
+  //     }
+  // }
 
-  useEffect(() => {
-    return () => {
-      audio.destroy()
-    }
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     audio.destroy()
+  //   }
+  // }, []);
 
   const makeCommentsList = (comments) => {
     return comments.map((c, i) => (

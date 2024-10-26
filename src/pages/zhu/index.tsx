@@ -6,8 +6,20 @@ import { Env } from '../../env'
 import { Grid, NoticeBar, Swiper, Tabs, SearchBar, Calendar } from '@nutui/nutui-react-taro'
 import { fmtDate } from '../../utils/fmtDate'
 
-function gotoNode(id, type = 3) {
-  Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
+function gotoNode(id, type = 3, target = '') {
+  Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id + '&target=' + target })
+  .then(
+    res => {
+      console.log(res)
+      if (target) {
+        console.log('have target, scroll to it:', target)
+        Taro.pageScrollTo({
+          selector: target,
+          duration: 300
+        })
+      }
+    }
+  )
 }
 
 function Index() {
@@ -158,15 +170,15 @@ function Index() {
     return (
       <View className="d-flex">
         <View className="left align-center">
-          <View className="">
+          <View className="" onClick={() => gotoNode(node.id, type)}>
             <View>
             <img className="" width="20px" height="20px" src={Env.iconUrl + 'star-fill-gold.svg'} />
             </View>
             <View>{node.rates.rate}</View>
           </View>
-          <View className="">
+          <View className="" onClick={() => gotoNode(node.id, type, '.comments')}>
             <View>
-            <img className="" width="20px" height="20px" src={Env.iconUrl + 'chat-dots-fill.svg'} />
+              <img className="" width="20px" height="20px" src={Env.iconUrl + 'chat-dots-fill.svg'} />
             </View>
             <View>{node.comments.length}</View>
           </View>
