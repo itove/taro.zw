@@ -39,7 +39,7 @@ function Index() {
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
 
-  function onToggleFav(id) {
+  function toggleFav(id) {
     if (!logged) {
       Taro.navigateTo({ url: '/pages/me/login' })
       return
@@ -98,7 +98,7 @@ function Index() {
               <img width="24px" height="24px" src={Env.imageUrl + node.author.avatar} className="me-5 avatar img" />
               <View className="ellipsis">{node.author.name}</View>
             </View>
-            <View className="fav" onClick={() => onToggleFav(node.id)}>
+            <View className="fav" onClick={() => toggleFav(node.id)}>
               <img className="icon me-5" height="16px" width="16px" src={Env.iconUrl + (node.isFav ? 'heart-pink-fill.svg' : 'heart-grey.svg') } />
               <View className="count">{node.favCount}</View>
             </View>

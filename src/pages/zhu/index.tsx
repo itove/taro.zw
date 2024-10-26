@@ -10,50 +10,13 @@ function gotoNode(id, type = 3) {
   Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
 }
 
-function ListItem({node, type, index}) {
-  return (
-    <View className="d-flex">
-      <View className="left align-center">
-        <View className="">
-          <View>
-          <img className="" width="20px" height="20px" src={Env.iconUrl + 'star-fill-gold.svg'} />
-          </View>
-          <View>{node.rates.rate}</View>
-        </View>
-        <View className="">
-          <View>
-          <img className="" width="20px" height="20px" src={Env.iconUrl + 'chat-dots-fill.svg'} />
-          </View>
-          <View>{node.comments.length}</View>
-        </View>
-        <View>
-          <img className="" width="20px" height="20px" src={Env.iconUrl + 'heart-grey.svg'} />
-        </View>
-      </View>
-      <View className="card right">
-        <Image
-        className="w-100 img"
-        mode="aspectFill"
-        onClick={() => gotoNode(node.id, type)}
-        src={Env.imageUrl + node.image}
-        alt=""
-        />
-      <View className="text">
-        <View className="title">{node.title}</View>
-        <View className="price">¥ {node.price / 100}/晚</View>
-      </View>
-      </View>
-    </View>
-  )
-}
-
 function Index() {
   const today = new Date()
   const tommorrow = new Date()
   tommorrow.setDate(tommorrow.getDate() + 1)
   const endDay = new Date()
   endDay.setDate(endDay.getDate() + 15)
-  const [youList, setYouList] = useState([])
+  const [nodes, setNodes] = useState([])
   const [start, setStart] = useState(today.getDate())
   const [end, setEnd] = useState(tommorrow.getDate())
   // const [guests, setGuests] = useState(1)
@@ -65,6 +28,8 @@ function Index() {
 
   const [date, setDate] = useState([fmtDate(today, 2), fmtDate(tommorrow, 2)])
   const [isVisible, setIsVisible] = useState(false)
+  const [logged, setLogged] = useState(false)
+  const [uid, setUid] = useState(0)
 
   const openSwitch = () => {
     console.log('open date picker')
@@ -97,7 +62,15 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setYouList(data.nodes.map((node, index) => <ListItem node={node} type={2} index={index} />))
+      setNodes(data.nodes)
+
+      Taro.getStorage({
+        key: Env.storageKey
+      })
+      .then(res => {
+        setLogged(true)
+        setUid(res.data.id)
+      })
     })
     .catch(err => {
       console.log(err)
@@ -134,6 +107,90 @@ function Index() {
     // setNumSelected(numList[e.detail.value])
   }
 
+  function toggleFav(id) {
+    if (!logged) {
+      Taro.navigateTo({ url: '/pages/me/login' })
+      return
+    }
+
+    const newNodes = nodes.map((node) => {
+      if (node.id === id) {
+
+        const data = { uid: uid, nid: node.id }
+
+        Taro.request({
+          method: 'POST',
+          url: Env.apiUrl + 'fav/toggle',
+          data
+        }).then((res) => {
+          console.log(res.data)
+          // return res.data.node
+        })
+
+        let favs = node.favs
+        if (node.favs.includes(uid)) {
+          favs = node.favs.filter((i) => {return i !== uid})
+        } else {
+          favs = [...node.favs, uid]
+        }
+
+        const updatedNode = {
+          ...node,
+          favs: favs,
+        }
+
+        return updatedNode
+      }
+
+      // console.log(node)
+      return node
+    })
+
+    setNodes(newNodes);
+  }
+
+  function ListItem({node, type, index}) {
+    node.isFav = false
+    if (node.favs.includes(uid)) {
+      node.isFav = true
+    }
+
+    return (
+      <View className="d-flex">
+        <View className="left align-center">
+          <View className="">
+            <View>
+            <img className="" width="20px" height="20px" src={Env.iconUrl + 'star-fill-gold.svg'} />
+            </View>
+            <View>{node.rates.rate}</View>
+          </View>
+          <View className="">
+            <View>
+            <img className="" width="20px" height="20px" src={Env.iconUrl + 'chat-dots-fill.svg'} />
+            </View>
+            <View>{node.comments.length}</View>
+          </View>
+          <View>
+          <img width="20px" height="20px" onClick={() => toggleFav(node.id)} src={Env.iconUrl + (node.isFav && 'heart-red-fill.svg' || 'heart-grey.svg')} />
+          </View>
+        </View>
+        <View className="card right">
+          <Image
+          className="w-100 img"
+          mode="aspectFill"
+          onClick={() => gotoNode(node.id, type)}
+          src={Env.imageUrl + node.image}
+          alt=""
+          />
+        <View className="text">
+          <View className="title">{node.title}</View>
+          <View className="price">¥ {node.price / 100}/晚</View>
+        </View>
+        </View>
+      </View>
+    )
+  }
+
   return (
     <View className="index-zhu">
       <View className="d-flex tags">
@@ -152,7 +209,7 @@ function Index() {
       </View>
       <View className="leyou block">
         <View className="list">
-          {youList} 
+          {nodes.map((node, index) => <ListItem node={node} type={2} index={index} />)}
         </View>
       </View>
 
