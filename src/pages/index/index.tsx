@@ -220,7 +220,7 @@ function Index() {
             </View>
             <View
               className="more" 
-              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=dong&type=4'})}
+              onClick={() => Taro.navigateTo({url: '/pages/list/card?region=dong&type=4'})}
             >
             <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
             </View>
