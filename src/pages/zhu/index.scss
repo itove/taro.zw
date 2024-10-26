@@ -248,8 +248,31 @@ swiper-item, .card{
       font-size: 16px;
     }
   }
-  .card .text{
-    background: none;
-    box-shadow: none;
+  .card{
+    padding-right: 0;
+    .img{
+      height: 150px;
+      border-radius: 12px 0 0 0;
+      &::after{
+        border-radius: 12px 0 0 0;
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 150px;
+        // opacity: 0.5;
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        background-size: cover;
+        background: linear-gradient(180deg, rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, .8) 100%);
+      }
+    }
+    .text{
+      // background: linear-gradient(148deg, rgba(0, 0, 0, .1) 50%, rgba(0, 0, 0, .5) 100%);
+      background: none;
+      box-shadow: none;
+    }
   }
 }
