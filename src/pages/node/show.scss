@@ -255,9 +255,10 @@ page{
   color: #666666;
 }
 page .show{
+  padding-bottom: 40px;
   .hero-jing{
     .img{
-      position: absolute;
+      position: fixed;
       top: 50px;
       left: 16px;
     }

@@ -502,7 +502,15 @@ function Index() {
       </Tabs>
       }
 
-      { type == 1 &&
+      { type == 2 &&
+      <View className="comments">
+        <View className="title">评论 ({commentCount})</View>
+        <View className="comments-list">
+        {commentList}
+        </View>
+      </View>
+      }
+
       <View className="footer fixed d-flex p-1">
         <Input width="" placeholder='我想说...' className="input" value={comment} onInput={(e) => updateInput(e)}>
           <img width="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
@@ -512,7 +520,6 @@ function Index() {
           <img width="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
         </View>
       </View>
-      }
 
       <ImagePreview
         // autoPlay
