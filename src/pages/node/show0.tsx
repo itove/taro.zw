@@ -410,7 +410,7 @@ function Index() {
             { type == 1 &&
             <View className="reviews d-flex align-items-center">
               <Rate className="stars me-8" allowHalf readOnly touchable defaultValue={0} value={node.rates.rate} />
-              <View className="">{node.rates.rate} <span className="counts">({node.rates.users.length} 条评价)</span> </View>
+              <View className="">{node.rates.rate} <span className="count">({node.rates.users.length} 条评价)</span> </View>
             </View>
             }
 
@@ -503,7 +503,7 @@ function Index() {
       }
 
       { type == 2 &&
-      <View className="comments">
+      <View className="comments p-16">
         <View className="title">评论 ({commentCount})</View>
         <View className="comments-list">
         {commentList}

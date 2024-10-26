@@ -14,7 +14,7 @@ page{
   width: 25%;
 }
 .p-1{
-  padding: 16px;
+  padding: 16px !important;
 }
 .home{
   --nutui-grid-item-content-bg-color: var(--gray);
@@ -284,7 +284,7 @@ page{
   color: #ffffff;
 }
 .p-16{
-  padding: 16px;
+  padding: 16px !important;
 }
 .align-center{
   text-align: center;

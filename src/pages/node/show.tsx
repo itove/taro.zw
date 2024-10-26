@@ -415,7 +415,7 @@ function Index() {
 
             <View className="reviews d-flex align-items-center">
               <Rate className="stars me-8" allowHalf readOnly touchable defaultValue={0} value={node.rates.rate} />
-              <View className="">{node.rates.rate} <span className="counts">({commentCount} 条评价)</span> </View>
+              <View className="">{node.rates.rate} <span className="count">({commentCount} 条评价)</span> </View>
             </View>
           </View>
         </View>

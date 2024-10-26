@@ -40,7 +40,7 @@ page{
   align-items: baseline;
   .reviews{
     font-size: 16px;
-    .counts{
+    .count{
       font-size: 14px;
       display: inline;
       color: #979797;
@@ -255,6 +255,11 @@ page{
   color: #666666;
 }
 page .show{
+  .count{
+    font-size: 14px;
+    line-height: 14px;
+    height: 14px;
+  }
   padding-bottom: 40px;
   .hero-jing{
     .img{
