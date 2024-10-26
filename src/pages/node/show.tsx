@@ -31,7 +31,6 @@ function Index() {
   const [comment, setComment] = useState('')
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
-  const [favs, setFavs] = useState(0)
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
   const [logged, setLogged] = useState(false)
@@ -39,6 +38,7 @@ function Index() {
   const [commentCount, setCommentCount] = useState(0)
   const [liked, setLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(0)
+  const [favCount, setFavCount] = useState(0)
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
@@ -85,7 +85,7 @@ function Index() {
     .then(res => {
       const n = res.data
       setNode(n)
-      setFavs(n.favs.length)
+      setFavCount(n.favs.length)
       console.log(n)
       if (n.body) {
         setBody(n.body.replace(/&nbsp;/g, '<br/>'))
@@ -96,7 +96,7 @@ function Index() {
       })
 
       setCommentCount(n.comments.length)
-      setLikeCount(n.likes.length)
+      setFavCount(n.favs.length)
       setCommentList(makeCommentsList(n.comments))
       setTags(n.tags.map((i, index) => <View className="tag tag-blue" key={index}>{i}</View> ))
       // setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
@@ -107,8 +107,10 @@ function Index() {
         key: Env.storageKey
       })
       .then(res => {
-        if (n.likes.includes(res.data.id)) {
-          setLiked(true)
+        setLogged(true)
+        setUid(res.data.id)
+        if (n.favs.includes(res.data.id)) {
+          setIsFav(true)
         }
       })
 
@@ -239,27 +241,6 @@ function Index() {
     }
   }, []);
 
-  useEffect(() => {
-    Taro.getStorage({
-      key: Env.storageKey
-    })
-    .then(res => {
-      setLogged(true)
-      setUid(res.data.id)
-      Taro.request({
-        url: Env.apiUrl + 'isfav?uid=' + res.data.id + '&nid=' + id
-      })
-      .then(res => {
-        console.log(res.data)
-        setIsFav(res.data.isFav)
-      })
-    })
-    .catch(err => {
-      console.log(err)
-      // Taro.redirectTo({url: '/pages/me/login'})
-    })
-  }, [])
-
   const makeCommentsList = (comments) => {
     return comments.map((c, i) => (
           <View className="item">
@@ -369,9 +350,9 @@ function Index() {
     }).then((res) => {
       setIsFav(res.data.isFav)
       if (res.data.isFav) {
-        setFavs(favs + 1)
+        setFavCount(favCount + 1)
       } else {
-        setFavs(favs - 1)
+        setFavCount(favCount - 1)
       }
     })
   }
@@ -451,7 +432,7 @@ function Index() {
           <View className="right">
             <View className="">
               <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} /> {commentCount}
-              <img className="ms-20" width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart.png' || 'heart.png')} />{favs}
+              <img className="ms-20" width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart.png' || 'heart.png')} />{favCount}
             </View>
           </View>
         </View>
@@ -476,8 +457,8 @@ function Index() {
 
         <View className="info d-flex justify-between align-items-center py-16">
           <View className="like d-flex align-items-center">
-            <img height="20px" width="20px" onClick={likeit} src={Env.iconUrl + (liked ? 'heart-pink-fill.svg' : 'heart-pink.svg') } />
-            <View className="ms-5">{likeCount}</View>
+            <img height="20px" width="20px" onClick={toggleFav} src={Env.iconUrl + (isFav ? 'heart-pink-fill.svg' : 'heart-pink.svg') } />
+            <View className="ms-5">{favCount}</View>
           </View>
           <View className="date">{fmtDate(new Date(node.createdAt))}</View>
         </View>
