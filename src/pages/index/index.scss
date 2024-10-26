@@ -57,6 +57,13 @@ page{
   }
   padding-bottom: 10px;
   .home{
+    .hero{
+      .text{
+        .title{
+          font-size: 16px;
+        }
+      }
+    }
     position: relative;
     overflow: hidden;
     .nut-grid-border{

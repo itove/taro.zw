@@ -56,10 +56,10 @@ function ViewItem({node, type, index}) {
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="aspectFill" />
       </View>
       <View className="text">
-        <View className="ellipsis-2 title mb-16">{node.title}</View>
+        <View className="ellipsis-2 title mb-10">{node.title}</View>
         <View className="d-flex">
           <View className="left">
-            <img width="16px" height="16px" src={Env.imageUrl + node.author.avatar} /> {node.author.name}
+            <img className="avatar" width="16px" height="16px" src={Env.imageUrl + node.author.avatar} /> {node.author.name}
           </View>
           <View className="right">
             <img width="16px" height="16px" src={Env.iconUrl + 'heart.png'} /> {node.favs.length}

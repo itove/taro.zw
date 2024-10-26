@@ -89,10 +89,10 @@ function List2({node, type, index}) {
     <View className="text">
       <View className="ellipsis"> {node.title} </View>
       <View className="info">
-        {type === 0 &&
+        {type === 4 &&
         <View className="">{fmtDate(new Date(node.startAt), 1)}</View>
         }
-        {type === 1 &&
+        {type === 3 &&
         <View className="d-flex justify-between" style="width: 80%">
           <View>
             <img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill-gold.svg'} />
@@ -165,8 +165,8 @@ function Index() {
 
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
       setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={1} />))
-      setDongList(data.dong.map((node, index) => index < 3 && <List2 node={node} index={index} type={0} />))
-      setShiList(data.shi.map((node, index) => index < 3 && <List2 node={node} index={index} type={1} />))
+      setDongList(data.dong.map((node, index) => index < 3 && <List2 node={node} index={index} type={4} />))
+      setShiList(data.shi.map((node, index) => index < 3 && <List2 node={node} index={index} type={3} />))
       setWanList(data.wan.map((node, index) => <List node={node} type={0} index={index} />))
     })
     .catch(err => {
@@ -220,7 +220,7 @@ function Index() {
             </View>
             <View
               className="more" 
-              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=jing&type=0'})}
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=dong&type=4'})}
             >
             <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
             </View>
@@ -236,7 +236,7 @@ function Index() {
             </View>
             <View
               className="more" 
-              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=shi&type=0'})}
+              onClick={() => Taro.navigateTo({url: '/pages/node/index?region=shi&type=3'})}
             >
             <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
             </View>

@@ -15,5 +15,9 @@ export function fmtDate (date, style = 0) {
     result = `${year}-${month}-${day}`
   }
 
+  if (style === 3) {
+    result = `${year}/${month}/${day}`
+  }
+
   return result
 }

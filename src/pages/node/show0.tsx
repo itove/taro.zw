@@ -507,8 +507,8 @@ function Index() {
         <Input width="" placeholder='我想说...' className="input" value={comment} onInput={(e) => updateInput(e)}>
           <img width="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
         </Input>
-        <View className="d-flex btns">
-          <img width="28" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
+        <View className="d-flex justify-between btns">
+          <img width="28px" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
           <img width="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
         </View>
       </View>

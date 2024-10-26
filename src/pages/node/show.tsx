@@ -393,7 +393,7 @@ function Index() {
       <View className="hero">
         { type == 4 &&
         <View className="widget">
-          <View className="badge">{node.tags[0]}</View>
+          <View className="badge">活动日期：{fmtDate(new Date(node.startAt), 3)} - {fmtDate(new Date(node.endAt), 3)}</View>
         </View>
         }
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
@@ -540,7 +540,7 @@ function Index() {
           <img widht="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
         </Input>
         <View className="d-flex btns">
-          <img widht="28" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
+          <img widht="28px" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
           <img widht="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
         </View>
       </View>

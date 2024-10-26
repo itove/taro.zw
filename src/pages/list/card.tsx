@@ -3,6 +3,7 @@ import { View, Image } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
+import { fmtDate } from '../../utils/fmtDate'
 
 function gotoNode(id, type = 3) {
   if (type === 1 || type === 2) {
@@ -58,7 +59,7 @@ function ListItem({node, type, index}) {
     <View className="card">
       { type == 4 &&
       <View className="widget">
-        <View className="badge">{node.tags[0]}</View>
+        <View className="badge">活动日期：{fmtDate(new Date(node.startAt), 3)} - {fmtDate(new Date(node.endAt), 3)}</View>
       </View>
       }
 

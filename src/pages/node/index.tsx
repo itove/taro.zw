@@ -47,7 +47,7 @@ function ListItem({node, index, type}) {
           <View className="tag tag-y ms-5">{node.tags[0]}</View>
           }
         </View>
-        { type != 6 &&
+        { type == 3 &&
           <p className="ellipsis-2">{node.summary}</p>
         }
         </View>
@@ -89,7 +89,7 @@ function GridItem({node, index, type}) {
       <Image className="w-100 img" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
         <View className="title d-flex justify-between mb-10">
-          {node.title}
+          <View className="ellipsis">{node.title}</View>
           { type == 7 &&
           <View className="tag tag-y ms-5">{node.tags[0]}</View>
           }
