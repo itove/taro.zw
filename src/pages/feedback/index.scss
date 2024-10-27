@@ -31,3 +31,11 @@ page{
   border: 0.5px solid #D8D8D8;
   border-radius: 4 !important;
 }
+page .feedback-index{
+  .footer{
+    border-top: none;
+    .btn-primary{
+      background: #3e7cf3;
+    }
+  }
+}

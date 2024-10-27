@@ -23,6 +23,7 @@ export default defineAppConfig({
     'pages/search/index',
     'pages/search/result',
     'pages/feedback/index',
+    'pages/feedback/new',
     'pages/me/login',
     'pages/node/show',
     'pages/node/show0',

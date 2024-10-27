@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '联系我们'
+  navigationBarTitleText: '我的建议'
 })
