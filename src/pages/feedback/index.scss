@@ -39,3 +39,39 @@ page .feedback-index{
     }
   }
 }
+page{
+  background: #F1F3F4;
+  .feedback-new{
+    padding-top: 10px;
+    background: #F1F3F4;
+    font-size: 16px;
+    .btn-primary{
+      border-radius: 10px;
+      width: 90%;
+      margin-top: 80px;
+    }
+    .field{
+      margin: 8px 0;
+      background: #ffffff;
+      padding: 16px;
+      .text-title{
+        padding-bottom: 16px;
+        font-weight: 600;
+      }
+      .star{
+        color: red;
+        margin-right: 1px;
+      }
+      .nut-cell{
+        padding: 0;
+        border: none;
+      }
+    }
+    .nut-cell-group-wrap{
+      background: none;
+    }
+    .nut-textarea-textarea{
+      font-size: 14px !important;
+    }
+  }
+}
