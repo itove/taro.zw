@@ -24,7 +24,7 @@ function openLocation(latitude, longitude) {
 }
 
 function Index() {
-  const [node, setNode] = useState({rates: {rate: 0}, tags: []})
+  const [node, setNode] = useState({rates: {rate: 0, users: []}, tags: []})
   const [rooms, setRooms] = useState([])
   const [uid, setUid] = useState(0)
   const [body, setBody] = useState('')
@@ -416,7 +416,7 @@ function Index() {
 
             <View className="reviews d-flex align-items-center">
               <Rate className="stars me-8" allowHalf readOnly touchable defaultValue={0} value={node.rates.rate} />
-              <View className="">{node.rates.rate} <span className="count">({commentCount} 条评价)</span> </View>
+              <View className="">{node.rates.rate} <span className="count">({node.rates.users.length} 条评分)</span> </View>
             </View>
           </View>
         </View>
