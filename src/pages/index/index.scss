@@ -70,7 +70,7 @@ page{
       border: none;
     }
     .grid{
-      padding-bottom: 16px;
+      padding: 16px 0;
       // background: #ffffff;
       background-size: cover;
       background-repeat: no-repeat;
@@ -92,9 +92,9 @@ page{
         border: none;
       }
       .img{
-        width: 37px;
-        height: 37px;
-        padding: 16px 16px 0px;
+        width: 40px;
+        height: 40px;
+        padding: 0 16px;
         // background: #ffffff;
         border-radius: 15px;
       }
