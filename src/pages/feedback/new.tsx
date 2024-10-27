@@ -41,12 +41,12 @@ function Index() {
         Taro.showToast({
           title: '反馈成功',
           icon: 'success',
-          duration: 2000
+          duration: 1000
         }).then(() => {
           setTimeout(() => {
             // Taro.reLaunch({ url: '/pages/index/index' })
             Taro.navigateBack()
-          }, 2000)
+          }, 1000)
         })
       } else {
         Taro.showToast({
