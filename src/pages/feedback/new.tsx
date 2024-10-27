@@ -31,6 +31,7 @@ function Index() {
   const formSubmit = (data) => {
     setDisabled(true)
     console.log(data);
+    data.uid = uid
     Taro.request({
       method: 'POST',
       url: Env.apiUrl + 'feedback',
