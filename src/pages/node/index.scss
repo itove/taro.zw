@@ -43,9 +43,8 @@ page{
     background: #f4f4f7;
     border-radius: 15px;
     color: #979797;
-    View{
+    .picker{
       display: flex;
-      align-items: center;
     }
   }
 }

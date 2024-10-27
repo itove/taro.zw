@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { View, Image, Picker } from '@tarojs/components'
+import { View, Image, Text, Picker } from '@tarojs/components'
 import { Grid } from '@nutui/nutui-react-taro'
 import './index.scss'
 // import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list'
 
 function gotoNode(id, type = 2) {
-  if (type === 1 || type === 2) {
+  console.log(type)
+  if (type == 1 || type == 2) {
     Taro.navigateTo({url: '/pages/node/show0?type=' + type + '&id=' + id})
   } else {
     Taro.navigateTo({url: '/pages/node/show?type=' + type + '&id=' + id})
@@ -108,16 +109,6 @@ function GridItem({node, index, type}) {
   )
 }
 
-/*
-function GridItem({node, index, type}) {
-  return (
-    <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id)}>
-    <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
-    </Grid.Item>
-  )
-}
-*/
-
 function Index() {
   const instance = Taro.getCurrentInstance();
   const region = instance.router.params.region
@@ -126,23 +117,16 @@ function Index() {
   const type = instance.router.params.type ? instance.router.params.type : 2
   const [userLocation, setUserLocation] = useState({})
 
-  const [list, setList] = useState([])
+  const [nodes, setNodes] = useState([])
   const [sortList, setSortList] = useState(['升序', '降序'])
   const [cateList, setCateList] = useState(['农家乐', '星级', '烧烤', '海鲜', '特色', '夜市'])
-  const [locList, setLocList] = useState(['红卫街道', '花果街道', '黄龙镇', '西沟乡', '方滩乡'])
+  const [areaList, setAreaList] = useState(['红卫街道', '花果街道', '黄龙镇', '西沟乡', '方滩乡'])
+  const [selectedSort, setSelectedSort] = useState('排序')
+  const [selectedCate, setSelectedCate] = useState('类别')
+  const [selectedArea, setSelectedArea] = useState('地区')
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
-
-  // useEffect(() => {
-  //   Taro.getLocation({
-  //     // type: 'wgs84',
-  //     type: 'gcj02',
-  //     }).then((res) => {
-  //       console.log(res)
-  //       setUserLocation({lat: res.latitude, long: res.longitude})
-  //     })
-  // }, []);
 
   useEffect(() => {
     // console.log(uid)
@@ -161,17 +145,7 @@ function Index() {
         title: data.region ? data.region : '列表'
       })
 
-      setList(data.nodes.map((node, index) => {
-        return (type == 2 || type == 5 || type == 7)
-        &&
-        // <Grid.Item text={node.title} key={index} className="grid-list rounded overflow-hidden" onClick={() => gotoNode(node.id, type)}>
-        // <Image className="w-100" src={Env.imageUrl + node.image} mode="aspectFill" />
-        // </Grid.Item>
-            <GridItem node={node} type={type} key={index}/>
-          ||
-            <ListItem node={node} type={type} key={index} />
-        }
-        ))
+      setNodes(data.nodes)
 
       Taro.getLocation({
         // type: 'wgs84',
@@ -180,26 +154,30 @@ function Index() {
         console.log(res)
         setUserLocation({lat: res.latitude, long: res.longitude})
 
-        setList(data.nodes.map((node, index) => {
+        setNodes(data.nodes.map((node, index) => {
           node.distance = getDistance(res.latitude, res.longitude, node.latitude, node.longitude)
-          return (type == 2 || type == 5 || type == 7)
-          &&
-              <GridItem node={node} type={type} key={index} />
-            ||
-              <ListItem node={node} type={type} key={index} />
-          }
-          ))
-
-      })
+          return node
+        }))
 
     })
     .catch(err => {
       console.log(err)
     })
+    })
   }, [])
 
   const sortChange = (e) => {
     console.log('sort change')
+    console.log(e.detail.value)
+  }
+
+  const cateChange = (e) => {
+    console.log('cate change')
+    console.log(e.detail.value)
+  }
+
+  const areaChange = (e) => {
+    console.log('area change')
     console.log(e.detail.value)
   }
 
@@ -210,39 +188,39 @@ function Index() {
     <View className="sort">
       <View>
         <Picker mode='selector' range={sortList} onChange={sortChange}>
-          <View className='picker'>
-          排序
+          <View className="picker">
+            <Text className=''> {selectedSort}</Text>
+            <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
           </View>
         </Picker>
-        <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
       </View>
       <View>
         <Picker mode='selector' range={cateList} onChange={sortChange}>
-          <View className='picker'>
-          类别
+          <View className="picker">
+            <Text className=''> {selectedCate}</Text>
+            <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
           </View>
         </Picker>
-        <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
       </View>
       <View>
-        <Picker mode='selector' range={locList} onChange={sortChange}>
-          <View className='picker'>
-          地区
+        <Picker mode='selector' range={areaList} onChange={sortChange}>
+          <View className="picker">
+            <Text className=''> {selectedArea}</Text>
+            <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
           </View>
         </Picker>
-        <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
       </View>
     </View>
     }
 
     { (type == 2 || type == 5 || type == 7) &&
       <View columns="2" gap="5" center={false} className="grid">
-        {list}
+        {nodes.map((node, index) => <GridItem node={node} type={type} key={index} /> )}
       </View>
     }
     { (type != 2 && type != 5 && type != 7) &&
       <View className="list">
-        {list}
+        {nodes.map((node, index) => <ListItem node={node} type={type} key={index} /> )}
       </View>
     }
     </View>
