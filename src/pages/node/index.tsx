@@ -118,12 +118,16 @@ function Index() {
   const [userLocation, setUserLocation] = useState({})
 
   const [nodes, setNodes] = useState([])
-  const [sortList, setSortList] = useState(['升序', '降序'])
-  const [cateList, setCateList] = useState(['农家乐', '星级', '烧烤', '海鲜', '特色', '夜市'])
-  const [areaList, setAreaList] = useState(['红卫街道', '花果街道', '黄龙镇', '西沟乡', '方滩乡'])
-  const [selectedSort, setSelectedSort] = useState('排序')
-  const [selectedCate, setSelectedCate] = useState('类别')
-  const [selectedArea, setSelectedArea] = useState('地区')
+  const [sorts, setSorts] = useState(['降序', '升序'])
+  const [categories, setCategories] = useState([])
+  const [areas, setAreas] = useState([])
+  // const [areas, setAreas] = useState(['全部', '红卫街道', '花果街道', '黄龙镇', '西沟乡', '方滩乡'])
+  const [selectedOrder, setSelectedOrder] = useState('DESC')
+  const [selectedCate, setSelectedCate] = useState(0)
+  const [selectedArea, setSelectedArea] = useState(0)
+  const [sortText, setSortText] = useState('排序')
+  const [cateText, setCateText] = useState('类别')
+  const [areaText, setAreaText] = useState('地区')
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
@@ -133,6 +137,32 @@ function Index() {
     let url = Env.apiUrl + 'nodes/' + region
     if (uid !== undefined ) {
       url = Env.apiUrl + 'fav?region=' + region + '&uid=' + uid
+    }
+
+    getNodes(region)
+  }, [])
+
+  useEffect(() => {
+    Taro.request({
+      url: Env.apiUrl + 'taxons/'
+    })
+    .then(res => {
+      const c = res.data.categories
+      const a = res.data.areas
+      c.unshift({name: '全部'})
+      a.unshift({name: '全部'})
+      setCategories(c)
+      setAreas(a)
+    })
+  }, [])
+
+  const getNodes = (region, sort = 'DESC', cate = 0, area = 0) => {
+    let url = Env.apiUrl + 'nodes/' + region + '?order=' + sort
+    if (cate > 0 ) {
+      url = url + '&cate=' + cate
+    }
+    if (area > 0) {
+      url = url + '&area=' + area
     }
     Taro.request({
       url
@@ -158,27 +188,43 @@ function Index() {
           node.distance = getDistance(res.latitude, res.longitude, node.latitude, node.longitude)
           return node
         }))
-
     })
     .catch(err => {
       console.log(err)
     })
     })
-  }, [])
+  }
 
   const sortChange = (e) => {
     console.log('sort change')
-    console.log(e.detail.value)
+    const v = Number(e.detail.value)
+    console.log(v)
+    let order = 'DESC'
+    if (v !== 0) {
+      order = 'ASC'
+    }
+    setSelectedOrder(order)
+    setSortText(sorts[v])
+    getNodes(region, order, categories[selectedCate].id, selectedArea)
   }
 
   const cateChange = (e) => {
     console.log('cate change')
-    console.log(e.detail.value)
+    const v = Number(e.detail.value)
+    console.log(v)
+    console.log(categories[v])
+    setSelectedCate(v)
+    setCateText(categories[v].name)
+    getNodes(region, selectedOrder, categories[v].id, areas[selectedArea].id)
   }
 
   const areaChange = (e) => {
     console.log('area change')
-    console.log(e.detail.value)
+    const v = Number(e.detail.value)
+    console.log(v)
+    setSelectedArea(v)
+    setAreaText(areas[v].name)
+    getNodes(region, selectedOrder, categories[selectedCate].id, areas[v].id)
   }
 
   return (
@@ -187,25 +233,25 @@ function Index() {
     {type == 3 &&
     <View className="sort">
       <View>
-        <Picker mode='selector' range={sortList} onChange={sortChange}>
+        <Picker mode='selector' range={sorts} onChange={sortChange}>
           <View className="picker">
-            <Text className=''> {selectedSort}</Text>
+            <Text className=''> {sortText}</Text>
             <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
           </View>
         </Picker>
       </View>
       <View>
-        <Picker mode='selector' range={cateList} onChange={sortChange}>
+        <Picker mode='selector' range={categories} rangeKey="name" onChange={cateChange}>
           <View className="picker">
-            <Text className=''> {selectedCate}</Text>
+            <Text className=''> {cateText}</Text>
             <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
           </View>
         </Picker>
       </View>
       <View>
-        <Picker mode='selector' range={areaList} onChange={sortChange}>
+        <Picker mode='selector' range={areas} rangeKey="name" onChange={areaChange}>
           <View className="picker">
-            <Text className=''> {selectedArea}</Text>
+            <Text className=''> {areaText}</Text>
             <img className="ms-5" width="16px" height="16px" src={Env.iconUrl + 'chevron-down.svg'} />
           </View>
         </Picker>
