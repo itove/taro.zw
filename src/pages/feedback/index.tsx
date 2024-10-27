@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Button } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
+import { useDidShow } from '@tarojs/taro'
 import { Env } from '../../env'
 import { fmtDate } from '../../utils/fmtDate'
 
@@ -10,7 +11,7 @@ function Index() {
   const [disabled, setDisabled] = useState(false)
   const [user, setUser] = useState({})
 
-  useEffect(() => {
+  useDidShow(() => {
     Taro.getStorage({
       key: Env.storageKey
     })
