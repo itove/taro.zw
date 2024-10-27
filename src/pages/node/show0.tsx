@@ -29,13 +29,13 @@ function Index() {
   const [uid, setUid] = useState(0)
   const [body, setBody] = useState('')
   const [comment, setComment] = useState('')
+  const [comments, setComments] = useState([])
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
   const [favs, setFavs] = useState(0)
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
   const [logged, setLogged] = useState(false)
-  const [commentList, setCommentList] = useState([])
   const [commentCount, setCommentCount] = useState(0)
   const [rateCount, setRateCount] = useState(0)
   const [liked, setLiked] = useState(false)
@@ -99,8 +99,8 @@ function Index() {
       })
 
       setCommentCount(n.comments.length)
+      setComments(n.comments)
       setLikeCount(n.likes.length)
-      setCommentList(makeCommentsList(n.comments))
       setTags(n.tags.map((i, index) => index < 3 && <View className="tag tag-blue" key={index}>{i}</View> ))
       // setRooms(n.children.map((child, index) => <RoomView key={index} room={child} node={n}/>))
 
@@ -154,7 +154,7 @@ function Index() {
   const upit = (cid) => {
     console.log('logged? ,', logged);
     if (!logged) {
-      // Taro.navigateTo({ url: '/pages/me/login' })
+      Taro.navigateTo({ url: '/pages/me/login' })
       return
     }
     console.log('up comment: ' + cid)
@@ -170,7 +170,7 @@ function Index() {
     }).then((res) => {
       if (res.statusCode === 200) {
         console.log(res.data)
-        setCommentList(makeCommentsList(res.data.comments))
+        setComments(res.data.comments)
       } else {
         Taro.showToast({
           title: '系统错误',
@@ -206,7 +206,7 @@ function Index() {
     }).then((res) => {
       if (res.statusCode === 200) {
         setCommentList(makeCommentsList(res.data.comments))
-        setCommentCount(res.data.comments.length)
+        setComments(res.data.comments)
         Taro.showToast({
           title: '提交成功',
           icon: 'success',
@@ -244,46 +244,25 @@ function Index() {
   //   }
   // }, []);
 
-  const makeCommentsList = (comments) => {
-    return comments.map((c, i) => (
-          <View className="item">
+  const Comment = ({comment, index}) => {
+    return (
+          <View className="item" key={index}>
             <View className="top">
               <View className="user">
-                <img width="48px" height="48px" className="img" src={Env.imageUrl + c.author.avatar} />
-                <View>{c.author.name}</View>
+                <img width="48px" height="48px" className="img" src={Env.imageUrl + comment.author.avatar} />
+                <View>{comment.author.name}</View>
               </View>
               <View className="like">
-                <img width="16px" height="16px" className="img" onClick={() => upit(c.id)} src={Env.iconUrl + (c.ups.includes(uid) ? 'hand-thumbs-up-fill.svg' : 'hand-thumbs-up.svg')} />
-                {c.ups.length}
+                <img width="16px" height="16px" className="img" onClick={() => upit(comment.id)} src={Env.iconUrl + (comment.ups.includes(uid) ? 'hand-thumbs-up-fill.svg' : 'hand-thumbs-up.svg')} />
+                {comment.ups.length}
               </View>
             </View>
             <View className="content">
-              <View className="body">{c.body}</View>
-              <View className="time">{fmtDate(new Date(c.createdAt))} </View>
+              <View className="body">{comment.body}</View>
+              <View className="time">{fmtDate(new Date(comment.createdAt))} </View>
             </View>
           </View>
-      ))
-  }
-
-  const commentItem = ({c}) => {
-    return (
-      <View className="item">
-        <View className="top">
-          <View className="user">
-            <img width="48px" height="48px" className="img" src={Env.imageUrl + c.author.avatar} />
-            <View>{c.author.name}</View>
-          </View>
-          <View className="like">
-            <img width="16px" height="16px" className="img" onClick={() => upit(c.id)} src={Env.iconUrl + (c.ups.includes(uid) ? 'hand-thumbs-up-fill.svg' : 'hand-thumbs-up.svg')} />
-            {c.ups.length}
-          </View>
-        </View>
-        <View className="content">
-          <View className="body">{c.body}</View>
-          <View className="time">{fmtDate(new Date(c.createdAt))} </View>
-        </View>
-      </View>
-    )
+      )
   }
 
   const RoomView = ({room, index, node}) => {
@@ -474,7 +453,7 @@ function Index() {
           <View className="comments">
             <View className="title">评论 ({commentCount})</View>
             <View className="comments-list">
-            {commentList}
+            {comments.map((c, i) => <Comment comment={c} index={i} />)}
             </View>
           </View>
 
@@ -489,7 +468,7 @@ function Index() {
       <View className="comments p-16">
         <View className="title">评论 ({commentCount})</View>
         <View className="comments-list">
-        {commentList}
+          {comments.map((c, i) => <Comment comment={c} index={i} />)}
         </View>
       </View>
       }
