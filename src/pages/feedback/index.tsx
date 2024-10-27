@@ -3,12 +3,7 @@ import { View, Button } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import {
-  Form,
-  InputNumber,
-  Input,
-  TextArea,
-} from '@nutui/nutui-react-taro'
+import { fmtDate } from '../../utils/fmtDate'
 
 function Index() {
   const [list, setList] = useState([])
@@ -21,6 +16,7 @@ function Index() {
     })
     .then(res => {
       console.log(res.data)
+      setUser(res.data)
       Taro.request({
         url: Env.apiUrl + 'feedback?uid=' + res.data.id
       })
@@ -37,29 +33,29 @@ function Index() {
 
   const Feedback = ({feedback, index}) => {
     return (
-      <View>
-        <View className="top">
-          <View className="left">
-            <img className="avatar" width="16px" height="16px" src={Env.imageUrl + user.avatar} />
-            <View className="name"> {user.name}的建议</View>
-            <View className="status tag tab-b">处理中</View>
+      <View className="item">
+        <View className="top d-flex justify-between mb-16 align-items-center">
+          <View className="left d-flex align-items-center">
+            <img className="avatar me-10" width="24px" height="24px" src={Env.imageUrl + user.avatar} />
+            <View className="name me-8"> {user.name}的建议</View>
+            <View className="status tag tag-b">处理中</View>
           </View>
-          <View className="right">2024-10-10</View>
+          <View className="right">{fmtDate(new Date(feedback.createdAt), 2)}</View>
         </View>
-        <View className="text">
+        <View className="text d-flex mb-16">
           <View className="text-title">问题建议</View>
-          <View className="text-body">{feedback.title}</View>
+          <View className="text-body ellipsis-2">{feedback.title}</View>
         </View>
-        <View className="text">
+        <View className="text d-flex">
           <View className="text-title">详细描述</View>
-          <View className="text-body">{feedback.body}</View>
+          <View className="text-body ellipsis-4">{feedback.body}</View>
         </View>
       </View>
     )
   }
 
   return (
-    <View className="feedback-index p-1">
+    <View className="feedback-index">
       {list.map((feedback, index) => <Feedback feedback={feedback} index={index} />)}
 
       <View className="footer fixed">

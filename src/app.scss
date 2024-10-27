@@ -74,6 +74,14 @@ page{
     }
   }
 }
+.ellipsis-4{
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
 .ellipsis-2{
   white-space: normal !important;
   overflow: hidden;
@@ -202,6 +210,12 @@ page{
 }
 .me-8{
   margin-right: 8px !important;
+}
+.me-10{
+  margin-right: 10px !important;
+}
+.me-16{
+  margin-right: 16px !important;
 }
 .btn-primary{
   background: #3e7cf3;
