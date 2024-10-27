@@ -22,9 +22,9 @@ function Index() {
   const [uid, setUid] = useState(0)
   const [avatarUrl, setAvatarUrl] = useState(Env.imageUrl + 'avatar.jpg')
   const [favCount, setFavCount] = useState(0)
-  const [answerCount, setAnswerCount] = useState(0)
+  const [planCount, setPlanCount] = useState(0)
+  const [youCount, setYouCount] = useState(0)
   const [couponCount, setCouponCount] = useState(0)
-  const [logCount, setLogCount] = useState(0)
 
   useEffect(() => {
     console.log('page me useEffect')
@@ -47,6 +47,8 @@ function Index() {
         setUser(u)
         setUid(u.id)
         setFavCount(u.favCount)
+        setPlanCount(u.planCount)
+        setYouCount(u.youCount)
         if (u.avatar !== undefined && u.avatar !== null) {
           setAvatarUrl(Env.imageUrl + u.avatar)
         }
@@ -99,15 +101,15 @@ function Index() {
             <View className="">收藏</View>
           </View>
           <View className="item">
-            <View className="">{answerCount}</View>
-            <View className="">回答</View>
-          </View>
-          <View className="item">
             <View className="">{couponCount}</View>
             <View className="">优惠券</View>
           </View>
           <View className="item">
-            <View className="">{logCount}</View>
+            <View className="">{planCount}</View>
+            <View className="">行程</View>
+          </View>
+          <View className="item">
+            <View className="">{youCount}</View>
             <View className="">游记</View>
           </View>
         </View>
