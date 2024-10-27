@@ -127,7 +127,7 @@ function Index() {
   const [userLocation, setUserLocation] = useState({})
 
   const [list, setList] = useState([])
-  const [sortList, setSortList] = useState(['地区', '类别'])
+  const [sortList, setSortList] = useState(['升序', '降序'])
   const [cateList, setCateList] = useState(['农家乐', '星级', '烧烤', '海鲜', '特色', '夜市'])
   const [locList, setLocList] = useState(['红卫街道', '花果街道', '黄龙镇', '西沟乡', '方滩乡'])
 
