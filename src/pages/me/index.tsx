@@ -164,25 +164,25 @@ function Index() {
           <More text={'服务'} />
         </View>
         <View className="info-2">
-          <View className="item" onClick={() => goto('youzai')}>
+          <View className="item">
             <img
               src={Env.iconUrl + 'grid_1.png'}
             />
             <View> 积分商城 </View>
           </View>
-          <View className="item" onClick={() => goto('zhuzai')} >
+          <View className="item">
             <img
               src={Env.iconUrl + 'grid_2.png'}
             />
             <View> 会员卡 </View>
           </View>
-          <View className="item" onClick={() => goto('chizai')} >
+          <View className="item">
             <img
               src={Env.iconUrl + 'grid_3.png'}
             />
             <View> 常用信息 </View>
           </View>
-          <View className="item" onClick={() => goto('gouzai')} >
+          <View className="item" onClick={() => Taro.navigateTo({url: '/pages/feedback/index'})} >
             <img
               src={Env.iconUrl + 'grid_4.png'}
             />

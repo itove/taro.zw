@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View } from '@tarojs/components'
+import { View, Button as Btn  } from '@tarojs/components'
 import { Button, Cell, Avatar } from "@nutui/nutui-react-taro"
 import './index.scss'
 import Taro from '@tarojs/taro'
@@ -158,8 +158,8 @@ function Index() {
         extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{phone}</Button><Right /></>}
         />
       </Cell.Group>
-    <View className="p-1 fixed">
-      <Button className="btn-primary w-100" onClick={logout}>退出登录</Button>
+    <View className="p-1 fixed footer">
+      <Btn className="w-100 btn-rounded" onClick={logout}>退出登录</Btn>
     </View>
     </View>
   )
