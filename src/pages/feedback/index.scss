@@ -33,6 +33,7 @@ page{
 }
 page .feedback-index{
   padding-top: 10px;
+  padding-bottom: 50px;
   font-size: 16px;
   .item{
     padding: 16px;
@@ -67,6 +68,7 @@ page .feedback-index{
     border-top: none;
     .btn-primary{
       background: #3e7cf3;
+      border-radius: 10px;
     }
   }
 }
