@@ -494,7 +494,7 @@ function Index() {
       </View>
       }
 
-      <View className="footer fixed d-flex p-1">
+      <View className="footer fixed d-flex">
         <Input width="" placeholder='我想说...' className="input" value={comment} onInput={(e) => updateInput(e)}>
           <img width="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
         </Input>
