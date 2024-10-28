@@ -205,7 +205,7 @@ function Index() {
       data
     }).then((res) => {
       if (res.statusCode === 200) {
-        setCommentList(makeCommentsList(res.data.comments))
+        setCommentCount(res.data.comments.length)
         setComments(res.data.comments)
         Taro.showToast({
           title: '提交成功',
