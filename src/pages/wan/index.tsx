@@ -36,7 +36,7 @@ function SwiperItem({node, index, type}) {
 
 function GridItem({node, index, type}) {
   return (
-    <View className="grid-item" onClick={() => gotoNode(node.id, type)} >
+    <View className="grid-item mb-10" onClick={() => gotoNode(node.id, type)} >
       <View className="text mb-8">
         <View className="title d-flex mb-4">
           <View className="ellipsis" style="width: 70%">{node.title}</View>
