@@ -12,6 +12,7 @@ function Index() {
   const [uid, setUid] = useState(0)
   const [body, setBody] = useState('')
   const [logged, setLogged] = useState(false)
+  const [rate, setRate] = useState(0)
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
@@ -68,10 +69,15 @@ function Index() {
     console.log('rating: ', rate);
   }
 
+  const rateChange = (e) => {
+    console.log(e)
+    setRate(e)
+  }
+
   return (
-    <View className="rate">
-      <Rate />
-      <Button className="w-100 btn-primary btn-rounded" onClick={() => rateIt(nid, uid, rate) }>提交</Button>
+    <View className="rate p-1">
+      <Rate className="stars" allowHalf value={rate} onChange={(e) => rateChange(e) } />
+      <Button className="w-100 btn-primary btn-rounded mt-16" onClick={() => rateIt(nid, uid, rate) }>提交</Button>
     </View>
   )
 }
