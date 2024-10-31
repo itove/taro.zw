@@ -86,10 +86,10 @@ function ListItem({node, index, type}) {
 
 function GridItem({node, index, type}) {
   return (
-    <View onClick={() => gotoNode(node.id, 7)}>
+    <View onClick={() => gotoNode(node.id, 7)} className={'grid-item-' + type}>
       <Image className="w-100 img" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
-        <View className="title d-flex justify-between mb-10">
+        <View className="title d-flex mb-10">
           <View className="ellipsis">{node.title}</View>
           { type == 7 &&
           <View className="tag tag-y ms-5">{node.tags[0]}</View>

@@ -55,6 +55,11 @@ page{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    .grid-item-5{
+      .title{
+        justify-content: space-between;
+      }
+    }
     >View{
       background: #ffffff;
       border-radius: 10px;
