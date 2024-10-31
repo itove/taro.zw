@@ -23,6 +23,11 @@ function openLocation(latitude, longitude) {
   })
 }
 
+function gotoRate(nid) {
+  console.log('go to rate...');
+  Taro.navigateTo({url: 'rate?nid=' + nid})
+}
+
 function Index() {
   const [node, setNode] = useState({rates: {rate: 0, users: []}, tags: []})
   const [rooms, setRooms] = useState([])
@@ -370,8 +375,8 @@ function Index() {
             <View className="title article-title mt-1">{node.title}</View>
 
             { type == 1 &&
-            <View className="reviews d-flex align-items-center">
-              <Rate className="stars me-8" allowHalf readOnly touchable defaultValue={0} value={node.rates.rate} />
+            <View className="reviews d-flex align-items-center" onClick={() => gotoRate(node.id)}>
+              <Rate className="stars me-8" allowHalf readOnly value={node.rates.rate} />
               <View className="">{node.rates.rate} <span className="count">({node.rates.users.length} 条评分)</span> </View>
             </View>
             }
@@ -401,7 +406,7 @@ function Index() {
             <img width="20px" height="20px" src={Env.iconUrl + 'chat-dots-fill.svg'} />
             <View> {commentCount} 评论 </View>
           </View>
-          <View className="tag tag-y">
+          <View className="tag tag-y" onClick={() => gotoRate(node.id)}>
             <img width="20px" height="20px" src={Env.iconUrl + 'star-fill-gold.svg'} />
             <View> {node.rates.rate} 评分 </View>
           </View>

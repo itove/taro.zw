@@ -28,6 +28,11 @@ function openSticker() {
   // Taro.openStickerSetView()
 }
 
+function gotoRate(nid) {
+  console.log('go to rate...');
+  Taro.navigateTo({url: 'rate?nid=' + nid})
+}
+
 function Index() {
   const [node, setNode] = useState({rates: {rate: 0, users: []}, tags: []})
   const [rooms, setRooms] = useState([])
@@ -398,8 +403,8 @@ function Index() {
 
             <View className="title article-title mt-1">{node.title}</View>
 
-            <View className="reviews d-flex align-items-center">
-              <Rate className="stars me-8" allowHalf readOnly touchable defaultValue={0} value={node.rates.rate} />
+            <View className="reviews d-flex align-items-center" onClick={() => gotoRate(node.id)}>
+              <Rate className="stars me-8" allowHalf readOnly value={node.rates.rate} />
               <View className="">{node.rates.rate} <span className="count">({node.rates.users.length} 条评分)</span> </View>
             </View>
           </View>
