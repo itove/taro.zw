@@ -1,7 +1,8 @@
 page{
   padding: 0;
   .node-index{
-    background-image: linear-gradient(0deg, #f8f8f800 67%, #FFFFFF 92%);
+    // background-image: linear-gradient(0deg, #f8f8f800 67%, #FFFFFF 92%);
+    background: #F0F2F3;
   }
   .node-index.shi{
     background: #ffffff;
@@ -9,6 +10,7 @@ page{
   .list-item{
     border: 0;
     background: #ffffff;
+    padding: 15px;
     .img{
       width: 46%;
       height: 100px;
@@ -54,6 +56,8 @@ page{
     flex-wrap: wrap;
     justify-content: space-between;
     >View{
+      background: #ffffff;
+      border-radius: 10px;
       margin-bottom: 10px;
       flex: 0 0 auto;
       width: 49%;
@@ -81,5 +85,5 @@ page{
   }
 }
 .node-index.yi{
-  background: #fdfdfe;
+  // background: #fdfdfe;
 }
