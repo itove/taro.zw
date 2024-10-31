@@ -380,7 +380,7 @@ function Index() {
 
             <View className="info d-flex justify-between">
               <View className="address d-flex">
-                <img className="me-5 img" width="22px" height="16px" src={Env.iconUrl + 'location-grey.png'} />
+                <img className="me-5 img" width="16px" height="16px" src={Env.iconUrl + 'location-grey.png'} />
                 <View>{node.address}</View>
               </View>
               <View className="nav d-flex" onClick={openLocation}>
