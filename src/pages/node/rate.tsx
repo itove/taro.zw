@@ -15,8 +15,7 @@ function Index() {
   const [rate, setRate] = useState(0)
 
   const instance = Taro.getCurrentInstance();
-  const id = instance.router.params.id
-  const nid = instance.router.params.id
+  const nid = instance.router.params.nid
   const type = instance.router.params.type ? instance.router.params.type : 2
   const region = instance.router.params.region ? instance.router.params.region : 'all'
 
@@ -38,7 +37,8 @@ function Index() {
 
     const data = {
       uid: uid,
-      nid: id,
+      nid: nid,
+      rate: rate,
     }
 
     Taro.request({
