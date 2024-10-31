@@ -53,6 +53,17 @@ page{
     }
     .nut-searchbar-input{
       color: #ffffff;
+      .input-placeholder{
+        color: #ffffff;
+        font-size: 12px;
+      }
+      // ::placeholder{
+      //   color: #ffffff;
+      // }
+    }
+    .nut-searchbar-rightin{
+      width: 28px;
+      font-size: 12px;
     }
   }
   padding-bottom: 10px;
@@ -168,6 +179,10 @@ page{
 .you{
   .list{
     background-image: linear-gradient(180deg, #FFFFFF 56%, #ffffff17 85%);
+    .list-item{
+      box-shadow: 0 0 4px 0 rgb(0 0 0 / 6%);
+      padding: 16px 15px;
+    }
   }
   background-size: 96%;
   background-position: top -7px left 16px;
@@ -190,7 +205,7 @@ page{
     border: none;
   }
   .list-item .text{
-    width: 68%;
+    width: 66%;
   }
   .badge{
     background: #6195fa1a;
@@ -300,7 +315,9 @@ page{
         }
         .text{
           width: 70%;
+          font-size: 13px;
           .info{
+            font-size: 11px;
             color: #999999;
             .hightlight{
               color: #FF8214;

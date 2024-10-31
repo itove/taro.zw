@@ -417,7 +417,7 @@ function Index() {
           </View>
           <View className="right">
             <View className="d-flex">
-              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat.png'} />
+              <img className="" width="16px" height="16px" src={Env.iconUrl + 'chat-dots-grey.svg'} />
               <View className="count ms-5">{commentCount}</View>
               <img className="ms-20" width="16px" height="16px" onClick={toggleFav} src={Env.iconUrl + (isFav && 'heart-pink-fill.svg' || 'heart-pink.svg')} />
               <View className="count ms-5">{favCount}</View>

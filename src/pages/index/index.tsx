@@ -111,7 +111,7 @@ function SwiperItem1({node, index, type}) {
   return (
     <SwiperItem className="slide-item">
     <View className="widget">
-      <View className="badge"><img className="me-5" width="10px" height="10px" src={Env.iconUrl + 'star-fill.svg'} /> {node.rates.rate} </View>
+      <View className="badge"><img className="me-5" width="12px" height="12px" src={Env.iconUrl + 'star-fill.svg'} /> {node.rates.rate} </View>
     </View>
 
     <Image
@@ -178,14 +178,14 @@ function Index() {
     <View className="home">
       <View className="hero" style="background-image: url(https://zw.dev.itove.com/images/1.png)">
         <View className="text">
-          <View className="desc"><img src={Env.iconUrl + 'dingwei.png'} />张湾区</View>
+          <View className="desc d-flex align-items-center"><img src={Env.iconUrl + 'dingwei.png'} />张湾区</View>
           <View className="title">遇见张湾</View>
           <View className="placeholder"></View>
         </View>
         <View
          onClick={() => Taro.navigateTo({url: '/pages/search/index'})}
         >
-         <SearchBar className="search" disabled={true} shape="round" maxLength={5} placeholder="请输入关键字搜索景点，美食，购物…" />
+         <SearchBar className="search" disabled={true} shape="round" maxLength={5} placeholder="请输入关键字搜索景点，美食，购物…" rightIn="搜索" />
         </View>
       </View>
 
@@ -215,7 +215,7 @@ function Index() {
         <View className="dong item bg-img" style={{backgroundImage: `url(${Env.imageUrl + 'huodong_bg.png'})`}}>
           <View className="header">
             <View className="left">
-              <img width="16px" height="16px" className="me-5" src={Env.imageUrl+ 'flag.png'} />
+              <img width="16px" height="16px" className="me-5" src={Env.iconUrl + 'flag.png'} />
               热门活动
             </View>
             <View
@@ -238,7 +238,7 @@ function Index() {
               className="more" 
               onClick={() => Taro.navigateTo({url: '/pages/node/index?region=shi&type=3'})}
             >
-            <img width="14px" height="14px" src={Env.iconUrl + 'arrow_2.png'} />
+            <img width="14px" height="14px" src={Env.iconUrl + 'arrow_3.png'} />
             </View>
           </View>
           <View className="list">{shiList} </View>
@@ -256,7 +256,7 @@ function Index() {
               className="more" 
               onClick={() => Taro.navigateTo({url: '/pages/node/index?region=wan&type=0'})}
             >
-            更多 <img width="14px" height="14px" src={Env.iconUrl + 'arrow-right.png'} />
+            更多 <img width="14px" height="14px" src={Env.iconUrl + 'chevron-right-grey.svg'} />
           </View>
         </View>
 
