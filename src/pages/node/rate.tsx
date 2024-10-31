@@ -13,6 +13,7 @@ function Index() {
   const [body, setBody] = useState('')
   const [logged, setLogged] = useState(false)
   const [rate, setRate] = useState(0)
+  const [rated, setRated] = useState(false)
 
   const instance = Taro.getCurrentInstance();
   const nid = instance.router.params.nid
@@ -25,7 +26,24 @@ function Index() {
     })
     .then(res => {
       setLogged(true)
+      const userid = res.data.id
       setUid(res.data.id)
+
+      Taro.request({
+        url: Env.apiUrl + 'rates/node/' + nid
+      })
+      .then(res => {
+        console.log(res.data)
+        res.data.some((rate, i) => {
+          if (rate.user.id === userid){
+            setRated(true)
+            setRate(rate.rate)
+            console.log('already rated')
+            return
+          }
+        })
+      })
+
     })
   }, [])
 
@@ -76,8 +94,17 @@ function Index() {
 
   return (
     <View className="rate p-1">
+      { rated &&
+      <>
+      <View className="text-align-center mb-16">您的评分</View>
+      <Rate className="stars" readOnly allowHalf value={rate} />
+      </>
+      ||
+      <>
       <Rate className="stars" allowHalf value={rate} onChange={(e) => rateChange(e) } />
       <Button className="w-100 btn-primary btn-rounded mt-16" onClick={() => rateIt(nid, uid, rate) }>提交</Button>
+      </>
+      }
     </View>
   )
 }
