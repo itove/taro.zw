@@ -362,7 +362,7 @@ function Index() {
       { (type != 4 && type !=6 && region != 'talk') &&
       <View className="card card-jing">
         <View className="header">
-          <View className="">
+          <View className="w-100">
             { (type == 0 || type == 1) &&
             <View className="tags">{tags}</View>
             }
