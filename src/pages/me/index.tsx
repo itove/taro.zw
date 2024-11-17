@@ -108,7 +108,7 @@ function Index() {
             <View className="">{planCount}</View>
             <View className="">行程</View>
           </View>
-          <View className="item">
+          <View className="item" onClick={() => Taro.navigateTo({url: '/pages/youji/index'})}>
             <View className="">{youCount}</View>
             <View className="">游记</View>
           </View>
