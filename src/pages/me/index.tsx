@@ -113,7 +113,7 @@ function Index() {
             <View className="">游记</View>
           </View>
         </View>
-        <Button className="btn">开始你的游记</Button>
+        <Button className="btn" onClick={() => Taro.navigateTo({url: '/pages/youji/new'})}>开始你的游记</Button>
       </View>
 
       <View className="block">
