@@ -217,15 +217,25 @@ page{
 .me-16{
   margin-right: 16px !important;
 }
+.m-0{
+  margin: 0;
+}
 .btn-primary{
   background: #3e7cf3;
   color: #ffffff;
+}
+.btn-light{
+  background: #d3d3d3;
+  color: #000000;
 }
 .text-center{
   text-align: center;
 }
 .d-flex{
-  display: flex;
+  display: flex !important;
+}
+.d-block{
+  display: block !important;
 }
 .align-items-center{
   align-items: center;
