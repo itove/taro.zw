@@ -19,5 +19,13 @@ export function fmtDate (date, style = 0) {
     result = `${year}/${month}/${day}`
   }
 
+  if (style === 4) {
+    result = `${month}月${day} ${hour}:${minute}`
+  }
+
+  if (style === 5) {
+    result = `${year}年${month}月`
+  }
+
   return result
 }

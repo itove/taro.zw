@@ -13,6 +13,7 @@ import {
   Uploader,
 	DatePicker,
 } from '@nutui/nutui-react-taro'
+import { fmtDate } from '../../utils/fmtDate'
 
 function Index() {
   const [disabled, setDisabled] = useState(false)
@@ -23,29 +24,23 @@ function Index() {
   const [imgs, setImgs] = useState([])
   const [pickerVisible, setPickerVisible] = useState(false)
   const [datePickerShow, setDatePickerShow] = useState(false)
-  const [pickerIndex, setPickerIndex ] = useState(0)
-  const pickerOpts = [
-    { value: 0, text: '请选择' },
-    { value: 1, text: '1月' },
-      { value: 2, text: '2月' },
-      { value: 3, text: '3月' },
-      { value: 4, text: '4月' },
-      { value: 5, text: '5月' },
-      { value: 6, text: '6月' },
-      { value: 7, text: '7月' },
-      { value: 8, text: '8月' },
-      { value: 9, text: '9月' },
-      { value: 10, text: '10月' },
-      { value: 12, text: '11月' },
-      { value: 12, text: '12月' },
-  ]
+  const [stepIndex, setStepIndex ] = useState(0)
+  const [planDate, setPlanDate] = useState(0)
 
   const Step = ({step, index}) => {
     return (
       <View className="step d-flex align-items-center my-4" key={index}>
-        <View className="date" onClick={() => setDatePickerShow(!datePickerShow) }>选择日期时间</View>
+        <View className="date"
+          onClick={() => {
+            setDatePickerShow(!datePickerShow)
+            setStepIndex(index)
+          }}
+        >
+          {fmtDate(steps[index].date, 4)}
+        </View>
         <TextArea className="body" autoSize placeholder="输入行程内容..." value={steps[index].body}
           onChange={(e) => stepBodyChange(e, index)}
+          focus
         />
         <img width="16px" height="16px" src={Env.iconUrl + 'x-circle-fill-blue.svg'} 
           onClick={(e) => rmStep(index)}
@@ -56,7 +51,7 @@ function Index() {
 
   const stepBodyChange = (e, index) => {
     console.log('step body changed ', e)
-    setSteps(steps.map((step, i) => i === index ? {...step, body: e} : step))
+    setSteps(prevSteps => prevSteps.map((step, i) => i === index ? {...step, body: e} : step))
   }
 
   const addStep = (e) => {
@@ -71,7 +66,7 @@ function Index() {
   }
 
   const dateChange = (options, value, index) => {
-    console.log('date change')
+    // console.log('date change')
     // console.log(options)
     // console.log(value)
     // console.log(index)
@@ -80,18 +75,23 @@ function Index() {
   const dateConfirm = (options, value) => {
     console.log(options)
     console.log(value)
+    console.log(stepIndex)
+    setSteps(prevSteps =>
+      prevSteps.map((step, i) =>
+        i === stepIndex ? {...step, date: new Date(value[0] + '/' + value[1] + '/' + value[2] + ' ' + value[3] + ':' + value[4])} : step
+      ))
   }
 
   const pickerChange = (options, value) => {
-    console.log('picker change')
+    // console.log('picker change')
     // console.log(options)
     // console.log(value)
   }
 
   const pickerConfirm = (options, value) => {
-    console.log(options)
+    // console.log(options)
     console.log(value)
-    setPickerIndex(value[0])
+    setPlanDate(new Date(value[0] + '/' + value[1] + '/01'))
   }
 
   const formSubmit = (data) => {
@@ -177,7 +177,7 @@ function Index() {
         >
           <Cell
 					align="center"
-          title={pickerOpts[pickerIndex].text}
+          title={planDate === 0 ? '请选择' : fmtDate(planDate, 5)}
           onClick={() => setPickerVisible(!pickerVisible)}
           extra={<img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} className="icon" />}
           />
@@ -255,9 +255,10 @@ function Index() {
         </View>
       </Form>
 
-      <Picker
+      <DatePicker
         visible={pickerVisible}
-        options={pickerOpts}
+        type="year-month"
+        startDate={new Date()}
         onClose={() => setPickerVisible(false)}
         onConfirm={(options, value) => pickerConfirm(options, value)}
         onChange={(options, value) => pickerChange(options, value)}
