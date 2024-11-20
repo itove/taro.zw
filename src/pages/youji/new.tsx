@@ -18,14 +18,36 @@ import { fmtDate } from '../../utils/fmtDate'
 function Index() {
   const [disabled, setDisabled] = useState(false)
   const [uid, setUid] = useState(0)
+  const [user, setUser] = useState({})
   const uploadUrl = Env.apiUrl + 'media_objects'
   const [defaultFileList, setDefaultFileList] = useState([])
   const [steps, setSteps] = useState([])
-  const [imgs, setImgs] = useState([])
+  const [images, setImages] = useState([])
   const [pickerVisible, setPickerVisible] = useState(false)
   const [datePickerShow, setDatePickerShow] = useState(false)
   const [stepIndex, setStepIndex ] = useState(0)
   const [planDate, setPlanDate] = useState(0)
+
+  useEffect(() => {
+    Taro.getStorage({
+      key: Env.storageKey
+    })
+    .then(res => {
+      Taro.request({
+        url: Env.apiUrl + 'users/' + res.data.id
+      })
+      .then(res => {
+        console.log(res)
+        let u = res.data
+        setUser(u)
+        setUid(u.id)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      // Taro.redirectTo({url: '/pages/me/login'})
+    })
+  }, [])
 
   const Step = ({step, index}) => {
     return (
@@ -98,8 +120,9 @@ function Index() {
     setDisabled(true)
     console.log(data);
     data.uid = uid
+    data.images = images
     data.steps = steps
-    data.planDate = planDate
+    data.planDate = planDate === 0 ? new Date() : planDate
     Taro.request({
       method: 'POST',
       url: Env.apiUrl + 'youji',
@@ -136,6 +159,7 @@ function Index() {
 
   const uploadSuccess = (e) => {
     console.log(e)
+    setImages([...images, JSON.parse(e.responseText.data).url.replace('/images/', '')])
   }
 
   return (

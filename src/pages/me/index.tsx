@@ -108,12 +108,12 @@ function Index() {
             <View className="">{planCount}</View>
             <View className="">行程</View>
           </View>
-          <View className="item" onClick={() => Taro.navigateTo({url: '/pages/youji/index'})}>
+          <View className="item" onClick={() => { logged && Taro.navigateTo({url: '/pages/youji/index'}) || Taro.navigateTo({url: 'login'})} }>
             <View className="">{youCount}</View>
             <View className="">游记</View>
           </View>
         </View>
-        <Button className="btn" onClick={() => Taro.navigateTo({url: '/pages/youji/new'})}>开始你的游记</Button>
+        <Button className="btn" onClick={() => { logged && Taro.navigateTo({url: '/pages/youji/new'}) || Taro.navigateTo({url: 'login'})} }>开始你的游记</Button>
       </View>
 
       <View className="block">
