@@ -14,6 +14,32 @@ page .youji-new{
   .add{
     color: #6195FA;
   }
+  .steps{
+    background: #ffffff;
+    padding: 4px 16px;
+    .step{
+      padding: 4px 10px;
+      border-radius: 10px;
+      background: #eff4fe;
+      .nut-textarea{
+        background: none;
+        .nut-textarea-textarea{
+          color: #848484;
+          height: 18px;
+        }
+      }
+      >*{
+        display: flex;
+        align-items: center;
+      }
+      .date{
+        width: 10em;
+      }
+    }
+  }
+  .nut-cell-title{
+    color: #848484;
+  }
   .nut-cell-group-wrap{
     background: none !important;
   }
@@ -28,7 +54,7 @@ page .youji-new{
       position: relative;
     }
   }
-  .label{
+  .label, .date{
     color: #848484;
   }
   .nut-form-item-body{
