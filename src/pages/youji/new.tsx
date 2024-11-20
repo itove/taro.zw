@@ -98,6 +98,8 @@ function Index() {
     setDisabled(true)
     console.log(data);
     data.uid = uid
+    data.steps = steps
+    data.planDate = planDate
     Taro.request({
       method: 'POST',
       url: Env.apiUrl + 'youji',
@@ -188,11 +190,7 @@ function Index() {
           label="行程天数"
           name="days"
         >
-          <Cell
-					align="center"
-          title={ <Input placeholder="请输入" type="number" /> }
-          extra="天"
-          />
+          <Input placeholder="请输入" type="number" className="days" /> 
         </Form.Item>
 
         <Form.Item
@@ -200,11 +198,7 @@ function Index() {
           label="人均花费"
           name="cost"
         >
-          <Cell
-					align="center"
-          title={ <Input placeholder="请输入" type="number" /> }
-          extra="元"
-          />
+          <Input placeholder="请输入" type="number" className="cost" /> 
         </Form.Item>
 
         <Form.Item
@@ -243,9 +237,6 @@ function Index() {
             placeholder="请输入攻略详情..."
             showCount
             maxLength={5000}
-            onChange={(value) => console.log('change', value)}
-            onBlur={() => console.log('blur')}
-            onFocus={() => console.log('focus')}
           />
         </Form.Item>
 

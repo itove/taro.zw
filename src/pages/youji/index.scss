@@ -4,6 +4,12 @@ page .youji-new{
 	--nutui-uploader-image-height: 75px;
   --nutui-uploader-image-border-radius: 10px;
   background: #F1F3F4;
+  .days.nut-input:after{
+    content: '天';
+  }
+  .cost.nut-input:after{
+    content: '元';
+  }
   .btns{
     padding-bottom: 48px !important;
     margin-top: 32px;
