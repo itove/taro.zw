@@ -1,5 +1,45 @@
 page .youji-new{
+  margin-top: 6px;
+	--nutui-uploader-image-width: 75px;
+	--nutui-uploader-image-height: 75px;
+  --nutui-uploader-image-border-radius: 10px;
   background: #F1F3F4;
+  .btns{
+    padding-bottom: 48px !important;
+    margin-top: 32px;
+  }
+  .btns, .add{
+    background: #ffffff;
+  }
+  .add{
+    color: #6195FA;
+  }
+  .nut-cell-group-wrap{
+    background: none !important;
+  }
+  .d-block .nut-form-item-label{
+    margin-bottom: 16px;
+  }
+  .nut-form-item-label{
+    display: flex !important;
+    color: #848484;
+    padding-left: 0;
+    .required{
+      position: relative;
+    }
+  }
+  .label{
+    color: #848484;
+  }
+  .nut-form-item-body{
+    .nut-cell{
+      padding: 0;
+    }
+  }
+  .form-item{
+    border-radius: 0 !important;
+    align-items: center !important;
+  }
   .btn1, .btn2{
     font-size: 14px;
   }
