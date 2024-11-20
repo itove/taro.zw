@@ -33,15 +33,10 @@ function Index() {
       key: Env.storageKey
     })
     .then(res => {
-      Taro.request({
-        url: Env.apiUrl + 'users/' + res.data.id
-      })
-      .then(res => {
-        console.log(res)
-        let u = res.data
-        setUser(u)
-        setUid(u.id)
-      })
+      console.log(res)
+      let u = res.data
+      setUser(u)
+      setUid(u.id)
     })
     .catch(err => {
       console.log(err)
