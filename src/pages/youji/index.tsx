@@ -11,17 +11,15 @@ function gotoNode(nid) {
 
 function GridItem({node, index}) {
   return (
-    <View onClick={() => gotoNode(node.id)}>
+    <View key={index} onClick={() => gotoNode(node.id)} className="grid-item rounded overflow-hidden">
       <Image className="w-100 img" src={Env.imageUrl + node.image} mode="aspectFill" />
       <View className="text">
-        <View className="title d-flex mb-10">
-          <View className="ellipsis">{node.title}</View>
-        </View>
-        <View>
+        <View className="ellipsis">{node.title}</View>
+        <View className="more">
           <View>{fmtDate(new Date(node.createdAt), 4)}</View>
-          <View>
-            <View className="count">{node.favCount}</View>
-            <img className="icon ms-5" height="16px" width="16px" src={Env.iconUrl + 'heart-pink-fill.svg'} />
+          <View className="fav">
+            <img className="icon me-5" height="16px" width="16px" src={Env.iconUrl + 'heart-pink-fill.svg'} />
+            <View className="count">{node.favs.length}</View>
           </View>
         </View>
       </View>
@@ -57,8 +55,8 @@ function Index() {
   }, [])
 
   return (
-    <View className="">
-      <View className="">
+    <View className="youji-index p-1">
+      <View className="grid">
         {nodes.map((node, index) => <GridItem node={node} index={index} />)}
       </View>
     </View>

@@ -83,3 +83,53 @@ page .youji-new{
     width: 67%;
   }
 }
+
+page .youji-index{
+  background: #F1F3F4;
+  .nut-grid-item-content{
+    border: none;
+  }
+  .img{
+    border-radius: 10px;
+  }
+  .grid-item{
+    width: 46%;
+    // float: left;
+    margin: 6px;
+    // padding: 4px;
+    // height: 300px;
+    margin-bottom: 16px;
+    .nut-grid-item-text{
+      padding-bottom: 14px;
+    }
+  }
+  .user{
+    display: flex;
+    justify-content: space-between;
+  }
+  .more{
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon{
+      border-radius: 0 !important;
+    }
+  }
+  .fav{
+    width: 40%;
+    justify-content: flex-end;
+  }
+  .user, .fav{
+    display: flex;
+    align-items: center;
+    .count{
+      font-size: 14px;
+      line-height: 14px;
+      height: 14px;
+    }
+  }
+  .text{
+    padding: 6px 10px;
+  }
+}
