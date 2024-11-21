@@ -35,14 +35,14 @@ function Index() {
 
   useEffect(() => {
     Taro.request({
-      url: Env.apiUrl + 'wx/home'
+      url: Env.apiUrl + 'nodes/jing'
     })
     .then(res => {
-      const data = res.data
+      const nodes = res.data.nodes
       console.log(res)
 
-      setJingNodes(data.jing)
-      setYouNodes(data.jing)
+      setJingNodes(nodes.slice(0, 5))
+      setYouNodes(nodes)
     })
     .catch(err => {
       console.log(err)
