@@ -34,6 +34,7 @@ export default defineAppConfig({
   'pages/youji/index',
   'pages/youji/new',
   'pages/youji/edit',
+  'pages/youji/show',
   ],
 
   window: {
