@@ -118,6 +118,7 @@ function Index() {
     data.images = images
     data.steps = steps
     data.planDate = planDate === 0 ? new Date() : planDate
+    data.published = true
     Taro.request({
       method: 'POST',
       url: Env.apiUrl + 'youji',
