@@ -100,7 +100,7 @@ function Index() {
 
       setLuList(data.lu.map((node, index) => <SwiperItem node={node} key={index} type={0} />))
       setWanList(data.wan.map((node, index) => index < 4 && <GridItem node={node} type={0} key={index} />))
-      setYouList(data.you.map((node, index) => <ViewItem node={node} type={1} key={index} />))
+      setYouList(data.youji.map((node, index) => <ViewItem node={node} type={1} key={index} />))
     })
     .catch(err => {
       console.log(err)
@@ -132,7 +132,7 @@ function Index() {
       <View className="you block">
         <View className="header">
           用户游记
-          <More region={'you'} type={1} />
+          <More region={'youji'} type={1} />
         </View>
         <View class="list">
         {youList}
