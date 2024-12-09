@@ -28,6 +28,8 @@ function Index() {
   const [stepIndex, setStepIndex ] = useState(0)
   const [planDate, setPlanDate] = useState(0)
   const [form] = Form.useForm()
+  const instance = Taro.getCurrentInstance();
+  const nid = instance.router.params.nid
 
   useEffect(() => {
     Taro.getStorage({
@@ -43,6 +45,36 @@ function Index() {
       console.log(err)
       // Taro.redirectTo({url: '/pages/me/login'})
     })
+  }, [])
+
+  useEffect(() => {
+    if (nid !== undefined) {
+      Taro.request({
+        url: Env.apiUrl + 'youji/' + nid
+      })
+      .then(res => {
+        const n = res.data
+        console.log(n)
+        form.setFieldsValue({
+          title: n.title,
+          days: n.plan.days,
+          cost: n.plan.cost,
+          who: n.plan.who,
+          summary: n.summary,
+          body: n.body === null ? '' : n.body,
+        })
+        setPlanDate(new Date(n.plan.startAt))
+        setSteps(n.plan.steps.map(s => ({date: new Date(s.startAt), body: s.body})))
+        setDefaultFileList(n.images.map(i => ({
+					name: i,
+          url: Env.imageUrl + i,
+          status: 'success',
+          message: '上传成功',
+          type: 'image/jpeg',
+          uid: new Date().getTime().toString(),
+        })))
+      })
+    }
   }, [])
 
   const Step = ({step, index}) => {
@@ -119,6 +151,7 @@ function Index() {
     data.images = images
     data.steps = steps
     data.planDate = planDate === 0 ? new Date() : planDate
+    data.nid = nid
     Taro.request({
       method: 'POST',
       url: Env.apiUrl + 'youji',
@@ -190,7 +223,7 @@ function Index() {
             { required: true, message: '请上传图片' },
           ]}
         >
-          <Uploader name="upload" defaultValue={defaultFileList} url={uploadUrl} multiple maxCount="9" onSuccess={(e) => uploadSuccess(e) } />
+          <Uploader name="upload" initialValue={defaultFileList} url={uploadUrl} multiple maxCount="9" onSuccess={(e) => uploadSuccess(e) } />
         </Form.Item>
 
         <Form.Item
@@ -285,6 +318,7 @@ function Index() {
         visible={pickerVisible}
         type="year-month"
         startDate={new Date()}
+				defaultValue={planDate}
         onClose={() => setPickerVisible(false)}
         onConfirm={(options, value) => pickerConfirm(options, value)}
         onChange={(options, value) => pickerChange(options, value)}
