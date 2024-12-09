@@ -1,0 +1,36 @@
+page .youji-show{
+  padding-bottom: 2em;
+  .title{
+    font-size: 22px;
+  }
+  .cell{
+    padding: 14px 16px;
+    border-radius: 4px;
+  }
+  .sec-title{
+    font-size: 18px;
+  }
+  .plan{
+    .cell{
+      background: #f2f6fe;
+    }
+    .data{
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  }
+  .steps{
+    .cell{
+      background: #f9f9f9;
+      margin: 4px 0;
+      .date{
+        width: 6em;
+      }
+    }
+  }
+  .meta{
+    .img{
+      border-radius: 50%;
+    }
+  }
+}

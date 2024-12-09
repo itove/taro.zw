@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image, Input, Button } from '@tarojs/components'
+import { View, Text, Image, Input, Button } from '@tarojs/components'
 import './show.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
@@ -58,50 +58,64 @@ function Index() {
       <View className="hero">
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
       </View>
-      <View className="title mb-10 p-1">
+      <View className="title p-1">
         {node.title}
       </View>
+      {node.author &&
+      <View className="meta mb-10 px-1 d-flex justify-between">
+        <View className="d-flex align-items-center">
+          <img className="img" width="24px" height="24px" src={Env.imageUrl + node.author.avatar} />
+          <Text className="ms-4">{node.author.name}</Text>
+        </View>
+        <View className="">{fmtDate(new Date(node.createdAt))}</View>
+      </View>
+      }
 
-      <View className="plan mb-10 d-flex justify-between p-1">
-        <View className="">
-          <View>出发时间</View>
-          <View>5月</View>
-        </View>
-        <View className="">
-          <View>行程天数</View>
-          <View>2天</View>
-        </View>
-        <View className="">
-          <View>人均花费</View>
-          <View>500</View>
-        </View>
-        <View className="">
-          <View>和谁出行</View>
-          <View>5月</View>
+      { node.plan &&
+      <View className="plan mb-10 p-1">
+        <View className="cell d-flex justify-between">
+          <View className="text-center">
+            <View>出发时间</View>
+            <View className="data">{fmtDate(new Date(node.plan.startAt), 1)}</View>
+          </View>
+          <View className="text-center">
+            <View>行程天数</View>
+            <View className="data">{node.plan.days}</View>
+          </View>
+          <View className="text-center">
+            <View>人均花费</View>
+            <View className="data">{node.plan.cost}</View>
+          </View>
+          <View className="text-center">
+            <View>和谁出行</View>
+            <View className="data">{node.plan.who}</View>
+          </View>
         </View>
       </View>
+      }
 
+      { node.plan &&
       <View className="steps mb-10 p-1">
-        <View>行程单</View>
-        <View className="d-flex justify-between">
-          <View>
-            <View>icon</View>
+        <View className="sec-title">行程单</View>
+        <View className="d-flex justify-between cell">
+          <View className="text-center">
+            <img width="24px" height="24px" src={Env.iconUrl + 'journal-text.svg'} />
             <View>总览</View>
           </View>
           <View>
-            <View>icon</View>
-            <View>总览</View>
+            <View>{node.plan.summary}</View>
           </View>
         </View>
 
-        {node.plan && node.plan.steps.map((s, i) => 
-        <View className="d-flex justify-between" key={i}>
-            <View>{fmtDate(new Date(s.startAt), 1)}</View>
+        {node.plan.steps.map((s, i) => 
+        <View className="d-flex cell" key={i}>
+            <View className="date">{fmtDate(new Date(s.startAt), 1)}</View>
             <View>{s.body}</View>
         </View>)}
       </View>
+      }
 
-      <View className="p-1">详情</View>
+      <View className="p-1 sec-title">详情</View>
       <View className="images mb-10 p-1">
         {node.images && node.images.map((img, i) => <Image className="w-100" src={Env.imageUrl + img} mode="heightFix" />)}
       </View>
