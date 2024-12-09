@@ -58,30 +58,55 @@ function Index() {
       <View className="hero">
         <Image className="w-100 rounded" src={Env.imageUrl + node.image} mode="heightFix" />
       </View>
-      <View className="title mb-10">
+      <View className="title mb-10 p-1">
         {node.title}
       </View>
 
-      <View className="plan mb-10">
-        <View>
+      <View className="plan mb-10 d-flex justify-between p-1">
+        <View className="">
           <View>出发时间</View>
+          <View>5月</View>
+        </View>
+        <View className="">
+          <View>行程天数</View>
+          <View>2天</View>
+        </View>
+        <View className="">
+          <View>人均花费</View>
+          <View>500</View>
+        </View>
+        <View className="">
+          <View>和谁出行</View>
           <View>5月</View>
         </View>
       </View>
 
-      <View className="steps mb-10">
+      <View className="steps mb-10 p-1">
         <View>行程单</View>
-        <View>
+        <View className="d-flex justify-between">
           <View>
+            <View>icon</View>
+            <View>总览</View>
+          </View>
+          <View>
+            <View>icon</View>
+            <View>总览</View>
           </View>
         </View>
+
+        {node.plan && node.plan.steps.map((s, i) => 
+        <View className="d-flex justify-between" key={i}>
+            <View>{fmtDate(new Date(s.startAt), 1)}</View>
+            <View>{s.body}</View>
+        </View>)}
       </View>
 
-      <View>详情</View>
-      <View className="images mb-10">
+      <View className="p-1">详情</View>
+      <View className="images mb-10 p-1">
+        {node.images && node.images.map((img, i) => <Image className="w-100" src={Env.imageUrl + img} mode="heightFix" />)}
       </View>
 
-      <View dangerouslySetInnerHTML={{__html: body}} className='body py-16'></View>
+      <View dangerouslySetInnerHTML={{__html: body}} className='body p-1'></View>
     </View>
   )
 }
