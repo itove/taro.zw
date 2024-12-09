@@ -27,6 +27,7 @@ function Index() {
   const [datePickerShow, setDatePickerShow] = useState(false)
   const [stepIndex, setStepIndex ] = useState(0)
   const [planDate, setPlanDate] = useState(0)
+  const [form] = Form.useForm()
 
   useEffect(() => {
     Taro.getStorage({
@@ -118,7 +119,6 @@ function Index() {
     data.images = images
     data.steps = steps
     data.planDate = planDate === 0 ? new Date() : planDate
-    data.published = true
     Taro.request({
       method: 'POST',
       url: Env.apiUrl + 'youji',
@@ -149,6 +149,20 @@ function Index() {
   const formReset = () => {
   }
 
+  const save = () => {
+    form.setFieldsValue({published: false})
+    // console.log(form)
+    form.submit()
+    console.log('save')
+  }
+
+  const publish = () => {
+    form.setFieldsValue({published: true})
+    // console.log(form)
+    form.submit()
+    console.log('publish')
+  }
+
   const onFinishFailed = () => {
     console.log('verify failed')
   }
@@ -161,6 +175,7 @@ function Index() {
   return (
     <View className="youji-new">
       <Form 
+        form={form}
         className="form"
         labelPosition="left"
         onFinish={(values) => formSubmit(values)}
@@ -261,8 +276,8 @@ function Index() {
         </Form.Item>
 
         <View className="d-flex justify-between p-1 btns mt-16">
-          <Button disabled={disabled} formType="submit" className="btn-light btn1 m-0">保存</Button>
-          <Button disabled={disabled} formType="submit" className="btn-primary btn2 m-0">发布</Button>
+          <Button disabled={disabled} onClick={save} className="btn-light btn1 m-0">保存</Button>
+          <Button disabled={disabled} onClick={publish} className="btn-primary btn2 m-0">发布</Button>
         </View>
       </Form>
 
