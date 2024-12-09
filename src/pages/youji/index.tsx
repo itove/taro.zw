@@ -12,7 +12,7 @@ function gotoNode(nid, type) {
   if (type === 0) {
     Taro.navigateTo({url: 'show?nid=' + nid})
   } else {
-    // Taro.navigateTo({url: 'new?nid=' + nid})
+    Taro.navigateTo({url: 'new?nid=' + nid})
   }
 }
 
