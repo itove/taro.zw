@@ -151,15 +151,29 @@ function Index() {
     data.images = images
     data.steps = steps
     data.planDate = planDate === 0 ? new Date() : planDate
-    data.nid = nid
+
+    let method = 'POST'
+    let header = {
+      'content-type': 'application/json'
+    }
+    let url = Env.apiUrl + 'youji'
+    if (nid !== undefined) {
+      method = 'PATCH'
+      header = {
+        'content-type': 'application/merge-patch+json'
+      }
+      url = Env.apiUrl + 'youji/' + nid
+    }
+
     Taro.request({
-      method: 'POST',
-      url: Env.apiUrl + 'youji',
+      method,
+      url,
+      header,
       data
     }).then((res) => {
       if (res.statusCode === 200) {
         Taro.showToast({
-          title: '发布成功',
+          title: data.published ? '发布成功' : '保存成功',
           icon: 'success',
           duration: 1000
         }).then(() => {
