@@ -483,7 +483,6 @@ function Index() {
           <img width="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
         </Input>
         <View className="d-flex justify-between btns">
-          <img width="28px" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} />
           <img width="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
         </View>
       </View>

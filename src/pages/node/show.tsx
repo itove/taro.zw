@@ -514,7 +514,6 @@ function Index() {
           <img widht="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
         </Input>
         <View className="d-flex btns">
-          <img widht="28px" height="28px" src={Env.iconUrl + 'emoji-smile.svg'} onClick={() => openSticker()} />
           <img widht="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
         </View>
       </View>
