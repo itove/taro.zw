@@ -91,74 +91,28 @@ function Index() {
       return
     }
 
-    const newJingNodes = jingNodes.map((node) => {
-      if (node.id === id) {
-
-        const data = { uid: uid, nid: node.id }
-
-        Taro.request({
-          method: 'POST',
-          url: Env.apiUrl + 'fav/toggle',
-          data
-        }).then((res) => {
-          console.log(res.data)
-          // return res.data.node
-        })
-
-        let favs = node.favs
-        if (node.favs.includes(uid)) {
-          favs = node.favs.filter((i) => {return i !== uid})
-        } else {
-          favs = [...node.favs, uid]
+    const data = { uid: uid, nid: id }
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + 'fav/toggle',
+      data
+    }).then((res) => {
+      console.log(res.data)
+      
+      const updateNodes = (node) => {
+        if (node.id === id) {
+          const favs = node.favs.includes(uid) 
+            ? node.favs.filter(i => i !== uid)
+            : [...node.favs, uid]
+          
+          return { ...node, favs }
         }
-
-        const updatedNode = {
-          ...node,
-          favs: favs,
-        }
-
-        return updatedNode
+        return node
       }
 
-      // console.log(node)
-      return node
+      setJingNodes(jingNodes.map(updateNodes))
+      setYouNodes(youNodes.map(updateNodes))
     })
-
-    const newYouNodes = youNodes.map((node) => {
-      if (node.id === id) {
-
-        const data = { uid: uid, nid: node.id }
-
-        Taro.request({
-          method: 'POST',
-          url: Env.apiUrl + 'fav/toggle',
-          data
-        }).then((res) => {
-          console.log(res.data)
-          // return res.data.node
-        })
-
-        let favs = node.favs
-        if (node.favs.includes(uid)) {
-          favs = node.favs.filter((i) => {return i !== uid})
-        } else {
-          favs = [...node.favs, uid]
-        }
-
-        const updatedNode = {
-          ...node,
-          favs: favs,
-        }
-
-        return updatedNode
-      }
-
-      // console.log(node)
-      return node
-    })
-
-    setJingNodes(newJingNodes);
-    setYouNodes(newYouNodes);
   }
 
   function ListItem({node, type, index}) {
