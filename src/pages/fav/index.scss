@@ -1,0 +1,86 @@
+page .fav-index{
+  --nutui-tabs-titles-background-color: #ffffff;
+  --nutui-tabs-titles-item-color: #666666;
+  --nutui-tabs-titles-item-active-color: #333333;
+  --nutui-tabs-tab-line-width: 22px;
+  --nutui-tabs-titles-item-active-font-size: 16px;
+  --nutui-tabs-titles-font-size: 14px;
+  .nut-tabpane{
+    padding: 0;
+    background: none;
+  }
+  .nut-tabs{
+    //background: #ffffff;
+    .nut-tabs-titles{
+      margin-bottom: 8px;
+      background: none;
+      .nut-tabs-titles-item{
+        font-size: 14px;
+        padding: 0 13px;
+      }
+      .nut-tabs-titles-item-smile{
+        background-image: url("https://zw.dev.itove.com/images/icons/curve.png") !important;
+        background-repeat: no-repeat;
+        background-position: center;
+        //width: 62px;
+        // height: 8px;
+        .nut-icon{
+          color: #7E9CF4;
+          display: none;
+        }
+      }
+      .nut-tabs-titles-item-active{
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+  }
+  background: #F1F3F4;
+  .nut-grid-item-content{
+    border: none;
+  }
+  .img{
+    border-radius: 10px 10px 0 0;
+  }
+  .grid-item{
+    border-radius: 10px;
+    background: #ffffff;
+    width: 46%;
+    // float: left;
+    margin: 6px;
+    // padding: 4px;
+    // height: 300px;
+    margin-bottom: 16px;
+    .nut-grid-item-text{
+      padding-bottom: 14px;
+    }
+  }
+  .user{
+    display: flex;
+    justify-content: space-between;
+  }
+  .more{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon{
+      border-radius: 0 !important;
+    }
+  }
+  .fav{
+    width: 40%;
+    justify-content: flex-end;
+  }
+  .user, .fav{
+    display: flex;
+    align-items: center;
+    .count{
+      font-size: 14px;
+      line-height: 14px;
+      height: 14px;
+    }
+  }
+  .text{
+    padding: 10px;
+  }
+}

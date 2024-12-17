@@ -28,6 +28,7 @@ export default defineAppConfig({
   'pages/node/show',
   'pages/node/rate',
   'pages/node/show0',
+  'pages/fav/index',
   'pages/list/index',
   'pages/list/card',
   'pages/list/grid',
@@ -36,6 +37,7 @@ export default defineAppConfig({
   'pages/youji/edit',
   'pages/youji/show',
   ],
+
 
   window: {
     backgroundTextStyle: 'light',

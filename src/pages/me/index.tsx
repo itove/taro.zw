@@ -96,7 +96,7 @@ function Index() {
 
       <View className="block">
         <View className="info">
-          <View className="item">
+          <View className="item" onClick={() => { logged && Taro.navigateTo({url: '/pages/fav/index'}) || Taro.navigateTo({url: 'login'})} }>
             <View className="">{favCount}</View>
             <View className="">收藏</View>
           </View>
