@@ -18,7 +18,7 @@ function gotoNodeIndex(region, type) {
 }
 
 function goto(node, type) {
-  if (type == 5 || type == 7) {
+  if (type == 7) {
     gotoNodeIndex('shop', type)
   } else {
     gotoNode(node.id, type)
