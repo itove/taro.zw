@@ -179,7 +179,7 @@ function Index() {
       <View className="hero" style="background-image: url(https://zw.dev.itove.com/images/1.png)">
         <View className="text">
           <View className="desc d-flex align-items-center"><img src={Env.iconUrl + 'dingwei.png'} />张湾区</View>
-          <View className="title">遇见张湾</View>
+          <View className="title">漫游张湾</View>
           <View className="placeholder"></View>
         </View>
         <View

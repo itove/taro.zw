@@ -511,10 +511,10 @@ function Index() {
 
       <View className="footer fixed d-flex">
         <Input width="" placeholder='我想说...' className="input" value={comment} onInput={(e) => updateInput(e)}>
-          <img widht="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
+          <img width="12px" height="12px" src={Env.iconUrl + 'pen.svg'} />
         </Input>
         <View className="d-flex btns">
-          <img widht="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
+          <img width="28px" height="28px" src={Env.iconUrl + 'send.svg'} onClick={() => sendComment(comment)} />
         </View>
       </View>
 
