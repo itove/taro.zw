@@ -178,7 +178,7 @@ function Index() {
       const data = res.data
       console.log(res)
 
-      setSlideList(data.jing.map((node, index) => <SwiperItem0 node={node} index={index} />))
+      setSlideList(data.slides.map((node, index) => <SwiperItem0 node={node} index={index} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
       setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={1} />))
       setDongList(data.dong.map((node, index) => index < 3 && <List2 node={node} index={index} type={4} />))
@@ -205,7 +205,7 @@ function Index() {
         </View>
       </View>
 
-      <Swiper defaultValue={0} circular className="slide0">
+      <Swiper defaultValue={0} circular autoplay indicatorDots indicatorOffset={[10, 50]} className="slide0">
         {slideList}
       </Swiper>
 
