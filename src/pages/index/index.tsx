@@ -165,7 +165,7 @@ function Index() {
     { t: '美食', p: Env.iconUrl + 'grid_3.png', target: '', url: 'node/index?type=3&region=shi', isTab: false, },
     { t: '活动', p: Env.iconUrl + 'grid_4.png', target: '', url: 'list/card?type=4&region=dong', isTab: false, },
     { t: '文创', p: Env.iconUrl + 'grid_5.png', target: '', url: 'list/card?type=5&region=wen', isTab: false, },
-    { t: '艺动', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=6&region=yi', isTab: false, },
+    { t: '场馆', p: Env.iconUrl + 'grid_6.png', target: '', url: 'node/index?type=6&region=yi', isTab: false, },
     { t: '购物', p: Env.iconUrl + 'grid_7.png', target: '', url: 'list/card?type=7&region=gou', isTab: false, },
     { t: '玩法', p: Env.iconUrl + 'grid_8.png', target: '', url: 'wan/index', isTab: false, },
   ]
