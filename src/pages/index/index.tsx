@@ -107,6 +107,20 @@ function List2({node, type, index}) {
   )
 }
 
+function SwiperItem0({node, index}) {
+  return (
+    <SwiperItem className="">
+      <Image
+      className="w-100 img h-100"
+      mode="aspectFill"
+      // onClick={() => gotoNode(node.id, type)}
+      src={Env.imageUrl + node.image}
+      alt=""
+      />
+    </SwiperItem>
+  )
+}
+
 function SwiperItem1({node, index, type}) {
   return (
     <SwiperItem className="slide-item">
@@ -135,6 +149,7 @@ function GridItem({node, index}) {
 }
 
 function Index() {
+  const [slideList, setSlideList] = useState([])
   const [gridList, setGridList] = useState([])
   const [wanList, setWanList] = useState([])
   const [jingList, setJingList] = useState([])
@@ -163,6 +178,7 @@ function Index() {
       const data = res.data
       console.log(res)
 
+      setSlideList(data.jing.map((node, index) => <SwiperItem0 node={node} index={index} />))
       setGridList(gridItems.map((node, index) => <GridItem node={node} index={index} />))
       setJingList(data.jing.map((node, index) => <SwiperItem1 node={node} index={index} type={1} />))
       setDongList(data.dong.map((node, index) => index < 3 && <List2 node={node} index={index} type={4} />))
@@ -176,7 +192,7 @@ function Index() {
 
   return (
     <View className="home">
-      <View className="hero" style="background-image: url(https://zw.dev.itove.com/images/1.png)">
+      <View className="hero">
         <View className="text">
           <View className="desc d-flex align-items-center"><img src={Env.iconUrl + 'dingwei.png'} />张湾区</View>
           <View className="title">漫游张湾</View>
@@ -188,6 +204,10 @@ function Index() {
          <SearchBar className="search" disabled={true} shape="round" maxLength={5} placeholder="请输入关键字搜索景点，美食，购物…" rightIn="搜索" />
         </View>
       </View>
+
+      <Swiper defaultValue={0} circular className="slide0">
+        {slideList}
+      </Swiper>
 
       <Grid columns="4" className="grid" style={{backgroundImage: `url(${Env.imageUrl}grid-bg.png)`}}>
         {gridList}
