@@ -444,6 +444,12 @@ function Index() {
       </>
       }
 
+      { type == 5 &&
+      <>
+      <View dangerouslySetInnerHTML={{__html: body}} className='body py-16'></View>
+      </>
+      }
+
       { region == 'talk' &&
       <>
         <View dangerouslySetInnerHTML={{__html: body}} className='body py-6'></View>
